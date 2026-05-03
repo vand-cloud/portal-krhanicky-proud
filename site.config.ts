@@ -6,9 +6,9 @@ export const siteConfig = {
   phase: "wireframe" as Phase,
 
   brand: {
-    name: "Studio Template",
-    domain: "example.cz",
-    primaryColor: "#0A0A0A",
+    name: "Krhanický Proud",
+    domain: "krhanicky-proud.cz",
+    primaryColor: "",
     secondaryColor: "#525252",
     accentColor: "#3D2817",
     // Wireframe phase: Inter only. Designer overrides display in designed phase.
@@ -44,7 +44,7 @@ export const siteConfig = {
   },
 
   contact: {
-    email: "info@example.cz",
+    email: "kontakt@anfilov.cz",
   },
 } as const;
 

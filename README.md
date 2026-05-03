@@ -1,6 +1,6 @@
-# {{CLIENT_NAME}}, web
+# Krhanický Proud, web
 
-Repo obsahuje zdrojový kód webu {{CLIENT_DOMAIN}}. Web postavilo studio ANFILOV na stacku Next.js, Sanity CMS a Vercel hosting. Obsah webu spravujete v Sanity Studiu na adrese `/studio`, kód a deploy zajišťuje studio. Tento dokument je určený vám jako majiteli projektu, případně vašemu budoucímu vývojáři, pokud se rozhodnete projekt převzít.
+Repo obsahuje zdrojový kód webu krhanicky-proud.cz. Web postavilo studio ANFILOV na stacku Next.js, Sanity CMS a Vercel hosting. Obsah webu spravujete v Sanity Studiu na adrese `/studio`, kód a deploy zajišťuje studio. Tento dokument je určený vám jako majiteli projektu, případně vašemu budoucímu vývojáři, pokud se rozhodnete projekt převzít.
 
 ## Co tady je
 
@@ -16,7 +16,7 @@ Repo obsahuje zdrojový kód webu {{CLIENT_DOMAIN}}. Web postavilo studio ANFILO
 
 Texty, obrázky a sekce webu spravujete sami v Sanity Studiu, technické úpravy zajišťuje studio.
 
-- Studio běží na adrese `https://{{CLIENT_DOMAIN}}/studio`
+- Studio běží na adrese `https://krhanicky-proud.cz/studio`
 - Přihlášení funguje přes Google účet, který jste poskytl studiu při onboardingu
 - Sami editujete: texty stránek, obrázky, jednotlivé sekce, právní stránky (GDPR, cookies, přístupnost), kontaktní údaje
 - Studio řeší: úpravy designu, nové typy bloků a sekcí, technické změny, integrace, deploy
@@ -30,8 +30,8 @@ Tato sekce je určená vývojářům. Pro spuštění projektu lokálně potřeb
 
 ```bash
 # 1. Klon repa
-git clone https://github.com/ANFILOV-Studio/{{GITHUB_REPO_NAME}}.git
-cd {{GITHUB_REPO_NAME}}
+git clone https://github.com/ANFILOV-Studio/client-krhanicky-proud-web.git
+cd client-krhanicky-proud-web
 
 # 2. Instalace závislostí
 npm install
@@ -59,14 +59,14 @@ Dev server používá Webpack mode (`next dev --webpack`), produkční build bě
 
 ## Deploy
 
-- Hosting běží na Vercelu, projekt `{{VERCEL_PROJECT_NAME}}` v studio Pro teamu
+- Hosting běží na Vercelu, projekt `client-krhanicky-proud-web` v studio Pro teamu
 - Auto-deploy se spustí při každém pushi do větve `main`
 - Pull requesty dostávají vlastní preview deploy s unikátní URL pro náhled
-- Doména `{{CLIENT_DOMAIN}}` je připojená přes Cloudflare DNS v režimu DNS-only (šedý mráček), proxy přes Cloudflare se zde nepoužívá kvůli kompatibilitě s Vercel SSL a edge sítí
+- Doména `krhanicky-proud.cz` je připojená přes Cloudflare DNS v režimu DNS-only (šedý mráček), proxy přes Cloudflare se zde nepoužívá kvůli kompatibilitě s Vercel SSL a edge sítí
 
 ## CMS
 
-- Sanity verze 5, project ID `{{SANITY_PROJECT_ID}}`, dataset `production`
+- Sanity verze 5, project ID `euod3b9r`, dataset `production`
 - Studio je mountnuté přímo do webu na cestě `/studio` (Embedded Studio)
 - Vy jako klient máte roli Editor, studio má roli Admin
 - Schémata dokumentů a objektů najdete v `sanity/schemas/`
@@ -90,6 +90,6 @@ Jakékoli změny ve schématu (nové typy obsahu, pole, validace) řeší studio
 
 ## Licence
 
-- Kód: copyright {{CLIENT_NAME}}, vyrobeno studiem ANFILOV
+- Kód: copyright Krhanický Proud, vyrobeno studiem ANFILOV
 - Klient má neomezené právo užívání kódu po dobu placení hosting fee studiu
 - Po ukončení vztahu studio převede repo i všechny související projekty (Vercel, Sanity, Resend, doménu) na klienta podle handover protokolu, který je součástí smlouvy

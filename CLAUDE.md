@@ -17,12 +17,12 @@ A když najdeš něco dobrého, na chvíli buď u toho.
 
 ## Identita projektu
 
-Tohle je klientský web pro **{{CLIENT_NAME}}** ({{CLIENT_DOMAIN}}), postavený na ANFILOV Studio template. Repo žije pod GitHub org `ANFILOV-Studio`, hosting běží na studio Vercel Pro teamu, obsah spravuje klient v Sanity Studiu jako Administrator (Free plán) nebo Editor (placený plán).
+Tohle je klientský web pro **Krhanický Proud** (krhanicky-proud.cz), postavený na ANFILOV Studio template. Repo žije pod GitHub org `ANFILOV-Studio`, hosting běží na studio Vercel Pro teamu, obsah spravuje klient v Sanity Studiu jako Administrator (Free plán) nebo Editor (placený plán).
 
-- Klient: `{{CLIENT_NAME}}`
-- Doména: `{{CLIENT_DOMAIN}}`
-- GitHub username klienta (pro lokální git config): `{{CLIENT_GITHUB_USER}}`
-- E-mail klienta (pro lokální git config): `{{CLIENT_EMAIL}}`
+- Klient: `Krhanický Proud`
+- Doména: `krhanicky-proud.cz`
+- GitHub username klienta (pro lokální git config): `Anfilov`
+- E-mail klienta (pro lokální git config): `kontakt@anfilov.cz`
 
 Tento `CLAUDE.md` je **self-contained**, neodvozuje pravidla z parent monorepa. Vše, co Claude potřebuje pro práci na tomto projektu, je tady.
 
@@ -66,7 +66,7 @@ git config user.email "simon@anfilov.cz"
 
 Globální git config Simona zůstává nedotčený, nastavení je jen lokální (per-repo). Onboard skript `02-clone-repo.mjs` to dělá automaticky.
 
-**Pro hosting model B** (klient má vlastní Vercel Hobby): commit autor musí být klient, ne Simon. Tehdy se nastaví `{{CLIENT_GITHUB_USER}}` a `{{CLIENT_EMAIL}}`. Edge case, řeší se per-projekt.
+**Pro hosting model B** (klient má vlastní Vercel Hobby): commit autor musí být klient, ne Simon. Tehdy se nastaví `Anfilov` a `kontakt@anfilov.cz`. Edge case, řeší se per-projekt.
 
 ### `npm run dev` používá `--webpack`
 Default v této složce kvůli mezerám v cestě `0 CLAUDE CODE/`, kde Turbopack v Next.js 16 nedokáže resolvovat `tailwindcss`. `package.json` má v `dev` scriptu vždy:
@@ -78,7 +78,7 @@ Default v této složce kvůli mezerám v cestě `0 CLAUDE CODE/`, kde Turbopack
 Build (`next build`) zůstává Turbopack, Vercel má vlastní pipeline. Webpack je jen pro lokální dev.
 
 ### Cloudflare DNS pro Vercel projekty = DNS-only mode (šedý mráček)
-Nikdy Proxied (oranžový), interferuje s Vercel SSL validací, cache managementem a edge networkem. Při auditu DNS recordů u domény `{{CLIENT_DOMAIN}}` flagni jakýkoliv oranžový mráček mířící na Vercel.
+Nikdy Proxied (oranžový), interferuje s Vercel SSL validací, cache managementem a edge networkem. Při auditu DNS recordů u domény `krhanicky-proud.cz` flagni jakýkoliv oranžový mráček mířící na Vercel.
 
 ### Secrets nikdy do repa
 `.env.local` je gitignored. Pravdivý zdroj přístupů je **Vercel Environment Variables** pro daný projekt. Lokálně se vytváří `.env.local` ze vzoru `.env.local.example`. Claude nikdy necituje hodnoty tokenů do markdown výstupů, commit messages, ani PR popisů, jen názvy proměnných a paths.
@@ -179,7 +179,7 @@ Stručný přehled, detaily jsou v `/onboard-web` skillu.
 4. **Schvalovací loop**: Simon ukáže klientovi statickou Vercel preview URL. Připomínky se zapracují v `content/`.
 5. **`phase: "designed"`**: Simon přepne, Claude aplikuje brand colors přes semantic tokens (`/apply-brand`).
 6. **`/elevate-to-sanity`**: po schválení obsahu Claude vygeneruje Sanity schéma podle skutečné struktury, migruje data, klient dostane Administrator přístup přes Google login (Free plán; Editor role až od Growth $15/seat/měsíc).
-7. **`/launch-web`**: produkční deploy, doména `{{CLIENT_DOMAIN}}` (DNS-only mode na Cloudflare), monitoring, handoff dokumentace.
+7. **`/launch-web`**: produkční deploy, doména `krhanicky-proud.cz` (DNS-only mode na Cloudflare), monitoring, handoff dokumentace.
 
 
 ## Sanity Studio: tiché pasti při nasazení (povinně)
@@ -201,13 +201,13 @@ Když je `name === "studio"` a `basePath === "/studio"`, Studio router interpret
 
 ### 2. Registrace Studia po deployi
 
-Od přelomu 2025/2026 vyžaduje Sanity, aby každé Studio na vlastní doméně bylo registrováno (klik na „Register this studio" při první návštěvě). Bez registrace fetch dat selže permission errorem. **Při `/launch-web` Claude otevře `https://{{CLIENT_DOMAIN}}/studio` a provede registraci.**
+Od přelomu 2025/2026 vyžaduje Sanity, aby každé Studio na vlastní doméně bylo registrováno (klik na „Register this studio" při první návštěvě). Bez registrace fetch dat selže permission errorem. **Při `/launch-web` Claude otevře `https://krhanicky-proud.cz/studio` a provede registraci.**
 
 ### 3. CORS origin pro produkční doménu
 
 Bez whitelistnutého origin Studio dostane „Cross-Origin Request Blocked". **Při `/launch-web` Claude přidá** přes `mcp__plugin_sanity_Sanity__add_cors_origin`:
-- `https://{{CLIENT_DOMAIN}}` (apex)
-- `https://www.{{CLIENT_DOMAIN}}` (www, pokud používáte)
+- `https://krhanicky-proud.cz` (apex)
+- `https://www.krhanicky-proud.cz` (www, pokud používáte)
 
 **Audit checklist před deployem:**
 - `app/studio/...` exists? → `sanity.config.ts` musí mít `basePath: "/studio"` a `name !== "studio"`.
@@ -217,7 +217,7 @@ Bez whitelistnutého origin Studio dostane „Cross-Origin Request Blocked". **P
 
 ## Reference, externí dashboards
 
-- Sanity Manage: https://www.sanity.io/manage/project/{{SANITY_PROJECT_ID}}
-- Vercel Project: https://vercel.com/anfilov-studio/{{VERCEL_PROJECT_NAME}}
-- GitHub Repo: https://github.com/ANFILOV-Studio/{{GITHUB_REPO_NAME}}
+- Sanity Manage: https://www.sanity.io/manage/project/euod3b9r
+- Vercel Project: https://vercel.com/anfilov-studio/client-krhanicky-proud-web
+- GitHub Repo: https://github.com/ANFILOV-Studio/client-krhanicky-proud-web
 - Resend Domain: https://resend.com/domains
