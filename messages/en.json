@@ -1,0 +1,47 @@
+{
+  "common": {
+    "skipToContent": "Skip to content",
+    "menu": "Menu",
+    "close": "Close",
+    "loading": "Loading…"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "contact": "Contact"
+  },
+  "actions": {
+    "learnMore": "Learn more",
+    "getInTouch": "Get in touch",
+    "submit": "Submit",
+    "cancel": "Cancel"
+  },
+  "forms": {
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "required": "Required",
+    "invalidEmail": "Invalid email"
+  },
+  "footer": {
+    "copyright": "© {year} {brand}. All rights reserved.",
+    "legal": "Legal",
+    "gdpr": "Privacy Policy",
+    "cookies": "Cookies",
+    "accessibility": "Accessibility"
+  },
+  "consent": {
+    "title": "Cookie consent",
+    "description": "We use cookies for essential site operation, preferences, analytics, and marketing. Accept all, reject all, or customize.",
+    "acceptAll": "Accept all",
+    "rejectAll": "Reject all",
+    "preferences": "Preferences",
+    "categories": {
+      "necessary": "Necessary",
+      "preferences": "Preferences",
+      "analytics": "Analytics",
+      "marketing": "Marketing"
+    }
+  }
+}

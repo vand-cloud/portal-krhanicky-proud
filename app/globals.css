@@ -1,0 +1,111 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  /* Primitives — raw values */
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e5e5e5;
+  --color-neutral-300: #d4d4d4;
+  --color-neutral-400: #a3a3a3;
+  --color-neutral-500: #737373;
+  --color-neutral-600: #525252;
+  --color-neutral-700: #404040;
+  --color-neutral-800: #262626;
+  --color-neutral-900: #171717;
+  --color-neutral-950: #0a0a0a;
+
+  /* Spacing primitives */
+  --spacing-section: 6rem;
+  --spacing-section-hero: 8rem;
+  --spacing-block: 3rem;
+  --spacing-grid: 2rem;
+
+  /* Typography primitives */
+  /* Wireframe phase: Inter for both body and heading. Display font (serif,
+     condensed, etc.) gets reintroduced for --font-heading in designed phase. */
+  --font-body: var(--font-sans), system-ui, -apple-system, sans-serif;
+  --font-heading: var(--font-sans), system-ui, -apple-system, sans-serif;
+  --heading-weight: 700;
+  --heading-tracking: -0.02em;
+
+  /* Radius primitives */
+  --radius-none: 0;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+}
+
+/* Semantic layer (overridable per brand) */
+:root {
+  --color-bg: var(--color-white);
+  --color-surface: var(--color-neutral-50);
+  --color-text: var(--color-neutral-900);
+  --color-text-secondary: var(--color-neutral-600);
+  --color-text-tertiary: var(--color-neutral-500);
+  --color-text-accent: var(--color-neutral-900);
+  --color-border: var(--color-neutral-200);
+  --color-brand: var(--color-neutral-900);
+  --color-accent: var(--color-neutral-900);
+  --color-accent-subtle: var(--color-neutral-100);
+  --color-glow: transparent;
+  --color-glow-subtle: transparent;
+}
+
+/* Dark mode (auto) */
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] {
+    --color-bg: var(--color-neutral-950);
+    --color-surface: var(--color-neutral-900);
+    --color-text: var(--color-neutral-50);
+    --color-text-secondary: var(--color-neutral-300);
+    --color-text-tertiary: var(--color-neutral-400);
+    --color-text-accent: var(--color-neutral-50);
+    --color-border: var(--color-neutral-800);
+  }
+}
+
+/* Layout utility classes (used by components) */
+.layout-text {
+  text-align: left;
+}
+.layout-mx {
+  margin-left: 0;
+  margin-right: 0;
+}
+.layout-items {
+  align-items: flex-start;
+}
+.layout-justify {
+  justify-content: flex-start;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Wireframe phase: all heading elements default to bold. Removed once
+   designed phase introduces a display font with its own weight. */
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: var(--heading-weight);
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  /* Hero / page-intro paragraph: any <p> that immediately follows an <h1>
+     gets balanced line lengths so centered subtitles never end with a
+     stub last line. Each page should only have one <h1>, so this targets
+     hero-style intros without affecting article body copy. */
+  h1 + p {
+    text-wrap: balance;
+  }
+}

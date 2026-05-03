@@ -1,0 +1,47 @@
+{
+  "common": {
+    "skipToContent": "Přeskočit na obsah",
+    "menu": "Menu",
+    "close": "Zavřít",
+    "loading": "Načítám…"
+  },
+  "nav": {
+    "home": "Domů",
+    "about": "O nás",
+    "services": "Služby",
+    "contact": "Kontakt"
+  },
+  "actions": {
+    "learnMore": "Zjistit více",
+    "getInTouch": "Ozvat se",
+    "submit": "Odeslat",
+    "cancel": "Zrušit"
+  },
+  "forms": {
+    "name": "Jméno",
+    "email": "E-mail",
+    "message": "Zpráva",
+    "required": "Povinné pole",
+    "invalidEmail": "Neplatný e-mail"
+  },
+  "footer": {
+    "copyright": "© {year} {brand}. Všechna práva vyhrazena.",
+    "legal": "Právní",
+    "gdpr": "GDPR",
+    "cookies": "Cookies",
+    "accessibility": "Přístupnost"
+  },
+  "consent": {
+    "title": "Souhlas s cookies",
+    "description": "Používáme cookies pro nezbytný provoz, preference, analytiku a marketing. Můžete je všechny přijmout, odmítnout nebo si vybrat.",
+    "acceptAll": "Přijmout vše",
+    "rejectAll": "Odmítnout vše",
+    "preferences": "Nastavit",
+    "categories": {
+      "necessary": "Nezbytné",
+      "preferences": "Preference",
+      "analytics": "Analytika",
+      "marketing": "Marketing"
+    }
+  }
+}
