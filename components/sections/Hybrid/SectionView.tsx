@@ -13,6 +13,7 @@ import type {
 } from "@/content/entries";
 import {
   DEFAULT_DISTANCE_TIER,
+  KRHANICE_CENTER,
   categoriesForType,
   distanceTierOrder,
   entryMatchesTier,
@@ -24,6 +25,7 @@ import {
   filterByType,
   getCategoryLabel,
   getTagLabel,
+  haversineKm,
   sortByDistance,
   sortByStart,
   subcategoriesFor,
@@ -38,6 +40,7 @@ import { EntryListItem } from "./EntryListItem";
 import { EntryThumb } from "./EntryThumb";
 import { ScopePills } from "./ScopePills";
 import { DistanceTierPills } from "./DistanceTierPills";
+import { SortControl, type SortMode } from "./SortControl";
 import { SOCIAL_ITEMS, formatWebUrl } from "./SocialIcons";
 import {
   type Scope,
@@ -193,6 +196,11 @@ export function SectionView({
   const [tier, setTier] = useState<DistanceTier>(
     initialTier ?? DEFAULT_DISTANCE_TIER,
   );
+  // Sort mode for non-event listings (mista / gastro / obchody / sluzby
+  // / spolky). Akce uses chronological time buckets in TimelineView and
+  // does not surface a sort control. "all" scope is a curated landing
+  // and likewise stays untouched.
+  const [sortMode, setSortMode] = useState<SortMode>("distance");
   const [query, setQuery] = useState("");
   // Bidirectional hover sync between map pins and list items.
   const [hoveredId, setHoveredId] = useState<string | null>(null);
@@ -365,14 +373,41 @@ export function SectionView({
 
   const placeholder = searchPlaceholderByScope[scope];
 
-  // Show the distance hint only when the active list is distance-sorted.
-  // In "all" mode each section has its own sort, so the hint is omitted.
-  // Distance-sorted scopes: everything except akce (which sorts by date) and
-  // "all" (which uses curated sections with their own sorts).
-  const sortHint =
-    scope !== "all" && scope !== "akce"
-      ? ` · ${tHome("sortByDistance")}`
-      : "";
+  // Sort variants for the non-Akce listings. Computed once per
+  // (filtered, sortMode) so toggling the dropdown is cheap. Each branch
+  // returns a fresh array so the underlying `filtered` memo stays
+  // immutable.
+  //   - distance: nearest first; entries without coords sink to the end
+  //               (sortByDistance handles the partition).
+  //   - alpha:    a-z by title via Czech-aware localeCompare.
+  //   - featured: editor-flagged first (featured: true), then nearest
+  //               within each group as the deterministic tiebreak.
+  const sortedNonAkce = useMemo(() => {
+    if (sortMode === "alpha") {
+      return [...filtered].sort((a, b) =>
+        a.title.localeCompare(b.title, "cs"),
+      );
+    }
+    if (sortMode === "featured") {
+      return [...filtered].sort((a, b) => {
+        const af = a.featured ? 1 : 0;
+        const bf = b.featured ? 1 : 0;
+        if (af !== bf) return bf - af;
+        const aHas = a.lat !== undefined && a.lng !== undefined;
+        const bHas = b.lat !== undefined && b.lng !== undefined;
+        if (aHas && bHas) {
+          return (
+            haversineKm({ lat: a.lat!, lng: a.lng! }, KRHANICE_CENTER) -
+            haversineKm({ lat: b.lat!, lng: b.lng! }, KRHANICE_CENTER)
+          );
+        }
+        if (aHas) return -1;
+        if (bHas) return 1;
+        return 0;
+      });
+    }
+    return sortByDistance(filtered);
+  }, [filtered, sortMode]);
 
   return (
     <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -380,12 +415,18 @@ export function SectionView({
           viewport -- the user came here for one specific entry. */}
       {selectedEntry ? null : (
         <>
-          {/* HERO -- centered dominant block. Cascade reads top to bottom:
-              identity (eyebrow + title), then the WHICH (4 cascading pill
-              rows: scope -> category -> subcategory -> tags), then the
-              free-text fallback (search input as the last element). All
-              filter rows render centered so the hero stays as a single
-              vertical column anchored on the page axis. */}
+          {/* HERO -- centered dominant block. Cascade reads top to
+              bottom: identity (eyebrow + title), then four pill rows
+              that progressively narrow the corpus, then a free-text
+              search, then a geographic tier. All centered so the hero
+              stays a single vertical column on the page axis.
+
+              Spacing rules (deliberate, do NOT change without a sweep):
+              - Inter-row gap on the four pill rows: 8px (space-y-2),
+                uniform across rows so the cascade reads as one block.
+              - Search has 16px above (mt-4) and the distance tier has
+                16px above (mt-4) too, so search sits with symmetric
+                vertical breathing room between Tags and Distance. */}
           <header className="mx-auto max-w-3xl pt-12 pb-8 text-center sm:pt-16 lg:pt-20 lg:pb-10">
             {pageEyebrow ? (
               <p className="eyebrow mb-3">{pageEyebrow}</p>
@@ -394,77 +435,68 @@ export function SectionView({
               {pageTitle}
             </h1>
 
-            {/* Level 1: Type pills (always visible). Largest size, sets
-                the corpus for the whole page. */}
-            <div className="mt-8">
+            {/* Pill cascade -- rows 1 through 4. Uniform 8px gap. */}
+            <div className="mt-8 space-y-2">
+              {/* Row 1: Type pills (always visible). Largest size, sets
+                  the corpus for the whole page. */}
               <ScopePills active={scope} onChange={handleScopeChange} />
+
+              {/* Row 2: Category pills. Visible after a non-"Vše" type
+                  is picked. Medium size. "Vše" sentinel resets row 2
+                  and cascades to clear rows 3 + 4. */}
+              {visibleCategories.length > 0 ? (
+                <PillRow
+                  size="md"
+                  items={[
+                    { value: null, label: tHome("filterAll") },
+                    ...visibleCategories.map((c) => ({
+                      value: c as Category,
+                      label:
+                        scope === "all" ? c : getCategoryLabel(scope, c),
+                    })),
+                  ]}
+                  active={category}
+                  onChange={(v) =>
+                    handleCategoryChange((v as Category | null) ?? null)
+                  }
+                />
+              ) : null}
+
+              {/* Row 3: Subcategory pills. Visible only when the active
+                  category has subcategories. Small size. */}
+              {visibleSubcategories.length > 0 ? (
+                <PillRow
+                  size="sm"
+                  items={[
+                    { value: null, label: tHome("filterAll") },
+                    ...visibleSubcategories.map((s) => ({
+                      value: s.slug as Subcategory,
+                      label: s.label,
+                    })),
+                  ]}
+                  active={subcategory}
+                  onChange={(v) =>
+                    handleSubcategoryChange((v as Subcategory | null) ?? null)
+                  }
+                />
+              ) : null}
+
+              {/* Row 4: Tag chips. Multi-select, intersection (AND).
+                  Visible after subcategory is picked, or when the
+                  active category is flat (no subcategories defined). */}
+              {showTagRow && tagPool.length > 0 ? (
+                <TagChipRow
+                  tags={tagPool}
+                  active={tags}
+                  onToggle={handleTagToggle}
+                />
+              ) : null}
             </div>
 
-            {/* Levels 2-4: Refinement filters appear conditionally as
-                the user drills in. Each row is centered so the cascade
-                reads as a single hero column. Spacing tighter than the
-                scope -> search gap so refinements feel like one unit. */}
-            {(visibleCategories.length > 0 ||
-              visibleSubcategories.length > 0 ||
-              (showTagRow && tagPool.length > 0)) ? (
-              <div className="mt-4 space-y-2">
-                {/* Level 2: Category pills. Visible after a non-"Vše"
-                    type is picked. Medium size. "Vše" sentinel resets
-                    level 2 and cascades to clear levels 3 + 4. */}
-                {visibleCategories.length > 0 ? (
-                  <PillRow
-                    size="md"
-                    items={[
-                      { value: null, label: tHome("filterAll") },
-                      ...visibleCategories.map((c) => ({
-                        value: c as Category,
-                        label:
-                          scope === "all" ? c : getCategoryLabel(scope, c),
-                      })),
-                    ]}
-                    active={category}
-                    onChange={(v) =>
-                      handleCategoryChange((v as Category | null) ?? null)
-                    }
-                  />
-                ) : null}
-
-                {/* Level 3: Subcategory pills. Visible only when the
-                    active category has subcategories. Small size. */}
-                {visibleSubcategories.length > 0 ? (
-                  <PillRow
-                    size="sm"
-                    items={[
-                      { value: null, label: tHome("filterAll") },
-                      ...visibleSubcategories.map((s) => ({
-                        value: s.slug as Subcategory,
-                        label: s.label,
-                      })),
-                    ]}
-                    active={subcategory}
-                    onChange={(v) =>
-                      handleSubcategoryChange((v as Subcategory | null) ?? null)
-                    }
-                  />
-                ) : null}
-
-                {/* Level 4: Tag chips. Multi-select, intersection (AND).
-                    Visible after subcategory is picked, or when the
-                    active category is flat (no subcategories defined). */}
-                {showTagRow && tagPool.length > 0 ? (
-                  <TagChipRow
-                    tags={tagPool}
-                    active={tags}
-                    onToggle={handleTagToggle}
-                  />
-                ) : null}
-              </div>
-            ) : null}
-
-            {/* Search input -- the free-text fallback, last in the
-                cascade. Slightly wider than the pill rows so it carries
-                weight as the primary alternative to picking pills. */}
-            <div className="mx-auto mt-6 max-w-2xl">
+            {/* Search input -- the free-text fallback. Symmetric 16px
+                gap above (from row 4) and below (to row 5) so the
+                search sits as a balanced midpoint in the cascade. */}
+            <div className="mx-auto mt-4 max-w-2xl">
               <SearchBar
                 query={query}
                 onChange={setQuery}
@@ -473,11 +505,10 @@ export function SectionView({
               />
             </div>
 
-            {/* Distance tier -- geographic cross-cutting filter. Sits
-                below the search box because it modifies WHERE results
-                come from, not WHAT, and the project mission caps at
-                15 km so the radius vocabulary is finite. Default is
-                "Do 7 km" (blizko). */}
+            {/* Row 5: Distance tier pills -- geographic cross-cutting
+                filter. Sized like the row-3 subcategory pills so the
+                visual weight steps down through the cascade. 16px
+                above to mirror the gap above the search. */}
             <div className="mt-4">
               <DistanceTierPills active={tier} onChange={setTier} />
             </div>
@@ -515,10 +546,18 @@ export function SectionView({
             />
           ) : (
             <div ref={listRef}>
-              <p className="mb-4 text-xs text-[var(--color-text-tertiary)]">
-                {tHome("resultsCount", { count: filtered.length })}
-                {filtered.length > 0 ? sortHint : ""}
-              </p>
+              {/* Per-scope listing variants. Each carries its own
+                  structural metaphor:
+                  - "all": curated landing with per-section windowing.
+                           No global sort (each section has its own).
+                  - "akce": chronological time buckets in TimelineView.
+                           Group headers ("Dnes · 3", "Tento víkend · 5"
+                           etc.) carry the count; no global readout.
+                  - others: SortControl sits at the top of the list,
+                           letting the user toggle distance / alpha /
+                           featured. The "X výsledků" count was dropped
+                           on Simon's "decentní" pass -- the list itself
+                           shows what's there. */}
               {scope === "all" ? (
                 <AllScopeList
                   entries={filtered}
@@ -535,13 +574,25 @@ export function SectionView({
                   onHover={handleListHover}
                 />
               ) : (
-                <DistanceList
-                  entries={sortByDistance(filtered)}
-                  contextType={scope}
-                  emptyLabel={tHome("noResults")}
-                  hoveredId={hoveredId ?? undefined}
-                  onHover={handleListHover}
-                />
+                <>
+                  {/* Count on the left, sort control on the right, one
+                      row above the list. The "v okolí Krhanic" suffix
+                      was dropped on Simon's pass -- redundant with the
+                      page hero already saying "Krhanický průvodce". */}
+                  <div className="mb-4 flex items-center justify-between gap-4">
+                    <p className="text-xs text-[var(--color-text-tertiary)]">
+                      {tHome("resultsCount", { count: sortedNonAkce.length })}
+                    </p>
+                    <SortControl mode={sortMode} onChange={setSortMode} />
+                  </div>
+                  <DistanceList
+                    entries={sortedNonAkce}
+                    contextType={scope}
+                    emptyLabel={tHome("noResults")}
+                    hoveredId={hoveredId ?? undefined}
+                    onHover={handleListHover}
+                  />
+                </>
               )}
             </div>
           )}
