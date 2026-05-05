@@ -37,18 +37,16 @@ Setup vám zabere kolem 10 minut. Pokud by cokoliv vyhodilo error, který vám n
 
 ### B2. Environment Variables
 
-Rozklikněte sekci **Environment Variables** a vyplňte následujících **6 položek**:
+Rozklikněte sekci **Environment Variables** a vyplňte tyto **2 položky**:
 
 | Name | Value |
 |---|---|
-| `NEXT_PUBLIC_SANITY_PROJECT_ID` | `4nb8kl4e` |
-| `NEXT_PUBLIC_SANITY_DATASET` | `production` |
-| `SANITY_API_VERSION` | `2026-04-27` |
 | `SANITY_WRITE_TOKEN` | (token z kroku A) |
 | `NEXT_PUBLIC_SITE_URL` | `https://krhanicky-proud.cz` |
-| `RESEND_API_KEY` | nechte zatím prázdné, doplníme později |
 
-U každé proměnné ponechte výchozí scope **Production / Preview / Development** (zaškrtnuté všechny tři).
+U obou ponechte výchozí scope **Production / Preview / Development** (zaškrtnuté všechny tři).
+
+Project ID, dataset a API version jsou hardcoded přímo v kódu (viz `sanity/env.ts`), takže je do Vercelu nepíšete. Resend doplníme až při zapnutí formulářů.
 
 ### B3. Deploy
 
