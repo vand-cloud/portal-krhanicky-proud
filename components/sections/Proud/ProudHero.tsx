@@ -44,7 +44,7 @@ export function ProudHero({ values }: { values: Value[] }) {
     <section className="mt-12 grid gap-10 lg:grid-cols-12 lg:gap-14">
       {/* ── Values + program CTA ───────────────────────────────────── */}
       <div className="lg:col-span-5">
-        <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)]">
+        <h2 className="section-eyebrow">
           Hodnoty, které sdílíme
         </h2>
         <ul className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -66,7 +66,7 @@ export function ProudHero({ values }: { values: Value[] }) {
 
       {/* ── Candidates + contact CTA ───────────────────────────────── */}
       <div className="lg:col-span-7">
-        <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)]">
+        <h2 className="section-eyebrow">
           Kandidáti do voleb 2026
         </h2>
         {candidates.length === 0 ? (

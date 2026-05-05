@@ -30,7 +30,7 @@ export default async function VolbyPage({
       </header>
 
       <section className="mt-12">
-        <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)]">
+        <h2 className="section-eyebrow">
           Kandidátka
         </h2>
         <p className="mt-3 text-sm leading-relaxed text-[var(--color-text-secondary)]">
@@ -39,7 +39,7 @@ export default async function VolbyPage({
       </section>
 
       <section className="mt-12">
-        <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)]">
+        <h2 className="section-eyebrow">
           Program
         </h2>
         <p className="mt-3 text-sm leading-relaxed text-[var(--color-text-secondary)]">

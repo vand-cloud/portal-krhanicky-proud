@@ -41,7 +41,7 @@ export function SpecialistCard({
         )}
       </div>
       <div>
-        <p className="text-xl font-[family-name:var(--font-heading)]">
+        <p className="text-xl font-heading">
           {specialist.name}
         </p>
         <p className="text-sm text-[var(--color-text-secondary)] mt-0.5">
@@ -62,7 +62,7 @@ export function SpecialistCard({
     <section className="py-[var(--spacing-section)] bg-[var(--color-bg)]">
       <Container>
         {heading && (
-          <h2 className="text-3xl md:text-4xl font-[family-name:var(--font-heading)] mb-4">
+          <h2 className="text-3xl md:text-4xl font-heading mb-4">
             {heading}
           </h2>
         )}

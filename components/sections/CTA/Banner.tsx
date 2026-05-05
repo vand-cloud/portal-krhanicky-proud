@@ -17,7 +17,7 @@ export default function Banner({
   return (
     <section className="bg-[var(--color-brand)] py-[var(--spacing-section)] text-[var(--color-bg)]">
       <Container className={containerClass}>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-[family-name:var(--font-heading)]">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading">
           {heading}
         </h2>
         {subheading && (

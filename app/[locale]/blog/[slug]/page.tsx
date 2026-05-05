@@ -171,7 +171,7 @@ export default async function BlogDetailPage({
         >
           <h2
             id="related-heading"
-            className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)]"
+            className="section-eyebrow"
           >
             Související články
           </h2>

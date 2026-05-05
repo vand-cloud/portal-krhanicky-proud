@@ -532,7 +532,7 @@ function FilterRow({
   return (
     <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5 sm:flex-nowrap">
       <span
-        className={`${LABEL_COL} text-xs font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)]`}
+        className={`${LABEL_COL} section-eyebrow`}
       >
         {label}
       </span>
@@ -750,7 +750,7 @@ function AllScopeList({
           <div className="mb-1 flex items-end justify-between gap-4 px-3">
             <h2
               id={`scope-${section.key}`}
-              className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)]"
+              className="section-eyebrow"
             >
               {section.label}
             </h2>

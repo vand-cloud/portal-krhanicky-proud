@@ -137,7 +137,7 @@ export default async function GdprPage({
         </li>
       </ul>
 
-      <p style={{ marginTop: "2.5rem", fontSize: "0.875rem", color: "var(--color-text-tertiary)" }}>
+      <p className="mt-10 text-sm text-[var(--color-text-tertiary)]">
         Naposledy aktualizováno: [DOPLNIT datum při launchi].
       </p>
     </LegalLayout>

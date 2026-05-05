@@ -46,7 +46,7 @@ export default function Split({
           )}
           <div className={textWrapperClass}>
             {badge && <HeroBadge>{badge}</HeroBadge>}
-            <h1 className="text-[2.5rem] leading-[1.05] sm:text-5xl md:text-6xl font-[family-name:var(--font-heading)]">
+            <h1 className="text-[2.5rem] leading-[1.05] sm:text-5xl md:text-6xl font-heading">
               {title}
             </h1>
             {subtitle && (

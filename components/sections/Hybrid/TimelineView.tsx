@@ -129,7 +129,7 @@ export function TimelineView({
         <section key={group.key} aria-labelledby={`group-${group.key}`}>
           <h2
             id={`group-${group.key}`}
-            className="mb-1 px-3 text-xs font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)]"
+            className="section-eyebrow mb-1 px-3"
           >
             {group.label}
           </h2>

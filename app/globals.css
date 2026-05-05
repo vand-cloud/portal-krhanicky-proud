@@ -203,95 +203,99 @@ body {
 
 /* ─────────────────────────────────────────────────────────────────────────────
    Legal content prose styles (used by /gdpr, /cookies, /pristupnost).
-   These pages use plain HTML inside .legal-content — markup like <h2>, <p>,
-   <ul>, <a>, <table> get typographic rules here so the content reads as
-   editorial body copy without needing per-page Tailwind.
+   Lives in @layer components so utility classes (and base heading rules)
+   cascade predictably. We intentionally do NOT redeclare heading color or
+   font-family — those inherit from the @layer base h1-h6 rule below, which
+   keeps headings on navy across the whole site (including legal pages).
+   What stays here: font-size, weight tweaks, vertical rhythm, list/table
+   styling specific to the editorial reading context.
    ───────────────────────────────────────────────────────────────────────── */
-.legal-content > :first-child {
-  margin-top: 0;
-}
+@layer components {
+  .legal-content > :first-child {
+    margin-top: 0;
+  }
 
-.legal-content h2 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  line-height: 1.28;
-  color: var(--color-text);
-  margin-top: 2.5rem;
-  margin-bottom: 0.75rem;
-}
+  .legal-content h2 {
+    font-size: 1.5rem;
+    line-height: 1.28;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
 
-.legal-content h3 {
-  font-size: 1.125rem;
-  font-weight: 600;
-  line-height: 1.4;
-  color: var(--color-text);
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
-}
+  .legal-content h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
 
-.legal-content p {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--color-text-secondary);
-  margin-bottom: 1rem;
-}
+  .legal-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    margin-bottom: 1rem;
+  }
 
-.legal-content ul {
-  list-style: disc;
-  padding-left: 1.25rem;
-  margin-bottom: 1rem;
-}
+  .legal-content ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+    margin-bottom: 1rem;
+  }
 
-.legal-content ul li {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--color-text-secondary);
-  padding-left: 0.25rem;
-  margin-bottom: 0.25rem;
-}
+  .legal-content ul li {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    padding-left: 0.25rem;
+    margin-bottom: 0.25rem;
+  }
 
-.legal-content ul li::marker {
-  color: var(--color-text-tertiary);
-}
+  .legal-content ul li::marker {
+    color: var(--color-text-tertiary);
+  }
 
-.legal-content table {
-  font-size: 0.875rem;
-  color: var(--color-text-secondary);
-  margin-bottom: 1rem;
-}
+  .legal-content table {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 1rem;
+  }
 
-.legal-content code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.85em;
-  background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  padding: 0.05rem 0.3rem;
-  border-radius: var(--radius-sm);
-  color: var(--color-text);
-}
+  .legal-content code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.85em;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    padding: 0.05rem 0.3rem;
+    border-radius: var(--radius-sm);
+    color: var(--color-text);
+  }
 
-/* Inline text link used in legal pages and elsewhere in prose contexts. */
-.prose-link,
-.legal-content a {
-  display: inline;
-  color: var(--color-accent);
-  font-weight: 500;
-  text-decoration: underline;
-  text-decoration-color: var(--color-border);
-  text-underline-offset: 3px;
-  transition: color 150ms, text-decoration-color 150ms;
-}
+  /* Inline text link used in legal pages and elsewhere in prose contexts. */
+  .prose-link,
+  .legal-content a {
+    display: inline;
+    color: var(--color-accent);
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-color: var(--color-border);
+    text-underline-offset: 3px;
+    transition: color 150ms, text-decoration-color 150ms;
+  }
 
-.prose-link:hover,
-.legal-content a:hover {
-  color: var(--color-text);
-  text-decoration-color: var(--color-accent);
+  .prose-link:hover,
+  .legal-content a:hover {
+    color: var(--color-text);
+    text-decoration-color: var(--color-accent);
+  }
 }
 
 /* Designed phase typography. Headings shift to Sora (--font-heading) with
    tightened tracking and brand-navy color. Body inherits Inter via body{}
-   above. Eyebrow is the technical mono kicker class used over headings. */
+   above. Eyebrow is the technical mono kicker class used over headings.
+   H1 weight is 700 (Bold) -- matches the de-facto pattern used across all
+   page heros. Sora ExtraBold (800) tested too marketing-heavy for the
+   civic-village tone; refined Bold reads as authoritative without shouting. */
 @layer base {
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
@@ -300,7 +304,7 @@ body {
     letter-spacing: var(--heading-tracking);
     text-wrap: balance;
   }
-  h1 { font-weight: 800; letter-spacing: -0.03em; }
+  h1 { letter-spacing: -0.03em; }
   h2 { letter-spacing: -0.025em; }
   h3 { letter-spacing: -0.02em; }
   h4 { font-weight: 600; letter-spacing: -0.015em; }
@@ -317,12 +321,17 @@ body {
   }
 }
 
-/* Eyebrow / kicker -- small uppercase signal above a heading. The design
-   bundle suggested JetBrains Mono for technical character, but in Czech
-   text it read as code/UI metadata. Switched to Sora (the display font)
-   at medium weight with wide tracking -- still distinct from the heading
-   thanks to the size + caps + tracking, but visually consistent.
-   Use as <p className="eyebrow">…</p>. */
+/* Eyebrow / kicker variants. Both are small uppercase signals, but used
+   in two distinct positions:
+   - `.eyebrow` -- page-level kicker, accent-blue, lives above page H1.
+                   Sora medium with wider 0.12em tracking, sits at the
+                   top of a hero or page header section.
+   - `.section-eyebrow` -- in-page subsection label, tertiary-gray,
+                   semibold, narrower 0.05em tracking. Used as <h2>
+                   above grouped lists/cards inside a section that
+                   already has its own page H1. Quieter so it does not
+                   compete with the page H1 visually, but still semantic
+                   heading for screen readers. */
 .eyebrow {
   font-family: var(--font-heading);
   font-size: 0.75rem;
@@ -330,4 +339,13 @@ body {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-accent);
+}
+
+.section-eyebrow {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
 }

@@ -105,7 +105,7 @@ export function MegaMenu({ data }: Props) {
                   <div key={div.label}>
                     <Link
                       href={div.href}
-                      className="text-base font-semibold font-[family-name:var(--font-heading)] hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] rounded-[var(--radius-sm)]"
+                      className="text-base font-semibold font-heading hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] rounded-[var(--radius-sm)]"
                     >
                       {div.label}
                     </Link>
@@ -138,14 +138,14 @@ export function MegaMenu({ data }: Props) {
                   return (
                     <div key={columnIndex}>
                       {columnIndex === 0 && (
-                        <p className="text-base font-semibold font-[family-name:var(--font-heading)] mb-4">
+                        <p className="text-base font-semibold font-heading mb-4">
                           {data.categoriesHeading}
                         </p>
                       )}
                       {columnIndex === 1 && (
                         <p
                           aria-hidden="true"
-                          className="text-base font-semibold font-[family-name:var(--font-heading)] mb-4 invisible"
+                          className="text-base font-semibold font-heading mb-4 invisible"
                         >
                           {data.categoriesHeading}
                         </p>

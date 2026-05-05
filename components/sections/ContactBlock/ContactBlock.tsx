@@ -56,7 +56,7 @@ export function ContactBlock({
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
           <div className="space-y-10">
             <div>
-              <h2 className="text-3xl md:text-4xl font-[family-name:var(--font-heading)] mb-4">
+              <h2 className="text-3xl md:text-4xl font-heading mb-4">
                 {heading}
               </h2>
               {lead && (

@@ -13,7 +13,7 @@ export default function Centered({
     <section className="relative overflow-hidden bg-[var(--color-surface)] py-[var(--spacing-section-hero)]">
       <Container className="relative text-center">
         {badge && <HeroBadge>{badge}</HeroBadge>}
-        <h1 className="text-[2.5rem] leading-[1.05] sm:text-6xl md:text-7xl lg:text-[5.5rem] max-w-5xl mx-auto font-[family-name:var(--font-heading)]">
+        <h1 className="text-[2.5rem] leading-[1.05] sm:text-6xl md:text-7xl lg:text-[5.5rem] max-w-5xl mx-auto font-heading">
           {title}
         </h1>
         {subtitle && (

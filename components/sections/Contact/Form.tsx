@@ -15,7 +15,7 @@ export default function Form({
     <section className="bg-[var(--color-bg)] py-[var(--spacing-section)]">
       <Container size="narrow">
         <div className="text-center mb-[var(--spacing-block)]">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-[family-name:var(--font-heading)]">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading">
             {heading}
           </h2>
           {subheading && (

@@ -11,7 +11,7 @@ export default function Minimal({
   return (
     <section className="bg-[var(--color-bg)] py-[var(--spacing-section)]">
       <Container size="narrow">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-[family-name:var(--font-heading)]">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-heading">
           {title}
         </h1>
         {subtitle && (

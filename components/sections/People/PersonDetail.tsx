@@ -81,7 +81,7 @@ export function PersonDetail({
 
       {person.contactEmail || person.contactPhone || person.social ? (
         <section className="mt-8">
-          <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)]">
+          <h2 className="section-eyebrow">
             Kontakt
           </h2>
           <dl className="mt-3 grid gap-3 text-sm sm:grid-cols-2">
@@ -121,7 +121,7 @@ export function PersonDetail({
 
       {businesses.length > 0 ? (
         <section className="mt-10">
-          <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)]">
+          <h2 className="section-eyebrow">
             Provozuje
           </h2>
           <ul className="mt-3 divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]">
@@ -148,7 +148,7 @@ export function PersonDetail({
 
       {articles.length > 0 ? (
         <section className="mt-10">
-          <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)]">
+          <h2 className="section-eyebrow">
             Publikované články
           </h2>
           <ul className="mt-3 divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]">

@@ -77,7 +77,7 @@ export function LegalLayout({
             <span className="mb-3 block text-[12px] font-bold uppercase tracking-[0.2em] text-[var(--color-text-tertiary)]">
               Správce webu
             </span>
-            <div className="space-y-[1px] text-[14px] leading-[1.65] text-[var(--color-text-secondary)]">
+            <div className="space-y-px text-sm leading-relaxed text-[var(--color-text-secondary)]">
               <p className="font-semibold text-[var(--color-text)]">
                 {entity.name}
               </p>

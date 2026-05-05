@@ -28,7 +28,7 @@ export default function Grid({
         {(heading || subheading) && (
           <div className={`${headerClass} mb-[var(--spacing-block)]`}>
             {heading && (
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-[family-name:var(--font-heading)]">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading">
                 {heading}
               </h2>
             )}
@@ -52,7 +52,7 @@ export default function Grid({
                     <Icon className="w-5 h-5 text-[var(--color-accent)]" />
                   </div>
                 )}
-                <h3 className="text-lg font-semibold font-[family-name:var(--font-heading)]">
+                <h3 className="text-lg font-semibold font-heading">
                   {feature.title}
                 </h3>
                 <p className="text-[var(--color-text-secondary)] leading-relaxed">

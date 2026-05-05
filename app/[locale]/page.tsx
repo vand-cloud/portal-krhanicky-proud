@@ -175,7 +175,7 @@ function ColumnHeader({
 }) {
   return (
     <div className="mb-2 flex items-end justify-between gap-3">
-      <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)]">
+      <h2 className="section-eyebrow">
         {title}
       </h2>
       <a

@@ -99,7 +99,7 @@ export function MobileMenu({
             <Link
               href="/"
               onClick={close}
-              className="font-[family-name:var(--font-heading)] text-lg font-semibold tracking-tight"
+              className="font-heading text-lg font-semibold tracking-tight"
             >
               {brand}
             </Link>
@@ -129,7 +129,7 @@ export function MobileMenu({
                     aria-expanded={servicesExpanded}
                     aria-controls="mobile-services-panel"
                     onClick={() => setServicesExpanded((s) => !s)}
-                    className="w-full flex items-center justify-between py-2 text-lg font-[family-name:var(--font-heading)] font-semibold text-[var(--color-text)] hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 rounded-[var(--radius-sm)]"
+                    className="w-full flex items-center justify-between py-2 text-lg font-heading font-semibold text-[var(--color-text)] hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 rounded-[var(--radius-sm)]"
                   >
                     <span>{services.triggerLabel}</span>
                     <svg
@@ -160,7 +160,7 @@ export function MobileMenu({
                           <Link
                             href={div.href}
                             onClick={close}
-                            className="block text-base font-semibold font-[family-name:var(--font-heading)] hover:opacity-70"
+                            className="block text-base font-semibold font-heading hover:opacity-70"
                           >
                             {div.label}
                           </Link>
@@ -215,7 +215,7 @@ export function MobileMenu({
                   <Link
                     href={item.href}
                     onClick={close}
-                    className="block py-2 text-lg font-[family-name:var(--font-heading)] font-semibold text-[var(--color-text)] hover:opacity-70"
+                    className="block py-2 text-lg font-heading font-semibold text-[var(--color-text)] hover:opacity-70"
                   >
                     {item.label}
                   </Link>

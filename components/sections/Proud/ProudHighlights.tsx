@@ -127,7 +127,7 @@ export function ProudHighlights() {
     <section className="mt-16 sm:mt-20" aria-labelledby="proud-highlights">
       <div className="flex items-end justify-between gap-4">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)]">
+          <p className="section-eyebrow">
             Z našeho programu
           </p>
           <h2

@@ -110,7 +110,7 @@ export function BlogIndex({ posts }: { posts: BlogPost[] }) {
           desktop so the menu stays visible while the grid scrolls. */}
       <aside className="lg:sticky lg:top-24 lg:self-start">
         <div>
-          <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)]">
+          <p className="section-eyebrow mb-2">
             Kategorie
           </p>
           <ul className="space-y-1" role="radiogroup" aria-label="Kategorie">
@@ -139,7 +139,7 @@ export function BlogIndex({ posts }: { posts: BlogPost[] }) {
 
         {allTags.length > 0 ? (
           <div className="mt-8">
-            <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)]">
+            <p className="section-eyebrow mb-2">
               Štítky
             </p>
             <div className="flex flex-wrap gap-1.5" role="radiogroup" aria-label="Štítky">

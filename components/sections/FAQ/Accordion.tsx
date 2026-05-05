@@ -8,7 +8,7 @@ export default function Accordion({ heading, subheading, items }: FAQAccordionPr
         {(heading || subheading) && (
           <div className="text-center mb-[var(--spacing-block)]">
             {heading && (
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-[family-name:var(--font-heading)]">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading">
                 {heading}
               </h2>
             )}

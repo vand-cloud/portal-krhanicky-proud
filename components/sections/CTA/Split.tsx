@@ -9,7 +9,7 @@ export default function Split({ heading, subheading, ctaPrimary, ctaSecondary, i
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-[family-name:var(--font-heading)]">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading">
               {heading}
             </h2>
             {subheading && (

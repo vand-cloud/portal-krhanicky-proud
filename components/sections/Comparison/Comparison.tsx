@@ -27,7 +27,7 @@ export function Comparison({
     <section className="py-[var(--spacing-section)] bg-[var(--color-bg)]">
       <Container>
         <div className="mb-12 max-w-3xl">
-          <h2 className="text-3xl md:text-4xl font-[family-name:var(--font-heading)] mb-4">
+          <h2 className="text-3xl md:text-4xl font-heading mb-4">
             {heading}
           </h2>
           {subheading && (

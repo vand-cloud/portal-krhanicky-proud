@@ -37,7 +37,7 @@ export function ArticleCard({ article, href }: SingleProps) {
             </span>
           ))}
         </div>
-        <h3 className="text-xl md:text-2xl font-[family-name:var(--font-heading)] mb-3 line-clamp-2 group-hover:opacity-70 transition-opacity">
+        <h3 className="text-xl md:text-2xl font-heading mb-3 line-clamp-2 group-hover:opacity-70 transition-opacity">
           {article.title}
         </h3>
         <p className="text-base text-[var(--color-text-secondary)] line-clamp-3 mb-6">
@@ -77,7 +77,7 @@ export function ArticleList({
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
             <div className="max-w-3xl">
               {heading && (
-                <h2 className="text-3xl md:text-4xl font-[family-name:var(--font-heading)] mb-4">
+                <h2 className="text-3xl md:text-4xl font-heading mb-4">
                   {heading}
                 </h2>
               )}

@@ -45,7 +45,7 @@ export function TrustBlock({
         {(heading || subheading) && (
           <div className="mb-12 max-w-3xl">
             {heading && (
-              <h2 className="text-3xl md:text-4xl font-[family-name:var(--font-heading)] mb-4">
+              <h2 className="text-3xl md:text-4xl font-heading mb-4">
                 {heading}
               </h2>
             )}
@@ -112,7 +112,7 @@ export function TrustBlock({
                   key={i}
                   className="p-5 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-[var(--radius-md)]"
                 >
-                  <p className="text-base font-semibold font-[family-name:var(--font-heading)] mb-1">
+                  <p className="text-base font-semibold font-heading mb-1">
                     {cert.label}
                   </p>
                   {cert.description && (

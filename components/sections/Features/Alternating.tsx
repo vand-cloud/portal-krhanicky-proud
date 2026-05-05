@@ -13,7 +13,7 @@ export default function Alternating({
         {(heading || subheading) && (
           <div className="max-w-2xl mx-auto text-center mb-[var(--spacing-block)]">
             {heading && (
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-[family-name:var(--font-heading)]">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading">
                 {heading}
               </h2>
             )}
@@ -33,7 +33,7 @@ export default function Alternating({
                 className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${reversed ? "lg:[&>:first-child]:order-2" : ""}`}
               >
                 <div>
-                  <h3 className="text-2xl sm:text-3xl font-[family-name:var(--font-heading)]">
+                  <h3 className="text-2xl sm:text-3xl font-heading">
                     {feature.title}
                   </h3>
                   <p className="mt-4 text-lg text-[var(--color-text-secondary)] leading-relaxed">

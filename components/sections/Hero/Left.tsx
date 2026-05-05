@@ -20,7 +20,7 @@ export default function Left({
       <Container>
         <div className="max-w-4xl">
           {badge && <HeroBadge>{badge}</HeroBadge>}
-          <h1 className="text-[2.5rem] leading-[1.05] sm:text-5xl md:text-6xl lg:text-7xl font-[family-name:var(--font-heading)]">
+          <h1 className="text-[2.5rem] leading-[1.05] sm:text-5xl md:text-6xl lg:text-7xl font-heading">
             {title}
           </h1>
           {subtitle && (

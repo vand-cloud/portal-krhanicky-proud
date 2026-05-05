@@ -13,7 +13,7 @@ export default function Default({
       <Container>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           <div className="col-span-2">
-            <p className="text-lg font-semibold font-[family-name:var(--font-heading)]">
+            <p className="text-lg font-semibold font-heading">
               {brand.name}
             </p>
             {brand.tagline && (

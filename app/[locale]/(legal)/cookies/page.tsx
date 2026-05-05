@@ -120,7 +120,7 @@ export default async function CookiesPage({
         </table>
       </div>
 
-      <p style={{ fontSize: "0.875rem", color: "var(--color-text-tertiary)" }}>
+      <p className="text-sm text-[var(--color-text-tertiary)]">
         Naposledy aktualizováno: [DOPLNIT datum při launchi].
       </p>
 

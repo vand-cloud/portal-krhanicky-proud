@@ -31,7 +31,7 @@ export function ProcessSteps({ heading, subheading, steps }: ProcessStepsProps) 
         {(heading || subheading) && (
           <div className="mb-16 max-w-3xl">
             {heading && (
-              <h2 className="text-3xl md:text-4xl font-[family-name:var(--font-heading)] mb-4">
+              <h2 className="text-3xl md:text-4xl font-heading mb-4">
                 {heading}
               </h2>
             )}
@@ -71,7 +71,7 @@ export function ProcessSteps({ heading, subheading, steps }: ProcessStepsProps) 
                 </div>
 
                 <div className="flex-1 lg:flex-none lg:w-full lg:mt-6 lg:pr-6">
-                  <h3 className="text-base md:text-lg font-[family-name:var(--font-heading)] font-semibold text-[var(--color-text-accent)] text-balance">
+                  <h3 className="text-base md:text-lg font-heading font-semibold text-[var(--color-text-accent)] text-balance">
                     {step.title}
                   </h3>
                   <p className="mt-2 text-sm text-[var(--color-text-secondary)] leading-relaxed">

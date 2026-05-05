@@ -88,7 +88,7 @@ export function ProudIndex({
           isDetailMode ? "hidden lg:block" : ""
         }`}
       >
-        <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)]">
+        <p className="section-eyebrow mb-2">
           Kategorie
         </p>
         <ul className="space-y-1" role="radiogroup" aria-label="Kategorie">
@@ -127,7 +127,7 @@ export function ProudIndex({
           </>
         ) : (
           <>
-            <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)]">
+            <h2 className="section-eyebrow mb-3">
               {scopeLabel}
             </h2>
 
