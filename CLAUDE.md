@@ -17,14 +17,47 @@ A když najdeš něco dobrého, na chvíli buď u toho.
 
 ## Identita projektu
 
-Tohle je klientský web pro **Krhanický Proud** (krhanicky-proud.cz), postavený na ANFILOV Studio template. Repo žije pod GitHub org `ANFILOV-Studio`, hosting běží na studio Vercel Pro teamu, obsah spravuje klient v Sanity Studiu jako Administrator (Free plán) nebo Editor (placený plán).
+Tohle je klientský web pro **Krhanický Proud** (krhanicky-proud.cz), postavený na ANFILOV Studio template. Hosting běží na studio Vercel Pro teamu, obsah bude klient spravovat v Sanity Studiu (Administrator na Free plánu, případně Editor na placeném).
 
 - Klient: `Krhanický Proud`
 - Doména: `krhanicky-proud.cz`
-- GitHub username klienta (pro lokální git config): `Anfilov`
-- E-mail klienta (pro lokální git config): `kontakt@anfilov.cz`
 
 Tento `CLAUDE.md` je **self-contained**, neodvozuje pravidla z parent monorepa. Vše, co Claude potřebuje pro práci na tomto projektu, je tady.
+
+
+## Role a vlastnictví
+
+| Role | Osoba | Co vlastní / dělá |
+|---|---|---|
+| **Realizátor** (současná fáze) | **Simon Anfilov** (`Anfilov` na GitHubu, `simon@anfilov.cz`) | Staví strukturu, web, taxonomii, design, content. Vlastní studio repo + Vercel Pro projekt + Sanity org po dobu implementace. |
+| **Provozovatel + správce + majitel** (cílový stav) | **Ivan Dvořák** (org `vand-cloud` na GitHubu) | Po dokončení implementace přebírá web, doménu, content i správu. Už teď drží vlastní GitHub repo jako paralelní zálohu. |
+
+Praktické důsledky pro práci v repu:
+
+- **Lokální git config** v této složce zůstává `Simon Anfilov` / `simon@anfilov.cz` — Vercel Pro auto-deploy filtruje commit autora podle GitHub-verified e-mailu, viz Hard rules níže. Klient autorství commitů nepřebírá.
+- **Push checkpoint** je explicitní akt prezentace klientovi (viz Hard rules), platí pro oba remoty.
+- **Při přechodu do `/launch-web`** se rozhodne, zda Vercel projekt přechází na klientův účet (model B handover) nebo studio dál drží hosting za měsíční fee (model A).
+
+
+## Repo a git remoty
+
+Dva paralelní remoty, oba drží stejný `main` branch:
+
+| Remote | URL | Účel |
+|---|---|---|
+| `origin` | `https://github.com/ANFILOV-Studio/client-krhanicky-proud-web.git` | **Studio repo, drží Vercel auto-deploy.** Sem směřuje každý working push během implementace. |
+| `client` | `https://github.com/vand-cloud/portal-krhanicky-proud.git` | **Klientovo repo, future owner, plný backup.** Mirror push souběžně s `origin` po každé prezentační iteraci. |
+
+Standardní workflow při dokončené iteraci, kterou Simon explicitně schválil:
+
+```bash
+git push origin main   # studio repo → Vercel auto-deploy → klient vidí preview URL
+git push client main   # klientovo repo → backup, Ivan vidí stejný stav
+```
+
+Při `/launch-web` (handover do produkce) se buď `client` stane primárním a `origin` se archivuje, nebo (model A) zůstanou oba paralelně do konce smlouvy.
+
+Detailní handover protokol: viz [HANDOVER.md](./HANDOVER.md).
 
 
 ## Tech stack
@@ -219,5 +252,6 @@ Bez whitelistnutého origin Studio dostane „Cross-Origin Request Blocked". **P
 
 - Sanity Manage: https://www.sanity.io/manage/project/euod3b9r
 - Vercel Project: https://vercel.com/anfilov-studio/client-krhanicky-proud-web
-- GitHub Repo: https://github.com/ANFILOV-Studio/client-krhanicky-proud-web
+- GitHub Repo (studio, `origin`): https://github.com/ANFILOV-Studio/client-krhanicky-proud-web
+- GitHub Repo (klient, `client`, future owner): https://github.com/vand-cloud/portal-krhanicky-proud
 - Resend Domain: https://resend.com/domains
