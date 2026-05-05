@@ -48,6 +48,26 @@ Až bude wireframe schválený a brand fáze hotová:
 4. Ivan otevře `https://krhanicky-proud.cz/studio` a zaregistruje Studio (klikne „Register this studio" — Sanity to vyžaduje od přelomu 2025/2026).
 5. Když budou potřeba formuláře, Ivan zařídí Resend Free účet a doménovou verifikaci.
 
+## Pre-launch decisions (rozhodnout před `/launch-web`)
+
+Tyto věci jsou v repu úmyslně ponechané v polo-stavu, aby Simon o nich rozhodl před produkčním nasazením. Žádné z nich není blocker pro klientské preview, ale **každé musí být explicitně vyřešené před tím, než se sebou popneme produkční doménu**.
+
+### `/rozcestnik` — co s původní homepage?
+
+Od **2026-05-05** je homepage (`/`) search-driven Krhanický průvodce (mapa + filtry + výsledky). Předchozí kurátorovaná 3-sloupcová verze (nadcházející akce, vybrané služby, aktuality obce) zůstává v repu na cestě `/rozcestnik`, ale **není linkovaná z hlavní navigace**.
+
+Před launchem rozhodnout jednu ze tří cest:
+
+- **a) DELETE** — pokud je vzor opuštěný a žádná hodnota se z něj nepřenese, smazat `app/[locale]/rozcestnik/`. Žádný impact na build, čistý odchod.
+- **b) PROMOTE** — pokud Simon usoudí, že kurátorovaná stránka má smysl jako sekundární surface (např. jako „Domů" pro vracející se uživatele po loginu, nebo jako rychlý dashboard), přidat ji zpátky do site nav a aktualizovat copy.
+- **c) REPURPOSE** — vybrané sekce přenést do jiné stránky (např. „Nadcházející akce" do `/obec` jako bonus blok, „Z blogu" do patičky, atd.).
+
+Když Simon rozhodne **a)**, vedle smazání souboru projít i `i18n/routing.ts` a odstranit z něj `"/rozcestnik": "/rozcestnik"` řádek.
+
+### Redirect `/pruvodce` → `/`
+
+Aktuální `next.config.ts` obsahuje permanent redirect z `/pruvodce` (legacy URL z dob, kdy průvodce byl podstránka) na `/`. Tento redirect můžeme nechat **trvale**, nebo ho odstranit po `n` měsících (až bude jisté, že žádný odkaz venku už nemíří na `/pruvodce`). Default: nechat. Stojí nás to nula a chrání proti budoucím překvapením.
+
 ## Kontakty
 
 - **Simon Anfilov** (realizátor) — `simon@anfilov.cz`, GitHub `Anfilov`, web [anfilov.cz](https://anfilov.cz)

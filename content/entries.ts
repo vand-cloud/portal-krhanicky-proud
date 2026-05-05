@@ -77,6 +77,18 @@ export interface Entry {
   organizer?: string;
   contactEmail?: string;
   contactPhone?: string;
+  // Civic membership flag: TRUE means this entry sits in Krhanice or one
+  // of its osady (Prosechov, Brejlov, Závist). Used by the distance tier
+  // filter -- "Jen Krhanice" only shows entries where inVillage === true,
+  // independent of haversine math (the village boundary is fuzzy and a
+  // pure radius from náves would mis-classify some osady). For tiers
+  // "do 7 km" and "do 15 km" the flag is OR-combined with haversine, so
+  // every in-village entry stays visible at any tier even if it has no
+  // lat/lng (e.g. a craftsman without a fixed pin). Editor sets this
+  // explicitly in Sanity Studio; in this hardcoded wireframe phase the
+  // flag is pre-populated for entries whose address points to one of
+  // the village settlements.
+  inVillage?: boolean;
   // Curator's pick for the "Vše" landing's selected sections.
   featured?: boolean;
   // Cross-references for the "split into two records" pattern (e.g. Hrnčířka
@@ -581,6 +593,7 @@ const events: Entry[] = [
     lat: 49.8568,
     lng: 14.5576,
     address: "Hasičská zbrojnice, Krhanice",
+    inVillage: true,
     startedAt: "2026-04-30T18:00:00+02:00",
     endedAt: "2026-04-30T22:30:00+02:00",
     category: "zabava",
@@ -603,6 +616,7 @@ const events: Entry[] = [
     lat: 49.8568,
     lng: 14.5576,
     address: "Hasičská zbrojnice, Krhanice",
+    inVillage: true,
     startedAt: "2026-05-30T15:00:00+02:00",
     category: "zabava",
     subcategory: "oslavy",
@@ -625,6 +639,7 @@ const events: Entry[] = [
     lat: 49.8561,
     lng: 14.5574,
     address: "Náves Krhanice",
+    inVillage: true,
     startedAt: "2026-06-06T14:00:00+02:00",
     category: "deti-rodina",
     subcategory: "detske-dny",
@@ -647,6 +662,7 @@ const events: Entry[] = [
     lat: 49.8557,
     lng: 14.5580,
     address: "Sokolovna Krhanice",
+    inVillage: true,
     startedAt: "2026-07-25T20:00:00+02:00",
     category: "zabava",
     subcategory: "tanecni-zabavy",
@@ -669,6 +685,7 @@ const events: Entry[] = [
     lat: 49.8568,
     lng: 14.5576,
     address: "Hasičská zbrojnice, Krhanice",
+    inVillage: true,
     startedAt: "2026-08-22T20:00:00+02:00",
     category: "zabava",
     subcategory: "plesy",
@@ -691,6 +708,7 @@ const events: Entry[] = [
     lat: 49.8561,
     lng: 14.5574,
     address: "Náves Krhanice",
+    inVillage: true,
     startedAt: "2026-08-28T20:30:00+02:00",
     category: "kultura",
     subcategory: "kino",
@@ -712,6 +730,7 @@ const events: Entry[] = [
     href: "/akce/cervnove-diskoteky-pro-deti-a-dospele-2026-06-13",
     website: "https://www.obeckrhanice.cz/pozvanky-na-akce",
     address: "Krhanice (místo upřesní pořadatel)",
+    inVillage: true,
     startedAt: "2026-06-13",
     category: "zabava",
     subcategory: "tanecni-zabavy",
@@ -730,6 +749,7 @@ const events: Entry[] = [
     href: "/akce/kavarnicka-pro-seniory-2026-06-19",
     website: "https://www.obeckrhanice.cz/pozvanky-na-akce",
     address: "Krhanice (místo upřesní pořadatel)",
+    inVillage: true,
     startedAt: "2026-06-19",
     category: "zabava",
     subcategory: "oslavy",
@@ -768,6 +788,7 @@ const events: Entry[] = [
     href: "/akce/krhanice-open-air-2026-08-01",
     website: "https://www.obeckrhanice.cz/pozvanky-na-akce",
     address: "Krhanice",
+    inVillage: true,
     startedAt: "2026-08-01",
     category: "kultura",
     subcategory: "festivaly",
@@ -1159,6 +1180,7 @@ const directory: Entry[] = [
     href: "/sluzby/sdh-krhanice",
     website: "https://hasici.obeckrhanice.cz/",
     address: "Krhanice (hasičská zbrojnice, přesnou adresu doplníme)",
+    inVillage: true,
     category: "tradice-komunita",
     subcategory: "hasicsky-sbor",
     tags: ["tradice"],
@@ -1182,6 +1204,7 @@ const directory: Entry[] = [
       facebook: "https://www.facebook.com/sokolkrhanice/",
     },
     address: "Krhanice (sokolské hřiště, přesnou adresu doplníme)",
+    inVillage: true,
     category: "sport",
     subcategory: "sokol",
     tags: ["tradice"],
@@ -1205,6 +1228,7 @@ const directory: Entry[] = [
     lat: 49.8552575,
     lng: 14.557905,
     address: "Krhanice 35, 257 42",
+    inVillage: true,
     category: "tradice-komunita",
     subcategory: "sousedsky",
     tags: [],
@@ -1229,6 +1253,7 @@ const directory: Entry[] = [
     lat: 49.8560226,
     lng: 14.56012,
     address: "Krhanice 197, 257 42",
+    inVillage: true,
     category: "tradice-komunita",
     subcategory: "sousedsky",
     tags: ["tradice"],
@@ -1247,6 +1272,7 @@ const directory: Entry[] = [
     href: "/sluzby/nase-krhanice",
     website: "https://www.nasekrhanice.cz/",
     address: "Krhanice 252, 257 42",
+    inVillage: true,
     category: "tradice-komunita",
     subcategory: "sousedsky",
     tags: [],
@@ -1265,6 +1291,7 @@ const directory: Entry[] = [
     href: "/sluzby/mazoretky-hrabenky-kamenice",
     website: "https://www.mazoretkykamenice.cz/",
     address: "Krhanice 62, 257 42",
+    inVillage: true,
     category: "sport",
     subcategory: "ostatni-sport",
     tags: ["pro-deti", "tradice"],
@@ -1280,6 +1307,7 @@ const directory: Entry[] = [
       "Lyžařský klub se zaměřením na carving, fun carving a race carving.",
     href: "/sluzby/czech-fun-carving-club",
     address: "Krhanice 37, 257 42",
+    inVillage: true,
     category: "sport",
     subcategory: "ostatni-sport",
     tags: [],
@@ -1295,6 +1323,7 @@ const directory: Entry[] = [
       "Tradiční korejské bojové umění pro děti i dospělé. Trénuje se v tělocvičně ZŠ Krhanice.",
     href: "/sluzby/skola-taekwon-do",
     address: "Krhanice 149, 257 42 (tělocvična ZŠ)",
+    inVillage: true,
     category: "sport",
     subcategory: "bojove-sporty",
     tags: ["pro-deti"],
@@ -1310,6 +1339,7 @@ const directory: Entry[] = [
       "Hudební skupina z Krhanic.",
     href: "/sluzby/crazy-boys-kapela",
     address: "Krhanice, 257 42",
+    inVillage: true,
     category: "kultura-umeni",
     subcategory: "hudebni",
     tags: ["hudba"],
@@ -1359,6 +1389,7 @@ const directory: Entry[] = [
     lat: 49.85434,
     lng: 14.591563,
     address: "Krhanice 257 42 (lokalita Zbořený Kostelec)",
+    inVillage: true,
     category: "pamatky",
     subcategory: "hrady-zamky",
     tags: ["historie", "venku"],
@@ -1476,6 +1507,7 @@ const directory: Entry[] = [
     lat: 49.7847,
     lng: 14.4944,
     address: "Lešany 1, 257 42 Krhanice",
+    inVillage: true,
     hours: "Út-Ne 9:30-17:30 (květen-říjen)",
     price: "150 Kč, děti 50 Kč",
     parking: "Volné parkoviště u areálu",
@@ -1518,6 +1550,7 @@ const directory: Entry[] = [
     lat: 49.8569238,
     lng: 14.5596988,
     address: "Krhanice 46, 257 42 (budova obecního úřadu)",
+    inVillage: true,
     hours: "Po 15:00–18:00",
     price: "Roční registrace 50 Kč, děti zdarma",
     category: "kultura",
@@ -1658,6 +1691,7 @@ const directory: Entry[] = [
     lat: 49.875053,
     lng: 14.564747,
     address: "Krhanice 257 42 (severní katastr obce)",
+    inVillage: true,
     category: "priroda-krajina",
     subcategory: "vyhlidky",
     tags: ["priroda", "venku", "pro-rodiny"],
@@ -1716,6 +1750,7 @@ const directory: Entry[] = [
     lat: 49.8561,
     lng: 14.5574,
     address: "Krhanice (úsek stezky podél Sázavy)",
+    inVillage: true,
     category: "priroda-krajina",
     subcategory: "naucne-stezky",
     tags: ["pro-rodiny", "naucne", "priroda", "venku"],
@@ -1754,6 +1789,7 @@ const directory: Entry[] = [
     lat: 49.874643,
     lng: 14.531274,
     address: "Krhanice 257 42 (lokalita Vlčí rokle, severozápadní katastr)",
+    inVillage: true,
     category: "priroda-krajina",
     subcategory: "lesy-stezky",
     tags: ["priroda", "venku"],
@@ -1790,6 +1826,7 @@ const directory: Entry[] = [
     lat: 49.855295,
     lng: 14.541899,
     address: "Krhanice 257 42",
+    inVillage: true,
     category: "rekreace",
     subcategory: "detska-hriste",
     tags: ["pro-deti", "pro-rodiny", "venku"],
@@ -1842,6 +1879,7 @@ const directory: Entry[] = [
     lat: 49.8561,
     lng: 14.5574,
     address: "Stanice Krhanice (na trati Čerčany–Světlá)",
+    inVillage: true,
     category: "rekreace",
     subcategory: "piknikova-mista",
     tags: ["historie", "sezonni", "pro-rodiny", "mimo-obec"],
@@ -1883,6 +1921,7 @@ const directory: Entry[] = [
     lat: 49.8533701,
     lng: 14.5575275,
     address: "Krhanice 149, 257 42 (u ZŠ)",
+    inVillage: true,
     hours: "Non-stop, 24/7",
     category: "prakticka-mista",
     subcategory: "posta",
@@ -1909,6 +1948,7 @@ const directory: Entry[] = [
     lat: 49.8557,
     lng: 14.5580,
     address: "Krhanice (sokolské hřiště, přesnou adresu doplníme)",
+    inVillage: true,
     category: "hospody-bary",
     subcategory: "pivnice",
     tags: ["pejskari-vitani"],
@@ -1948,6 +1988,7 @@ const directory: Entry[] = [
     lat: 49.7965,
     lng: 14.5905,
     address: "Prosečnice (část obce Krhanice), 257 42",
+    inVillage: true,
     category: "hospody-bary",
     subcategory: "pivnice",
     tags: [],
@@ -1967,6 +2008,7 @@ const directory: Entry[] = [
     lat: 49.855353,
     lng: 14.557239,
     address: "Krhanice 13, 257 42",
+    inVillage: true,
     hours: "Po-So 7:00-19:00, Ne 8:00-19:00",
     category: "potraviny-napoje",
     subcategory: "samoobsluhy",
@@ -1988,6 +2030,7 @@ const directory: Entry[] = [
     lat: 49.856555,
     lng: 14.559594,
     address: "Krhanice, hospoda U Krkovičky (naproti OÚ)",
+    inVillage: true,
     hours: "Út, Čt, Ne 15:00-17:30",
     category: "pekarstvi-cukrarstvi",
     subcategory: "pekarny",
@@ -2006,6 +2049,7 @@ const directory: Entry[] = [
     href: "/mista/jarno-pekarna",
     website: "https://www.jarno.cz/",
     address: "Krhanice 62, 257 42",
+    inVillage: true,
     category: "pekarstvi-cukrarstvi",
     subcategory: "pekarny",
     tags: ["regionalni-produkt", "lokalni-vyroba", "tradice"],
@@ -2027,6 +2071,7 @@ const directory: Entry[] = [
     lat: 49.8569,
     lng: 14.5577,
     address: "Krhanice 7, 257 42",
+    inVillage: true,
     category: "potraviny-napoje",
     subcategory: "regionalni-produkty",
     tags: ["lokalni-vyroba", "regionalni-produkt"],
@@ -2047,6 +2092,7 @@ const directory: Entry[] = [
     lat: 49.8489976,
     lng: 14.5505675,
     address: "Krhanice 125, 257 42",
+    inVillage: true,
     category: "specializovane",
     subcategory: "keramika-remeslo",
     tags: ["lokalni-vyroba", "remeslo"],
@@ -2066,6 +2112,7 @@ const directory: Entry[] = [
     lat: 49.8537888,
     lng: 14.5544963,
     address: "Krhanice 238, 257 42",
+    inVillage: true,
     category: "specializovane",
     subcategory: "keramika-remeslo",
     tags: ["lokalni-vyroba", "bio-eko", "remeslo"],
@@ -2082,6 +2129,7 @@ const directory: Entry[] = [
       "Výroba porcelánu v Krhanicích.",
     href: "/mista/porcelanova-vyroba-mulier",
     address: "Krhanice 71, 257 42",
+    inVillage: true,
     category: "specializovane",
     subcategory: "keramika-remeslo",
     tags: ["lokalni-vyroba", "remeslo"],
@@ -2098,6 +2146,7 @@ const directory: Entry[] = [
     href: "/mista/vinovintage",
     website: "https://vinovintage.cz/",
     address: "Krhanice 20, 257 42",
+    inVillage: true,
     category: "potraviny-napoje",
     subcategory: "vinoteky",
     tags: [],
@@ -2113,6 +2162,7 @@ const directory: Entry[] = [
       "Italská dámská móda.",
     href: "/mista/denny-rose",
     address: "Krhanice 84, 257 42",
+    inVillage: true,
     category: "moda",
     subcategory: "odevy",
     tags: [],
@@ -2128,6 +2178,7 @@ const directory: Entry[] = [
       "Návrh a realizace zahrad v Krhanicích a okolí.",
     href: "/mista/zahradni-studio-strnadova",
     address: "Krhanice 291, 257 42",
+    inVillage: true,
     category: "pro-domov",
     subcategory: "zahradnictvi",
     tags: ["lokalni-vyroba"],
@@ -2178,6 +2229,7 @@ const directory: Entry[] = [
     lat: 49.8533701,
     lng: 14.5575275,
     address: "Krhanice 149, 257 42",
+    inVillage: true,
     hours: "Vyučování 7:55–14:20, sekretariát v provozních dnech školy",
     category: "vzdelavani",
     subcategory: "zakladni-skola",
@@ -2199,6 +2251,7 @@ const directory: Entry[] = [
     website: "http://www.mskrhanice.cz/",
     heroImage: "/brand/photos/sv-ms-krhanice.webp",
     address: "Krhanice (poblíž ZŠ)",
+    inVillage: true,
     hours: "Po-Pá 6:30-16:30",
     price: "1 200 Kč/měsíc + strava",
     category: "vzdelavani",
@@ -2220,6 +2273,7 @@ const directory: Entry[] = [
     href: "/sluzby/dr-klutz-english-theatre",
     website: "https://drklutz.com/",
     address: "Krhanice 181, 257 42",
+    inVillage: true,
     category: "vzdelavani",
     subcategory: "jazykovka",
     tags: ["pro-deti"],
@@ -2235,6 +2289,7 @@ const directory: Entry[] = [
       "Individuální výuka zpěvu (mýdlárna Leontýnka, stejná osoba).",
     href: "/sluzby/vyuka-zpevu-leona-hlavnickova",
     address: "Krhanice 238, 257 42",
+    inVillage: true,
     category: "vzdelavani",
     subcategory: "kurzy",
     tags: [],
@@ -2254,6 +2309,7 @@ const directory: Entry[] = [
     lat: 49.8513926,
     lng: 14.550525,
     address: "Krhanice 70, 257 42",
+    inVillage: true,
     category: "zdravi",
     subcategory: "prakticky-lekar",
     tags: ["rezervace-nutna"],
@@ -2274,6 +2330,7 @@ const directory: Entry[] = [
     lat: 49.8560713,
     lng: 14.5537363,
     address: "Krhanice 169, 257 42",
+    inVillage: true,
     hours: "Po-Pá 16:00-18:00",
     category: "zdravi",
     subcategory: "veterinar",
@@ -2292,6 +2349,7 @@ const directory: Entry[] = [
       "Stomatologická laboratoř v Krhanicích. Výroba fixních i snímatelných zubních protéz.",
     href: "/sluzby/marie-mikolasova-zubni-laborator",
     address: "Krhanice 188, 257 42",
+    inVillage: true,
     category: "zdravi",
     subcategory: "zubar",
     tags: [],
@@ -2329,6 +2387,7 @@ const directory: Entry[] = [
     lat: 49.8556,
     lng: 14.5570,
     address: "Krhanice (mobilní)",
+    inVillage: true,
     hours: "Dle objednávek",
     category: "krasa-pece",
     subcategory: "masaze",
@@ -2349,6 +2408,7 @@ const directory: Entry[] = [
     lat: 49.8571538,
     lng: 14.5616213,
     address: "Krhanice 122, 257 42",
+    inVillage: true,
     category: "krasa-pece",
     subcategory: "kadernictvi",
     tags: ["rezervace-nutna"],
@@ -2401,6 +2461,7 @@ const directory: Entry[] = [
     lat: 49.8572431,
     lng: 14.5650591,
     address: "Krhanice 293, 257 42",
+    inVillage: true,
     hours: "Po dohodě",
     category: "bydleni-stavba",
     subcategory: "stavebni-firmy",
@@ -2421,6 +2482,7 @@ const directory: Entry[] = [
     lat: 49.8596749,
     lng: 14.5592258,
     address: "Krhanice 270, 257 42",
+    inVillage: true,
     category: "bydleni-stavba",
     subcategory: "zednik",
     tags: [],
@@ -2439,6 +2501,7 @@ const directory: Entry[] = [
     lat: 49.8528851,
     lng: 14.5546438,
     address: "Krhanice 255, 257 42",
+    inVillage: true,
     category: "bydleni-stavba",
     subcategory: "stavebni-firmy",
     tags: [],
@@ -2457,6 +2520,7 @@ const directory: Entry[] = [
     lat: 49.8585388,
     lng: 14.5619913,
     address: "Krhanice 260, 257 42",
+    inVillage: true,
     category: "bydleni-stavba",
     subcategory: "klempir",
     tags: [],
@@ -2473,6 +2537,7 @@ const directory: Entry[] = [
       "Truhlářské práce v Krhanicích.",
     href: "/sluzby/mv-truhlarstvi",
     address: "Krhanice 316, 257 42",
+    inVillage: true,
     category: "bydleni-stavba",
     subcategory: "stavebni-firmy",
     tags: [],
@@ -2488,6 +2553,7 @@ const directory: Entry[] = [
       "Prodej a montáž oken a dveří.",
     href: "/sluzby/okna-dvere-roman-blahut",
     address: "Krhanice 163, 257 42",
+    inVillage: true,
     category: "bydleni-stavba",
     subcategory: "sklenari",
     tags: [],
@@ -2505,6 +2571,7 @@ const directory: Entry[] = [
     lat: 49.8607026,
     lng: 14.5592475,
     address: "Krhanice 38, 257 42",
+    inVillage: true,
     category: "bydleni-stavba",
     subcategory: "instalater",
     tags: [],
@@ -2520,6 +2587,7 @@ const directory: Entry[] = [
       "Instalatérské práce: voda, topení, kanalizace, sádrokarton.",
     href: "/sluzby/instalaterstvi-jaroslav-hudcek",
     address: "Krhanice 59, 257 42",
+    inVillage: true,
     category: "bydleni-stavba",
     subcategory: "instalater",
     tags: [],
@@ -2535,6 +2603,7 @@ const directory: Entry[] = [
       "Tepelná čerpadla pro domácnosti i firmy.",
     href: "/sluzby/energozon",
     address: "Krhanice 74, 257 42",
+    inVillage: true,
     category: "bydleni-stavba",
     subcategory: "instalater",
     tags: [],
@@ -2553,6 +2622,7 @@ const directory: Entry[] = [
     lat: 49.8575813,
     lng: 14.5607038,
     address: "Krhanice 88, 257 42",
+    inVillage: true,
     category: "bydleni-stavba",
     subcategory: "elektrikar",
     tags: [],
@@ -2570,6 +2640,7 @@ const directory: Entry[] = [
       "Fotovoltaika, vodní a solární energetika v Krhanicích.",
     href: "/sluzby/pin-292-fotovoltaika",
     address: "Krhanice 236, 257 42",
+    inVillage: true,
     category: "bydleni-stavba",
     subcategory: "elektrikar",
     tags: [],
@@ -2585,6 +2656,7 @@ const directory: Entry[] = [
       "Antény, kabeláže a kamerové systémy.",
     href: "/sluzby/antelek",
     address: "Krhanice 259, 257 42",
+    inVillage: true,
     category: "bydleni-stavba",
     subcategory: "elektrikar",
     tags: [],
@@ -2600,6 +2672,7 @@ const directory: Entry[] = [
       "Instalace a servis antén, partner Skylink.",
     href: "/sluzby/instalace-a-servis-anten",
     address: "Krhanice 185, 257 42",
+    inVillage: true,
     category: "bydleni-stavba",
     subcategory: "elektrikar",
     tags: [],
@@ -2615,6 +2688,7 @@ const directory: Entry[] = [
       "Silnoproud i slaboproud od roku 2010.",
     href: "/sluzby/elektroprace-jan-bozik",
     address: "Krhanice ev.č. 37, 257 42",
+    inVillage: true,
     category: "bydleni-stavba",
     subcategory: "elektrikar",
     tags: [],
@@ -2631,6 +2705,7 @@ const directory: Entry[] = [
     href: "/sluzby/kominictvi-tony-cermak",
     website: "https://www.kominictvitonycermak.cz/",
     address: "Krhanice 222, 257 42",
+    inVillage: true,
     hours: "Po-Pá 8:00-18:00",
     category: "bydleni-stavba",
     subcategory: "kominik",
@@ -2652,6 +2727,7 @@ const directory: Entry[] = [
     href: "/sluzby/quad-moto-shop",
     website: "https://www.quad-motoshop.cz/",
     address: "Krhanice 16, 257 42",
+    inVillage: true,
     hours: "Po dohodě (i víkendy a svátky)",
     category: "auto-doprava",
     subcategory: "autoservis",
@@ -2670,6 +2746,7 @@ const directory: Entry[] = [
       "Autoservisní dílna Jana Bažanta v Krhanicích. Bez vlastního webu, kontakt telefonicky.",
     href: "/sluzby/autodilna-bazant",
     address: "Krhanice 122, 257 42",
+    inVillage: true,
     category: "auto-doprava",
     subcategory: "autoservis",
     tags: [],
@@ -2687,6 +2764,7 @@ const directory: Entry[] = [
     href: "/sluzby/auto-moto-tyno",
     heroImage: "/brand/photos/auto-moto-tyno.webp",
     address: "Krhanice 189, 257 42",
+    inVillage: true,
     category: "auto-doprava",
     subcategory: "autoservis",
     tags: [],
@@ -2703,6 +2781,7 @@ const directory: Entry[] = [
       "Nabízíme autolakýrnické a drobné karosářské práce.",
     href: "/sluzby/autolakovna-standa",
     address: "Krhanice 269, 257 42",
+    inVillage: true,
     category: "auto-doprava",
     subcategory: "autoservis",
     tags: [],
@@ -2733,6 +2812,7 @@ const directory: Entry[] = [
       "Autoservis v Krhanicích (dříve EUROTYRES).",
     href: "/sluzby/tmcar-autoservis",
     address: "Krhanice 233, 257 42",
+    inVillage: true,
     category: "auto-doprava",
     subcategory: "autoservis",
     tags: [],
@@ -2748,6 +2828,7 @@ const directory: Entry[] = [
       "Provozujeme autodopravu v Krhanicích a okolí.",
     href: "/sluzby/autodoprava-mlejnek",
     address: "Krhanice 215, 257 42",
+    inVillage: true,
     category: "auto-doprava",
     tags: [],
     status: "approved",
@@ -2764,6 +2845,7 @@ const directory: Entry[] = [
       "Účetnictví a daně pro fyzické i právnické osoby.",
     href: "/sluzby/sona-valaskova-ucetnictvi",
     address: "Krhanice 277, 257 42",
+    inVillage: true,
     category: "profesni-financni",
     subcategory: "ucetni",
     tags: [],
@@ -2779,6 +2861,7 @@ const directory: Entry[] = [
       "Poradenství a pomoc s EU dotacemi.",
     href: "/sluzby/ludek-brabec-your-win",
     address: "Krhanice 165, 257 42",
+    inVillage: true,
     category: "profesni-financni",
     tags: [],
     status: "approved",
@@ -2814,6 +2897,7 @@ const directory: Entry[] = [
     lat: 49.8557201,
     lng: 14.5591271,
     address: "Krhanice 309, 257 42",
+    inVillage: true,
     hours: "Po-Pá 9:00-18:00, So-Ne 10:00-14:00",
     category: "pro-domacnost-ostatni",
     subcategory: "it-web",
@@ -2837,6 +2921,7 @@ const directory: Entry[] = [
     },
     heroImage: "/brand/photos/anfilov-symbol.webp",
     address: "Krhanice 275, 257 42",
+    inVillage: true,
     category: "pro-domacnost-ostatni",
     subcategory: "it-web",
     tags: [],
@@ -2854,6 +2939,7 @@ const directory: Entry[] = [
       "Grafické návrhy a předtisková příprava.",
     href: "/sluzby/zita-nielsen-grafika",
     address: "Krhanice 181, 257 42",
+    inVillage: true,
     category: "pro-domacnost-ostatni",
     subcategory: "it-web",
     tags: [],
@@ -2869,6 +2955,7 @@ const directory: Entry[] = [
       "Portrétní focení a fotoknihy.",
     href: "/sluzby/fotoatelier-magdalena-dostalkova",
     address: "Krhanice 46, 257 42",
+    inVillage: true,
     category: "pro-domacnost-ostatni",
     subcategory: "foto",
     tags: ["rezervace-nutna"],
@@ -2884,6 +2971,7 @@ const directory: Entry[] = [
       "Profesionální fotograf v Krhanicích.",
     href: "/sluzby/aafoto",
     address: "Krhanice 197, 257 42",
+    inVillage: true,
     category: "pro-domacnost-ostatni",
     subcategory: "foto",
     tags: ["rezervace-nutna"],
@@ -2899,6 +2987,7 @@ const directory: Entry[] = [
       "Opravy, údržbu a repase věžních hodin. Specializované řemeslo, v České republice vzácné.",
     href: "/sluzby/jan-balacek-vezni-hodiny",
     address: "Krhanice 36, 257 42",
+    inVillage: true,
     category: "pro-domacnost-ostatni",
     subcategory: "hodinar",
     tags: ["remeslo"],
@@ -2915,6 +3004,7 @@ const directory: Entry[] = [
       "Servis a kalibrace vah.",
     href: "/sluzby/vladimir-smolik-servis-vah",
     address: "Krhanice ev.č. 70, 257 42",
+    inVillage: true,
     category: "pro-domacnost-ostatni",
     subcategory: "hodinar",
     tags: [],
@@ -2930,6 +3020,7 @@ const directory: Entry[] = [
       "Sekání trávy a údržba zelených ploch.",
     href: "/sluzby/jerman-sekani-travy",
     address: "Krhanice 197, 257 42",
+    inVillage: true,
     category: "pro-domacnost-ostatni",
     tags: [],
     status: "approved",
@@ -2944,6 +3035,7 @@ const directory: Entry[] = [
       "Pronájem světel, zvukové techniky a mobilních pódií.",
     href: "/sluzby/koloros-production",
     address: "Krhanice 235, 257 42",
+    inVillage: true,
     category: "pro-domacnost-ostatni",
     subcategory: "svatebni-agentura",
     tags: [],
@@ -2959,6 +3051,7 @@ const directory: Entry[] = [
       "Pronájem ozvučení, osvětlení a pódií pro akce.",
     href: "/sluzby/fstage",
     address: "Krhanice 184, 257 42",
+    inVillage: true,
     category: "pro-domacnost-ostatni",
     subcategory: "svatebni-agentura",
     tags: [],
@@ -3152,6 +3245,60 @@ export function sortByDistance(
     if (bHas) return 1;
     return 0;
   });
+}
+
+// Distance tier filter. Three tiers, narrow to wide:
+//   - "krhanice": only entries explicitly tagged inVillage. Pure civic
+//                 membership, no haversine. An entry without lat/lng but
+//                 marked inVillage stays visible (e.g. a Krhanice-based
+//                 craftsman with no fixed shop pin).
+//   - "blizko":   inVillage OR within 7 km of náves. Walking + short
+//                 drive distance. The "neighborhood" radius (Týnec,
+//                 Bukovany, Prosechov-via-radius, Krusičany).
+//   - "region":   inVillage OR within 15 km of náves. The Posázaví
+//                 regional radius the project mission scopes to.
+// Tiers are cumulative: the wider tier shows everything the narrower
+// tier shows, plus more. Default tier on /pruvodce is "blizko".
+export type DistanceTier = "krhanice" | "blizko" | "region";
+
+export const DEFAULT_DISTANCE_TIER: DistanceTier = "blizko";
+
+export const distanceTierLabels: Record<DistanceTier, string> = {
+  krhanice: "Jen Krhanice",
+  blizko: "Do 7 km",
+  region: "Do 15 km",
+};
+
+// Display order: narrow to wide. Mirrors how the user thinks about
+// expanding scope ("nejdřív obec, pak okolí, pak region").
+export const distanceTierOrder: DistanceTier[] = [
+  "krhanice",
+  "blizko",
+  "region",
+];
+
+const TIER_RADIUS_KM: Record<DistanceTier, number> = {
+  krhanice: 0, // sentinel, never used (in-village is checked separately)
+  blizko: 7,
+  region: 15,
+};
+
+export function entryMatchesTier(entry: Entry, tier: DistanceTier): boolean {
+  // In-village always wins, at every tier. Tier "krhanice" is the only
+  // tier that REQUIRES this flag.
+  if (entry.inVillage === true) return true;
+  if (tier === "krhanice") return false;
+
+  // For tiers blizko / region we need coordinates. Entries without
+  // lat/lng (and without inVillage) drop out of these tiers -- they
+  // have no testable location.
+  if (entry.lat === undefined || entry.lng === undefined) return false;
+
+  const km = haversineKm(
+    { lat: entry.lat, lng: entry.lng },
+    KRHANICE_CENTER,
+  );
+  return km <= TIER_RADIUS_KM[tier];
 }
 
 // Strip Czech diacritics + lowercase. Used for both haystack and needle so

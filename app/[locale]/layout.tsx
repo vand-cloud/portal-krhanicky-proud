@@ -100,8 +100,10 @@ function ChromeWrapper({ children }: { children: React.ReactNode }) {
   const tNav = useTranslations("nav");
   const tFooter = useTranslations("footer");
 
+  // The "guide" entry was dropped: the Krhanický průvodce IS the
+  // homepage now, so the brand logo (top-left) already covers that
+  // navigation. Keeping a redundant nav item would only add noise.
   const navItems = [
-    { label: tNav("guide"), href: "/pruvodce" },
     { label: tNav("village"), href: "/obec" },
     {
       label: tNav("proud"),

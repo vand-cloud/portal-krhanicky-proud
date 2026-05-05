@@ -43,12 +43,15 @@ function iconPaths(type: EntryType): string {
         <circle cx="12" cy="10" r="3"/>
       `;
     case "gastro":
-      // ChefHat -- kuchařská čepice. Universálnější signál pro gastro
-      // než utensils (které čte jako "jídlo k jídlu", ne místo, kam jít).
-      // Source: lucide-react main.
+      // Beer -- půllitr s pěnou. V českém kontextu jasnější signál pro
+      // gastro než kuchařská čepice (která čte jako "vaří se zde", což
+      // je málo specifické). Source: lucide-react v1.11.0 beer icon.
       return `
-        <path d="M17 21a1 1 0 0 0 1-1v-5.35c0-.457.316-.844.727-1.041a4 4 0 0 0-2.134-7.589 5 5 0 0 0-9.186 0 4 4 0 0 0-2.134 7.588c.411.198.727.585.727 1.041V20a1 1 0 0 0 1 1Z"/>
-        <path d="M6 17h12"/>
+        <path d="M17 11h1a3 3 0 0 1 0 6h-1"/>
+        <path d="M9 12v6"/>
+        <path d="M13 12v6"/>
+        <path d="M14 7.5c-1 0-1.44.5-3 .5s-2-.5-3-.5-1.72.5-2.5.5a2.5 2.5 0 0 1 0-5c.78 0 1.57.5 2.5.5S9.44 2 11 2s2 1.5 3 1.5 1.72-.5 2.5-.5a2.5 2.5 0 0 1 0 5c-.78 0-1.5-.5-2.5-.5Z"/>
+        <path d="M5 8v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8"/>
       `;
     case "obchody":
       // Store

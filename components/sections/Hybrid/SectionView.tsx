@@ -12,7 +12,10 @@ import type {
   Subcategory,
 } from "@/content/entries";
 import {
+  DEFAULT_DISTANCE_TIER,
   categoriesForType,
+  distanceTierOrder,
+  entryMatchesTier,
   filterByCategory,
   filterBySubcategory,
   filterByTagsIntersection,
@@ -26,6 +29,7 @@ import {
   subcategoriesFor,
   subcategoryDefs,
   typeLabels,
+  type DistanceTier,
 } from "@/content/entries";
 import { SearchBar } from "./SearchBar";
 import { TimelineView } from "./TimelineView";
@@ -33,6 +37,7 @@ import { MapView } from "./MapView";
 import { EntryListItem } from "./EntryListItem";
 import { EntryThumb } from "./EntryThumb";
 import { ScopePills } from "./ScopePills";
+import { DistanceTierPills } from "./DistanceTierPills";
 import { SOCIAL_ITEMS, formatWebUrl } from "./SocialIcons";
 import {
   type Scope,
@@ -120,6 +125,7 @@ export function SectionView({
   initialCategorySlug,
   initialSubcategorySlug,
   initialTags = [],
+  initialTier,
   initialSelectedSlug,
   initialSelectedType,
 }: {
@@ -141,6 +147,9 @@ export function SectionView({
   initialSubcategorySlug?: string;
   // From URL query (?tags=rock,venkovni). Pre-applies tag intersection.
   initialTags?: string[];
+  // From URL query (?dist=krhanice|blizko|region). Sets the distance tier.
+  // Falls back to DEFAULT_DISTANCE_TIER ("blizko") when absent or invalid.
+  initialTier?: DistanceTier;
   // Set on canonical detail pages (/akce/[slug] etc.). Together with
   // initialSelectedType, the view shows the detail panel pre-selected.
   initialSelectedSlug?: string;
@@ -178,6 +187,12 @@ export function SectionView({
     return def ? def.slug : null;
   });
   const [tags, setTags] = useState<string[]>(initialTags);
+  // Distance tier is a cross-cutting filter -- it does NOT cascade-reset
+  // when the user changes scope/category/etc. A user filtering "Do 7 km"
+  // who switches from Akce to Místa probably still wants "Do 7 km".
+  const [tier, setTier] = useState<DistanceTier>(
+    initialTier ?? DEFAULT_DISTANCE_TIER,
+  );
   const [query, setQuery] = useState("");
   // Bidirectional hover sync between map pins and list items.
   const [hoveredId, setHoveredId] = useState<string | null>(null);
@@ -239,9 +254,13 @@ export function SectionView({
     if (category) params.set("cat", category);
     if (subcategory) params.set("sub", subcategory);
     if (tags.length > 0) params.set("tags", tags.join(","));
+    // Only serialize tier when it differs from the default. Keeps the
+    // URL clean for the common case (Do 7 km) and makes ?dist=krhanice
+    // / ?dist=region the explicit shareable variants.
+    if (tier !== DEFAULT_DISTANCE_TIER) params.set("dist", tier);
     const qs = params.toString();
     router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
-  }, [scope, category, subcategory, tags, pathname, router, initialSelectedSlug]);
+  }, [scope, category, subcategory, tags, tier, pathname, router, initialSelectedSlug]);
 
   // Pill rows visible right now. Progressive reveal: each level appears
   // only after the previous one is committed (not "Vše").
@@ -278,8 +297,12 @@ export function SectionView({
     list = filterBySubcategory(list, subcategory);
     list = filterByTagsIntersection(list, tags);
     list = filterByText(list, query);
+    // Distance tier: applied LAST so all categorical filters narrow first
+    // and the geo cut sits on top. inVillage entries always pass; others
+    // require lat/lng within the tier's km radius.
+    list = list.filter((e) => entryMatchesTier(e, tier));
     return list;
-  }, [entries, scope, category, subcategory, tags, query]);
+  }, [entries, scope, category, subcategory, tags, query, tier]);
 
   // Tag pool for the chip row. Computed from the items that currently
   // pass type/category/subcategory filters (so picking "Hudební" shows
@@ -357,89 +380,108 @@ export function SectionView({
           viewport -- the user came here for one specific entry. */}
       {selectedEntry ? null : (
         <>
-          <header className="pt-12 pb-6 sm:pt-16 lg:pb-8">
+          {/* HERO -- centered dominant block. Cascade reads top to bottom:
+              identity (eyebrow + title), then the WHICH (4 cascading pill
+              rows: scope -> category -> subcategory -> tags), then the
+              free-text fallback (search input as the last element). All
+              filter rows render centered so the hero stays as a single
+              vertical column anchored on the page axis. */}
+          <header className="mx-auto max-w-3xl pt-12 pb-8 text-center sm:pt-16 lg:pt-20 lg:pb-10">
             {pageEyebrow ? (
               <p className="eyebrow mb-3">{pageEyebrow}</p>
             ) : null}
             <h1 className="text-3xl font-bold leading-tight tracking-tight text-[var(--color-text-accent)] sm:text-4xl lg:text-5xl">
               {pageTitle}
             </h1>
-            {pageIntro ? (
-              <p className="mt-4 max-w-2xl text-base leading-relaxed text-[var(--color-text-secondary)] sm:text-lg">
-                {pageIntro}
-              </p>
-            ) : null}
-          </header>
 
-          <div className="space-y-3 pb-6">
-            {/* Level 1: Type pills (always visible). Largest size --
-                they set the corpus for the whole page. Wrapped in
-                FilterRow so the "TYP" label aligns with KATEGORIE /
-                PODKATEGORIE / ŠTÍTKY in the rows below. */}
-            <FilterRow label="Typ">
+            {/* Level 1: Type pills (always visible). Largest size, sets
+                the corpus for the whole page. */}
+            <div className="mt-8">
               <ScopePills active={scope} onChange={handleScopeChange} />
-            </FilterRow>
+            </div>
 
-            {/* Level 2: Category pills. Visible after a non-"Vše" type
-                is picked. Medium size. "Vše" sentinel resets level 2
-                and cascades to clear levels 3 + 4. */}
-            {visibleCategories.length > 0 ? (
-              <PillRow
-                label="Kategorie"
-                size="md"
-                items={[
-                  { value: null, label: tHome("filterAll") },
-                  ...visibleCategories.map((c) => ({
-                    value: c as Category,
-                    label: scope === "all" ? c : getCategoryLabel(scope, c),
-                  })),
-                ]}
-                active={category}
-                onChange={(v) =>
-                  handleCategoryChange((v as Category | null) ?? null)
-                }
-              />
+            {/* Levels 2-4: Refinement filters appear conditionally as
+                the user drills in. Each row is centered so the cascade
+                reads as a single hero column. Spacing tighter than the
+                scope -> search gap so refinements feel like one unit. */}
+            {(visibleCategories.length > 0 ||
+              visibleSubcategories.length > 0 ||
+              (showTagRow && tagPool.length > 0)) ? (
+              <div className="mt-4 space-y-2">
+                {/* Level 2: Category pills. Visible after a non-"Vše"
+                    type is picked. Medium size. "Vše" sentinel resets
+                    level 2 and cascades to clear levels 3 + 4. */}
+                {visibleCategories.length > 0 ? (
+                  <PillRow
+                    size="md"
+                    items={[
+                      { value: null, label: tHome("filterAll") },
+                      ...visibleCategories.map((c) => ({
+                        value: c as Category,
+                        label:
+                          scope === "all" ? c : getCategoryLabel(scope, c),
+                      })),
+                    ]}
+                    active={category}
+                    onChange={(v) =>
+                      handleCategoryChange((v as Category | null) ?? null)
+                    }
+                  />
+                ) : null}
+
+                {/* Level 3: Subcategory pills. Visible only when the
+                    active category has subcategories. Small size. */}
+                {visibleSubcategories.length > 0 ? (
+                  <PillRow
+                    size="sm"
+                    items={[
+                      { value: null, label: tHome("filterAll") },
+                      ...visibleSubcategories.map((s) => ({
+                        value: s.slug as Subcategory,
+                        label: s.label,
+                      })),
+                    ]}
+                    active={subcategory}
+                    onChange={(v) =>
+                      handleSubcategoryChange((v as Subcategory | null) ?? null)
+                    }
+                  />
+                ) : null}
+
+                {/* Level 4: Tag chips. Multi-select, intersection (AND).
+                    Visible after subcategory is picked, or when the
+                    active category is flat (no subcategories defined). */}
+                {showTagRow && tagPool.length > 0 ? (
+                  <TagChipRow
+                    tags={tagPool}
+                    active={tags}
+                    onToggle={handleTagToggle}
+                  />
+                ) : null}
+              </div>
             ) : null}
 
-            {/* Level 3: Subcategory pills. Visible only when the active
-                category has subcategories. Small size. */}
-            {visibleSubcategories.length > 0 ? (
-              <PillRow
-                label="Podkategorie"
-                size="sm"
-                items={[
-                  { value: null, label: tHome("filterAll") },
-                  ...visibleSubcategories.map((s) => ({
-                    value: s.slug as Subcategory,
-                    label: s.label,
-                  })),
-                ]}
-                active={subcategory}
-                onChange={(v) =>
-                  handleSubcategoryChange((v as Subcategory | null) ?? null)
-                }
+            {/* Search input -- the free-text fallback, last in the
+                cascade. Slightly wider than the pill rows so it carries
+                weight as the primary alternative to picking pills. */}
+            <div className="mx-auto mt-6 max-w-2xl">
+              <SearchBar
+                query={query}
+                onChange={setQuery}
+                placeholder={placeholder}
+                size="large"
               />
-            ) : null}
+            </div>
 
-            {/* Level 4: Tag chips. Multi-select, intersection (AND).
-                Visible after subcategory is picked, or when the active
-                category is flat (no subcategories defined). */}
-            {showTagRow && tagPool.length > 0 ? (
-              <TagChipRow
-                label="Štítky"
-                tags={tagPool}
-                active={tags}
-                onToggle={handleTagToggle}
-              />
-            ) : null}
-
-            <SearchBar
-              query={query}
-              onChange={setQuery}
-              placeholder={placeholder}
-              size="large"
-            />
-          </div>
+            {/* Distance tier -- geographic cross-cutting filter. Sits
+                below the search box because it modifies WHERE results
+                come from, not WHAT, and the project mission caps at
+                15 km so the radius vocabulary is finite. Default is
+                "Do 7 km" (blizko). */}
+            <div className="mt-4">
+              <DistanceTierPills active={tier} onChange={setTier} />
+            </div>
+          </header>
         </>
       )}
 
@@ -513,30 +555,13 @@ export function SectionView({
 // Filter row primitives (single-select pills + multi-select tag chips)
 // ─────────────────────────────────────────────────────────────────────────────
 
-// Fixed label column width so all four filter rows (TYP / KATEGORIE /
-// PODKATEGORIE / ŠTÍTKY) start their pill column at the same x-axis
-// position. Without this, the rows wobble because each label is a
-// different width.
-const LABEL_COL = "w-28 shrink-0";
-
-// Wrapper that gives a filter row a left-aligned uppercase label and an
-// inline pill area. Used for ScopePills (TYP) at the top and for
-// PillRow / TagChipRow below.
-function FilterRow({
-  label,
-  children,
-}: {
-  label: string;
-  children: React.ReactNode;
-}) {
+// Wrapper for a horizontal filter row of pills/chips. Centered to match
+// the hero column; pill content + size hierarchy carries the meaning,
+// no uppercase label is rendered.
+function FilterRow({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5 sm:flex-nowrap">
-      <span
-        className={`${LABEL_COL} section-eyebrow`}
-      >
-        {label}
-      </span>
-      <div className="flex flex-wrap items-center gap-1.5">{children}</div>
+    <div className="flex flex-wrap items-center justify-center gap-1.5">
+      {children}
     </div>
   );
 }
@@ -551,13 +576,11 @@ interface PillItem<V> {
 // as soft outline chips. Size prop scales the rhythm so deeper levels
 // read smaller and the page hierarchy is unambiguous.
 function PillRow<V extends string | null>({
-  label,
   size,
   items,
   active,
   onChange,
 }: {
-  label: string;
   size: "md" | "sm";
   items: PillItem<V>[];
   active: V;
@@ -569,7 +592,7 @@ function PillRow<V extends string | null>({
       : "px-2.5 py-1 text-xs";
 
   return (
-    <FilterRow label={label}>
+    <FilterRow>
       {items.map((item) => {
         const isActive =
           item.value === active ||
@@ -602,18 +625,16 @@ function PillRow<V extends string | null>({
 // (intersection / AND filter). Size is fixed to xs -- this is the
 // finest-grained filter on the page.
 function TagChipRow({
-  label,
   tags,
   active,
   onToggle,
 }: {
-  label: string;
   tags: string[];
   active: string[];
   onToggle: (tag: string) => void;
 }) {
   return (
-    <FilterRow label={label}>
+    <FilterRow>
       {tags.map((tag) => {
         const isActive = active.includes(tag);
         return (

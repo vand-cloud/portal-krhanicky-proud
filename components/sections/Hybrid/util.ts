@@ -12,18 +12,20 @@ export const scopeSlugByType: Record<EntryType, string> = {
   spolky: "spolky",
 };
 
-// All scope values accepted by the /pruvodce page.
+// All scope values accepted by the homepage listing.
 export type Scope = "all" | EntryType;
 
-// Build URL for the listing page with a specific scope pre-selected.
+// Build URL for the homepage listing with a specific scope pre-selected.
+// The Krhanický průvodce IS the homepage now (formerly /pruvodce), so
+// "all" maps to "/" and scope filters become "/?type=...".
 export function pruvodceHref(scope: Scope): string {
-  if (scope === "all") return "/pruvodce";
-  return `/pruvodce?type=${scopeSlugByType[scope]}`;
+  if (scope === "all") return "/";
+  return `/?type=${scopeSlugByType[scope]}`;
 }
 
 // Build URL for a category-filtered listing view, anchored to the entry's
 // type. Click on a "Děti a rodina" chip in an event detail goes to
-// /pruvodce?type=akce&cat=deti-rodina.
+// /?type=akce&cat=deti-rodina.
 export function categoryFilterHref(entry: Entry, cat: Category): string {
-  return `/pruvodce?type=${scopeSlugByType[entry.type]}&cat=${encodeURIComponent(cat)}`;
+  return `/?type=${scopeSlugByType[entry.type]}&cat=${encodeURIComponent(cat)}`;
 }

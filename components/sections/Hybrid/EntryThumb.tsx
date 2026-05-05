@@ -1,4 +1,4 @@
-import { Calendar, MapPin, ChefHat, Store, Briefcase, Users } from "lucide-react";
+import { Calendar, MapPin, Beer, Store, Briefcase, Users } from "lucide-react";
 import type { Entry, EntryType } from "@/content/entries";
 
 // Generic image-placeholder icons -- one per type so the empty thumb still
@@ -11,7 +11,7 @@ const placeholderIconByType: Record<
 > = {
   akce: ({ size = 20 }) => <Calendar size={size} aria-hidden />,
   mista: ({ size = 20 }) => <MapPin size={size} aria-hidden />,
-  gastro: ({ size = 20 }) => <ChefHat size={size} aria-hidden />,
+  gastro: ({ size = 20 }) => <Beer size={size} aria-hidden />,
   obchody: ({ size = 20 }) => <Store size={size} aria-hidden />,
   sluzby: ({ size = 20 }) => <Briefcase size={size} aria-hidden />,
   spolky: ({ size = 20 }) => <Users size={size} aria-hidden />,

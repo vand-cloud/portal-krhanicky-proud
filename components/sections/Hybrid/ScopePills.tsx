@@ -1,4 +1,4 @@
-import { Calendar, MapPin, ChefHat, Store, Briefcase, Users, Sparkles } from "lucide-react";
+import { Calendar, MapPin, Beer, Store, Briefcase, Users, Sparkles } from "lucide-react";
 import { typeNavLabels, typeOrder } from "@/content/entries";
 import type { EntryType } from "@/content/entries";
 import type { Scope } from "./util";
@@ -18,7 +18,7 @@ const iconByType: Record<
 > = {
   akce: ({ size = 14 }) => <Calendar size={size} aria-hidden />,
   mista: ({ size = 14 }) => <MapPin size={size} aria-hidden />,
-  gastro: ({ size = 14 }) => <ChefHat size={size} aria-hidden />,
+  gastro: ({ size = 14 }) => <Beer size={size} aria-hidden />,
   obchody: ({ size = 14 }) => <Store size={size} aria-hidden />,
   sluzby: ({ size = 14 }) => <Briefcase size={size} aria-hidden />,
   spolky: ({ size = 14 }) => <Users size={size} aria-hidden />,
@@ -34,7 +34,7 @@ export function ScopePills({
   onChange: (next: Scope) => void;
 }) {
   return (
-    <nav aria-label="Filtr typu položek" className="flex flex-wrap gap-2">
+    <nav aria-label="Filtr typu položek" className="flex flex-wrap justify-center gap-2">
       {ORDER.map((scope) => {
         const isActive = scope === active;
         const label = scope === "all" ? ALL_LABEL : typeNavLabels[scope];
