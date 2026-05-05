@@ -27,7 +27,7 @@ export default function Split({ heading, subheading, ctaPrimary, ctaSecondary, i
               {ctaSecondary && (
                 <Link
                   href={ctaSecondary.href}
-                  className="inline-flex items-center justify-center rounded-[var(--radius-md)] text-[var(--color-text)] px-6 py-3 text-lg font-medium hover:bg-[var(--color-surface)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
+                  className="inline-flex items-center justify-center rounded-[var(--radius-md)] text-[var(--color-text)] px-6 py-3 text-lg font-medium hover:bg-[var(--color-bg-elev)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
                 >
                   {ctaSecondary.label}
                 </Link>

@@ -44,6 +44,7 @@ next-env.d.ts
 .env.local
 .env.production
 .onboard-state.json
+.firecrawl/
 .firecrawl-cache/
 .sanity-backup-*.tar.gz
 playwright-report/

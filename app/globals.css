@@ -17,43 +17,104 @@
   --color-neutral-900: #171717;
   --color-neutral-950: #0a0a0a;
 
+  /* ── Krhanický Proud brand palette ──────────────────────────────────
+     Source: design system bundle (Claude Design, Sora+Inter+JBM).
+     "Restrained, mostly-blue palette anchored by two brand colors,
+      supporting warm neutrals (sand, stone), no extra saturated hues."   */
+  --color-kp-navy: #00257b;       /* primary -- logo, headings, key UI    */
+  --color-kp-navy-hover: #001f66; /* navy -8% L                           */
+  --color-kp-navy-press: #001a52; /* navy -12% L                          */
+  --color-kp-blue: #0077c0;       /* secondary -- links, accents, focus   */
+  --color-kp-blue-mid: #5ba0ce;   /* supporting -- quiet illustrative     */
+  --color-kp-blue-sky: #a9cce3;   /* tertiary -- backgrounds, dividers    */
+  --color-kp-blue-mist: #d4e5f2;  /* surface tint -- cards, hover bg      */
+
+  --color-kp-paper: #f8f7f3;      /* warm off-white (design system default)*/
+  --color-kp-paper-cool: #f2f5f9; /* subtle cool tint -- gray-blue paper  */
+  --color-kp-sand: #e8e2d5;       /* section bg, tinted bands             */
+  --color-kp-stone: #5c5c5c;      /* body text on light                   */
+  --color-kp-ink: #1a1a1a;        /* strongest text                       */
+  --color-kp-border-warm: #e1ddd2;
+  --color-kp-border-cool: #dce6ef;
+
+  --color-kp-success: #3b7a4b;
+  --color-kp-warn: #f2c94c;
+  --color-kp-warn-ink: #5c3a00;
+  --color-kp-danger: #9b2c2c;
+
   /* Spacing primitives */
   --spacing-section: 6rem;
   --spacing-section-hero: 8rem;
   --spacing-block: 3rem;
   --spacing-grid: 2rem;
 
-  /* Typography primitives */
-  /* Wireframe phase: Inter for both body and heading. Display font (serif,
-     condensed, etc.) gets reintroduced for --font-heading in designed phase. */
+  /* Typography primitives.
+     Designed phase: Sora (display), Inter (body), JetBrains Mono (eyebrow).
+     Font face variables --font-display / --font-sans / --font-mono are
+     injected by next/font in app/[locale]/layout.tsx. */
   --font-body: var(--font-sans), system-ui, -apple-system, sans-serif;
-  --font-heading: var(--font-sans), system-ui, -apple-system, sans-serif;
+  --font-heading: var(--font-display), system-ui, -apple-system, sans-serif;
+  --font-eyebrow: var(--font-mono), ui-monospace, "SF Mono", Menlo, monospace;
   --heading-weight: 700;
-  --heading-tracking: -0.02em;
+  --heading-tracking: -0.025em;
 
-  /* Radius primitives */
+  /* Radius primitives -- aligned with design system 4/6/8/12/16/999 scale. */
   --radius-none: 0;
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
+  --radius-xs: 0.25rem;     /* 4  -- inputs                          */
+  --radius-sm: 0.375rem;    /* 6                                     */
+  --radius-md: 0.5rem;      /* 8  -- buttons, cards                  */
+  --radius-lg: 0.75rem;     /* 12 -- large surfaces                  */
+  --radius-xl: 1rem;        /* 16                                    */
   --radius-full: 9999px;
+
+  /* Shadows -- tinted with brand navy, never neutral gray. */
+  --shadow-sm: 0 1px 2px rgba(0, 37, 123, 0.06);
+  --shadow-md: 0 4px 12px rgba(0, 37, 123, 0.08);
+  --shadow-lg: 0 12px 32px rgba(0, 37, 123, 0.10);
+  --shadow-focus: 0 0 0 3px rgba(0, 119, 192, 0.35);
 }
 
-/* Semantic layer (overridable per brand) */
+/* Semantic layer -- maps Krhanický Proud brand palette onto generic tokens
+   used by every component. Component code never references --color-kp-*
+   directly; it goes through these aliases so we could re-skin later
+   without touching components. */
 :root {
-  --color-bg: var(--color-white);
-  --color-surface: var(--color-neutral-50);
-  --color-text: var(--color-neutral-900);
-  --color-text-secondary: var(--color-neutral-600);
-  --color-text-tertiary: var(--color-neutral-500);
-  --color-text-accent: var(--color-neutral-900);
-  --color-border: var(--color-neutral-200);
-  --color-brand: var(--color-neutral-900);
-  --color-accent: var(--color-neutral-900);
-  --color-accent-subtle: var(--color-neutral-100);
+  /* Two-tier background semantics:
+     --color-page  = warm paper, the actual <body> background. Quiet,
+                     civic-village feel. Components do not target this --
+                     it is owned by body{}.
+     --color-bg    = white. The default "elevated surface" colour for
+                     cards, inputs, header, dropdown panels, etc. Stays
+                     neutral so cards always read as elevated above the
+                     paper page. Components target this. */
+  --color-page: var(--color-kp-paper-cool);
+  --color-bg: #ffffff;
+  --color-bg-elev: #ffffff;
+  /* Surface = quiet neutral gray for inert backgrounds (image placeholders,
+     skeleton states). Brand-tinted surfaces -- blue mist for hover, sand for
+     section bands -- have their own dedicated tokens below. The base surface
+     stays color-neutral so empty thumbnails do not advertise themselves. */
+  --color-surface: var(--color-neutral-100);
+  --color-surface-cool: var(--color-kp-blue-mist);
+  --color-surface-warm: var(--color-kp-sand);
+  --color-text: var(--color-kp-ink);
+  --color-text-secondary: var(--color-kp-stone);
+  --color-text-tertiary: #8a8a8a;
+  --color-text-accent: var(--color-kp-navy);
+  --color-text-on-brand: #ffffff;
+  --color-border: var(--color-kp-border-warm);
+  --color-border-cool: var(--color-kp-border-cool);
+  --color-brand: var(--color-kp-navy);
+  --color-accent: var(--color-kp-blue);
+  --color-accent-subtle: var(--color-kp-blue-mist);
   --color-glow: transparent;
   --color-glow-subtle: transparent;
+
+  /* Semantic states (forms, alerts, badges). */
+  --color-success: var(--color-kp-success);
+  --color-warn: var(--color-kp-warn);
+  --color-warn-ink: var(--color-kp-warn-ink);
+  --color-danger: var(--color-kp-danger);
 }
 
 /* Dark mode (auto) */
@@ -67,6 +128,55 @@
     --color-text-accent: var(--color-neutral-50);
     --color-border: var(--color-neutral-800);
   }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   vanilla-cookieconsent v3 theming
+   Mapping our semantic tokens onto the library's CSS variables. When the
+   designed phase reassigns brand colors to --color-bg / --color-text /
+   --color-accent / --color-border, the cookie banner picks them up
+   automatically -- no banner edit needed.
+   Reference: https://cookieconsent.orestbida.com/advanced/customization.html
+   ───────────────────────────────────────────────────────────────────────── */
+#cc-main {
+  --cc-font-family: var(--font-body);
+
+  /* Surfaces */
+  --cc-bg: var(--color-bg);
+  --cc-modal-border-radius: var(--radius-lg);
+  --cc-overlay-bg: rgba(0, 0, 0, 0.5);
+  --cc-cookie-category-block-bg: var(--color-surface);
+  --cc-cookie-category-block-bg-hover: var(--color-surface);
+  --cc-cookie-category-block-border: var(--color-border);
+  --cc-section-border: var(--color-border);
+
+  /* Text */
+  --cc-primary-color: var(--color-text);
+  --cc-secondary-color: var(--color-text-secondary);
+
+  /* Buttons -- primary = solid text-color block (matches our default
+     "strong" CTA pattern in the wireframe phase). */
+  --cc-btn-border-radius: var(--radius-md);
+  --cc-btn-primary-bg: var(--color-text);
+  --cc-btn-primary-color: var(--color-bg);
+  --cc-btn-primary-hover-bg: var(--color-text-secondary);
+  --cc-btn-primary-hover-color: var(--color-bg);
+  --cc-btn-secondary-bg: var(--color-surface);
+  --cc-btn-secondary-color: var(--color-text);
+  --cc-btn-secondary-border: var(--color-border);
+  --cc-btn-secondary-hover-bg: var(--color-border);
+  --cc-btn-secondary-hover-color: var(--color-text);
+  --cc-btn-secondary-hover-border: var(--color-border);
+
+  /* Toggle (category switches) */
+  --cc-toggle-bg-on: var(--color-text);
+  --cc-toggle-bg-off: var(--color-text-tertiary);
+  --cc-toggle-bg-readonly: var(--color-text-tertiary);
+  --cc-toggle-knob-bg: var(--color-bg);
+  --cc-toggle-knob-icon-color: var(--color-bg);
+
+  /* Links inside the banner copy */
+  --cc-link-color: var(--color-text);
 }
 
 /* Layout utility classes (used by components) */
@@ -85,19 +195,116 @@
 }
 
 body {
-  background-color: var(--color-bg);
+  background-color: var(--color-page);
   color: var(--color-text);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
 }
 
-/* Wireframe phase: all heading elements default to bold. Removed once
-   designed phase introduces a display font with its own weight. */
+/* ─────────────────────────────────────────────────────────────────────────────
+   Legal content prose styles (used by /gdpr, /cookies, /pristupnost).
+   These pages use plain HTML inside .legal-content — markup like <h2>, <p>,
+   <ul>, <a>, <table> get typographic rules here so the content reads as
+   editorial body copy without needing per-page Tailwind.
+   ───────────────────────────────────────────────────────────────────────── */
+.legal-content > :first-child {
+  margin-top: 0;
+}
+
+.legal-content h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.28;
+  color: var(--color-text);
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.legal-content h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-text);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.legal-content p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin-bottom: 1rem;
+}
+
+.legal-content ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.legal-content ul li {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  padding-left: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.legal-content ul li::marker {
+  color: var(--color-text-tertiary);
+}
+
+.legal-content table {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 1rem;
+}
+
+.legal-content code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.85em;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  padding: 0.05rem 0.3rem;
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+}
+
+/* Inline text link used in legal pages and elsewhere in prose contexts. */
+.prose-link,
+.legal-content a {
+  display: inline;
+  color: var(--color-accent);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: var(--color-border);
+  text-underline-offset: 3px;
+  transition: color 150ms, text-decoration-color 150ms;
+}
+
+.prose-link:hover,
+.legal-content a:hover {
+  color: var(--color-text);
+  text-decoration-color: var(--color-accent);
+}
+
+/* Designed phase typography. Headings shift to Sora (--font-heading) with
+   tightened tracking and brand-navy color. Body inherits Inter via body{}
+   above. Eyebrow is the technical mono kicker class used over headings. */
 @layer base {
   h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
     font-weight: var(--heading-weight);
+    color: var(--color-text-accent);
+    letter-spacing: var(--heading-tracking);
     text-wrap: balance;
   }
+  h1 { font-weight: 800; letter-spacing: -0.03em; }
+  h2 { letter-spacing: -0.025em; }
+  h3 { letter-spacing: -0.02em; }
+  h4 { font-weight: 600; letter-spacing: -0.015em; }
+
   p {
     text-wrap: pretty;
   }
@@ -108,4 +315,19 @@ body {
   h1 + p {
     text-wrap: balance;
   }
+}
+
+/* Eyebrow / kicker -- small uppercase signal above a heading. The design
+   bundle suggested JetBrains Mono for technical character, but in Czech
+   text it read as code/UI metadata. Switched to Sora (the display font)
+   at medium weight with wide tracking -- still distinct from the heading
+   thanks to the size + caps + tracking, but visually consistent.
+   Use as <p className="eyebrow">…</p>. */
+.eyebrow {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
 }

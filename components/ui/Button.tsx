@@ -13,9 +13,9 @@ const variantStyles: Record<ButtonVariant, string> = {
   solid:
     "bg-[var(--color-brand)] text-[var(--color-bg)] hover:opacity-90 disabled:opacity-50",
   outline:
-    "border border-[var(--color-border)] text-[var(--color-text)] hover:bg-[var(--color-surface)] disabled:opacity-50",
+    "border border-[var(--color-border)] text-[var(--color-text)] hover:bg-[var(--color-bg-elev)] disabled:opacity-50",
   ghost:
-    "text-[var(--color-text)] hover:bg-[var(--color-surface)] disabled:opacity-50",
+    "text-[var(--color-text)] hover:bg-[var(--color-bg-elev)] disabled:opacity-50",
   link:
     "text-[var(--color-text-accent)] underline underline-offset-4 hover:opacity-80 disabled:opacity-50",
 };

@@ -1,35 +1,24 @@
 import { defineRouting } from "next-intl/routing";
 
 export const routing = defineRouting({
-  locales: ["cs", "en"],
+  locales: ["cs"],
   defaultLocale: "cs",
   localePrefix: "as-needed",
   pathnames: {
     "/": "/",
-    "/o-nas": {
-      cs: "/o-nas",
-      en: "/about",
-    },
-    "/sluzby": {
-      cs: "/sluzby",
-      en: "/services",
-    },
-    "/kontakt": {
-      cs: "/kontakt",
-      en: "/contact",
-    },
-    "/gdpr": {
-      cs: "/gdpr",
-      en: "/privacy-policy",
-    },
-    "/cookies": {
-      cs: "/cookies",
-      en: "/cookies",
-    },
-    "/pristupnost": {
-      cs: "/pristupnost",
-      en: "/accessibility",
-    },
+    "/pruvodce": "/pruvodce",
+    "/obec": "/obec",
+    "/obec/uredni-deska": "/obec/uredni-deska",
+    "/obec/zastupitelstvo": "/obec/zastupitelstvo",
+    "/obec/dokumenty": "/obec/dokumenty",
+    "/obec/aktuality": "/obec/aktuality",
+    "/proud": "/proud",
+    "/volby": "/volby",
+    "/blog": "/blog",
+    "/zapojte-se": "/zapojte-se",
+    "/gdpr": "/gdpr",
+    "/cookies": "/cookies",
+    "/pristupnost": "/pristupnost",
   },
 });
 

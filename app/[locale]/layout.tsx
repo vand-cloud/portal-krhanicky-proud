@@ -1,26 +1,62 @@
 import type { Metadata } from "next";
-import { NextIntlClientProvider, hasLocale } from "next-intl";
+import { NextIntlClientProvider, hasLocale, useTranslations } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { Inter } from "next/font/google";
+import { Inter, Sora, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { routing } from "@/i18n/routing";
-import { CookieBanner } from "@/components/consent/CookieBanner";
-import { ConsentGatedGA4 } from "@/components/consent/Analytics";
+import { siteConfig } from "@/site.config";
+import { CookieConsentBanner } from "@/components/consent/CookieConsent";
+import { SiteHeader } from "@/components/sections/Header";
+import { TopBar, type TopBarConfig } from "@/components/sections/Header/TopBar";
+import { SiteFooter } from "@/components/sections/Footer/SiteFooter";
 import "../globals.css";
 
-// Wireframe phase: Inter only. Display font (Fraunces, etc.) gets added in
-// designed phase via the same loader pattern, mapped to --font-heading.
+// Resolve which top-bar slot to show, if any. ALERT overrides CAMPAIGN
+// when both are enabled -- urgent notices win over marketing.
+function resolveTopBar(): TopBarConfig | null {
+  const { alert, campaign } = siteConfig.topBar;
+  if (alert.enabled) {
+    return { tone: "alert", text: alert.text, href: alert.href };
+  }
+  if (campaign.enabled) {
+    return { tone: "campaign", text: campaign.text, href: campaign.href };
+  }
+  return null;
+}
+
+// Designed phase fonts:
+//   Sora           -- display (h1-h4, hero titles, card titles)
+//   Inter          -- body / UI (paragraphs, lead, buttons, forms)
+//   JetBrains Mono -- eyebrow / meta (kicker above headings, dates, IDs)
+// All three loaded with latin-ext for Czech diacritics. Variables map onto
+// the --font-display / --font-sans / --font-mono primitives in globals.css.
 const inter = Inter({
   subsets: ["latin", "latin-ext"],
   variable: "--font-sans",
   display: "swap",
 });
+const sora = Sora({
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-display",
+  display: "swap",
+});
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500", "600"],
+  variable: "--font-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: "Studio Template",
-  description: "ANFILOV Studio template for client websites",
+  title: {
+    default: siteConfig.brand.name,
+    template: `%s | ${siteConfig.brand.name}`,
+  },
+  description:
+    "Krhanický Proud — místní portál pro občany Krhanic. Akce, místa, služby a aktuality v okolí.",
 };
 
 export function generateStaticParams() {
@@ -45,19 +81,65 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${inter.variable} h-full antialiased`}
+      className={`${inter.variable} ${sora.variable} ${jetbrainsMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
         <NextIntlClientProvider>
-          {children}
-          <CookieBanner />
+          <ChromeWrapper>{children}</ChromeWrapper>
+          <CookieConsentBanner />
         </NextIntlClientProvider>
         <Analytics />
         <SpeedInsights />
-        {/* Optional: Google Analytics 4 (consent-gated). Uncomment + set NEXT_PUBLIC_GA_ID env to enable. */}
-        {/* <ConsentGatedGA4 gaId={process.env.NEXT_PUBLIC_GA_ID} /> */}
       </body>
     </html>
+  );
+}
+
+function ChromeWrapper({ children }: { children: React.ReactNode }) {
+  const tNav = useTranslations("nav");
+  const tFooter = useTranslations("footer");
+
+  const navItems = [
+    { label: tNav("guide"), href: "/pruvodce" },
+    { label: tNav("village"), href: "/obec" },
+    {
+      label: tNav("proud"),
+      href: "/proud",
+      children: [
+        { label: tNav("programme"), href: "/proud/nas-program" },
+      ],
+    },
+    { label: tNav("blog"), href: "/blog" },
+    { label: tNav("getInvolved"), href: "/zapojte-se" },
+  ];
+
+  const legalLinks = [
+    { label: tFooter("gdpr"), href: "/gdpr" },
+    { label: tFooter("cookies"), href: "/cookies" },
+    { label: tFooter("accessibility"), href: "/pristupnost" },
+  ];
+
+  const topBar = resolveTopBar();
+
+  return (
+    <>
+      {topBar ? <TopBar config={topBar} /> : null}
+      <SiteHeader
+        brandName={siteConfig.brand.name}
+        brandHref="/"
+        navItems={navItems}
+      />
+      <main className="flex-1">{children}</main>
+      <SiteFooter
+        brandName={siteConfig.brand.name}
+        disclosure={tFooter("disclosure")}
+        legalLinks={legalLinks}
+        copyright={tFooter("copyright", {
+          year: new Date().getFullYear(),
+          brand: siteConfig.brand.name,
+        })}
+      />
+    </>
   );
 }

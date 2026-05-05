@@ -3,23 +3,84 @@
     "skipToContent": "Přeskočit na obsah",
     "menu": "Menu",
     "close": "Zavřít",
-    "loading": "Načítám…"
+    "loading": "Načítám…",
+    "back": "Zpět",
+    "more": "Více",
+    "showAll": "Zobrazit vše"
   },
   "nav": {
     "home": "Domů",
-    "about": "O nás",
+    "guide": "Průvodce",
+    "events": "Akce",
     "services": "Služby",
-    "contact": "Kontakt"
+    "places": "Místa",
+    "village": "Obec",
+    "proud": "Proud",
+    "programme": "Náš program",
+    "blog": "Blog",
+    "getInvolved": "Zapojte se",
+    "elections": "Volby"
+  },
+  "homepage": {
+    "searchAll": "Hledat akci, místo, službu, řemeslníka…",
+    "searchEvents": "Hledat akci, festival, koncert…",
+    "searchPlaces": "Hledat místo, hospodu, hřiště…",
+    "searchGastro": "Hledat restauraci, kavárnu, hospodu…",
+    "searchObchody": "Hledat obchod, pekárnu, vinotéku…",
+    "searchServices": "Hledat službu, řemeslníka, doktora…",
+    "searchSpolky": "Hledat spolek, sbor, klub…",
+    "newsBanner": "{count, plural, one {# nová aktualita obce} few {# nové aktuality obce} other {# nových aktualit obce}}",
+    "openNews": "Otevřít",
+    "filterTitle": "Kategorie",
+    "filterAll": "Vše",
+    "noResults": "Nic neodpovídá zvoleným filtrům.",
+    "noResultsHint": "Zkuste je rozvolnit, třeba přepnout typ na Vše.",
+    "resultsCount": "{count, plural, =0 {Žádné výsledky v okolí Krhanic} one {# výsledek v okolí Krhanic} few {# výsledky v okolí Krhanic} other {# výsledků v okolí Krhanic}}",
+    "sortByDistance": "seřazeno podle blízkosti centra obce",
+    "upcomingEventsTitle": "Co se chystá",
+    "upcomingEventsLink": "Všechny akce",
+    "newsSectionTitle": "Aktuality obce",
+    "newsSectionLink": "Vše z obce",
+    "sectionsTitle": "Sekce",
+    "homeIntro": "Sousedský rozcestník pro Krhanice a okolí. Najdete tu akce, hospody, služby, ale i kontakty na obecní úřad. Všechno na jednom místě."
+  },
+  "sections": {
+    "events": "Akce",
+    "eventsDesc": "Co se chystá v Krhanicích a okolí",
+    "places": "Místa",
+    "placesDesc": "Kam se vydat, co navštívit",
+    "services": "Služby",
+    "servicesDesc": "Řemeslníci, doktoři, úřady, obchody",
+    "village": "Obec",
+    "villageDesc": "Úřední deska, zastupitelstvo, dokumenty",
+    "proud": "Proud",
+    "proudDesc": "Sdružení občanů Krhanic",
+    "getInvolved": "Zapojte se",
+    "getInvolvedDesc": "Pošlete tip, nahlaste akci, ozvěte se"
+  },
+  "categories": {
+    "kultura": "Kultura",
+    "zabava": "Zábava",
+    "sport": "Sport",
+    "priroda": "Příroda",
+    "deti": "Děti",
+    "vzdelavani": "Vzdělávání",
+    "gastro": "Gastro",
+    "ubytovani": "Ubytování",
+    "zdravi": "Zdraví",
+    "remeslnici": "Řemeslníci"
   },
   "actions": {
     "learnMore": "Zjistit více",
     "getInTouch": "Ozvat se",
     "submit": "Odeslat",
-    "cancel": "Zrušit"
+    "cancel": "Zrušit",
+    "openExternal": "Otevřít odkaz"
   },
   "forms": {
     "name": "Jméno",
     "email": "E-mail",
+    "phone": "Telefon",
     "message": "Zpráva",
     "required": "Povinné pole",
     "invalidEmail": "Neplatný e-mail"
@@ -29,7 +90,8 @@
     "legal": "Právní",
     "gdpr": "GDPR",
     "cookies": "Cookies",
-    "accessibility": "Přístupnost"
+    "accessibility": "Přístupnost",
+    "disclosure": "Krhanický Proud je nezávislé sdružení občanů. Provozujeme tento portál celoročně. V období voleb naleznete naši kandidátku a program v sekci /volby."
   },
   "consent": {
     "title": "Souhlas s cookies",

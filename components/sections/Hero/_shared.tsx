@@ -14,7 +14,7 @@ const ctaSolid =
   "inline-flex items-center justify-center gap-2 rounded-[var(--radius-md)] bg-[var(--color-brand)] text-[var(--color-bg)] px-6 py-3 text-lg font-medium hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2";
 
 const ctaGhost =
-  "inline-flex items-center justify-center gap-2 rounded-[var(--radius-md)] text-[var(--color-text)] px-6 py-3 text-lg font-medium hover:bg-[var(--color-surface)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2";
+  "inline-flex items-center justify-center gap-2 rounded-[var(--radius-md)] text-[var(--color-text)] px-6 py-3 text-lg font-medium hover:bg-[var(--color-bg-elev)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2";
 
 export function HeroCTAs({ primary, secondary }: { primary?: CTA; secondary?: CTA }) {
   if (!primary && !secondary) return null;
