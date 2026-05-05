@@ -43,15 +43,12 @@ function iconPaths(type: EntryType): string {
         <circle cx="12" cy="10" r="3"/>
       `;
     case "gastro":
-      // Utensils -- vidlička (vlevo) + nůž (vpravo). Multi-path verze
-      // z lucide-react main, méně náchylná k nesprávnému parsování než
-      // původní spojený "Zm0 0v7" zápis.
+      // ChefHat -- kuchařská čepice. Universálnější signál pro gastro
+      // než utensils (které čte jako "jídlo k jídlu", ne místo, kam jít).
+      // Source: lucide-react main.
       return `
-        <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/>
-        <path d="M7 2v20"/>
-        <path d="M21 15V2"/>
-        <path d="M18 15V8a4 4 0 0 1 4-4"/>
-        <path d="M21 15a3 3 0 1 1-6 0"/>
+        <path d="M17 21a1 1 0 0 0 1-1v-5.35c0-.457.316-.844.727-1.041a4 4 0 0 0-2.134-7.589 5 5 0 0 0-9.186 0 4 4 0 0 0-2.134 7.588c.411.198.727.585.727 1.041V20a1 1 0 0 0 1 1Z"/>
+        <path d="M6 17h12"/>
       `;
     case "obchody":
       // Store
