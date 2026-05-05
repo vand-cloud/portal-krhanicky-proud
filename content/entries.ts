@@ -603,6 +603,7 @@ const events: Entry[] = [
     trustLevel: "verified",
     organizer: "SDH Krhanice",
     price: "Vstup zdarma",
+    contactEmail: "ou@obeckrhanice.cz",
   },
   {
     id: "evt-kaceni-maje-2026",
@@ -738,6 +739,7 @@ const events: Entry[] = [
     status: "approved",
     trustLevel: "verified",
     organizer: "Naše Krhanice",
+    contactEmail: "ou@obeckrhanice.cz",
   },
   {
     id: "evt-kavarnicka-seniori-2026",
@@ -757,6 +759,7 @@ const events: Entry[] = [
     status: "approved",
     trustLevel: "verified",
     organizer: "Obecní úřad Krhanice a Kulturní komise",
+    contactEmail: "ou@obeckrhanice.cz",
   },
   {
     id: "evt-zajezd-divadlo-2026",
@@ -777,6 +780,7 @@ const events: Entry[] = [
     status: "approved",
     trustLevel: "verified",
     organizer: "Kulturní komise a Obecní úřad Krhanice",
+    contactEmail: "ou@obeckrhanice.cz",
   },
   {
     id: "evt-krhanice-open-air-2026",
@@ -795,6 +799,7 @@ const events: Entry[] = [
     tags: ["venku", "pro-rodiny", "hudba"],
     status: "approved",
     trustLevel: "verified",
+    contactEmail: "ou@obeckrhanice.cz",
   },
 
   // ─── Reálné regionální akce (scraped 2026-05-04) ────────────────────────
@@ -828,6 +833,7 @@ const events: Entry[] = [
     description:
       "Srdečně vás zveme na Férovou snídani, celorepublikový piknik na podporu fair trade a lokálních potravin, který se uskuteční v zahradě Kulturního centra Týnec. Přijďte si užít příjemné dopoledne v milé společnosti, přineste si vlastní snídani z férových nebo lokálních surovin a společně podpořme myšlenku spravedlivého obchodu a odpovědné spotřeby.",
     href: "/akce/ferova-snidane-tynec",
+    heroImage: "/brand/photos/evt-ferova-snidane-tynec-2026.webp",
     website: "http://tourist.posazavi.com/cz/Event/Event.aspx?Id=44172",
     lat: 49.8369,
     lng: 14.5949,
@@ -840,6 +846,7 @@ const events: Entry[] = [
     trustLevel: "scraped",
     organizer: "Kulturní centrum Týnec",
     price: "Vstup zdarma",
+    contactEmail: "radnice@mestotynec.cz",
   },
   {
     id: "evt-tvoreni-dne-matek-2026",
@@ -914,6 +921,7 @@ const events: Entry[] = [
     description:
       "Navštivte výstavu kreativních obrazů Lenky Útratové a Miloše Klenovce. K vidění ve velké galerii v otevírací době muzea: duben, květen pátek–neděle 10–12 a 13–17. Vernisáž 3. 4. od 17.00 hodin.",
     href: "/akce/kreativni-obrazy-tynec",
+    heroImage: "/brand/photos/evt-kreativni-obrazy-tynec-2026.webp",
     website: "https://www.mestotynec.cz/kalendar-akci/kalendar-akci/220482-kreativni-obrazy/",
     lat: 49.8369,
     lng: 14.5949,
@@ -926,6 +934,8 @@ const events: Entry[] = [
     status: "approved",
     trustLevel: "scraped",
     organizer: "Městské muzeum Týnec nad Sázavou",
+    contactEmail: "radnice@mestotynec.cz",
+    contactPhone: "+420 317 701 431",
   },
   {
     id: "evt-sazavenkov-carodejnice-2026",
@@ -1088,6 +1098,11 @@ const events: Entry[] = [
     description:
       "Sousedský trh na návsi v Zaječí, osadě Bystřice u Benešova. Lokální výrobci, jídlo, drobní řemeslníci. Od 12:00.",
     href: "/akce/trziste-v-zajeci-2026",
+    social: {
+      instagram: "https://www.instagram.com/mestobystrice",
+      facebook: "https://www.facebook.com/mestobystrice",
+      youtube: "https://m.youtube.com/channel/UC6K5mkru9q-gRFK5PE5eYrA",
+    },
     website: "https://www.mestobystrice.cz/volny-cas/kalendar-akci/",
     lat: 49.7900,
     lng: 14.6850,
@@ -1099,6 +1114,8 @@ const events: Entry[] = [
     status: "approved",
     trustLevel: "scraped",
     organizer: "Město Bystřice u Benešova",
+    contactEmail: "podatelna@mestobystrice.cz",
+    contactPhone: "+420 317 793 217",
   },
   {
     id: "evt-cesky-pohar-vodaku-2026",
@@ -1108,6 +1125,7 @@ const events: Entry[] = [
     description:
       "Další ročník závodu se koná na trase Týnec nad Sázavou – Luka pod Medníkem, která je dlouhá 12 kilometrů (WW I-II). Start závodu je nad jezem v Týnci, cíl pod 'soutěskou' na Lukách pod Medníkem.",
     href: "/akce/cesky-pohar-vodaku-sazava-2026",
+    heroImage: "/brand/photos/evt-cesky-pohar-vodaku-2026.webp",
     website: "https://www.kudyznudy.cz/akce/sazava-cesky-pohar-vodaku",
     lat: 49.8369,
     lng: 14.5949,
@@ -1119,6 +1137,8 @@ const events: Entry[] = [
     status: "approved",
     trustLevel: "scraped",
     organizer: "Český svaz kanoistů",
+    contactEmail: "info@rekakvs.cz",
+    contactPhone: "+420 271 731 521",
   },
   {
     id: "evt-muzejni-noc-tynec-2026",
@@ -1221,6 +1241,7 @@ const directory: Entry[] = [
     description:
       "Chceme vytvářet lepší životní prostředí realizováním nápadů a projektů, které pomůžou kultivovat veřejný prostor, krajinu i sousedské vztahy v obci Krhanice.",
     href: "/sluzby/aktivni-krhanice",
+    heroImage: "/brand/photos/sv-aktivni-krhanice.webp",
     website: "https://www.aktivnikrhanice.cz/",
     social: {
       facebook: "https://www.facebook.com/aktivnikrhanice",
@@ -1245,10 +1266,12 @@ const directory: Entry[] = [
     description:
       "Jsme spolkem fungujícím od roku 2017. Naším cílem je podpora, šíření kulturních a řemeslných tradic, vzdělávání občanů ve vazbě na aktivní využívání volného času, podpora školství, tělovýchovy, dětí, mládeže a ochrana přírody.",
     href: "/sluzby/karhany",
+    heroImage: "/brand/photos/sv-karhany.webp",
     website: "https://www.karhany.cz/",
     social: {
       facebook: "https://www.facebook.com/spolekkarhany",
       instagram: "https://www.instagram.com/karhany_spolek",
+      youtube: "https://www.youtube.com/channel/UCQAoozUYQ86WQR-1XaMIMAQ",
     },
     lat: 49.8560226,
     lng: 14.56012,
@@ -1270,6 +1293,10 @@ const directory: Entry[] = [
     description:
       "V roce 2022 byl založen spolek Naše Krhanice, z.s. a dále Nadační fond Naše Krhanice. Účelem nadačního fondu i spolku je podpora veřejně prospěšných aktivit na území obce Krhanice.",
     href: "/sluzby/nase-krhanice",
+    heroImage: "/brand/photos/sv-nase-krhanice.webp",
+    social: {
+      facebook: "https://www.facebook.com/nasekrhanice",
+    },
     website: "https://www.nasekrhanice.cz/",
     address: "Krhanice 252, 257 42",
     inVillage: true,
@@ -1280,23 +1307,6 @@ const directory: Entry[] = [
     trustLevel: "verified",
     contactEmail: "spolek@nasekrhanice.cz",
     contactPhone: "+420 604 202 337",
-  },
-  {
-    id: "sv-mazoretky-hrabenky",
-    type: "spolky",
-    slug: "mazoretky-hrabenky-kamenice",
-    title: "Mažoretky Hraběnky Kamenice",
-    description:
-      "Mažoretkový soubor pod vedením Markéty a Anny Novotné. Tým má za sebou úspěchy na mistrovství světa, aktivně se účastní soutěží České federace mažoretkového sportu. Sídlo a kontakt v Krhanicích.",
-    href: "/sluzby/mazoretky-hrabenky-kamenice",
-    website: "https://www.mazoretkykamenice.cz/",
-    address: "Krhanice 62, 257 42",
-    inVillage: true,
-    category: "sport",
-    subcategory: "ostatni-sport",
-    tags: ["pro-deti", "tradice"],
-    status: "approved",
-    trustLevel: "verified",
   },
   {
     id: "sv-fun-carving-club",
@@ -1404,6 +1414,11 @@ const directory: Entry[] = [
     description:
       "Nejstarší písemná zpráva o existenci Týnce a týneckého hradu je z roku 1318 a zachovala se ve zlomku bývalých soudních spisů tzv. půhonných desek.",
     href: "/mista/tynecky-hrad-a-muzeum",
+    heroImage: "/brand/photos/pl-tynecky-hrad.webp",
+    social: {
+      instagram: "https://www.instagram.com/hrad_tynec_nad_sazavou",
+      facebook: "https://www.facebook.com/hradtynecnadsazavou",
+    },
     website: "https://www.mestotynec.cz/hrad-a-muzeum",
     lat: 49.8369,
     lng: 14.5949,
@@ -1528,6 +1543,12 @@ const directory: Entry[] = [
     description:
       "Navštivte Regionální muzeum v Jílovém u Prahy a objevte fascinující historii těžby zlata i bohaté kulturní dědictví regionu.",
     href: "/mista/regionalni-muzeum-jilove",
+    heroImage: "/brand/photos/pl-muzeum-jilove.webp",
+    social: {
+      instagram: "https://www.instagram.com/muzeumjilove",
+      facebook: "https://www.facebook.com/muzeumjilove",
+      youtube: "https://www.youtube.com/channel/UC3WdZ0TTOENiHRiG95mx_Kg",
+    },
     website: "http://muzeumjilove.cz/",
     lat: 49.8983,
     lng: 14.4942,
@@ -1546,6 +1567,7 @@ const directory: Entry[] = [
     description:
       "Knihovna v budově obecního úřadu, fond beletrie i odborné literatury, koutek pro děti. Knihovnice Dana Kohoutová. Od ledna 2026 rozšířená provozní doba, registrace zůstává bez poplatku. Tematické akce: Březen měsíc čtenářů, Noc s Andersenem, velikonoční dílny.",
     href: "/mista/obecni-knihovna-krhanice",
+    heroImage: "/brand/photos/sv-knihovna-krhanice.webp",
     website: "https://www.obeckrhanice.cz/obecni-knihovna",
     lat: 49.8569238,
     lng: 14.5596988,
@@ -1940,6 +1962,7 @@ const directory: Entry[] = [
     description:
       "Hospoda u sokolského hřiště v Krhanicích. Posezení v terénu, akce TJ Sokol.",
     href: "/mista/hospoda-na-hristi",
+    heroImage: "/brand/photos/pl-hospoda-na-hristi.webp",
     social: {
       facebook: "https://www.facebook.com/p/Hospoda-Na-h%C5%99i%C5%A1ti-100063540310514/",
     },
@@ -1983,6 +2006,7 @@ const directory: Entry[] = [
     description:
       "Pohostinství v Prosečnici (část obce Krhanice).",
     href: "/mista/pohostinstvi-drevak-prosecnice",
+    heroImage: "/brand/photos/pl-pohostinstvi-drevak.webp",
     // Prosečnice center, přibližný offset od Restaurace Na zastávce, aby se
     // piny na mapě nepřekrývaly. Klient v Sanity upřesní.
     lat: 49.7965,
@@ -2026,6 +2050,7 @@ const directory: Entry[] = [
     description:
       "Prodejna pekárny JARNO Markéty a Roberta Novotných. Domácí chléb, pečivo, buchty, koláče, dukátové buchtičky a knedlíky. Provoz v hospodě U Krkovičky naproti obecnímu úřadu, prodejní dny tři týdně.",
     href: "/mista/rodinne-pekarstvi-novotni",
+    heroImage: "/brand/photos/rm-pekarstvi-novotni.webp",
     website: "https://www.jarno.cz/",
     lat: 49.856555,
     lng: 14.559594,
@@ -2038,6 +2063,8 @@ const directory: Entry[] = [
     status: "approved",
     trustLevel: "verified",
     relatedEntries: ["sv-jarno-pekarna"],
+    contactEmail: "jarno@jarno.cz",
+    contactPhone: "+420 722 971 136",
   },
   {
     id: "sv-jarno-pekarna",
@@ -2047,6 +2074,7 @@ const directory: Entry[] = [
     description:
       "Rodinná pekárna v Krhanicích. Široký sortiment z kvalitních surovin. Pekárnu založili v roce 1996 otec a syn Novotní, vyrábí tradiční sladké a slané výrobky ručně podle starých receptur. Mezi nejznámější patří dukátové buchtičky, škvarková houska, koblihy od Krkovičky, švestkový či meruňkový koláč a perník plněný marmeládou. Provozovna pro veřejnost: pekařství U Krkovičky naproti obecnímu úřadu.",
     href: "/mista/jarno-pekarna",
+    heroImage: "/brand/photos/sv-jarno-pekarna.webp",
     website: "https://www.jarno.cz/",
     address: "Krhanice 62, 257 42",
     inVillage: true,
@@ -2067,6 +2095,7 @@ const directory: Entry[] = [
     description:
       "Naše výrobna nabízí široký výběr ručně vyrobených knedlíků pro obchody, restaurace a jídelny.",
     href: "/mista/faho-vyroba-prodej",
+    heroImage: "/brand/photos/sv-faho-knedliky.webp",
     website: "https://www.faho.cz/",
     lat: 49.8569,
     lng: 14.5577,
@@ -2088,6 +2117,7 @@ const directory: Entry[] = [
     description:
       "Ruční keramika z krhanického ateliéru. Mísy, dárkové předměty, zakázková výroba. Online prodej přes Fler.cz.",
     href: "/mista/keramika-marketa-jordanova",
+    heroImage: "/brand/photos/rm-keramika-jordanova.webp",
     website: "https://www.fler.cz",
     lat: 49.8489976,
     lng: 14.5505675,
@@ -2108,6 +2138,7 @@ const directory: Entry[] = [
     description:
       "Náš zájem o vývoj a kreativní tvorbu ekologických mýdel z přírodních surovin vznikl z touhy přispět něčím pozitivním pro nás samotné, planetu Zemi i pro její další zájemce.",
     href: "/mista/mydlarna-leontynka",
+    heroImage: "/brand/photos/rm-mydlarna-leontynka.webp",
     website: "https://www.mydlarnaleontynka.cz",
     lat: 49.8537888,
     lng: 14.5544963,
@@ -2119,6 +2150,7 @@ const directory: Entry[] = [
     status: "approved",
     trustLevel: "verified",
     contactPhone: "+420 777 635 736",
+    contactEmail: "mydlarnaleontynka@gmail.com",
   },
   {
     id: "sv-porcelan-mulier",
@@ -2144,6 +2176,10 @@ const directory: Entry[] = [
     description:
       "Online vinotéka se sídlem v Krhanicích.",
     href: "/mista/vinovintage",
+    social: {
+      instagram: "https://www.instagram.com/vinovintage.cz",
+      facebook: "https://www.facebook.com/vinovintage.cz",
+    },
     website: "https://vinovintage.cz/",
     address: "Krhanice 20, 257 42",
     inVillage: true,
@@ -2152,6 +2188,8 @@ const directory: Entry[] = [
     tags: [],
     status: "approved",
     trustLevel: "verified",
+    contactEmail: "info@vinovintage.cz",
+    contactPhone: "+420 603 585 234",
   },
   {
     id: "sv-denny-rose",
@@ -2225,6 +2263,7 @@ const directory: Entry[] = [
     description:
       "Plně organizovaná škola s 1. až 9. ročníkem, vlastní školní vzdělávací program „Škola pro budoucnost“. Družina pro 60 žáků ve dvou odděleních a školní jídelna v budově. Maximální kapacita 200 žáků. Pravidelně se zapojuje do programu Doučování žáků, Digitalizujeme školu, OP JAK a Ovoce, zelenina a mléko do škol. Ředitelka Mgr. Bc. Věra Ráblová.",
     href: "/sluzby/zakladni-skola-krhanice",
+    heroImage: "/brand/photos/sv-zs-krhanice.webp",
     website: "https://www.zskrhanice.cz/",
     lat: 49.8533701,
     lng: 14.5575275,
@@ -2262,23 +2301,6 @@ const directory: Entry[] = [
     contactPhone: "+420 733 120 093",
     contactEmail: "ms.krhanice@seznam.cz",
     featured: true,
-  },
-  {
-    id: "sv-dr-klutz",
-    type: "sluzby",
-    slug: "dr-klutz-english-theatre",
-    title: "Dr. Klutz, anglické divadlo",
-    description:
-      "Anglické vzdělávací divadlo pro základní školy.",
-    href: "/sluzby/dr-klutz-english-theatre",
-    website: "https://drklutz.com/",
-    address: "Krhanice 181, 257 42",
-    inVillage: true,
-    category: "vzdelavani",
-    subcategory: "jazykovka",
-    tags: ["pro-deti"],
-    status: "approved",
-    trustLevel: "verified",
   },
   {
     id: "sv-zpev-hlavnickova",
@@ -2383,6 +2405,10 @@ const directory: Entry[] = [
     description:
       "Jmenuji se Kristýna Míčová, narodila jsem se v Praze v roce 1985. Jsem žena, milující manželka a maminka tří dětí. Masáže u klienta doma, v dosahu do 20 km kolem Krhanic.",
     href: "/sluzby/masaze-kristyna-micova",
+    heroImage: "/brand/photos/rm-masaze-micova.webp",
+    social: {
+      facebook: "https://facebook.com/MasazeKrhanice",
+    },
     website: "https://masazekrhanice.cz/",
     lat: 49.8556,
     lng: 14.5570,
@@ -2695,27 +2721,6 @@ const directory: Entry[] = [
     status: "approved",
     trustLevel: "verified",
   },
-  {
-    id: "sv-kominictvi-cermak",
-    type: "sluzby",
-    slug: "kominictvi-tony-cermak",
-    title: "Kominictví Tony Čermák",
-    description:
-      "Veškeré služby spojené s komínem od pravidelných ročních kontrol až po vložkování a frézování. Nabízíme kontroly komínů, jejich vložkování, frézování, čištění kachlových sporáků a opravy šamotu v krbech.",
-    href: "/sluzby/kominictvi-tony-cermak",
-    website: "https://www.kominictvitonycermak.cz/",
-    address: "Krhanice 222, 257 42",
-    inVillage: true,
-    hours: "Po-Pá 8:00-18:00",
-    category: "bydleni-stavba",
-    subcategory: "kominik",
-    tags: [],
-    status: "approved",
-    trustLevel: "verified",
-    contactPhone: "+420 704 284 264",
-    contactEmail: "tony.kominik@seznam.cz",
-  },
-
   // ─── SLUŽBY / auto-doprava ─────────────────────────────────────────────
   {
     id: "sv-quad-moto-shop",
@@ -2725,6 +2730,10 @@ const directory: Entry[] = [
     description:
       "Prodej elektrických skútrů a motocyklů, čtyřkolek a dalších značek (UM, Zontes, Masai, Keeway, Sym, Benelli, CFMOTO, Yasan, PEDA, DAYI). Servis ATV, QUAD i MOTO. Úpravy čtyřkolek pro hendikepované. O víkendech a svátcích po dohodě.",
     href: "/sluzby/quad-moto-shop",
+    social: {
+      facebook: "https://www.facebook.com/Quad-Moto-Shop-1001306459907897",
+      youtube: "https://youtu.be/YyD8vf7yW_4",
+    },
     website: "https://www.quad-motoshop.cz/",
     address: "Krhanice 16, 257 42",
     inVillage: true,
@@ -2915,11 +2924,13 @@ const directory: Entry[] = [
     description:
       "Studio vizuální komunikace v Krhanicích. Tvorba značky od strategie po design — naming, logo, vizuální identita a webdesign pro firmy a podnikatele. „Vdechnu život vaší značce.“",
     href: "/sluzby/anfilov-brand-design",
+    heroImage: "/brand/photos/anfilov-og.webp",
     website: "https://anfilov.cz/",
     social: {
       facebook: "https://www.facebook.com/anfilov/",
+      instagram: "https://www.instagram.com/simonanfilov/",
+      linkedin: "https://www.linkedin.com/in/simon-anfilov/",
     },
-    heroImage: "/brand/photos/anfilov-symbol.webp",
     address: "Krhanice 275, 257 42",
     inVillage: true,
     category: "pro-domacnost-ostatni",
