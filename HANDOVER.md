@@ -1,47 +1,52 @@
 # Krhanický Proud — handover protokol
 
-Tento dokument slouží jako **operační manuál** pro období, kdy realizaci webu drží Simon Anfilov (studio ANFILOV) a budoucím provozovatelem, správcem i majitelem je Ivan Dvořák (org `vand-cloud`). Detailní pravidla pro Claude Code najdete v [CLAUDE.md](./CLAUDE.md); tady je shrnutí pro lidi, co repem prochází bez Clauda.
+Operační manuál pro období, kdy realizaci webu drží Simon Anfilov (studio ANFILOV) a všechny provozní zdroje (doména, repo, CMS, hosting) **už od května 2026 vlastní Ivan Dvořák** (org `vand-cloud`). Detailní pravidla pro Claude Code najdete v [CLAUDE.md](./CLAUDE.md); tady je shrnutí pro lidi, co repem prochází bez Clauda.
 
-## Kdo co drží (současný stav, fáze wireframe)
+## Kdo co drží (model B — full handover)
 
 | Vrstva | Vlastník | Detail |
 |---|---|---|
-| Doména `krhanicky-proud.cz` | **Klient** (Ivan Dvořák) | DNS u registrátora klienta. Při launchi nastavíme A/AAAA záznamy na Vercel v DNS-only modu (Cloudflare šedý mráček). |
-| Kód v repu | **Studio** (Simon) implementuje, **klient** (vand-cloud org) drží paralelní backup | Dva remoty: `origin` (studio) + `client` (vand-cloud). Při launchi se dořeší primární vlastnictví. |
-| Hosting (Vercel Pro) | **Studio** | Projekt `client-krhanicky-proud-web` pod teamem `Anfilov Studio`. Auto-deploy z `origin/main`. |
-| Sanity (CMS) | **Studio** | Projekt `euod3b9r` v org „ANFILOV". Klient bude přidán jako Administrator (Free plán) nebo Editor (Growth plán) při dokončení wireframe fáze. |
-| Resend (transakční e-maily) | **Studio** Pro účet | Klientova doména verifikovaná pod studio účtem. Klient nastaví DNS records, dedicated API key žije v `.env.local` projektu. |
-| Obsah (texty, fotky, kontakty) | **Klient** (po migraci do Sanity) | Wireframe fáze: hardcoded v `content/*.ts`. Po schválení designu obsah migrujeme do Sanity, dál ho spravuje klient. |
+| Doména `krhanicky-proud.cz` | **Ivan Dvořák** | DNS u jeho registrátora. Při launchi nastaví A/AAAA záznamy na Vercel (DNS-only mode na Cloudflare, šedý mráček). |
+| GitHub repo | **Ivan Dvořák** (`vand-cloud/portal-krhanicky-proud`) | Single `origin` remote. Simon má `Write` collaborator přístup pro push. |
+| Hosting (Vercel **Hobby**) | **Ivan Dvořák** | Projekt v jeho osobním účtu. Auto-deploy z `main`. Simon přidaný jako collaborator (až Ivan dokončí setup, viz IVAN_SETUP.md). |
+| Sanity (CMS) | **Ivan Dvořák** | Projekt `4nb8kl4e` v org `vand-cloud`. Simon Administrator collaborator. Plán Growth Trial (30 dní), pak rozhodne Ivan o paid plánu nebo Free. |
+| Resend (transakční e-maily) | **Ivan Dvořák** (až bude potřeba) | Zatím neaktivní, formuláře jsou v Phase 2 wireframe placeholder. Až bude aktivace formulářů, Ivan si vytvoří Resend Free účet a zařídí domain verification. |
+| Obsah (texty, fotky, kontakty) | **Ivan Dvořák** | Wireframe fáze: hardcoded v `content/*.ts` ze Simonova scrape datasetu. Po schválení designu se obsah migruje do Sanity (4nb8kl4e), dál ho spravuje klient. |
 
 ## Push protokol
 
-Push do kteréhokoli remotu je **deliberativní akt**, ne každodenní snapshot. Drobné iterace ladíme lokálně přes `npm run dev`.
+Jediný `origin` ukazuje na klientovo repo. Push je **deliberativní akt**, ne každodenní snapshot — triggeruje Vercel auto-deploy a Ivan dostane preview URL.
 
 ```bash
 # Po dokončené prezentační iteraci, kterou Simon schválil:
-git push origin main    # 1. studio repo → spustí Vercel auto-deploy → klient vidí preview
-git push client main    # 2. klientův repo → záloha + viditelnost u Ivana
+git push origin main    # → vand-cloud/portal-krhanicky-proud → Ivanův Vercel deploy
 ```
 
-**Nepushovat** drobné WIP commity. Vercel by trigerl deploy s nehotovou verzí a klient by viděl rozpracovaný stav. Interní snapshoty držíme jen lokálně až do schváleného milestonu.
+**Drobné iterace ladíme lokálně přes `npm run dev`.** Vercel Hobby má 100 deploys/den a žádné build-minute limity, takže technicky není proč šetřit, ale klient by viděl rozpracovanou verzi a dostal failed-deploy maily při každém build erroru. Push až je iterace hotová.
 
-Pokud někdy potřebujete pushnout najednou na oba remoty, lokálně si můžete nastavit alias:
+## Rozdělení účtů a přístupů
 
-```bash
-git config --local alias.pushall '!git push origin main && git push client main'
-git pushall
-```
+### Pro Simona (dnes)
 
-## Plánovaný launch (kdy přejde repo na klienta)
+| Zdroj | Přístup | Jak se přihlásí |
+|---|---|---|
+| GitHub `vand-cloud/portal-krhanicky-proud` | Outside collaborator (Write) | osobní účet `Anfilov`, ověř přes `gh api /repos/vand-cloud/portal-krhanicky-proud --jq .permissions` |
+| Sanity projekt 4nb8kl4e | Administrator | login `simon@anfilov.cz` na [sanity.io/manage](https://www.sanity.io/manage/project/4nb8kl4e) |
+| Vercel Hobby projekt | Collaborator (až ho Ivan přidá v IVAN_SETUP.md kroku C) | login Vercel účtem `Anfilov` |
 
-Až bude web připravený pro produkci a klient potvrdí, že ho chce provozovat sám:
+### Pro Ivana (dnes a do budoucna)
 
-1. Spustíme `/launch-web` skill (detail v `~/.claude/skills/launch-web/`).
-2. Rozhodneme model:
-   - **Model A (recurring fee, doporučené):** studio dál drží Vercel + Sanity + Resend, klient platí měsíční hosting fee. Repo `client` se stane primárním pro Ivana, `origin` zůstává jako studio kopie.
-   - **Model B (full handover):** Vercel projekt + Sanity + Resend přejdou pod klientův účet. Studio zachovává jen referenční kopii kódu na `origin`, klient si pak vše spravuje sám.
-3. DNS u domény klienta směřujeme na produkční Vercel (DNS-only mode na Cloudflare, pokud klient používá CF).
-4. Generujeme finální verzi tohoto HANDOVER.md s konkrétními přihlašovacími údaji a checklistem pro klienta.
+Ivan dostane separátní setup checklist v [IVAN_SETUP.md](./IVAN_SETUP.md) — 2 kroky (Sanity token + Vercel import) a pak může web jet.
+
+## Plánovaný launch (kdy se web pustí na produkční doménu)
+
+Až bude wireframe schválený a brand fáze hotová:
+
+1. Ivan přidá produkční doménu `krhanicky-proud.cz` ve svém Vercel projektu.
+2. DNS A/AAAA záznamy nastaví na Vercel (DNS-only mode na Cloudflare, pokud používá CF).
+3. Simon přidá CORS origin pro `https://krhanicky-proud.cz` a `https://www.krhanicky-proud.cz` v Sanity.
+4. Ivan otevře `https://krhanicky-proud.cz/studio` a zaregistruje Studio (klikne „Register this studio" — Sanity to vyžaduje od přelomu 2025/2026).
+5. Když budou potřeba formuláře, Ivan zařídí Resend Free účet a doménovou verifikaci.
 
 ## Kontakty
 
@@ -50,4 +55,4 @@ Až bude web připravený pro produkci a klient potvrdí, že ho chce provozovat
 
 ## Změny v tomto dokumentu
 
-Pokud studio nebo klient mění rolová pravidla (např. handover modelu, přidání další osoby s admin přístupem, přesun domény), aktualizace patří sem **i** do [CLAUDE.md](./CLAUDE.md), aby Claude Code i lidi pracovali ze stejného obrazu.
+Pokud studio nebo klient mění rolová pravidla (přidání další osoby s admin přístupem, přesun domény, změna Sanity plánu z Trial na Free / Growth), aktualizace patří sem **i** do [CLAUDE.md](./CLAUDE.md), aby Claude Code i lidi pracovali ze stejného obrazu.

@@ -59,16 +59,16 @@ Dev server používá Webpack mode (`next dev --webpack`), produkční build bě
 
 ## Deploy
 
-- Hosting běží na Vercelu, projekt `client-krhanicky-proud-web` v studio Pro teamu
+- Hosting běží na Ivanově **Vercel Hobby** projektu (org `vand-cloud`)
 - Auto-deploy se spustí při každém pushi do větve `main`
 - Pull requesty dostávají vlastní preview deploy s unikátní URL pro náhled
-- Doména `krhanicky-proud.cz` je připojená přes Cloudflare DNS v režimu DNS-only (šedý mráček), proxy přes Cloudflare se zde nepoužívá kvůli kompatibilitě s Vercel SSL a edge sítí
+- Doména `krhanicky-proud.cz` se připojí přes Cloudflare DNS v režimu DNS-only (šedý mráček), proxy přes Cloudflare se zde nepoužívá kvůli kompatibilitě s Vercel SSL a edge sítí
 
 ## CMS
 
-- Sanity verze 5, project ID `euod3b9r`, dataset `production`
+- Sanity verze 5, project ID `4nb8kl4e`, dataset `production` (org `vand-cloud`)
 - Studio je mountnuté přímo do webu na cestě `/studio` (Embedded Studio)
-- Vy jako klient máte roli Editor, studio má roli Admin
+- Klient je Administrator, studio Administrator collaborator
 - Schémata dokumentů a objektů najdete v `sanity/schemas/`
 
 Jakékoli změny ve schématu (nové typy obsahu, pole, validace) řeší studio. Vy jako Editor pracujete vždy proti aktuálnímu schématu.
