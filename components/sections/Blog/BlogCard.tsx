@@ -34,6 +34,10 @@ const categoryIcon: Record<
   rozhovory: ({ size = 36 }) => <MicVocal size={size} aria-hidden />,
 };
 
+const FallbackIcon = ({ size = 36 }: { size?: number }) => (
+  <ImageIcon size={size} aria-hidden />
+);
+
 // Card-with-overlay pattern: title <a> covers the whole card via an
 // absolute pseudo-element, so the entire surface is clickable. Category
 // chips sit `relative z-10` above the overlay so they could host
@@ -41,8 +45,7 @@ const categoryIcon: Record<
 // labels -- filtering happens on the index, not via card clicks).
 export function BlogCard({ post }: { post: BlogPost }) {
   const Icon =
-    (post.categories[0] && categoryIcon[post.categories[0]]) ??
-    (({ size = 36 }: { size?: number }) => <ImageIcon size={size} aria-hidden />);
+    (post.categories[0] && categoryIcon[post.categories[0]]) ?? FallbackIcon;
 
   return (
     <article className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] transition-colors hover:border-[var(--color-text-tertiary)] focus-within:border-[var(--color-text-tertiary)]">

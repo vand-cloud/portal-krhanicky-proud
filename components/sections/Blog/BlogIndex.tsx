@@ -54,10 +54,15 @@ export function BlogIndex({ posts }: { posts: BlogPost[] }) {
 
   // Keep state in sync when the URL changes from the outside (e.g. user
   // clicks a tag link in a post detail and lands here, or hits Back).
+  // The setState-in-effect rule flags this, but the URL is the source of
+  // truth for filter state and the alternative (deriving every render)
+  // would skip the optimistic click-then-router.push pattern used below.
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     setActiveCategory(resolveInitialCategory(searchParams.get("cat")));
     setActiveTag(searchParams.get("stitek") || null);
   }, [searchParams]);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   const allTags = useMemo(() => getAllTags(posts), [posts]);
 

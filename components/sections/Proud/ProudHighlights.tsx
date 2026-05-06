@@ -46,9 +46,12 @@ const categoryIcon: Record<
   ),
 };
 
+const FallbackIcon = ({ size = 36 }: { size?: number }) => (
+  <ImageIcon size={size} aria-hidden />
+);
+
 function HighlightCard({ item }: { item: ProudItem }) {
-  const Icon = categoryIcon[item.category] ??
-    (({ size = 36 }: { size?: number }) => <ImageIcon size={size} aria-hidden />);
+  const Icon = categoryIcon[item.category] ?? FallbackIcon;
 
   return (
     <article className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] transition-colors hover:border-[var(--color-text-tertiary)] focus-within:border-[var(--color-text-tertiary)]">
