@@ -1,0 +1,129 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "krhanicky-proud",
+  "registries": {
+    "@anfilov": "https://ds.anfilov.cz/api/registry"
+  },
+  "items": [
+    {
+      "name": "alert",
+      "version": "1.0.0",
+      "installedHash": "sha256-6e979557722904afc58732501736e944dca873e43e6583e93cbaccfda711ff2e",
+      "installedAt": "2026-05-30",
+      "source": "https://ds.anfilov.cz/api/registry/alert",
+      "path": "components/ui/Alert.tsx"
+    },
+    {
+      "name": "avatar",
+      "version": "1.0.0",
+      "installedHash": "sha256-afa8cfacf53755ac43f4e2efb4064dff0f58240ca35d45866821d1585b5c010c",
+      "installedAt": "2026-05-30",
+      "source": "https://ds.anfilov.cz/api/registry/avatar",
+      "path": "components/ui/Avatar.tsx"
+    },
+    {
+      "name": "badge",
+      "version": "1.0.0",
+      "installedHash": "sha256-19343ea71f7bf48a782c241aac8564bd2ab46e2062116e1d4618efdbcb59947e",
+      "installedAt": "2026-05-30",
+      "source": "https://ds.anfilov.cz/api/registry/badge",
+      "path": "components/ui/Badge.tsx"
+    },
+    {
+      "name": "breadcrumbs",
+      "version": "1.0.0",
+      "installedHash": "sha256-2c227135794b2486ea30e34f0225b7e2a62a67257b4b12f58363c9ba3f0bc6e1",
+      "installedAt": "2026-05-30",
+      "source": "https://ds.anfilov.cz/api/registry/breadcrumbs",
+      "path": "components/ui/Breadcrumbs.tsx"
+    },
+    {
+      "name": "button",
+      "version": "1.0.0",
+      "installedHash": "sha256-84b173a99fbce1133e8b429152c9133916a1ee02a49cf69cfd0df2939c9eddf6",
+      "installedAt": "2026-05-30",
+      "source": "https://ds.anfilov.cz/api/registry/button",
+      "path": "components/ui/Button.tsx"
+    },
+    {
+      "name": "card",
+      "version": "1.0.0",
+      "installedHash": "sha256-a7906698638718434a52e7342dc4db976b33d2c6d4a7452f8ed1bfb452ea4c78",
+      "installedAt": "2026-05-30",
+      "source": "https://ds.anfilov.cz/api/registry/card",
+      "path": "components/ui/Card.tsx"
+    },
+    {
+      "name": "checkbox",
+      "version": "1.0.0",
+      "installedHash": "sha256-3ad8d15798e510d1c8c7769aca88ca78e6083a499ae94de7843ced39eb40ce82",
+      "installedAt": "2026-05-30",
+      "source": "https://ds.anfilov.cz/api/registry/checkbox",
+      "path": "components/ui/Checkbox.tsx"
+    },
+    {
+      "name": "container",
+      "version": "1.0.0",
+      "installedHash": "sha256-2304d70d80a8c96e3d0184b61a72eadb49cac9b2834952103c8ecaf968b9ad35",
+      "installedAt": "2026-05-30",
+      "source": "https://ds.anfilov.cz/api/registry/container",
+      "path": "components/ui/Container.tsx"
+    },
+    {
+      "name": "input",
+      "version": "1.0.0",
+      "installedHash": "sha256-1957d466ccbddc12fdff63bf2658ed6b9cd0ede1d756a9d96efc3df1f3887bc0",
+      "installedAt": "2026-05-30",
+      "source": "https://ds.anfilov.cz/api/registry/input",
+      "path": "components/ui/Input.tsx"
+    },
+    {
+      "name": "radio-group",
+      "version": "1.0.0",
+      "installedHash": "sha256-7f76ddc4f49a8914de5346cefbd57b53429d65156af518bf0c1322050af87557",
+      "installedAt": "2026-05-30",
+      "source": "https://ds.anfilov.cz/api/registry/radio-group",
+      "path": "components/ui/RadioGroup.tsx"
+    },
+    {
+      "name": "select",
+      "version": "1.0.0",
+      "installedHash": "sha256-0081e6f2f71880f174f55113a86e682ebe4248eb375a41702ac52fd3baecc9ff",
+      "installedAt": "2026-05-30",
+      "source": "https://ds.anfilov.cz/api/registry/select",
+      "path": "components/ui/Select.tsx"
+    },
+    {
+      "name": "separator",
+      "version": "1.0.0",
+      "installedHash": "sha256-375a05f48cc15548c2e2a3b3572aabde4e4955f4189fc59580b3477b82629f1a",
+      "installedAt": "2026-05-30",
+      "source": "https://ds.anfilov.cz/api/registry/separator",
+      "path": "components/ui/Separator.tsx"
+    },
+    {
+      "name": "skeleton",
+      "version": "1.0.0",
+      "installedHash": "sha256-1eece9790088d517ec555b9d37b55eaf6a714b49e3fd30f0597ebabdde36a600",
+      "installedAt": "2026-05-30",
+      "source": "https://ds.anfilov.cz/api/registry/skeleton",
+      "path": "components/ui/Skeleton.tsx"
+    },
+    {
+      "name": "textarea",
+      "version": "1.0.0",
+      "installedHash": "sha256-b4152e497f21baf206318a769425dd1b692eb28cd6f880f446149dfe0360dcd3",
+      "installedAt": "2026-05-30",
+      "source": "https://ds.anfilov.cz/api/registry/textarea",
+      "path": "components/ui/Textarea.tsx"
+    },
+    {
+      "name": "tooltip",
+      "version": "1.0.0",
+      "installedHash": "sha256-a2a4d9049f8ce27df38732fa7f558b8a5a1530c4acad6b65e6f4b8cc041893f2",
+      "installedAt": "2026-05-30",
+      "source": "https://ds.anfilov.cz/api/registry/tooltip",
+      "path": "components/ui/Tooltip.tsx"
+    }
+  ]
+}
