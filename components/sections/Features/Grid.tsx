@@ -26,7 +26,7 @@ export default function Grid({
     <section className="bg-[var(--color-bg)] py-[var(--spacing-section)]">
       <Container>
         {(heading || subheading) && (
-          <div className={`${headerClass} mb-[var(--spacing-block)]`}>
+          <div className={`${headerClass} mb-[var(--spacing-block-gap)]`}>
             {heading && (
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading">
                 {heading}

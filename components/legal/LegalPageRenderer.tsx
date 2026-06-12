@@ -20,7 +20,7 @@ export function LegalPageRenderer({ page }: { page: LegalPage }) {
   return (
     <article className="bg-[var(--color-bg)] py-[var(--spacing-section)]">
       <Container size="narrow">
-        <header className="mb-[var(--spacing-block)] border-b border-[var(--color-border)] pb-6">
+        <header className="mb-[var(--spacing-block-gap)] border-b border-[var(--color-border)] pb-6">
           <h1 className="text-3xl sm:text-4xl md:text-5xl">{page.title}</h1>
           <p className="mt-4 text-sm text-[var(--color-text-tertiary)]">
             Aktualizováno: {updated}

@@ -9,7 +9,7 @@ export default function Default({
   legalLinks = [],
 }: FooterDefaultProps) {
   return (
-    <footer className="bg-[var(--color-surface)] border-t border-[var(--color-border)] py-[var(--spacing-block)]">
+    <footer className="bg-[var(--color-surface)] border-t border-[var(--color-border)] py-[var(--spacing-block-gap)]">
       <Container>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           <div className="col-span-2">

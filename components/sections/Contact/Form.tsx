@@ -14,7 +14,7 @@ export default function Form({
   return (
     <section className="bg-[var(--color-bg)] py-[var(--spacing-section)]">
       <Container size="narrow">
-        <div className="text-center mb-[var(--spacing-block)]">
+        <div className="text-center mb-[var(--spacing-block-gap)]">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading">
             {heading}
           </h2>

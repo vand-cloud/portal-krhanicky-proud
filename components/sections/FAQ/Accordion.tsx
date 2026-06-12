@@ -6,7 +6,7 @@ export default function Accordion({ heading, subheading, items }: FAQAccordionPr
     <section className="bg-[var(--color-bg)] py-[var(--spacing-section)]">
       <Container size="narrow">
         {(heading || subheading) && (
-          <div className="text-center mb-[var(--spacing-block)]">
+          <div className="text-center mb-[var(--spacing-block-gap)]">
             {heading && (
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading">
                 {heading}

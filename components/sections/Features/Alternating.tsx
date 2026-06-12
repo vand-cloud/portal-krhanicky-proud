@@ -11,7 +11,7 @@ export default function Alternating({
     <section className="bg-[var(--color-bg)] py-[var(--spacing-section)]">
       <Container>
         {(heading || subheading) && (
-          <div className="max-w-2xl mx-auto text-center mb-[var(--spacing-block)]">
+          <div className="max-w-2xl mx-auto text-center mb-[var(--spacing-block-gap)]">
             {heading && (
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading">
                 {heading}
@@ -24,7 +24,7 @@ export default function Alternating({
             )}
           </div>
         )}
-        <div className="space-y-[var(--spacing-block)]">
+        <div className="space-y-[var(--spacing-block-gap)]">
           {items.map((feature, i) => {
             const reversed = i % 2 === 1;
             return (
