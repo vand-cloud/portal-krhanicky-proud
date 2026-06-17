@@ -10,7 +10,12 @@
     "guide": "Guide",
     "about": "About",
     "services": "Services",
-    "contact": "Contact"
+    "contact": "Contact",
+    "village": "Town hall",
+    "proud": "Proud",
+    "programme": "Programme",
+    "blog": "Blog",
+    "getInvolved": "Get involved"
   },
   "actions": {
     "learnMore": "Learn more",

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { ChevronLeft, Image as ImageIcon } from "lucide-react";
 import { type BlogPost, blogCategoryLabels, blogPosts } from "@/content/blog";
 import { BlogCard } from "@/components/sections/Blog/BlogCard";
+import { ArticleBodyDemo } from "@/components/sections/ArticleBodyDemo";
 
 const formatDate = new Intl.DateTimeFormat("cs-CZ", {
   day: "numeric",
@@ -96,26 +97,26 @@ export default async function BlogDetailPage({
           {post.excerpt}
         </p>
 
-        {/* Hero image. Phase 2 wireframe: when no asset, show typed
-            placeholder consistent with BlogCard cover. Sanity migration
-            replaces this with next/image + asset reference. */}
-        <div className="relative mt-8 aspect-[16/9] w-full overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)]">
-          {post.heroImage ? (
-            /* eslint-disable-next-line @next/next/no-img-element -- Phase 2 wireframe; next/image comes in Phase 4 with Sanity assets. */
+        {/* Hero image. Sits inside the reading column (not full-bleed) and
+            shows the whole image at its natural ratio -- no fixed aspect
+            box, no crop, so portrait/landscape/square covers all render
+            uncropped. The placeholder (no asset) keeps the boxed 16/9 look
+            since an empty div has no intrinsic height. Sanity migration
+            swaps the <img> for next/image + asset reference. */}
+        {post.heroImage ? (
+          <div className="relative mt-8 overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)]">
+            {/* eslint-disable-next-line @next/next/no-img-element -- Phase 2 wireframe; next/image comes in Phase 4 with Sanity assets. */}
             <img
               src={post.heroImage}
               alt={post.title}
-              className="absolute inset-0 h-full w-full object-cover"
+              className="block h-auto w-full"
             />
-          ) : (
-            <div
-              className="flex h-full w-full items-center justify-center text-[var(--color-text-tertiary)]"
-              aria-hidden
-            >
-              <ImageIcon size={48} />
-            </div>
-          )}
-        </div>
+          </div>
+        ) : (
+          <div className="relative mt-8 flex aspect-[16/9] w-full items-center justify-center overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-tertiary)]">
+            <ImageIcon size={48} aria-hidden />
+          </div>
+        )}
 
         {/* Metadata strip below the hero: publish date + author on one line,
             tags on the next. These are "service" details -- secondary to
@@ -143,22 +144,11 @@ export default async function BlogDetailPage({
           ) : null}
         </div>
 
-        {/* Body. Phase 4 swaps this for a portable text renderer with
-            real typography (lead paragraphs, pull quotes, captioned
-            images, embedded entries from Pruvodce). */}
-        {post.body ? (
-          <div className="mt-10 text-base leading-relaxed text-[var(--color-text)]">
-            {post.body.split("\n\n").map((para, i) => (
-              <p key={i} className="mt-4 first:mt-0">
-                {para}
-              </p>
-            ))}
-          </div>
-        ) : (
-          <p className="mt-10 italic text-[var(--color-text-tertiary)]">
-            Plný text článku připravujeme.
-          </p>
-        )}
+        {/* Body. Phase 2 demo: a formatted rich-text sample (headings,
+            lists, captioned images) so the client can see the editor
+            output. Phase 4 swaps this for a portable text renderer that
+            maps the same marks onto this typography. */}
+        <ArticleBodyDemo />
       </article>
 
       {/* Related articles -- editorial pick, max three. Lives in the same

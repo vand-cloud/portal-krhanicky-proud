@@ -14,9 +14,9 @@
     "events": "Akce",
     "services": "Služby",
     "places": "Místa",
-    "village": "Obec",
+    "village": "Úřad",
     "proud": "Proud",
-    "programme": "Náš program",
+    "programme": "Program",
     "blog": "Blog",
     "getInvolved": "Zapojte se",
     "elections": "Volby"
@@ -52,7 +52,7 @@
     "placesDesc": "Kam se vydat, co navštívit",
     "services": "Služby",
     "servicesDesc": "Řemeslníci, doktoři, úřady, obchody",
-    "village": "Obec",
+    "village": "Úřad",
     "villageDesc": "Úřední deska, zastupitelstvo, dokumenty",
     "proud": "Proud",
     "proudDesc": "Sdružení občanů Krhanic",
@@ -92,7 +92,7 @@
     "gdpr": "GDPR",
     "cookies": "Cookies",
     "accessibility": "Přístupnost",
-    "disclosure": "Krhanický Proud je nezávislé sdružení občanů. Provozujeme tento portál celoročně. V období voleb naleznete naši kandidátku a program v sekci /volby."
+    "disclosure": "Krhanický Proud je nezávislé sdružení občanů. Provozujeme tento portál celoročně. V období voleb naleznete naši kandidátku a program v sekci <program>Program</program>."
   },
   "consent": {
     "title": "Souhlas s cookies",

@@ -55,6 +55,7 @@ export const people: Person[] = [
   // jasně označenou jako členství ve výboru bez mandátu zastupitele.
   {
     id: "p-ales-papousek",
+    photo: "/people/profil-muz.webp",
     slug: "ales-papousek",
     name: "Mgr. Aleš Papoušek",
     role: "Starosta, předseda spolku Naše Krhanice",
@@ -67,6 +68,7 @@ export const people: Person[] = [
   },
   {
     id: "p-jaroslav-mixa",
+    photo: "/people/profil-muz.webp",
     slug: "jaroslav-mixa",
     name: "Jaroslav Mixa",
     role: "Místostarosta",
@@ -78,6 +80,7 @@ export const people: Person[] = [
   },
   {
     id: "p-tomas-kratochvil",
+    photo: "/people/profil-muz.webp",
     slug: "tomas-kratochvil",
     name: "Ing. Tomáš Kratochvíl",
     role: "Zastupitel, vedoucí SDH Krhanice",
@@ -89,6 +92,7 @@ export const people: Person[] = [
   },
   {
     id: "p-jana-laboutkova",
+    photo: "/people/profil-zena.webp",
     slug: "jana-laboutkova",
     name: "Jana Laboutková",
     role: "Zastupitelka, členka finančního výboru",
@@ -97,6 +101,7 @@ export const people: Person[] = [
   },
   {
     id: "p-martin-jiricka",
+    photo: "/people/profil-muz.webp",
     slug: "martin-jiricka",
     name: "Ing. Martin Jiřička",
     role: "Zastupitel, předseda kontrolního výboru",
@@ -106,6 +111,7 @@ export const people: Person[] = [
   },
   {
     id: "p-petr-dub",
+    photo: "/people/profil-muz.webp",
     slug: "petr-dub",
     name: "Bc. Petr Dub, DiS.",
     role: "Zastupitel, předseda finančního výboru",
@@ -115,6 +121,7 @@ export const people: Person[] = [
   },
   {
     id: "p-ales-kozel",
+    photo: "/people/profil-muz.webp",
     slug: "ales-kozel",
     name: "Ing. Aleš Kozel",
     role: "Zastupitel, člen kontrolního výboru",
@@ -123,6 +130,7 @@ export const people: Person[] = [
   },
   {
     id: "p-lucie-marsikova",
+    photo: "/people/profil-zena.webp",
     slug: "lucie-marsikova",
     name: "Mgr. Lucie Maršíková",
     role: "Zastupitelka, předsedkyně spolku Aktivní Krhanice",
@@ -135,6 +143,7 @@ export const people: Person[] = [
   },
   {
     id: "p-sarka-dusova",
+    photo: "/people/profil-zena.webp",
     slug: "sarka-dusova",
     name: "Bc. Šárka Dušová",
     role: "Zastupitelka",
@@ -144,6 +153,7 @@ export const people: Person[] = [
   // ─── Vedoucí veřejných institucí v Krhanicích ────────────────────────────
   {
     id: "p-vera-rablova",
+    photo: "/people/profil-zena.webp",
     slug: "vera-rablova",
     name: "Mgr. Bc. Věra Ráblová",
     role: "Ředitelka Základní školy Krhanice",
@@ -156,6 +166,7 @@ export const people: Person[] = [
   },
   {
     id: "p-jana-bydzovska",
+    photo: "/people/profil-zena.webp",
     slug: "jana-bydzovska",
     name: "Ing. Jana Bydžovská",
     role: "Předsedkyně spolku Karhany",
@@ -167,6 +178,7 @@ export const people: Person[] = [
   },
   {
     id: "p-ivana-vatechova",
+    photo: "/people/profil-zena.webp",
     slug: "ivana-vatechova",
     name: "Ivana Vatechová",
     role: "SDH Krhanice (kontakt)",
@@ -177,6 +189,7 @@ export const people: Person[] = [
   },
   {
     id: "p-hana-strnadova",
+    photo: "/people/profil-zena.webp",
     slug: "hana-strnadova",
     name: "Hana Strnadová",
     role: "Členka představenstva spolku Aktivní Krhanice",
@@ -189,6 +202,7 @@ export const people: Person[] = [
   // ─── Externí členové výborů (NEjsou zastupitelé) ────────────────────────
   {
     id: "p-alena-kratochvilova",
+    photo: "/people/profil-zena.webp",
     slug: "alena-kratochvilova",
     name: "Ing. Alena Kratochvílová",
     role: "Členka finančního výboru (externí)",
@@ -197,6 +211,7 @@ export const people: Person[] = [
   },
   {
     id: "p-dana-kohoutova",
+    photo: "/people/profil-zena.webp",
     slug: "dana-kohoutova",
     name: "Dana Kohoutová",
     role: "Knihovnice, členka finančního výboru (externí)",
@@ -207,6 +222,7 @@ export const people: Person[] = [
   },
   {
     id: "p-sona-valaskova",
+    photo: "/people/profil-zena.webp",
     slug: "sona-valaskova",
     name: "Soňa Valášková",
     role: "Členka finančního výboru (externí)",
@@ -215,6 +231,7 @@ export const people: Person[] = [
   },
   {
     id: "p-radek-scotka",
+    photo: "/people/profil-muz.webp",
     slug: "radek-scotka",
     name: "Ing. Radek Ščotka",
     role: "Člen kontrolního výboru (externí)",
@@ -223,6 +240,7 @@ export const people: Person[] = [
   },
   {
     id: "p-marketa-fischerova",
+    photo: "/people/profil-zena.webp",
     slug: "marketa-fischerova",
     name: "Ing. Markéta Fischerová",
     role: "Členka kontrolního výboru (externí)",
@@ -231,6 +249,7 @@ export const people: Person[] = [
   },
   {
     id: "p-adela-polachova",
+    photo: "/people/profil-zena.webp",
     slug: "adela-polachova",
     name: "Adéla Polachová",
     role: "Lídryně kandidátky, členka Krhanického Proudu",
@@ -248,6 +267,7 @@ export const people: Person[] = [
   // people array (ballot order).
   {
     id: "p-jakub-hajek",
+    photo: "/people/profil-muz.webp",
     slug: "jakub-hajek",
     name: "Jakub Hájek",
     role: "Kandidát, učitel matematiky",
@@ -258,6 +278,7 @@ export const people: Person[] = [
   },
   {
     id: "p-milena-dvorakova",
+    photo: "/people/profil-zena.webp",
     slug: "milena-dvorakova",
     name: "Milena Dvořáková",
     role: "Kandidátka, ekonomka",
@@ -268,6 +289,7 @@ export const people: Person[] = [
   },
   {
     id: "p-pavel-cerny",
+    photo: "/people/profil-muz.webp",
     slug: "pavel-cerny",
     name: "Pavel Černý",
     role: "Kandidát, hasič a zedník",
@@ -278,6 +300,7 @@ export const people: Person[] = [
   },
   {
     id: "p-lenka-pokorna",
+    photo: "/people/profil-zena.webp",
     slug: "lenka-pokorna",
     name: "Lenka Pokorná",
     role: "Kandidátka, lékařka",
@@ -288,6 +311,7 @@ export const people: Person[] = [
   },
   {
     id: "p-stepan-kratochvil",
+    photo: "/people/profil-muz.webp",
     slug: "stepan-kratochvil",
     name: "Štěpán Kratochvíl",
     role: "Kandidát, IT specialista",

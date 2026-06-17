@@ -54,7 +54,7 @@ export default async function PersonDetailPage({
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
       {/* This page is the standalone, context-less detail. People reached
-          from /obec are routed through /obec/[slug] (sidebar kept). The
+          from /urad are routed through /urad/[slug] (sidebar kept). The
           link back here is intentionally generic -- /proud is the most
           common origin for direct links. */}
       <a

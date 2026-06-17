@@ -7,7 +7,7 @@ import {
   type ObecItem,
   obecCategoryLabels,
   obecSubcategoryLabels,
-} from "@/content/obec";
+} from "@/content/urad";
 import { unaccent } from "@/content/entries";
 import { SearchBar } from "@/components/sections/Hybrid/SearchBar";
 
@@ -31,7 +31,7 @@ interface SearchHit {
 function buildCategoryHref(catSlug: string, subSlug?: string): string {
   const params = new URLSearchParams({ kat: catSlug });
   if (subSlug) params.set("pod", subSlug);
-  return `/obec?${params.toString()}`;
+  return `/urad?${params.toString()}`;
 }
 
 // Category + subcategory hits. Matching against label + description so
@@ -101,11 +101,11 @@ function findItemHits(items: ObecItem[], q: string) {
   return { people, docs };
 }
 
-// Search box for the /obec context. Looks across:
+// Search box for the /urad context. Looks across:
 //  1. Categories + subcategories (e.g. "Zastupitelé") -- jumps to the
-//     category hub at /obec?kat=...&pod=...
-//  2. People (council members) -- jumps to /obec/[slug] keeping sidebar
-//  3. Documents, meetings, notices -- jumps to /obec/[slug]
+//     category hub at /urad?kat=...&pod=...
+//  2. People (council members) -- jumps to /urad/[slug] keeping sidebar
+//  3. Documents, meetings, notices -- jumps to /urad/[slug]
 // The empty state hides the dropdown -- typing reveals it. Same
 // interaction model as HomeSearch for consistency.
 export function ObecSearch({

@@ -1,4 +1,4 @@
-// /obec content (Phase 2 wireframe -- hardcoded sample data).
+// /urad content (Phase 2 wireframe -- hardcoded sample data).
 // One flat list of items, each tagged with category + optional subcategory.
 // In Sanity this becomes a polymorphic `obecItem` document with a category
 // reference + per-category fields (date for news, file URL for documents,
@@ -137,7 +137,7 @@ export interface ObecItem {
   date?: string;
   category: ObecCategory;
   subcategory?: ObecSubcategory;
-  // Link target. Most items lead to /obec/[slug]; council members link to
+  // Link target. Most items lead to /urad/[slug]; council members link to
   // /lide/[slug]; some document items can link to external PDFs.
   href: string;
   // Person reference for council members (renders the person card inline
@@ -148,9 +148,9 @@ export interface ObecItem {
   featuredOrder?: number;
 }
 
-// Council members rendered as items pointing to /obec/[slug] -- the detail
-// stays inside the /obec sidebar context. The Person record is referenced
-// via personId; /obec/[slug] page resolves it and renders person details
+// Council members rendered as items pointing to /urad/[slug] -- the detail
+// stays inside the /urad sidebar context. The Person record is referenced
+// via personId; /urad/[slug] page resolves it and renders person details
 // in the right pane while keeping the sidebar.
 // Source: obeckrhanice.cz/slozeni-zastupitelstva-obce, scrape 2026-05-04
 // (round 2). Exactly 9 elected councillors; external committee members live
@@ -163,7 +163,7 @@ const councilItems: ObecItem[] = [
     description: "Starosta",
     category: "zastupitelstvo",
     subcategory: "zastupitele",
-    href: "/obec/zastupitel-ales-papousek",
+    href: "/urad/zastupitel-ales-papousek",
     personId: "p-ales-papousek",
   },
   {
@@ -173,7 +173,7 @@ const councilItems: ObecItem[] = [
     description: "Místostarosta",
     category: "zastupitelstvo",
     subcategory: "zastupitele",
-    href: "/obec/zastupitel-jaroslav-mixa",
+    href: "/urad/zastupitel-jaroslav-mixa",
     personId: "p-jaroslav-mixa",
   },
   {
@@ -183,7 +183,7 @@ const councilItems: ObecItem[] = [
     description: "Zastupitel",
     category: "zastupitelstvo",
     subcategory: "zastupitele",
-    href: "/obec/zastupitel-tomas-kratochvil",
+    href: "/urad/zastupitel-tomas-kratochvil",
     personId: "p-tomas-kratochvil",
   },
   {
@@ -193,7 +193,7 @@ const councilItems: ObecItem[] = [
     description: "Zastupitelka, finanční výbor",
     category: "zastupitelstvo",
     subcategory: "zastupitele",
-    href: "/obec/zastupitel-jana-laboutkova",
+    href: "/urad/zastupitel-jana-laboutkova",
     personId: "p-jana-laboutkova",
   },
   {
@@ -203,7 +203,7 @@ const councilItems: ObecItem[] = [
     description: "Předseda kontrolního výboru",
     category: "zastupitelstvo",
     subcategory: "zastupitele",
-    href: "/obec/zastupitel-martin-jiricka",
+    href: "/urad/zastupitel-martin-jiricka",
     personId: "p-martin-jiricka",
   },
   {
@@ -213,7 +213,7 @@ const councilItems: ObecItem[] = [
     description: "Předseda finančního výboru",
     category: "zastupitelstvo",
     subcategory: "zastupitele",
-    href: "/obec/zastupitel-petr-dub",
+    href: "/urad/zastupitel-petr-dub",
     personId: "p-petr-dub",
   },
   {
@@ -223,7 +223,7 @@ const councilItems: ObecItem[] = [
     description: "Zastupitel, kontrolní výbor",
     category: "zastupitelstvo",
     subcategory: "zastupitele",
-    href: "/obec/zastupitel-ales-kozel",
+    href: "/urad/zastupitel-ales-kozel",
     personId: "p-ales-kozel",
   },
   {
@@ -233,7 +233,7 @@ const councilItems: ObecItem[] = [
     description: "Zastupitelka, kontrolní výbor",
     category: "zastupitelstvo",
     subcategory: "zastupitele",
-    href: "/obec/zastupitel-lucie-marsikova",
+    href: "/urad/zastupitel-lucie-marsikova",
     personId: "p-lucie-marsikova",
   },
   {
@@ -243,7 +243,7 @@ const councilItems: ObecItem[] = [
     description: "Zastupitelka",
     category: "zastupitelstvo",
     subcategory: "zastupitele",
-    href: "/obec/zastupitel-sarka-dusova",
+    href: "/urad/zastupitel-sarka-dusova",
     personId: "p-sarka-dusova",
   },
 ];
@@ -259,7 +259,7 @@ const meetingItems: ObecItem[] = [
     description: "Termín a program zveřejní obec na úřední desce 7 dní předem.",
     category: "zastupitelstvo",
     subcategory: "nadchazejici-schuze",
-    href: "/obec/nadchazejici-zasedani-zastupitelstva",
+    href: "/urad/nadchazejici-zasedani-zastupitelstva",
   },
   {
     id: "obec-schuze-2026-03-09",
@@ -269,7 +269,7 @@ const meetingItems: ObecItem[] = [
     date: "2026-03-09",
     category: "zastupitelstvo",
     subcategory: "archiv-schuzi",
-    href: "/obec/zapis-2026-1-zasedani-9-3-2026",
+    href: "/urad/zapis-2026-1-zasedani-9-3-2026",
   },
   {
     id: "obec-schuze-2025-12-12",
@@ -279,7 +279,7 @@ const meetingItems: ObecItem[] = [
     date: "2025-12-12",
     category: "zastupitelstvo",
     subcategory: "archiv-schuzi",
-    href: "/obec/zapis-2025-6-zasedani-12-12-2025",
+    href: "/urad/zapis-2025-6-zasedani-12-12-2025",
   },
   {
     id: "obec-schuze-2025-11-19",
@@ -289,7 +289,7 @@ const meetingItems: ObecItem[] = [
     date: "2025-11-19",
     category: "zastupitelstvo",
     subcategory: "archiv-schuzi",
-    href: "/obec/zapis-2025-5-zasedani-19-11-2025",
+    href: "/urad/zapis-2025-5-zasedani-19-11-2025",
   },
   {
     id: "obec-schuze-2025-08-26",
@@ -299,7 +299,7 @@ const meetingItems: ObecItem[] = [
     date: "2025-08-26",
     category: "zastupitelstvo",
     subcategory: "archiv-schuzi",
-    href: "/obec/zapis-2025-4-zasedani-26-8-2025",
+    href: "/urad/zapis-2025-4-zasedani-26-8-2025",
   },
   {
     id: "obec-schuze-2025-06-25",
@@ -309,7 +309,7 @@ const meetingItems: ObecItem[] = [
     date: "2025-06-25",
     category: "zastupitelstvo",
     subcategory: "archiv-schuzi",
-    href: "/obec/zapis-2025-3-zasedani-25-6-2025",
+    href: "/urad/zapis-2025-3-zasedani-25-6-2025",
   },
   {
     id: "obec-schuze-2025-04-16",
@@ -319,7 +319,7 @@ const meetingItems: ObecItem[] = [
     date: "2025-04-16",
     category: "zastupitelstvo",
     subcategory: "archiv-schuzi",
-    href: "/obec/zapis-2025-2-zasedani-16-4-2025",
+    href: "/urad/zapis-2025-2-zasedani-16-4-2025",
   },
   {
     id: "obec-schuze-2025-03-11",
@@ -329,7 +329,7 @@ const meetingItems: ObecItem[] = [
     date: "2025-03-11",
     category: "zastupitelstvo",
     subcategory: "archiv-schuzi",
-    href: "/obec/zapis-2025-1-zasedani-11-3-2025",
+    href: "/urad/zapis-2025-1-zasedani-11-3-2025",
   },
 ];
 
@@ -343,7 +343,7 @@ const contactItems: ObecItem[] = [
       "Krhanice 46, 257 42 Krhanice. Telefon 317 702 121, e-mail ou.krhanice@seznam.cz. IČO 00232025.",
     category: "zastupitelstvo",
     subcategory: "kontakt",
-    href: "/obec/kontakt-obecni-urad",
+    href: "/urad/kontakt-obecni-urad",
   },
   {
     id: "obec-kontakt-uredni-hodiny",
@@ -353,7 +353,7 @@ const contactItems: ObecItem[] = [
       "Pondělí a středa 8:00 až 12:00 a 13:00 až 17:00. Úterý a čtvrtek 8:00 až 12:00. Pátek zavřeno. Stejný rozvrh platí pro evidenci obyvatel a CzechPoint.",
     category: "zastupitelstvo",
     subcategory: "kontakt",
-    href: "/obec/uredni-hodiny",
+    href: "/urad/uredni-hodiny",
   },
 ];
 
@@ -366,7 +366,7 @@ const noticeItems: ObecItem[] = [
     description: "Finanční úřad pro Středočeský kraj.",
     date: "2026-04-30",
     category: "uredni-deska",
-    href: "/obec/verejna-vyhlaska-dan-z-nemovitych-veci-2026",
+    href: "/urad/verejna-vyhlaska-dan-z-nemovitych-veci-2026",
   },
   {
     id: "obec-uredni-netykavka",
@@ -375,7 +375,7 @@ const noticeItems: ObecItem[] = [
     description: "Středočeský kraj, opatření obecné povahy.",
     date: "2026-04-27",
     category: "uredni-deska",
-    href: "/obec/verejna-vyhlaska-netykavka-zlaznata",
+    href: "/urad/verejna-vyhlaska-netykavka-zlaznata",
   },
   {
     id: "obec-uredni-rd-7-odvolani",
@@ -384,7 +384,7 @@ const noticeItems: ObecItem[] = [
     description: "Včetně garáží, jímek a přípojek.",
     date: "2026-04-27",
     category: "uredni-deska",
-    href: "/obec/rozhodnuti-o-odvolani-7-rodinnych-domu",
+    href: "/urad/rozhodnuti-o-odvolani-7-rodinnych-domu",
   },
   {
     id: "obec-uredni-drazba",
@@ -393,7 +393,7 @@ const noticeItems: ObecItem[] = [
     description: "Termín a podrobnosti v plném znění vyhlášky.",
     date: "2026-04-22",
     category: "uredni-deska",
-    href: "/obec/usneseni-drazebni-vyhlaska",
+    href: "/urad/usneseni-drazebni-vyhlaska",
   },
   {
     id: "obec-uredni-vodne-2025",
@@ -402,7 +402,7 @@ const noticeItems: ObecItem[] = [
     description: "Vodohospodářská společnost Benešov.",
     date: "2026-04-22",
     category: "uredni-deska",
-    href: "/obec/vyuctovani-vodneho-2025",
+    href: "/urad/vyuctovani-vodneho-2025",
   },
   {
     id: "obec-uredni-uzemni-plan-zmena-2",
@@ -411,7 +411,7 @@ const noticeItems: ObecItem[] = [
     description: "Ministerstvo pro místní rozvoj, veřejné projednání.",
     date: "2026-04-15",
     category: "uredni-deska",
-    href: "/obec/navrh-zmeny-c-2-uzemniho-rozvojoveho-planu",
+    href: "/urad/navrh-zmeny-c-2-uzemniho-rozvojoveho-planu",
   },
   {
     id: "obec-uredni-nalezena-vec",
@@ -420,7 +420,7 @@ const noticeItems: ObecItem[] = [
     description: "Lhůta pro vyzvednutí na obecním úřadě.",
     date: "2026-03-30",
     category: "uredni-deska",
-    href: "/obec/oznameni-o-nalezene-veci",
+    href: "/urad/oznameni-o-nalezene-veci",
   },
   {
     id: "obec-uredni-zkousky-hub",
@@ -429,7 +429,7 @@ const noticeItems: ObecItem[] = [
     description: "Krajská hygienická stanice Středočeského kraje.",
     date: "2026-03-25",
     category: "uredni-deska",
-    href: "/obec/pozvanka-zkousky-znalosti-hub-2026",
+    href: "/urad/pozvanka-zkousky-znalosti-hub-2026",
   },
 ];
 
@@ -444,7 +444,7 @@ const documentItems: ObecItem[] = [
     date: "2026-03-28",
     category: "dokumenty",
     subcategory: "vyhlasky",
-    href: "/obec/vyhlaska-c-1-2026-nocni-klid",
+    href: "/urad/vyhlaska-c-1-2026-nocni-klid",
   },
   {
     id: "obec-doc-vyhl-4-2025-pyrotechnika",
@@ -454,7 +454,7 @@ const documentItems: ObecItem[] = [
     date: "2026-01-02",
     category: "dokumenty",
     subcategory: "vyhlasky",
-    href: "/obec/vyhlaska-c-4-2025-pyrotechnika",
+    href: "/urad/vyhlaska-c-4-2025-pyrotechnika",
   },
   {
     id: "obec-doc-vyhl-3-2025-hlucne-cinnosti",
@@ -464,7 +464,7 @@ const documentItems: ObecItem[] = [
     date: "2025-07-11",
     category: "dokumenty",
     subcategory: "vyhlasky",
-    href: "/obec/vyhlaska-c-3-2025-hlucne-cinnosti",
+    href: "/urad/vyhlaska-c-3-2025-hlucne-cinnosti",
   },
   {
     id: "obec-doc-vyhl-2-2025-nocni-klid",
@@ -474,7 +474,7 @@ const documentItems: ObecItem[] = [
     date: "2025-07-11",
     category: "dokumenty",
     subcategory: "vyhlasky",
-    href: "/obec/vyhlaska-c-2-2025-nocni-klid",
+    href: "/urad/vyhlaska-c-2-2025-nocni-klid",
   },
   {
     id: "obec-doc-vyhl-5-2024-odpady",
@@ -484,7 +484,7 @@ const documentItems: ObecItem[] = [
     date: "2025-01-01",
     category: "dokumenty",
     subcategory: "vyhlasky",
-    href: "/obec/vyhlaska-c-5-2024-odpadove-hospodarstvi",
+    href: "/urad/vyhlaska-c-5-2024-odpadove-hospodarstvi",
   },
   {
     id: "obec-doc-vyhl-4-2024-koeficient-dane",
@@ -494,7 +494,7 @@ const documentItems: ObecItem[] = [
     date: "2025-01-01",
     category: "dokumenty",
     subcategory: "vyhlasky",
-    href: "/obec/vyhlaska-c-4-2024-mistni-koeficient",
+    href: "/urad/vyhlaska-c-4-2024-mistni-koeficient",
   },
   {
     id: "obec-doc-vyhl-11-2023-poplatek-odpady",
@@ -504,7 +504,7 @@ const documentItems: ObecItem[] = [
     date: "2024-01-01",
     category: "dokumenty",
     subcategory: "vyhlasky",
-    href: "/obec/vyhlaska-c-11-2023-poplatek-za-odpady",
+    href: "/urad/vyhlaska-c-11-2023-poplatek-za-odpady",
   },
   {
     id: "obec-doc-vyhl-8-2023-poplatek-psi",
@@ -514,7 +514,7 @@ const documentItems: ObecItem[] = [
     date: "2024-01-01",
     category: "dokumenty",
     subcategory: "vyhlasky",
-    href: "/obec/vyhlaska-c-8-2023-poplatek-ze-psu",
+    href: "/urad/vyhlaska-c-8-2023-poplatek-ze-psu",
   },
   // Rozpočet
   {
@@ -525,7 +525,7 @@ const documentItems: ObecItem[] = [
     date: "2025-12-12",
     category: "dokumenty",
     subcategory: "rozpocet",
-    href: "/obec/rozpocet-obce-2026",
+    href: "/urad/rozpocet-obce-2026",
   },
   {
     id: "obec-doc-cov-projekt-2026",
@@ -535,7 +535,7 @@ const documentItems: ObecItem[] = [
     date: "2026-03-11",
     category: "dokumenty",
     subcategory: "smlouvy",
-    href: "/obec/smlouva-projektova-priprava-cov-i-etapa",
+    href: "/urad/smlouva-projektova-priprava-cov-i-etapa",
   },
 ];
 

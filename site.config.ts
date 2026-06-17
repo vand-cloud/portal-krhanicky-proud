@@ -45,6 +45,8 @@ export const siteConfig = {
   },
 
   contact: {
+    name: "Ivan Dvořák",
+    phone: "+420 714 177",
     email: "krhanicky.proud@gmail.com",
   },
 
@@ -92,7 +94,7 @@ export const siteConfig = {
     alert: {
       enabled: true,
       text: "Pozor, ve čtvrtek od 12 do 16 hodin nepůjde proud v ulicích Pod Vrškem a Na Návsi.",
-      href: "/obec/aktuality/vypadek-proudu" as string | null,
+      href: "/urad/aktuality/vypadek-proudu" as string | null,
     },
   },
 } as const;

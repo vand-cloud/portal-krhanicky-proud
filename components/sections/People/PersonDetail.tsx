@@ -12,7 +12,7 @@ const formatDate = new Intl.DateTimeFormat("cs-CZ", {
 // PersonDetail renders a person profile WITHOUT an outer page container
 // or back link. The host is responsible for those:
 // - /lide/[slug] wraps it in a max-w-3xl page with a generic Zpět link
-// - /obec/[slug] embeds it inside ObecIndex's right pane (sidebar kept)
+// - /urad/[slug] embeds it inside ObecIndex's right pane (sidebar kept)
 //
 // Both contexts resolve the person + related businesses + articles and
 // pass them in as props -- the component itself does no fetching.
@@ -177,7 +177,7 @@ export function PersonDetail({
   );
 }
 
-// Helper used by both /lide/[slug] and /obec/[slug] to resolve refs.
+// Helper used by both /lide/[slug] and /urad/[slug] to resolve refs.
 export function resolvePersonRefs(
   person: Person,
   entries: Entry[],

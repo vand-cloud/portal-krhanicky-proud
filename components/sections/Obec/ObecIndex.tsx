@@ -12,7 +12,8 @@ import {
   obecItemsByCategory,
   obecItemsBySubcategory,
   obecSubcategoryLabels,
-} from "@/content/obec";
+} from "@/content/urad";
+import { PersonThumb } from "@/components/sections/People/PersonThumb";
 
 const formatDate = new Intl.DateTimeFormat("cs-CZ", {
   day: "numeric",
@@ -30,7 +31,7 @@ export function ObecIndex({
   initialSubcategory = null,
   // When set, the right pane renders the item's detail content instead of
   // a list. Sidebar stays mounted and reflects initialCategory/Subcategory.
-  // The host (/obec/[slug] page) supplies the rendered detail node so the
+  // The host (/urad/[slug] page) supplies the rendered detail node so the
   // component stays content-agnostic (person card vs. document body).
   initialSelectedSlug,
   detailNode,
@@ -221,7 +222,7 @@ export function ObecIndex({
 }
 
 // Sidebar row -- shared shape with the BlogIndex CategoryRow but kept local
-// here so /obec can evolve its own layout without coupling.
+// here so /urad can evolve its own layout without coupling.
 //
 // Optional `children` slot renders inside the same <li>, used by the
 // outer category iteration to attach a nested <ul> of subcategories
@@ -299,17 +300,17 @@ function SubSidebarRow({
   );
 }
 
-// Reconstruct the listing URL the user came from. The /obec page reads
+// Reconstruct the listing URL the user came from. The /urad page reads
 // these query params and pre-selects the same sidebar row.
 function buildBackHref(
   category: CategoryChoice,
   subcategory: ObecSubcategory | null,
 ): string {
-  if (category === "all") return "/obec";
+  if (category === "all") return "/urad";
   const params = new URLSearchParams();
   params.set("kat", category);
   if (subcategory) params.set("pod", subcategory);
-  return `/obec?${params.toString()}`;
+  return `/urad?${params.toString()}`;
 }
 
 // Top-level rozcestník: cards for each top category. Used in the "Vše"
@@ -430,14 +431,18 @@ function CategoryHub({
 
 // One row in the result list. Date (when available) sits left, title +
 // description in the middle, chevron right. Same hover/focus pattern as
-// EntryListItem so /obec and /pruvodce read as siblings.
+// EntryListItem so /urad and /pruvodce read as siblings.
 function ItemRow({ item }: { item: ObecItem }) {
   return (
     <a
       href={item.href}
       className="group flex items-start gap-3 px-3 py-4 outline-none transition-colors hover:bg-[var(--color-bg-elev)] focus-visible:bg-[var(--color-bg-elev)] focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 sm:gap-4"
     >
-      {item.date ? (
+      {item.personId ? (
+        // Councillor / person row: lead with the photo, same photo-led
+        // "special element" treatment as candidates in /proud.
+        <PersonThumb personId={item.personId} />
+      ) : item.date ? (
         <time
           dateTime={item.date}
           className="shrink-0 text-xs font-medium text-[var(--color-text-tertiary)] sm:w-28"

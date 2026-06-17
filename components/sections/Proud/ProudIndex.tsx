@@ -2,19 +2,14 @@
 
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Image as ImageIcon } from "lucide-react";
 import {
   type ProudCategory,
   type ProudItem,
   proudCategories,
   proudItemsByCategory,
 } from "@/content/proud";
-
-const formatDate = new Intl.DateTimeFormat("cs-CZ", {
-  day: "numeric",
-  month: "long",
-  year: "numeric",
-});
+import { PersonThumb } from "@/components/sections/People/PersonThumb";
 
 // "all" sentinel matches the radiogroup pattern from BlogIndex / ObecIndex.
 type CategoryChoice = ProudCategory | "all";
@@ -256,23 +251,22 @@ function buildBackHref(category: CategoryChoice): string {
   return `/proud/nas-program?${params.toString()}`;
 }
 
-// One row in the result list. Date (when available) sits left, title +
-// description in the middle, chevron right. Mirrors ObecIndex/ItemRow.
+// One row in the result list.
+//  - Programme posts: a small cover thumbnail sits left, then title +
+//    description. No date -- programme items are evergreen, not news.
+//  - Candidate rows (category "kandidati"): lead with the person's photo
+//    (circular avatar) -- candidates are a photo-led "special element".
 function ItemRow({ item }: { item: ProudItem }) {
+  const isCandidate = item.category === "kandidati";
   return (
     <a
       href={item.href}
       className="group flex items-start gap-3 px-3 py-4 outline-none transition-colors hover:bg-[var(--color-bg-elev)] focus-visible:bg-[var(--color-bg-elev)] focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 sm:gap-4"
     >
-      {item.date ? (
-        <time
-          dateTime={item.date}
-          className="shrink-0 text-xs font-medium text-[var(--color-text-tertiary)] sm:w-28"
-        >
-          {formatDate.format(new Date(item.date))}
-        </time>
+      {isCandidate ? (
+        <PersonThumb personId={item.personId} />
       ) : (
-        <span className="hidden sm:block sm:w-28" aria-hidden />
+        <ProudThumb heroImage={item.heroImage} />
       )}
       <div className="min-w-0 flex-1">
         <h3 className="text-sm font-bold leading-snug text-[var(--color-text-accent)] group-hover:underline group-hover:underline-offset-4 sm:text-base">
@@ -290,5 +284,30 @@ function ItemRow({ item }: { item: ProudItem }) {
         className="mt-1 shrink-0 text-[var(--color-text-tertiary)] transition-transform group-hover:translate-x-0.5 group-hover:text-[var(--color-text)]"
       />
     </a>
+  );
+}
+
+// Small left-aligned cover thumbnail for programme posts. Fixed 4:3 box so
+// the list stays tidy whatever the source ratio; falls back to a typed
+// placeholder until the operator adds a cover (Sanity asset in Phase 4).
+function ProudThumb({ heroImage }: { heroImage?: string }) {
+  return (
+    <div className="relative aspect-[4/3] w-20 shrink-0 overflow-hidden rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] sm:w-28">
+      {heroImage ? (
+        /* eslint-disable-next-line @next/next/no-img-element -- Phase 2 wireframe; next/image comes in Phase 4 with Sanity assets. */
+        <img
+          src={heroImage}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      ) : (
+        <div
+          className="flex h-full w-full items-center justify-center text-[var(--color-text-tertiary)]"
+          aria-hidden
+        >
+          <ImageIcon size={20} />
+        </div>
+      )}
+    </div>
   );
 }

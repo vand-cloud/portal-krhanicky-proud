@@ -655,6 +655,7 @@ const events: Entry[] = [
   {
     id: "evt-anenska-zabava-2026",
     type: "akce",
+    featured: true,
     slug: "anenska-zabava-2026-07-25",
     title: "Anenská zábava",
     description:
@@ -678,6 +679,7 @@ const events: Entry[] = [
   {
     id: "evt-hasicsky-ples-2026",
     type: "akce",
+    featured: true,
     slug: "hasicsky-ples-2026-08-22",
     title: "Hasičský ples pod hvězdami",
     description:
@@ -701,6 +703,7 @@ const events: Entry[] = [
   {
     id: "evt-letni-kino-2026",
     type: "akce",
+    featured: true,
     slug: "letni-kino-2026-08-28",
     title: "Letní kino",
     description:
@@ -744,6 +747,9 @@ const events: Entry[] = [
   {
     id: "evt-kavarnicka-seniori-2026",
     type: "akce",
+    // Curated "Doporučujeme" pick for the "Vše" landing (designed-phase
+    // seed; in Sanity the editor flips this flag in Studio).
+    featured: true,
     slug: "kavarnicka-pro-seniory-2026-06-19",
     title: "Kavárnička pro seniory",
     description:
@@ -785,6 +791,7 @@ const events: Entry[] = [
   {
     id: "evt-krhanice-open-air-2026",
     type: "akce",
+    featured: true,
     slug: "krhanice-open-air-2026-08-01",
     title: "Krhanice Open Air",
     description:
@@ -3085,7 +3092,7 @@ export const news: NewsItem[] = [
     description:
       "Starosta Aleš Papoušek shrnuje, jak obec dlouhodobě snižuje množství komunálního odpadu díky aktivnímu třídění a rozšíření sběrných míst. Krhanice obhájily stříbrný certifikát Ekologická obec za rok 2025, pokračují úklidy Čistá řeka Sázava i stavba zábran pro přechod žab přes silnici.",
     date: "2026-04-22",
-    href: "/obec/22duben-den-zeme",
+    href: "/urad/22duben-den-zeme",
     category: "kultura",
   },
   {
@@ -3095,7 +3102,7 @@ export const news: NewsItem[] = [
     description:
       "Obec spouští projektovou přípravu kanalizace a čistírny odpadních vod ve spolupráci s firmou Projekty Vodam. Příprava potrvá zhruba 40 týdnů od poloviny března 2026, financování pokryje obec kombinací dotace, státní půjčky a úvěru.",
     date: "2026-03-11",
-    href: "/obec/informace-o-akci-krhanice-kanalizace-a-cov-i-etapa",
+    href: "/urad/informace-o-akci-krhanice-kanalizace-a-cov-i-etapa",
     category: "urad",
   },
   {
@@ -3105,7 +3112,7 @@ export const news: NewsItem[] = [
     description:
       "Obec poskytuje občanům s trvalým pobytem příspěvek až 2 000 Kč na pořízení kompostéru o objemu od 600 litrů. Pro rok 2026 je vyčleněno 30 000 Kč. Stačí předložit fakturu a doklad o zaplacení do 16. prosince 2026.",
     date: "2026-03-10",
-    href: "/obec/neuvazujete-nad-porizenim-noveho-komposteru",
+    href: "/urad/neuvazujete-nad-porizenim-noveho-komposteru",
     category: "odpady",
   },
   {
@@ -3115,7 +3122,7 @@ export const news: NewsItem[] = [
     description:
       "Hnědé kontejnery na bioodpad jsou od 9. března 2026 přistavené v obci, vyvážejí se každé pondělí. Modrý velkoobjemový kontejner rotuje mezi stanovišti v Krhanicích (náves U křížku, víceúčelové hřiště u školy) a v Prosečnici od 9. března do 13. dubna.",
     date: "2026-03-10",
-    href: "/obec/zahajeni-svozu-bioodpadu-2026-ze-zahrad-a-domacnosti",
+    href: "/urad/zahajeni-svozu-bioodpadu-2026-ze-zahrad-a-domacnosti",
     category: "odpady",
   },
   {
@@ -3125,7 +3132,7 @@ export const news: NewsItem[] = [
     description:
       "Od úterý 3. března 2026 svoz popelnic probíhá pouze na novou známku pro rok 2026. Místostarosta Jaroslav Mixa žádá o vylepení nové známky a odstranění starých.",
     date: "2026-03-02",
-    href: "/obec/svoz-popelnic-jiz-na-novou-znamku-2026",
+    href: "/urad/svoz-popelnic-jiz-na-novou-znamku-2026",
     category: "odpady",
   },
   {
@@ -3135,7 +3142,7 @@ export const news: NewsItem[] = [
     description:
       "Služba pro občany s trvalým pobytem v Krhanicích od 65 let. Jízdy k lékaři a na rehabilitaci do Týnce nad Sázavou (25 Kč) nebo Benešova (50 Kč). Maximálně 6 jízd měsíčně, doprovod jede zdarma. Objednávky v pracovních dnech 6:00 až 17:00 na 739 701 246.",
     date: "2025-12-30",
-    href: "/obec/senior-taxi-a-rehabilitace-taxi-pokracuje-i-v-roce-2026",
+    href: "/urad/senior-taxi-a-rehabilitace-taxi-pokracuje-i-v-roce-2026",
     category: "doprava",
   },
   {
@@ -3145,7 +3152,7 @@ export const news: NewsItem[] = [
     description:
       "Od 1. prosince 2025 platí novela zákona o pyrotechnických výrobcích. Stánky a trhy už pyrotechniku prodávat nesmějí, ohňostroje jsou zakázané v pásmu 250 metrů od nemocnic, útulků, zoo a chovů. Zastupitelstvo Krhanice schválilo 12. prosince 2025 vlastní obecně závaznou vyhlášku.",
     date: "2025-12-19",
-    href: "/obec/prisnejsi-pravidla-pro-pyrotechniku-od-1-prosince",
+    href: "/urad/prisnejsi-pravidla-pro-pyrotechniku-od-1-prosince",
     category: "urad",
   },
   {
@@ -3155,7 +3162,7 @@ export const news: NewsItem[] = [
     description:
       "ČEZ Distribuce už delší dobu nezveřejňuje informace o odstávkách na sloupech vedení. Plánované odstávky najdete v sekci Důležité informace na webu obce, případně po registraci v systému ČEZ Distribuce.",
     date: "2023-02-14",
-    href: "/obec/jak-zjistite-planovane-vypnuti-vasi-nemovitosti-od-elektrickeho-proudu",
+    href: "/urad/jak-zjistite-planovane-vypnuti-vasi-nemovitosti-od-elektrickeho-proudu",
     category: "urad",
   },
 ];

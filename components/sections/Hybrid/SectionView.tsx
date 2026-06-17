@@ -3,7 +3,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { ArrowUpRight, ChevronLeft } from "lucide-react";
+import { ArrowRight, ArrowUpRight, ChevronLeft } from "lucide-react";
+import { blogPosts, sortBlogByDate } from "@/content/blog";
+import { BlogCard } from "../Blog/BlogCard";
 import type {
   Category,
   Entry,
@@ -228,6 +230,17 @@ export function SectionView({
     setTags([]);
     setQuery("");
   }, []);
+
+  // "Načíst všechny akce" on the "Vše" landing: flip the pill scope to
+  // Akce (in place, no navigation -- keeps the SPA state) and lift the
+  // viewport back to the hero so the user sees the now-active Akce pill
+  // and the full chronological timeline below it.
+  const handleShowAllEvents = useCallback(() => {
+    handleScopeChange("akce");
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [handleScopeChange]);
 
   const handleCategoryChange = useCallback((next: Category | null) => {
     setCategory(next);
@@ -564,6 +577,7 @@ export function SectionView({
                   emptyLabel={tHome("noResults")}
                   hoveredId={hoveredId ?? undefined}
                   onHover={handleListHover}
+                  onShowAllEvents={handleShowAllEvents}
                 />
               ) : scope === "akce" ? (
                 <TimelineView
@@ -598,6 +612,12 @@ export function SectionView({
           )}
         </div>
       </div>
+
+      {/* Full-width blog band below the search+map module. Shown on every
+          listing scope (Vše, Akce, Místa, …) once the user scrolls past
+          the module. Hidden only on detail pages, which stay focused on
+          the single entry. */}
+      {!selectedEntry ? <BlogBand /> : null}
     </div>
   );
 }
@@ -710,163 +730,161 @@ function TagChipRow({
   );
 }
 
-// Maximum items per "Vše" section. Beyond this, the user is invited to
-// jump into the type-filtered listing via "Zobrazit všechny X".
-const ALL_SECTION_LIMIT = 5;
+// Maximum curated events surfaced on the "Vše" landing before the user is
+// invited to open the full Akce timeline.
+const ALL_EVENTS_LIMIT = 5;
+// Newest blog posts shown in the editorial band under the events.
+const ALL_BLOG_LIMIT = 3;
 
-// "Vše" listing: a curated landing, NOT a full dump.
-// - Events: top 5 chronologically (objective, calendar wins).
-// - Services / Places: items marked `featured: true` by the operator,
-//   with a graceful fallback to the closest entries when nothing is
-//   featured yet. Multi-type entries (hospoda = place + service) can
-//   surface in BOTH sections at once -- this matches operator intent.
+// "Vše" listing inside the search+map module's right column: the
+// operator's "Doporučujeme" picks (featured: true), soonest term first,
+// capped at 5, each carrying the badge. When nothing is flagged yet
+// (fresh portal / empty Sanity), it falls back to the soonest upcoming
+// events WITHOUT the badge so the tab is never blank. A button lifts the
+// user into the full Akce scope.
+//
+// The "Z blogu" band is NOT here -- it renders full-width BELOW the whole
+// module (see BlogBand in SectionView), so the search+map module closes
+// first and the blog opens as its own section.
 function AllScopeList({
   entries,
   emptyLabel,
   hoveredId,
   onHover,
+  onShowAllEvents,
 }: {
   entries: Entry[];
   emptyLabel: string;
   hoveredId?: string;
   onHover?: (entry: Entry | null) => void;
+  // Switches the pill scope to Akce and scrolls back to the hero.
+  onShowAllEvents: () => void;
 }) {
-  // Events: top-5 upcoming chronologically. Past events are filtered out
-  // here (the parent skips the 60-day window in "all" mode so we can see
-  // farther into the future, but past entries should never surface).
-  const events = useMemo(() => {
+  // Upcoming events only (end >= now). Featured picks win; the fallback
+  // to all upcoming kicks in only when the operator has flagged nothing.
+  // `badged` tells the rows whether we are showing real picks (so the
+  // "Doporučujeme" badge appears) or the unflagged fallback (no badge).
+  const { events, badged } = useMemo(() => {
     const now = new Date();
-    return sortByStart(
-      entries.filter((e) => {
-        if (e.type !== "akce" || !e.startedAt) return false;
-        const end = e.endedAt ? new Date(e.endedAt) : new Date(e.startedAt);
-        return end >= now;
-      }),
-    ).slice(0, ALL_SECTION_LIMIT);
+    const upcoming = entries.filter((e) => {
+      if (e.type !== "akce" || !e.startedAt) return false;
+      const end = e.endedAt ? new Date(e.endedAt) : new Date(e.startedAt);
+      return end >= now;
+    });
+    const featured = upcoming.filter((e) => e.featured);
+    const pool = featured.length > 0 ? featured : upcoming;
+    return {
+      events: sortByStart(pool).slice(0, ALL_EVENTS_LIMIT),
+      badged: featured.length > 0,
+    };
   }, [entries]);
 
-  const places = useMemo(
-    () => pickFeaturedOrFallback(entries, "mista"),
-    [entries],
-  );
-  const gastro = useMemo(
-    () => pickFeaturedOrFallback(entries, "gastro"),
-    [entries],
-  );
-  const obchody = useMemo(
-    () => pickFeaturedOrFallback(entries, "obchody"),
-    [entries],
-  );
-  const sluzby = useMemo(
-    () => pickFeaturedOrFallback(entries, "sluzby"),
-    [entries],
-  );
-  const spolky = useMemo(
-    () => pickFeaturedOrFallback(entries, "spolky"),
-    [entries],
-  );
-
-  const allSections: Array<{
-    key: EntryType;
-    label: string;
-    showAllLabel: string;
-    items: Entry[];
-  }> = [
-    {
-      key: "akce",
-      label: "Nadcházející akce",
-      showAllLabel: "Všechny akce →",
-      items: events,
-    },
-    {
-      key: "mista",
-      label: "Vybraná místa",
-      showAllLabel: "Všechna místa →",
-      items: places,
-    },
-    {
-      key: "gastro",
-      label: "Vybrané gastro",
-      showAllLabel: "Vše gastro →",
-      items: gastro,
-    },
-    {
-      key: "obchody",
-      label: "Vybrané obchody",
-      showAllLabel: "Všechny obchody →",
-      items: obchody,
-    },
-    {
-      key: "sluzby",
-      label: "Vybrané služby",
-      showAllLabel: "Všechny služby →",
-      items: sluzby,
-    },
-    {
-      key: "spolky",
-      label: "Vybrané spolky",
-      showAllLabel: "Všechny spolky →",
-      items: spolky,
-    },
-  ];
-  const sections = allSections.filter((s) => s.items.length > 0);
-
-  if (sections.length === 0) {
-    return <EmptyState label={emptyLabel} />;
-  }
-
   return (
-    <div className="space-y-10">
-      {sections.map((section) => (
-        <section key={section.key} aria-labelledby={`scope-${section.key}`}>
-          <div className="mb-1 flex items-end justify-between gap-4 px-3">
-            <h2
-              id={`scope-${section.key}`}
-              className="section-eyebrow"
-            >
-              {section.label}
-            </h2>
-            {/* The "Show all X" link routes to the type-filtered listing,
-                which switches the pill scope to that type and shows the
-                full sorted list with all filters available. */}
-            <a
-              href={pruvodceHref(section.key)}
-              className="shrink-0 text-xs font-medium text-[var(--color-text-secondary)] underline-offset-4 outline-none transition-colors hover:text-[var(--color-text)] hover:underline focus-visible:underline focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
-            >
-              {section.showAllLabel}
-            </a>
-          </div>
-          <ul className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]">
-            {section.items.map((entry) => (
+    <section aria-labelledby="vse-akce">
+      <p className="eyebrow mb-2">Akce</p>
+      <h2
+        id="vse-akce"
+        className="text-2xl font-bold leading-tight tracking-tight text-[var(--color-text-accent)] sm:text-3xl"
+      >
+        Co se děje v okolí
+      </h2>
+
+      {events.length > 0 ? (
+        <>
+          <ul className="mt-6 divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]">
+            {events.map((entry) => (
               <li key={entry.id}>
                 <EntryListItem
                   entry={entry}
-                  contextType={section.key}
+                  contextType="akce"
+                  featuredBadge={badged && Boolean(entry.featured)}
                   hovered={hoveredId === entry.id}
                   onHover={onHover}
                 />
               </li>
             ))}
           </ul>
-        </section>
-      ))}
-    </div>
+
+          {/* Gateway into the full Akce timeline. In-place scope switch,
+              not a link -- preserves the search/filter SPA state. */}
+          <div className="mt-6 flex justify-center">
+            <button
+              type="button"
+              onClick={onShowAllEvents}
+              className="group inline-flex items-center gap-1.5 rounded-full border border-[var(--color-border)] bg-transparent px-5 py-2 text-sm font-semibold text-[var(--color-text)] outline-none transition-colors hover:border-[var(--color-text)] hover:bg-[var(--color-bg-elev)] focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
+            >
+              Načíst všechny akce
+              <ArrowRight
+                size={16}
+                aria-hidden
+                className="transition-transform group-hover:translate-x-0.5"
+              />
+            </button>
+          </div>
+        </>
+      ) : (
+        <div className="mt-6">
+          <EmptyState label={emptyLabel} />
+        </div>
+      )}
+    </section>
   );
 }
 
-// Pick featured entries of a given type for the "Vše" landing. If the
-// operator has not flagged any entry as featured yet, fall back to the
-// nearest 5 by distance so the section is never empty without reason.
-// Uses types.includes() (not types[0]) so multi-type entries can show in
-// both relevant sections when explicitly featured.
-function pickFeaturedOrFallback(
-  entries: Entry[],
-  type: EntryType,
-): Entry[] {
-  const all = entries.filter((e) => e.type === type);
-  const featured = all.filter((e) => e.featured);
-  const pool = featured.length > 0 ? featured : all;
-  return sortByDistance(pool).slice(0, ALL_SECTION_LIMIT);
+// Full-width editorial band sitting BELOW the search+map module on the
+// "Vše" landing. The three newest blog posts, independent of the entry
+// filters (the blog is its own corpus). Spans the full content width so
+// the three cards breathe, unlike the column-bound events list above.
+function BlogBand() {
+  const posts = useMemo(
+    () => sortBlogByDate(blogPosts).slice(0, ALL_BLOG_LIMIT),
+    [],
+  );
+  if (posts.length === 0) return null;
+
+  return (
+    <section
+      aria-labelledby="vse-blog"
+      className="border-t border-[var(--color-border)] pt-12 pb-20 lg:pt-16"
+    >
+      {/* Header row: eyebrow + title left, "Všechny články →" link right
+          (desktop). Mirrors the "Celý program →" pattern on /proud. */}
+      <div className="flex items-end justify-between gap-4">
+        <div>
+          <p className="eyebrow mb-2">Z blogu</p>
+          <h2
+            id="vse-blog"
+            className="text-2xl font-bold leading-tight tracking-tight text-[var(--color-text-accent)] sm:text-3xl"
+          >
+            Co je nového v obci
+          </h2>
+        </div>
+        <a
+          href="/blog"
+          className="hidden shrink-0 items-center gap-1.5 text-sm font-semibold text-[var(--color-accent)] underline underline-offset-4 hover:text-[var(--color-brand)] hover:no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 sm:inline-flex"
+        >
+          Všechny články
+          <ArrowRight size={16} aria-hidden />
+        </a>
+      </div>
+
+      <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {posts.map((post) => (
+          <BlogCard key={post.id} post={post} />
+        ))}
+      </div>
+
+      {/* Mobile-only CTA: header link hides under sm to keep the heading
+          line tidy. */}
+      <a
+        href="/blog"
+        className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--color-accent)] underline underline-offset-4 hover:text-[var(--color-brand)] hover:no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 sm:hidden"
+      >
+        Všechny články
+        <ArrowRight size={16} aria-hidden />
+      </a>
+    </section>
+  );
 }
 
 // Two-line empty state used when filters yield zero results. The headline

@@ -1,6 +1,6 @@
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { findObecItemBySlug, obecCategories, obecItems } from "@/content/obec";
+import { findObecItemBySlug, obecCategories, obecItems } from "@/content/urad";
 import { entries } from "@/content/entries";
 import { findPersonById } from "@/content/people";
 import { blogPosts } from "@/content/blog";
@@ -77,7 +77,7 @@ export default async function ObecDetailPage({
       <header className="hidden max-w-3xl lg:block">
         <p className="eyebrow mb-3">Vše z úřadu</p>
         <h1 className="text-3xl font-bold leading-tight tracking-tight text-[var(--color-text-accent)] sm:text-4xl lg:text-5xl">
-          Obec Krhanice
+          Obecní úřad Krhanice
         </h1>
         <p className="mt-4 text-base leading-relaxed text-[var(--color-text-secondary)] sm:text-lg">
           Úřední deska, zastupitelstvo, dokumenty a aktuality. Co potřebujete

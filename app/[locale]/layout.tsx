@@ -103,15 +103,13 @@ function ChromeWrapper({ children }: { children: React.ReactNode }) {
   // The "guide" entry was dropped: the Krhanický průvodce IS the
   // homepage now, so the brand logo (top-left) already covers that
   // navigation. Keeping a redundant nav item would only add noise.
+  //
+  // Flat top-level nav: Program is its own item (no longer a dropdown
+  // child under Proud), and the former "Obec" page is now "Úřad" at /urad.
   const navItems = [
-    { label: tNav("village"), href: "/obec" },
-    {
-      label: tNav("proud"),
-      href: "/proud",
-      children: [
-        { label: tNav("programme"), href: "/proud/nas-program" },
-      ],
-    },
+    { label: tNav("proud"), href: "/proud" },
+    { label: tNav("programme"), href: "/proud/nas-program" },
+    { label: tNav("village"), href: "/urad" },
     { label: tNav("blog"), href: "/blog" },
     { label: tNav("getInvolved"), href: "/zapojte-se" },
   ];
@@ -124,6 +122,34 @@ function ChromeWrapper({ children }: { children: React.ReactNode }) {
 
   const topBar = resolveTopBar();
 
+  // Inline link style shared by the footer disclosure + contact line.
+  const footerLink =
+    "font-medium text-[var(--color-text)] underline underline-offset-2 outline-none transition-colors hover:text-[var(--color-accent)] focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2";
+
+  // Disclosure with the word "Program" linking to the programme section.
+  const disclosure = tFooter.rich("disclosure", {
+    program: (chunks) => (
+      <a href="/proud/nas-program" className={footerLink}>
+        {chunks}
+      </a>
+    ),
+  });
+
+  // Contact line: name plain, phone + e-mail as active tel:/mailto: links.
+  const { name: contactName, phone, email } = siteConfig.contact;
+  const contact = (
+    <>
+      Kontakt: {contactName},{" "}
+      <a href={`tel:${phone.replace(/\s/g, "")}`} className={footerLink}>
+        {phone}
+      </a>
+      ,{" "}
+      <a href={`mailto:${email}`} className={footerLink}>
+        {email}
+      </a>
+    </>
+  );
+
   return (
     <>
       {topBar ? <TopBar config={topBar} /> : null}
@@ -135,7 +161,8 @@ function ChromeWrapper({ children }: { children: React.ReactNode }) {
       <main className="flex-1">{children}</main>
       <SiteFooter
         brandName={siteConfig.brand.name}
-        disclosure={tFooter("disclosure")}
+        disclosure={disclosure}
+        contact={contact}
         legalLinks={legalLinks}
         copyright={tFooter("copyright", {
           year: new Date().getFullYear(),

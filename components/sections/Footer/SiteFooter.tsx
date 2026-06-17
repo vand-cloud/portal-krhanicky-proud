@@ -5,12 +5,18 @@ type LegalLink = { label: string; href: string };
 export function SiteFooter({
   brandName,
   disclosure,
+  contact,
   legalLinks = [],
   copyright,
   cookieSettingsLabel = "Nastavení cookies",
 }: {
   brandName: string;
-  disclosure?: string;
+  // ReactNode (not just string) so the disclosure can embed inline links
+  // (e.g. a link to the programme section).
+  disclosure?: React.ReactNode;
+  // Optional contact line under the disclosure (name + active tel/mailto
+  // links). Built by the host from siteConfig.contact.
+  contact?: React.ReactNode;
   legalLinks?: LegalLink[];
   copyright: string;
   cookieSettingsLabel?: string;
@@ -34,6 +40,9 @@ export function SiteFooter({
             </p>
             {disclosure ? (
               <p className="mt-2 text-sm leading-relaxed">{disclosure}</p>
+            ) : null}
+            {contact ? (
+              <p className="mt-2 text-sm leading-relaxed">{contact}</p>
             ) : null}
           </div>
           <nav aria-label="Právní odkazy" className="shrink-0">

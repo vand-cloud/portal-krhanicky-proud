@@ -283,7 +283,7 @@ function ColumnNews({ items }: { items: typeof news }) {
       <ColumnHeader
         title="Aktuality obce"
         showAllLabel="Vše z obce →"
-        showAllHref="/obec/aktuality"
+        showAllHref="/urad/aktuality"
       />
       <ul className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]">
         {items.map((item) => (

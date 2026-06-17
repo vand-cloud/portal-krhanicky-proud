@@ -1,5 +1,7 @@
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { Image as ImageIcon } from "lucide-react";
+import { ArticleBodyDemo } from "@/components/sections/ArticleBodyDemo";
 import {
   type ProudItem,
   findProudItemBySlug,
@@ -16,12 +18,6 @@ import {
   PersonDetail,
   resolvePersonRefs,
 } from "@/components/sections/People/PersonDetail";
-
-const formatDate = new Intl.DateTimeFormat("cs-CZ", {
-  day: "numeric",
-  month: "long",
-  year: "numeric",
-});
 
 export async function generateStaticParams() {
   return proudItems.map((i) => ({ slug: i.slug }));
@@ -108,29 +104,41 @@ export default async function NasProgramDetailPage({
   );
 }
 
-// Generic detail view for non-candidate proud items: title, category +
-// date + author byline, description, placeholder body. Phase 4 (Sanity)
-// replaces the placeholder with a portable text body per post.
+// Generic detail view for non-candidate proud items, structured like a
+// blog post: category label, title, cover image, then text. No date --
+// programme items are evergreen, not news. Phase 4 (Sanity) replaces the
+// placeholder body with a rich-text body per post.
 function GenericProudPost({ item }: { item: ProudItem }) {
   const author = item.personId ? findPersonById(item.personId) : null;
   return (
     <article>
       <p className="text-xs font-medium uppercase tracking-wider text-[var(--color-text-tertiary)]">
         {proudCategoryLabels[item.category]}
-        {item.date ? (
-          <>
-            {" · "}
-            <time dateTime={item.date}>
-              {formatDate.format(new Date(item.date))}
-            </time>
-          </>
-        ) : null}
       </p>
       <h2 className="mt-3 text-2xl font-bold leading-tight tracking-tight text-[var(--color-text-accent)] sm:text-3xl">
         {item.title}
       </h2>
+
+      {/* Cover image below the title, like the blog detail: shown at its
+          natural ratio inside the reading column, no fixed-aspect crop.
+          Placeholder box until a cover is added (Sanity asset in Phase 4). */}
+      {item.heroImage ? (
+        <div className="relative mt-6 overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)]">
+          {/* eslint-disable-next-line @next/next/no-img-element -- Phase 2 wireframe; next/image comes in Phase 4 with Sanity assets. */}
+          <img
+            src={item.heroImage}
+            alt={item.title}
+            className="block h-auto w-full"
+          />
+        </div>
+      ) : (
+        <div className="relative mt-6 flex aspect-[16/9] w-full items-center justify-center overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-tertiary)]">
+          <ImageIcon size={48} aria-hidden />
+        </div>
+      )}
+
       {item.description ? (
-        <p className="mt-5 text-base leading-relaxed text-[var(--color-text-secondary)]">
+        <p className="mt-6 text-base leading-relaxed text-[var(--color-text-secondary)]">
           {item.description}
         </p>
       ) : null}
@@ -141,9 +149,7 @@ function GenericProudPost({ item }: { item: ProudItem }) {
           {author.role ? <span> ({author.role})</span> : null}
         </p>
       ) : null}
-      <p className="mt-10 italic text-[var(--color-text-tertiary)]">
-        Plný text návrhu připravujeme.
-      </p>
+      <ArticleBodyDemo />
     </article>
   );
 }

@@ -52,6 +52,7 @@ export function EntryListItem({
   contextType,
   hovered = false,
   onHover,
+  featuredBadge = false,
 }: {
   entry: Entry;
   contextType: EntryType;
@@ -59,6 +60,11 @@ export function EntryListItem({
   // pointer enter/leave fires onHover so the matching pin can highlight.
   hovered?: boolean;
   onHover?: (entry: Entry | null) => void;
+  // Curator's pick marker. When true, a solid-accent "Doporučujeme" pill
+  // leads the chip row. Only the "Vše" landing passes this (and only for
+  // entries the operator actually flagged), so the badge stays a scarce,
+  // meaningful signal rather than decoration on every row.
+  featuredBadge?: boolean;
 }) {
   // Single-type entries: contextType is informational only (it picks which
   // section the row sits in on the "Vše" landing). Display always reflects
@@ -90,7 +96,15 @@ export function EntryListItem({
       <div className="min-w-0 flex-1">
         {/* Root type chip + category chips, all the same visual weight so
             the row reads as one taxonomy line. Root just happens to be first. */}
-        <div className="relative z-10 flex flex-wrap gap-1.5">
+        <div className="relative z-10 flex flex-wrap items-center gap-1.5">
+          {featuredBadge ? (
+            // Same outline-chip shape as the type/category tags: white
+            // fill, but the border + label in the success (green) semantic
+            // so the curator's pick reads as a quiet positive marker.
+            <span className="rounded-full border border-[var(--color-success)] bg-[var(--color-bg)] px-2.5 py-0.5 text-xs font-medium text-[var(--color-success)]">
+              Doporučujeme
+            </span>
+          ) : null}
           <a
             href={pruvodceHref(displayType)}
             className="rounded-full border border-[var(--color-border)] bg-[var(--color-bg)] px-2.5 py-0.5 text-xs font-medium text-[var(--color-text-secondary)] outline-none transition-colors hover:border-[var(--color-text)] hover:text-[var(--color-text)] focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"

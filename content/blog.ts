@@ -57,6 +57,7 @@ export const blogPosts: BlogPost[] = [
     categories: ["komentare"],
     tags: ["portál", "komunita", "vize"],
     href: "/blog/proc-stavime-tento-portal",
+    heroImage: "/blog/proc-stavime-tento-portal.webp",
     relatedPosts: [
       "blog-spolky-v-krhanicich",
       "blog-rozhovor-starosta-2026",
@@ -75,6 +76,7 @@ export const blogPosts: BlogPost[] = [
     categories: ["tipy-na-vylet", "zivot-v-obci"],
     tags: ["jaro", "akce", "tradice"],
     href: "/blog/co-se-chysta-na-jaro-2026",
+    heroImage: "/blog/co-se-chysta-na-jaro-2026.webp",
     relatedPosts: [
       "blog-vylet-posazavi-cyklo",
       "blog-spolky-v-krhanicich",
@@ -93,6 +95,7 @@ export const blogPosts: BlogPost[] = [
     categories: ["z-radnice"],
     tags: ["kanalizace", "doprava", "infrastruktura"],
     href: "/blog/kanalizace-cov-prvni-etapa",
+    heroImage: "/blog/kanalizace-cov-prvni-etapa.webp",
     relatedPosts: [
       "blog-rozhovor-starosta-2026",
       "blog-proc-stavime-portal",
@@ -111,6 +114,7 @@ export const blogPosts: BlogPost[] = [
     categories: ["rozhovory", "z-radnice"],
     tags: ["starosta", "plány", "rozpočet"],
     href: "/blog/rozhovor-se-starostou-priority-2026",
+    heroImage: "/blog/rozhovor-se-starostou-priority-2026.webp",
     relatedPosts: [
       "blog-kanalizace-cov",
       "blog-proc-stavime-portal",
@@ -129,6 +133,7 @@ export const blogPosts: BlogPost[] = [
     categories: ["zivot-v-obci"],
     tags: ["spolky", "komunita", "hasiči", "sokol"],
     href: "/blog/sousedske-spolky-v-krhanicich",
+    heroImage: "/blog/sousedske-spolky-v-krhanicich.webp",
     relatedPosts: [
       "blog-jaro-2026",
       "blog-rozhovor-starosta-2026",
@@ -147,6 +152,7 @@ export const blogPosts: BlogPost[] = [
     categories: ["tipy-na-vylet"],
     tags: ["cyklistika", "příroda", "rodiny", "Posázaví"],
     href: "/blog/letni-vylet-po-posazavi-na-kole",
+    heroImage: "/blog/letni-vylet-po-posazavi-na-kole.webp",
     relatedPosts: [
       "blog-jaro-2026",
       "blog-spolky-v-krhanicich",

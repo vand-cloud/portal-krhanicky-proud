@@ -108,6 +108,7 @@ export interface ProudItem {
 const programItems: ProudItem[] = [
   {
     id: "proud-program-manifesto",
+    heroImage: "/blog/co-se-chysta-na-jaro-2026.webp",
     slug: "nas-program-2026-2030",
     title: "Náš program pro Krhanice 2026 až 2030",
     description:
@@ -186,6 +187,7 @@ const candidateItems: ProudItem[] = [
 const policyItems: ProudItem[] = [
   {
     id: "proud-d-bezpecne-chodniky",
+    heroImage: "/blog/sousedske-spolky-v-krhanicich.webp",
     slug: "bezpecne-chodniky-podel-hlavni",
     title: "Bezpečné chodníky podél hlavní silnice",
     description:
@@ -199,6 +201,7 @@ const policyItems: ProudItem[] = [
   },
   {
     id: "proud-d-autobus-tynec",
+    heroImage: "/blog/kanalizace-cov-prvni-etapa.webp",
     slug: "lepsi-autobus-do-tynce",
     title: "Lepší autobusové spojení do Týnce",
     description:
@@ -210,6 +213,7 @@ const policyItems: ProudItem[] = [
   },
   {
     id: "proud-zp-bioodpad",
+    heroImage: "/blog/letni-vylet-po-posazavi-na-kole.webp",
     slug: "tridit-bioodpad-v-kazde-domacnosti",
     title: "Třídit bioodpad v každé domácnosti",
     description:
@@ -223,6 +227,7 @@ const policyItems: ProudItem[] = [
   },
   {
     id: "proud-zp-laviky-stromy",
+    heroImage: "/blog/proc-stavime-tento-portal.webp",
     slug: "vice-laviek-a-stromu-v-centru",
     title: "Více laviček a stromů v centru obce",
     description:
@@ -234,6 +239,7 @@ const policyItems: ProudItem[] = [
   },
   {
     id: "proud-vd-detske-hriste",
+    heroImage: "/blog/rozhovor-se-starostou-priority-2026.webp",
     slug: "nove-detske-hriste-u-sokolovny",
     title: "Nové dětské hřiště u Sokolovny",
     description:
@@ -247,6 +253,7 @@ const policyItems: ProudItem[] = [
   },
   {
     id: "proud-vd-skolni-zahrada",
+    heroImage: "/blog/co-se-chysta-na-jaro-2026.webp",
     slug: "skolni-zahrada-jako-ucebna",
     title: "Školní zahrada jako učebna pod širým nebem",
     description:
@@ -258,6 +265,7 @@ const policyItems: ProudItem[] = [
   },
   {
     id: "proud-kk-sousedske-trhy",
+    heroImage: "/blog/sousedske-spolky-v-krhanicich.webp",
     slug: "navrat-sousedskych-trhu",
     title: "Návrat sousedských sobotních trhů",
     description:
@@ -270,6 +278,7 @@ const policyItems: ProudItem[] = [
   },
   {
     id: "proud-tr-otevrene-smlouvy",
+    heroImage: "/blog/kanalizace-cov-prvni-etapa.webp",
     slug: "zverejnime-vsechny-smlouvy",
     title: "Zveřejníme všechny smlouvy obce",
     description:
@@ -283,6 +292,7 @@ const policyItems: ProudItem[] = [
   },
   {
     id: "proud-tr-otevreny-rozpocet",
+    heroImage: "/blog/letni-vylet-po-posazavi-na-kole.webp",
     slug: "otevreny-rozpocet-online",
     title: "Otevřený rozpočet online",
     description:

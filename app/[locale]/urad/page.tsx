@@ -4,11 +4,11 @@ import {
   type ObecSubcategory,
   obecCategories,
   obecItems,
-} from "@/content/obec";
+} from "@/content/urad";
 import { ObecIndex } from "@/components/sections/Obec/ObecIndex";
 import { ObecSearch } from "@/components/sections/Obec/ObecSearch";
 
-export const metadata = { title: "Obec Krhanice" };
+export const metadata = { title: "Obecní úřad Krhanice" };
 
 // Validate URL params against the actual category/subcategory enums so a
 // stale or hand-typed link does not crash the page or pre-select garbage.
@@ -48,7 +48,7 @@ export default async function VillagePage({
       <header className="max-w-3xl">
         <p className="eyebrow mb-3">Vše z úřadu</p>
         <h1 className="text-3xl font-bold leading-tight tracking-tight text-[var(--color-text-accent)] sm:text-4xl lg:text-5xl">
-          Obec Krhanice
+          Obecní úřad Krhanice
         </h1>
         <p className="mt-4 text-base leading-relaxed text-[var(--color-text-secondary)] sm:text-lg">
           Úřední deska, zastupitelstvo, dokumenty a aktuality. Co potřebujete
