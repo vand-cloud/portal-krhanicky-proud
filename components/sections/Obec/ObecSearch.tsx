@@ -2,12 +2,10 @@
 
 import { useMemo, useState } from "react";
 import { Folder, FileText, User } from "lucide-react";
-import {
-  type ObecCategoryDef,
-  type ObecItem,
-  obecCategoryLabels,
-  obecSubcategoryLabels,
-} from "@/content/urad";
+import type {
+  UradCategoryVM,
+  UradItemVM,
+} from "@/lib/sanity/content-types";
 import { unaccent } from "@/content/entries";
 import { SearchBar } from "@/components/sections/Hybrid/SearchBar";
 
@@ -38,7 +36,7 @@ function buildCategoryHref(catSlug: string, subSlug?: string): string {
 // that "zastupitelé" finds the subcategory but "úřední" also finds the
 // top-level category through its description text.
 function findCategoryHits(
-  categories: ObecCategoryDef[],
+  categories: UradCategoryVM[],
   q: string,
 ): SearchHit[] {
   const hits: SearchHit[] = [];
@@ -53,7 +51,7 @@ function findCategoryHits(
         description: cat.description,
       });
     }
-    for (const sub of cat.subcategories ?? []) {
+    for (const sub of cat.subcategories) {
       const subHaystack = unaccent(`${sub.label} ${sub.description ?? ""}`);
       if (subHaystack.includes(q)) {
         hits.push({
@@ -69,10 +67,15 @@ function findCategoryHits(
   return hits;
 }
 
-// Item hits split into people (council members with personId) and the
-// rest (documents, meetings, notices). People get their own group so
-// "Petr Svoboda" lands above generic document matches.
-function findItemHits(items: ObecItem[], q: string) {
+// Item hits split into people (council members) and the rest (documents,
+// meetings, notices). People get their own group so "Petr Svoboda" lands
+// above generic document matches. Category/subcategory labels are resolved
+// from the categories prop (Sanity has no hardcoded label maps).
+function findItemHits(
+  categories: UradCategoryVM[],
+  items: UradItemVM[],
+  q: string,
+) {
   const matched = items.filter((item) =>
     unaccent(`${item.title} ${item.description ?? ""}`).includes(q),
   );
@@ -81,9 +84,12 @@ function findItemHits(items: ObecItem[], q: string) {
   const docs: SearchHit[] = [];
 
   for (const item of matched) {
-    const meta = item.subcategory
-      ? `${obecCategoryLabels[item.category]} · ${obecSubcategoryLabels[item.subcategory]}`
-      : obecCategoryLabels[item.category];
+    const cat = categories.find((c) => c.slug === item.category);
+    const catLabel = cat?.label ?? item.category;
+    const subLabel = item.subcategory
+      ? cat?.subcategories.find((s) => s.slug === item.subcategory)?.label
+      : undefined;
+    const meta = subLabel ? `${catLabel} · ${subLabel}` : catLabel;
     const hit: SearchHit = {
       id: item.id,
       href: item.href,
@@ -91,7 +97,7 @@ function findItemHits(items: ObecItem[], q: string) {
       meta,
       description: item.description,
     };
-    if (item.personId) {
+    if (item.isPerson) {
       people.push(hit);
     } else {
       docs.push(hit);
@@ -113,8 +119,8 @@ export function ObecSearch({
   items,
   placeholder,
 }: {
-  categories: ObecCategoryDef[];
-  items: ObecItem[];
+  categories: UradCategoryVM[];
+  items: UradItemVM[];
   placeholder: string;
 }) {
   const [query, setQuery] = useState("");
@@ -126,7 +132,7 @@ export function ObecSearch({
     }
     const q = unaccent(trimmed);
     const cats = findCategoryHits(categories, q).slice(0, CATEGORY_LIMIT);
-    const { people, docs } = findItemHits(items, q);
+    const { people, docs } = findItemHits(categories, items, q);
     return {
       categories: cats,
       people: people.slice(0, PEOPLE_LIMIT),

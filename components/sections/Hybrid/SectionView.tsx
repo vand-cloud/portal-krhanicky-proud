@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { ArrowRight, ArrowUpRight, ChevronLeft } from "lucide-react";
 import { blogPosts, sortBlogByDate } from "@/content/blog";
 import { BlogCard } from "../Blog/BlogCard";
+import { contentBlogToVM } from "@/lib/blog-card-adapter";
 import type {
   Category,
   Entry,
@@ -870,7 +871,7 @@ function BlogBand() {
 
       <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {posts.map((post) => (
-          <BlogCard key={post.id} post={post} />
+          <BlogCard key={post.id} post={contentBlogToVM(post)} />
         ))}
       </div>
 

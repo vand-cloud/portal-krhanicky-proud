@@ -3,7 +3,15 @@
 import { usePathname } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
-import { siteConfig } from "@/site.config";
+
+// "Správce webu" details, sourced from Sanity siteSettings by the caller.
+export type LegalController = {
+  name?: string;
+  addressStreet?: string;
+  addressCity?: string;
+  email?: string;
+  phone?: string;
+};
 
 // Section navigation between the three legal pages. The active item is
 // matched against pathname (locale prefix is stripped by next-intl, so
@@ -22,15 +30,17 @@ const navItems = [
 // stack first, content follows). Pattern mirrors anfilov.cz/gdpr 1:1.
 export function LegalLayout({
   title,
+  controller,
   children,
 }: {
   title: string;
+  // "Správce webu" data from siteSettings. Only present fields render.
+  controller?: LegalController;
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
   const activeNav = navItems.find((item) => item.href === pathname);
   const breadcrumbLabel = activeNav?.label ?? "Právní informace";
-  const entity = siteConfig.legalEntity;
 
   return (
     <section className="relative overflow-hidden bg-[var(--color-surface)]">
@@ -43,16 +53,16 @@ export function LegalLayout({
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-5 lg:gap-16">
           {/* ── Left column ─────────────────────────────────────────── */}
           <div className="lg:col-span-2">
-            <p className="mb-5 text-[12px] font-bold uppercase tracking-[0.2em] text-[var(--color-text)]">
+            <p className="mb-5 text-[12px] font-bold uppercase tracking-[0.2em] text-[var(--color-text)]"> {/* token-ok: established legal-page overline scale */}
               Právní informace
             </p>
 
-            <h1 className="mb-10 text-3xl leading-[1.08] tracking-[-0.02em] text-[var(--color-text-accent)] sm:text-4xl lg:text-[2.75rem]">
+            <h1 className="mb-10 text-3xl leading-[1.08] tracking-[-0.02em] text-[var(--color-text-accent)] sm:text-4xl lg:text-[2.75rem]"> {/* token-ok: established legal-page H1 scale */}
               {title}
             </h1>
 
             <nav aria-label="Právní stránky" className="mb-8">
-              <ol className="space-y-2 text-[13px]">
+              <ol className="space-y-2 text-[13px]"> {/* token-ok: established legal-page nav scale */}
                 {navItems.map((item) => {
                   const isActive = pathname === item.href;
                   return (
@@ -74,31 +84,46 @@ export function LegalLayout({
               </ol>
             </nav>
 
-            <span className="mb-3 block text-[12px] font-bold uppercase tracking-[0.2em] text-[var(--color-text-tertiary)]">
-              Správce webu
-            </span>
-            <div className="space-y-px text-sm leading-relaxed text-[var(--color-text-secondary)]">
-              <p className="font-semibold text-[var(--color-text)]">
-                {entity.name}
-              </p>
-              <p>{entity.addressLine1}</p>
-              <p>{entity.addressLine2}</p>
-              <p className="pt-1">
-                <a href={`mailto:${entity.email}`} className="prose-link">
-                  {entity.email}
-                </a>
-              </p>
-              {entity.phone ? (
-                <p>
-                  <a
-                    href={`tel:${entity.phone.replace(/\s/g, "")}`}
-                    className="prose-link"
-                  >
-                    {entity.phone}
-                  </a>
-                </p>
-              ) : null}
-            </div>
+            {controller ? (
+              <>
+                <span className="mb-3 block text-[12px] font-bold uppercase tracking-[0.2em] text-[var(--color-text-tertiary)]"> {/* token-ok: established legal-page overline scale */}
+                  Správce webu
+                </span>
+                <div className="space-y-px text-sm leading-relaxed text-[var(--color-text-secondary)]">
+                  {controller.name ? (
+                    <p className="font-semibold text-[var(--color-text)]">
+                      {controller.name}
+                    </p>
+                  ) : null}
+                  {controller.addressStreet ? (
+                    <p>{controller.addressStreet}</p>
+                  ) : null}
+                  {controller.addressCity ? (
+                    <p>{controller.addressCity}</p>
+                  ) : null}
+                  {controller.email ? (
+                    <p className="pt-1">
+                      <a
+                        href={`mailto:${controller.email}`}
+                        className="prose-link"
+                      >
+                        {controller.email}
+                      </a>
+                    </p>
+                  ) : null}
+                  {controller.phone ? (
+                    <p>
+                      <a
+                        href={`tel:${controller.phone.replace(/\s/g, "")}`}
+                        className="prose-link"
+                      >
+                        {controller.phone}
+                      </a>
+                    </p>
+                  ) : null}
+                </div>
+              </>
+            ) : null}
           </div>
 
           {/* ── Right column: content ──────────────────────────────── */}

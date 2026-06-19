@@ -1,15 +1,17 @@
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { findObecItemBySlug, obecCategories, obecItems } from "@/content/urad";
-import { entries } from "@/content/entries";
-import { findPersonById } from "@/content/people";
-import { blogPosts } from "@/content/blog";
+import {
+  getAllUradSlugs,
+  getPersonBySlug,
+  getUradData,
+  getUradPostBySlug,
+} from "@/lib/sanity/fetch";
+import type { UradItemVM } from "@/lib/sanity/content-types";
+import type { Person } from "@/content/people";
 import { ObecIndex } from "@/components/sections/Obec/ObecIndex";
 import { ObecSearch } from "@/components/sections/Obec/ObecSearch";
-import {
-  PersonDetail,
-  resolvePersonRefs,
-} from "@/components/sections/People/PersonDetail";
+import { PersonDetail } from "@/components/sections/People/PersonDetail";
+import { PortableBody } from "@/components/sections/RichText/PortableBody";
 
 const formatDate = new Intl.DateTimeFormat("cs-CZ", {
   day: "numeric",
@@ -18,7 +20,8 @@ const formatDate = new Intl.DateTimeFormat("cs-CZ", {
 });
 
 export async function generateStaticParams() {
-  return obecItems.map((i) => ({ slug: i.slug }));
+  const slugs = await getAllUradSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -27,7 +30,12 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const item = findObecItemBySlug(slug);
+  if (slug.startsWith("zastupitel-")) {
+    const person = await getPersonBySlug(slug.replace(/^zastupitel-/, ""));
+    if (!person) return { title: "Stránka nenalezena" };
+    return { title: person.name, description: person.bio };
+  }
+  const item = await getUradPostBySlug(slug);
   if (!item) return { title: "Stránka nenalezena" };
   return { title: item.title, description: item.description };
 }
@@ -40,32 +48,44 @@ export default async function ObecDetailPage({
   const { locale, slug } = await params;
   setRequestLocale(locale);
 
-  const item = findObecItemBySlug(slug);
-  if (!item) notFound();
+  const { page, categories, items } = await getUradData();
 
   // Two detail content shapes:
-  // - council items reference a Person record -> render the person card
-  // - everything else (notices, meetings, documents, contact pages) -> a
-  //   generic title + date + description block with a placeholder body
+  // - council items (slug "zastupitel-<personSlug>") -> render the person card
+  // - everything else (notices, meetings, documents) -> a generic title +
+  //   date + description block followed by the PortableText body.
   let detailNode: React.ReactNode;
+  let initialCategory: string;
+  let initialSubcategory: string | null;
 
-  if (item.personId) {
-    const person = findPersonById(item.personId);
+  if (slug.startsWith("zastupitel-")) {
+    const person = await getPersonBySlug(slug.replace(/^zastupitel-/, ""));
     if (!person) notFound();
-    const { businesses, articles } = resolvePersonRefs(
-      person,
-      entries,
-      blogPosts,
-    );
+    // Map the PersonVM to the content `Person` shape PersonDetail expects.
+    const person2: Person = {
+      id: person.id,
+      slug: person.slug,
+      name: person.name,
+      role: person.role,
+      bio: person.bio,
+      affiliations: person.affiliations as Person["affiliations"],
+      visibility: person.visibility,
+      contactEmail: person.contactEmail,
+      contactPhone: person.contactPhone,
+      social: person.social as Person["social"],
+      photo: person.photo,
+    };
     detailNode = (
-      <PersonDetail
-        person={person}
-        businesses={businesses}
-        articles={articles}
-      />
+      <PersonDetail person={person2} businesses={[]} articles={[]} />
     );
+    initialCategory = "zastupitelstvo";
+    initialSubcategory = "zastupitele";
   } else {
+    const item = await getUradPostBySlug(slug);
+    if (!item) notFound();
     detailNode = <GenericObecDetail item={item} />;
+    initialCategory = item.category;
+    initialSubcategory = item.subcategory ?? null;
   }
 
   return (
@@ -75,18 +95,18 @@ export default async function ObecDetailPage({
           intro is just noise. Sidebar stays mounted on desktop, where the
           two-column layout still makes sense. */}
       <header className="hidden max-w-3xl lg:block">
-        <p className="eyebrow mb-3">Vše z úřadu</p>
+        <p className="eyebrow mb-3">{page?.eyebrow ?? "Vše z úřadu"}</p>
         <h1 className="text-3xl font-bold leading-tight tracking-tight text-[var(--color-text-accent)] sm:text-4xl lg:text-5xl">
-          Obecní úřad Krhanice
+          {page?.title ?? "Obecní úřad Krhanice"}
         </h1>
         <p className="mt-4 text-base leading-relaxed text-[var(--color-text-secondary)] sm:text-lg">
-          Úřední deska, zastupitelstvo, dokumenty a aktuality. Co potřebujete
-          vědět z radnice na jednom místě.
+          {page?.subtitle ??
+            "Úřední deska, zastupitelstvo, dokumenty a aktuality. Co potřebujete vědět z radnice na jednom místě."}
         </p>
         <div className="mt-7">
           <ObecSearch
-            categories={obecCategories}
-            items={obecItems}
+            categories={categories}
+            items={items}
             placeholder="Hledat sekci, dokument, zastupitele…"
           />
         </div>
@@ -94,9 +114,10 @@ export default async function ObecDetailPage({
 
       <div className="lg:mt-12">
         <ObecIndex
-          items={obecItems}
-          initialCategory={item.category}
-          initialSubcategory={item.subcategory ?? null}
+          categories={categories}
+          items={items}
+          initialCategory={initialCategory}
+          initialSubcategory={initialSubcategory}
           initialSelectedSlug={slug}
           detailNode={detailNode}
         />
@@ -106,10 +127,8 @@ export default async function ObecDetailPage({
 }
 
 // Generic detail view for non-person obec items: title, date, description
-// and a placeholder body. Phase 4 (Sanity) replaces the placeholder with
-// a portable text block per item.
-function GenericObecDetail({ item }: { item: ReturnType<typeof findObecItemBySlug> }) {
-  if (!item) return null;
+// and the PortableText body rendered from Sanity.
+function GenericObecDetail({ item }: { item: UradItemVM }) {
   return (
     <article>
       <h1 className="text-2xl font-bold leading-tight tracking-tight text-[var(--color-text-accent)] sm:text-3xl">
@@ -127,9 +146,7 @@ function GenericObecDetail({ item }: { item: ReturnType<typeof findObecItemBySlu
           {item.description}
         </p>
       ) : null}
-      <p className="mt-10 italic text-[var(--color-text-tertiary)]">
-        Plný obsah dokumentu připravujeme.
-      </p>
+      <PortableBody value={item.body} />
     </article>
   );
 }

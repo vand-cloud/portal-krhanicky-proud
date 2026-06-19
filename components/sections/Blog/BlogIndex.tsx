@@ -2,51 +2,45 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import {
-  type BlogCategory,
-  type BlogPost,
-  blogCategoryLabels,
-  filterBlogByCategory,
-  filterBlogByTag,
-  getAllTags,
-  sortBlogByDate,
-} from "@/content/blog";
+import type { BlogPostVM, CategoryVM } from "@/lib/sanity/content-types";
 import { BlogCard } from "./BlogCard";
 
 // "all" is a sentinel for "no category filter" -- rendered as the first
 // item in the sidebar so the user always has a way back to the full list.
-type CategoryChoice = BlogCategory | "all";
+type CategoryChoice = string;
 
-// Stable order for the category list -- matches the operator's editorial
-// hierarchy in the data file.
-const CATEGORY_ORDER: BlogCategory[] = [
-  "z-radnice",
-  "zivot-v-obci",
-  "tipy-na-vylet",
-  "rozhovory",
-  "komentare",
-];
-
-// Validate ?cat= against the actual category enum so a stale or hand-typed
-// link does not crash the page or pre-select garbage.
-function resolveInitialCategory(catParam: string | null): CategoryChoice {
+// Validate ?cat= against the actual category slugs so a stale or hand-typed
+// link does not pre-select garbage. Returns "all" for anything unknown.
+function resolveInitialCategory(
+  catParam: string | null,
+  validSlugs: string[],
+): CategoryChoice {
   if (!catParam) return "all";
-  return CATEGORY_ORDER.includes(catParam as BlogCategory)
-    ? (catParam as BlogCategory)
-    : "all";
+  return validSlugs.includes(catParam) ? catParam : "all";
 }
 
-export function BlogIndex({ posts }: { posts: BlogPost[] }) {
+export function BlogIndex({
+  posts,
+  categories,
+}: {
+  posts: BlogPostVM[];
+  categories: CategoryVM[];
+}) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+
+  const categorySlugs = useMemo(
+    () => categories.map((c) => c.slug),
+    [categories],
+  );
 
   // Both filters are SINGLE-select: one category (or "Vše") plus one
   // optional tag. Click-to-filter, click-again-to-clear. Multi-select
   // tag refinement turned out to be confusing -- the operator's intent
   // was always "show me posts about X", not boolean intersections.
   const [activeCategory, setActiveCategory] = useState<CategoryChoice>(() =>
-    resolveInitialCategory(searchParams.get("cat")),
+    resolveInitialCategory(searchParams.get("cat"), categorySlugs),
   );
   const [activeTag, setActiveTag] = useState<string | null>(() =>
     searchParams.get("stitek") || null,
@@ -59,20 +53,40 @@ export function BlogIndex({ posts }: { posts: BlogPost[] }) {
   // would skip the optimistic click-then-router.push pattern used below.
   /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
-    setActiveCategory(resolveInitialCategory(searchParams.get("cat")));
+    setActiveCategory(
+      resolveInitialCategory(searchParams.get("cat"), categorySlugs),
+    );
     setActiveTag(searchParams.get("stitek") || null);
-  }, [searchParams]);
+  }, [searchParams, categorySlugs]);
   /* eslint-enable react-hooks/set-state-in-effect */
 
-  const allTags = useMemo(() => getAllTags(posts), [posts]);
+  // Build the tag list from the posts themselves: collect every tag, count
+  // frequency, then sort by frequency desc and alphabetically as tiebreak.
+  const allTags = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const p of posts) {
+      for (const tag of p.tags) {
+        counts.set(tag, (counts.get(tag) ?? 0) + 1);
+      }
+    }
+    return [...counts.keys()].sort((a, b) => {
+      const diff = (counts.get(b) ?? 0) - (counts.get(a) ?? 0);
+      return diff !== 0 ? diff : a.localeCompare(b, "cs");
+    });
+  }, [posts]);
 
   const filtered = useMemo(() => {
-    let list = sortBlogByDate(posts);
+    // Defensive sort: posts arrive newest-first from Sanity, but re-sort so
+    // the component stays correct regardless of fetch ordering.
+    let list = [...posts].sort(
+      (a, b) =>
+        new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+    );
     if (activeCategory !== "all") {
-      list = filterBlogByCategory(list, [activeCategory]);
+      list = list.filter((p) => p.categories.includes(activeCategory));
     }
     if (activeTag) {
-      list = filterBlogByTag(list, [activeTag]);
+      list = list.filter((p) => p.tags.includes(activeTag));
     }
     return list;
   }, [posts, activeCategory, activeTag]);
@@ -125,17 +139,17 @@ export function BlogIndex({ posts }: { posts: BlogPost[] }) {
               active={activeCategory === "all"}
               onClick={() => chooseCategory("all")}
             />
-            {CATEGORY_ORDER.map((cat) => {
+            {categories.map((cat) => {
               const count = posts.filter((p) =>
-                p.categories.includes(cat),
+                p.categories.includes(cat.slug),
               ).length;
               return (
                 <CategoryRow
-                  key={cat}
-                  label={blogCategoryLabels[cat]}
+                  key={cat.slug}
+                  label={cat.label}
                   count={count}
-                  active={activeCategory === cat}
-                  onClick={() => chooseCategory(cat)}
+                  active={activeCategory === cat.slug}
+                  onClick={() => chooseCategory(cat.slug)}
                 />
               );
             })}

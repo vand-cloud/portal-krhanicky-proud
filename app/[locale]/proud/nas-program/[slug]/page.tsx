@@ -1,26 +1,21 @@
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Image as ImageIcon } from "lucide-react";
-import { ArticleBodyDemo } from "@/components/sections/ArticleBodyDemo";
+import type { ProudItemVM } from "@/lib/sanity/content-types";
 import {
-  type ProudItem,
-  findProudItemBySlug,
-  proudCategories,
-  proudCategoryLabels,
-  proudItems,
-} from "@/content/proud";
-import { findPersonById } from "@/content/people";
-import { entries } from "@/content/entries";
-import { blogPosts } from "@/content/blog";
+  getProgramData,
+  getProudPostBySlug,
+  getPersonBySlug,
+} from "@/lib/sanity/fetch";
+import { type Person } from "@/content/people";
 import { ProudIndex } from "@/components/sections/Proud/ProudIndex";
 import { ProudSearch } from "@/components/sections/Proud/ProudSearch";
-import {
-  PersonDetail,
-  resolvePersonRefs,
-} from "@/components/sections/People/PersonDetail";
+import { PersonDetail } from "@/components/sections/People/PersonDetail";
+import { PortableBody } from "@/components/sections/RichText/PortableBody";
 
 export async function generateStaticParams() {
-  return proudItems.map((i) => ({ slug: i.slug }));
+  const { items } = await getProgramData();
+  return items.map((i) => ({ slug: i.slug }));
 }
 
 export async function generateMetadata({
@@ -29,7 +24,12 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const item = findProudItemBySlug(slug);
+  if (slug.startsWith("kandidat-")) {
+    const person = await getPersonBySlug(slug.replace(/^kandidat-/, ""));
+    if (!person) return { title: "Stránka nenalezena" };
+    return { title: person.name, description: person.bio };
+  }
+  const item = await getProudPostBySlug(slug);
   if (!item) return { title: "Stránka nenalezena" };
   return { title: item.title, description: item.description };
 }
@@ -46,27 +46,36 @@ export default async function NasProgramDetailPage({
   const { locale, slug } = await params;
   setRequestLocale(locale);
 
-  const item = findProudItemBySlug(slug);
-  if (!item) notFound();
+  const { page, categories, items } = await getProgramData();
 
   let detailNode: React.ReactNode;
-  if (item.category === "kandidati" && item.personId) {
-    const person = findPersonById(item.personId);
+  let initialCategory: string;
+
+  if (slug.startsWith("kandidat-")) {
+    const person = await getPersonBySlug(slug.replace(/^kandidat-/, ""));
     if (!person) notFound();
-    const { businesses, articles } = resolvePersonRefs(
-      person,
-      entries,
-      blogPosts,
-    );
+    const person2: Person = {
+      id: person.id,
+      slug: person.slug,
+      name: person.name,
+      role: person.role,
+      bio: person.bio,
+      affiliations: person.affiliations as Person["affiliations"],
+      visibility: person.visibility,
+      contactEmail: person.contactEmail,
+      contactPhone: person.contactPhone,
+      social: person.social as Person["social"],
+      photo: person.photo,
+    };
     detailNode = (
-      <PersonDetail
-        person={person}
-        businesses={businesses}
-        articles={articles}
-      />
+      <PersonDetail person={person2} businesses={[]} articles={[]} />
     );
+    initialCategory = "kandidati";
   } else {
+    const item = await getProudPostBySlug(slug);
+    if (!item) notFound();
     detailNode = <GenericProudPost item={item} />;
+    initialCategory = item.category;
   }
 
   return (
@@ -75,18 +84,18 @@ export default async function NasProgramDetailPage({
           the user clicked through to read one specific item, the section
           intro is just noise. Sidebar stays mounted on desktop only. */}
       <header className="hidden max-w-3xl lg:block">
-        <p className="eyebrow mb-3">Krhanický Proud</p>
+        <p className="eyebrow mb-3">{page?.eyebrow ?? "Krhanický Proud"}</p>
         <h1 className="text-3xl font-bold leading-tight tracking-tight text-[var(--color-text-accent)] sm:text-4xl lg:text-5xl">
-          Náš program
+          {page?.title ?? "Náš program"}
         </h1>
         <p className="mt-4 text-base leading-relaxed text-[var(--color-text-secondary)] sm:text-lg">
-          Co konkrétně chceme v Krhanicích řešit. Témata řadíme tematicky,
-          za každým návrhem stojí někdo z týmu nebo kandidátky.
+          {page?.subtitle ??
+            "Co konkrétně chceme v Krhanicích řešit. Témata řadíme tematicky, za každým návrhem stojí někdo z týmu nebo kandidátky."}
         </p>
         <div className="mt-7">
           <ProudSearch
-            categories={proudCategories}
-            items={proudItems}
+            categories={categories}
+            items={items}
             placeholder="Hledat téma, kandidáta, nápad…"
           />
         </div>
@@ -94,8 +103,9 @@ export default async function NasProgramDetailPage({
 
       <div className="lg:mt-12">
         <ProudIndex
-          items={proudItems}
-          initialCategory={item.category}
+          categories={categories}
+          items={items}
+          initialCategory={initialCategory}
           initialSelectedSlug={slug}
           detailNode={detailNode}
         />
@@ -108,18 +118,26 @@ export default async function NasProgramDetailPage({
 // blog post: category label, title, cover image, then text. No date --
 // programme items are evergreen, not news. Phase 4 (Sanity) replaces the
 // placeholder body with a rich-text body per post.
-function GenericProudPost({ item }: { item: ProudItem }) {
-  const author = item.personId ? findPersonById(item.personId) : null;
+function GenericProudPost({ item }: { item: ProudItemVM }) {
+  const author = item.author ?? null;
   return (
     <article>
       <p className="text-xs font-medium uppercase tracking-wider text-[var(--color-text-tertiary)]">
-        {proudCategoryLabels[item.category]}
+        {item.categoryLabel}
       </p>
       <h2 className="mt-3 text-2xl font-bold leading-tight tracking-tight text-[var(--color-text-accent)] sm:text-3xl">
         {item.title}
       </h2>
 
-      {/* Cover image below the title, like the blog detail: shown at its
+      {/* Lead/perex above the cover, like the blog detail excerpt: larger
+          type that sets up the piece before the reader hits the image. */}
+      {item.description ? (
+        <p className="mt-4 text-lg text-[var(--color-text-secondary)]">
+          {item.description}
+        </p>
+      ) : null}
+
+      {/* Cover image below the lead, like the blog detail: shown at its
           natural ratio inside the reading column, no fixed-aspect crop.
           Placeholder box until a cover is added (Sanity asset in Phase 4). */}
       {item.heroImage ? (
@@ -137,11 +155,9 @@ function GenericProudPost({ item }: { item: ProudItem }) {
         </div>
       )}
 
-      {item.description ? (
-        <p className="mt-6 text-base leading-relaxed text-[var(--color-text-secondary)]">
-          {item.description}
-        </p>
-      ) : null}
+      {/* Metadata strip below the cover, like the blog detail: programme
+          items carry no date, so just the author byline as a "service"
+          detail secondary to the body. */}
       {author ? (
         <p className="mt-6 text-sm text-[var(--color-text-tertiary)]">
           Za návrhem stojí:{" "}
@@ -149,7 +165,7 @@ function GenericProudPost({ item }: { item: ProudItem }) {
           {author.role ? <span> ({author.role})</span> : null}
         </p>
       ) : null}
-      <ArticleBodyDemo />
+      <PortableBody value={item.body} />
     </article>
   );
 }

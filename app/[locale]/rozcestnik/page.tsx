@@ -26,6 +26,7 @@ import {
 import { blogPosts, sortBlogByDate } from "@/content/blog";
 import { HomeSearch } from "@/components/sections/Home/HomeSearch";
 import { BlogCard } from "@/components/sections/Blog/BlogCard";
+import { contentBlogToVM } from "@/lib/blog-card-adapter";
 
 export const metadata = { title: "Rozcestník" };
 
@@ -168,7 +169,7 @@ export default async function RozcestnikPage({
             <ul className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {recentBlog.map((post) => (
                 <li key={post.id}>
-                  <BlogCard post={post} />
+                  <BlogCard post={contentBlogToVM(post)} />
                 </li>
               ))}
             </ul>

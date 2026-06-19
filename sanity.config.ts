@@ -3,26 +3,31 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
-import { documentInternationalization } from "@sanity/document-internationalization";
+import { table } from "@sanity/table";
 import { schemaTypes } from "./sanity/schemas";
 import { apiVersion, dataset, projectId } from "./sanity/env";
+import { structure, SINGLETON_TYPES } from "./sanity/structure";
 
 export default defineConfig({
   name: "default",
-  title: "Studio",
+  title: "Krhanický Proud",
   projectId,
   dataset,
   basePath: "/studio",
   plugins: [
-    structureTool(),
+    structureTool({ structure }),
     visionTool({ defaultApiVersion: apiVersion }),
-    documentInternationalization({
-      supportedLanguages: [
-        { id: "cs", title: "Čeština" },
-        { id: "en", title: "English" },
-      ],
-      schemaTypes: ["legalPage"],
-    }),
+    table(),
   ],
-  schema: { types: schemaTypes },
+  schema: {
+    types: schemaTypes,
+    // Keep singletons out of the global "create new" menu -- they are
+    // edited as a single document via the structure.
+    templates: (prev) =>
+      prev.filter((t) => !SINGLETON_TYPES.includes(t.schemaType)),
+  },
+  document: {
+    newDocumentOptions: (prev) =>
+      prev.filter((item) => !SINGLETON_TYPES.includes(item.templateId)),
+  },
 });

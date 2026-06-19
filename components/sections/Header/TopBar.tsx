@@ -1,52 +1,62 @@
-import { AlertTriangle, Megaphone } from "lucide-react";
+import { PortableText, type PortableTextComponents } from "@portabletext/react";
+import type { PortableTextBlock } from "@portabletext/types";
+import { Icon } from "@/components/sections/RichText/IconRender";
 
-export type TopBarTone = "alert" | "campaign";
+export type TopBarTone = "warning" | "campaign";
 
 export type TopBarConfig = {
   tone: TopBarTone;
-  text: string;
-  // When omitted, the bar renders as plain text (no link). Useful for
-  // stand-alone notices like "Pozor, nepůjde proud" without a detail page.
-  href?: string | null;
+  // Optional icon-picker value (lib/icons.ts). Renders nothing when unset.
+  icon?: string;
+  // Rich text rendered inline on a single line; may carry an inline link.
+  text: PortableTextBlock[];
 };
 
 // Single thin bar above the site header. Two visual tones:
-// - alert    : amber background, dark text, triangle icon -- urgent
-// - campaign : inverted dark background, light text, megaphone -- marketing
+// - warning  : amber background, dark text -- urgent notice
+// - campaign : green background, light text -- marketing / call to action
 //
-// When `href` is present, the whole bar acts as a single link (full-width
-// click target). Without `href` it falls back to a plain <div>.
+// The bar is a plain <div role="status"> so screen readers announce the
+// notice on first render without interrupting the user. Any link lives
+// inside the rich text, not on the whole bar.
 export function TopBar({ config }: { config: TopBarConfig }) {
-  const Icon = config.tone === "alert" ? AlertTriangle : Megaphone;
-
   const toneClass =
-    config.tone === "alert"
-      ? "bg-[var(--color-warn)] text-[var(--color-warn-ink)]"
-      : "bg-[var(--color-brand)] text-[var(--color-text-on-brand)]";
+    config.tone === "campaign"
+      ? "bg-[var(--color-success)] text-[var(--color-bg)]"
+      : "bg-[var(--color-warn)] text-[var(--color-warn-ink)]";
 
-  const inner = (
-    <div className="mx-auto flex max-w-7xl items-center justify-center gap-2 px-4 py-2 text-xs font-medium sm:text-sm">
-      <Icon size={14} aria-hidden className="shrink-0" />
-      <span>{config.text}</span>
-    </div>
-  );
+  // Minimal inline rendering: normal blocks become spans (no paragraph
+  // margins) so the bar stays a single thin line; links inherit the tone
+  // text color and gain an underline + focus ring.
+  const components: PortableTextComponents = {
+    block: {
+      normal: ({ children }) => <span>{children}</span>,
+    },
+    marks: {
+      link: ({ children, value }) => {
+        const href: string = value?.href ?? "#";
+        const external = /^https?:\/\//.test(href);
+        return (
+          <a
+            href={href}
+            {...(external
+              ? { target: "_blank", rel: "noopener noreferrer" }
+              : {})}
+            className="underline underline-offset-2 outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
+          >
+            {children}
+          </a>
+        );
+      },
+    },
+  };
 
-  if (config.href) {
-    return (
-      <a
-        href={config.href}
-        className={`block ${toneClass} outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2`}
-      >
-        {inner}
-      </a>
-    );
-  }
-
-  // Stand-alone notice. Use role="status" so screen readers announce the
-  // text on first render but do not interrupt the user mid-action.
   return (
     <div className={toneClass} role="status">
-      {inner}
+      <div className="mx-auto flex max-w-7xl items-center justify-center gap-2 px-4 py-2 text-xs font-medium sm:text-sm">
+        <Icon name={config.icon} size={14} aria-hidden className="shrink-0" />
+        <PortableText value={config.text} components={components} />
+      </div>
     </div>
   );
 }

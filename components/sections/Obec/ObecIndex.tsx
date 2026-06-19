@@ -2,17 +2,10 @@
 
 import { useMemo, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import {
-  type ObecCategory,
-  type ObecCategoryDef,
-  type ObecItem,
-  type ObecSubcategory,
-  obecCategories,
-  obecFeaturedMix,
-  obecItemsByCategory,
-  obecItemsBySubcategory,
-  obecSubcategoryLabels,
-} from "@/content/urad";
+import type {
+  UradCategoryVM,
+  UradItemVM,
+} from "@/lib/sanity/content-types";
 import { PersonThumb } from "@/components/sections/People/PersonThumb";
 
 const formatDate = new Intl.DateTimeFormat("cs-CZ", {
@@ -22,10 +15,13 @@ const formatDate = new Intl.DateTimeFormat("cs-CZ", {
 });
 
 // "all" sentinel matches the radiogroup pattern from BlogIndex -- "Vše" is
-// the first sidebar row and represents the curated mix.
-type CategoryChoice = ObecCategory | "all";
+// the first sidebar row and represents the curated mix. Category and
+// subcategory choices are plain slug strings now that they come from Sanity
+// (no hardcoded enums).
+type CategoryChoice = string;
 
 export function ObecIndex({
+  categories,
   items,
   initialCategory = "all",
   initialSubcategory = null,
@@ -36,16 +32,18 @@ export function ObecIndex({
   initialSelectedSlug,
   detailNode,
 }: {
-  items: ObecItem[];
+  categories: UradCategoryVM[];
+  items: UradItemVM[];
   initialCategory?: CategoryChoice;
-  initialSubcategory?: ObecSubcategory | null;
+  initialSubcategory?: string | null;
   initialSelectedSlug?: string;
   detailNode?: React.ReactNode;
 }) {
   const [activeCategory, setActiveCategory] =
     useState<CategoryChoice>(initialCategory);
-  const [activeSubcategory, setActiveSubcategory] =
-    useState<ObecSubcategory | null>(initialSubcategory);
+  const [activeSubcategory, setActiveSubcategory] = useState<string | null>(
+    initialSubcategory,
+  );
 
   const isDetailMode = Boolean(initialSelectedSlug && detailNode);
 
@@ -56,7 +54,7 @@ export function ObecIndex({
 
   const activeCategoryDef =
     activeCategory !== "all"
-      ? obecCategories.find((c) => c.slug === activeCategory)
+      ? categories.find((c) => c.slug === activeCategory)
       : null;
 
   // Three render modes for the right pane:
@@ -80,23 +78,27 @@ export function ObecIndex({
   }, [activeCategory, activeCategoryDef, activeSubcategory]);
 
   const filteredItems = useMemo(() => {
-    if (mode === "all") return obecFeaturedMix();
-    if (mode === "hub") return [];
+    // "all" mode renders the TopCategoriesHub, not a flat list, so the list
+    // here stays empty. "hub" likewise renders subcategory tiles.
+    if (mode === "all" || mode === "hub") return [];
     if (activeCategory !== "all" && activeSubcategory) {
-      return obecItemsBySubcategory(activeCategory, activeSubcategory);
+      return items.filter(
+        (i) =>
+          i.category === activeCategory && i.subcategory === activeSubcategory,
+      );
     }
     if (activeCategory !== "all") {
-      return obecItemsByCategory(activeCategory);
+      return items.filter((i) => i.category === activeCategory);
     }
     return [];
-  }, [mode, activeCategory, activeSubcategory]);
+  }, [items, mode, activeCategory, activeSubcategory]);
 
   // Heading above the right pane. For "all" it's a curator-pick label, for
   // "hub" the category name, for "list" the breadcrumb-style scope.
   const scopeLabel = useMemo(() => {
     if (activeCategory === "all") return "Sekce obce";
     if (activeSubcategory && activeCategoryDef) {
-      const sub = activeCategoryDef.subcategories?.find(
+      const sub = activeCategoryDef.subcategories.find(
         (s) => s.slug === activeSubcategory,
       );
       return sub ? `${activeCategoryDef.label} · ${sub.label}` : activeCategoryDef.label;
@@ -121,11 +123,11 @@ export function ObecIndex({
         <ul className="space-y-1" role="radiogroup" aria-label="Kategorie">
           <SidebarRow
             label="Vše"
-            count={obecFeaturedMix().length}
+            count={items.length}
             active={activeCategory === "all"}
             onClick={() => selectCategory("all")}
           />
-          {obecCategories.map((cat) => {
+          {categories.map((cat) => {
             const catItems = items.filter((i) => i.category === cat.slug);
             const isActive = activeCategory === cat.slug;
             return (
@@ -140,7 +142,7 @@ export function ObecIndex({
                     Indented and rendered slightly smaller so the hierarchy
                     is unambiguous. The nested <ul> sits inside the parent
                     SidebarRow's <li> -- no nested-<li> hydration error. */}
-                {isActive && cat.subcategories ? (
+                {isActive && cat.subcategories.length > 0 ? (
                   <ul className="mt-1 space-y-0.5 border-l border-[var(--color-border)] pl-2">
                     {cat.subcategories.map((sub) => {
                       const subItems = items.filter(
@@ -192,6 +194,7 @@ export function ObecIndex({
 
             {mode === "all" ? (
               <TopCategoriesHub
+                categories={categories}
                 items={items}
                 onSelectCategory={(cat) => selectCategory(cat)}
               />
@@ -304,7 +307,7 @@ function SubSidebarRow({
 // these query params and pre-selects the same sidebar row.
 function buildBackHref(
   category: CategoryChoice,
-  subcategory: ObecSubcategory | null,
+  subcategory: string | null,
 ): string {
   if (category === "all") return "/urad";
   const params = new URLSearchParams();
@@ -318,15 +321,17 @@ function buildBackHref(
 // (Aktuality / Úřední deska / Zastupitelstvo / Dokumenty) instead of
 // a flat curated mix that was hard to skim.
 function TopCategoriesHub({
+  categories,
   items,
   onSelectCategory,
 }: {
-  items: ObecItem[];
-  onSelectCategory: (cat: ObecCategory) => void;
+  categories: UradCategoryVM[];
+  items: UradItemVM[];
+  onSelectCategory: (cat: string) => void;
 }) {
   return (
     <ul className="grid gap-4 sm:grid-cols-2">
-      {obecCategories.map((cat) => {
+      {categories.map((cat) => {
         const count = items.filter((i) => i.category === cat.slug).length;
         return (
           <li key={cat.slug}>
@@ -373,11 +378,11 @@ function CategoryHub({
   items,
   onSelectSub,
 }: {
-  category: ObecCategoryDef;
-  items: ObecItem[];
-  onSelectSub: (sub: ObecSubcategory) => void;
+  category: UradCategoryVM;
+  items: UradItemVM[];
+  onSelectSub: (sub: string) => void;
 }) {
-  if (!category.subcategories) return null;
+  if (category.subcategories.length === 0) return null;
 
   return (
     <div>
@@ -432,16 +437,16 @@ function CategoryHub({
 // One row in the result list. Date (when available) sits left, title +
 // description in the middle, chevron right. Same hover/focus pattern as
 // EntryListItem so /urad and /pruvodce read as siblings.
-function ItemRow({ item }: { item: ObecItem }) {
+function ItemRow({ item }: { item: UradItemVM }) {
   return (
     <a
       href={item.href}
       className="group flex items-start gap-3 px-3 py-4 outline-none transition-colors hover:bg-[var(--color-bg-elev)] focus-visible:bg-[var(--color-bg-elev)] focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 sm:gap-4"
     >
-      {item.personId ? (
+      {item.isPerson ? (
         // Councillor / person row: lead with the photo, same photo-led
         // "special element" treatment as candidates in /proud.
-        <PersonThumb personId={item.personId} />
+        <PersonThumb photoUrl={item.personPhoto} />
       ) : item.date ? (
         <time
           dateTime={item.date}

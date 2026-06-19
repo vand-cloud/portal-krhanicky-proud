@@ -1,40 +1,39 @@
-import { PortableText } from "@portabletext/react";
-import { Container } from "@/components/ui/Container";
-import type { LegalPage } from "@/lib/sanity/types";
+import type { PortableTextBlock } from "@portabletext/types";
+import { LegalLayout, type LegalController } from "@/components/legal/LegalLayout";
+import { PortableBody } from "@/components/sections/RichText/PortableBody";
 
-// Phase 4 renderer for Sanity-driven legal pages. Mirrors the typography
-// of /gdpr, /cookies, /pristupnost (which use LegalLayout + raw HTML in
-// .legal-content) so when content migrates to Sanity the visual reading
-// experience is identical. We deliberately do NOT use Tailwind's `prose`
-// plugin here, it brings its own typography that fights our token system.
-// The `.legal-content` class (in app/globals.css under @layer components)
-// handles paragraph, list, table, and link styling from PortableText
-// output. Headings inherit color and font-family from @layer base h1-h6.
-export function LegalPageRenderer({ page }: { page: LegalPage }) {
-  const updated = new Date(page.lastUpdated).toLocaleDateString("cs-CZ", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+// Sanity-driven legal page renderer. Wraps the two-column LegalLayout shell
+// (overline + H1 + section nav + auto "Správce webu" from siteSettings) and
+// drops the document body into the right column via PortableBody, which
+// carries the same .legal-content typography as the wireframe version.
+// The "Naposledy aktualizováno" line closes the article.
+export function LegalPageRenderer({
+  title,
+  body,
+  lastUpdated,
+  controller,
+}: {
+  title: string;
+  body?: PortableTextBlock[];
+  lastUpdated?: string;
+  controller?: LegalController;
+}) {
+  const updated = lastUpdated
+    ? new Date(lastUpdated).toLocaleDateString("cs-CZ", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    : null;
 
   return (
-    <article className="bg-[var(--color-bg)] py-[var(--spacing-section)]">
-      <Container size="narrow">
-        <header className="mb-[var(--spacing-block-gap)] border-b border-[var(--color-border)] pb-6">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl">{page.title}</h1>
-          <p className="mt-4 text-sm text-[var(--color-text-tertiary)]">
-            Aktualizováno: {updated}
-          </p>
-        </header>
-        <div className="legal-content space-y-8">
-          {page.sections.map((section, i) => (
-            <section key={i}>
-              <h2>{section.heading}</h2>
-              <PortableText value={section.content} />
-            </section>
-          ))}
-        </div>
-      </Container>
-    </article>
+    <LegalLayout title={title} controller={controller}>
+      <PortableBody value={body} className="legal-content" />
+      {updated ? (
+        <p className="mt-10 text-sm text-[var(--color-text-tertiary)]">
+          Naposledy aktualizováno: {updated}.
+        </p>
+      ) : null}
+    </LegalLayout>
   );
 }

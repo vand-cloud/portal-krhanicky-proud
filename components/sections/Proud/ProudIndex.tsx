@@ -3,16 +3,12 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ChevronLeft, ChevronRight, Image as ImageIcon } from "lucide-react";
-import {
-  type ProudCategory,
-  type ProudItem,
-  proudCategories,
-  proudItemsByCategory,
-} from "@/content/proud";
+import type { CategoryVM, ProudItemVM } from "@/lib/sanity/content-types";
 import { PersonThumb } from "@/components/sections/People/PersonThumb";
 
 // "all" sentinel matches the radiogroup pattern from BlogIndex / ObecIndex.
-type CategoryChoice = ProudCategory | "all";
+// Category slugs are plain strings now (Sanity-driven, no hardcoded enum).
+type CategoryChoice = string | "all";
 
 // Sidebar + content layout, mirrors ObecIndex but without subcategories.
 // Three render modes for the right pane:
@@ -23,12 +19,14 @@ type CategoryChoice = ProudCategory | "all";
 // The host (/proud/[slug] page) supplies detailNode + initialCategory so
 // the sidebar lands on the right row when the user arrives at a detail.
 export function ProudIndex({
+  categories,
   items,
   initialCategory = "all",
   initialSelectedSlug,
   detailNode,
 }: {
-  items: ProudItem[];
+  categories: CategoryVM[];
+  items: ProudItemVM[];
   initialCategory?: CategoryChoice;
   initialSelectedSlug?: string;
   detailNode?: React.ReactNode;
@@ -59,15 +57,15 @@ export function ProudIndex({
 
   const activeCategoryDef =
     activeCategory !== "all"
-      ? proudCategories.find((c) => c.slug === activeCategory)
+      ? categories.find((c) => c.slug === activeCategory)
       : null;
 
   // "all" mode renders a category rozcestník (cards), so the filtered
   // item list stays empty -- it's only consumed by the list mode below.
   const filteredItems = useMemo(() => {
     if (activeCategory === "all") return [];
-    return proudItemsByCategory(activeCategory);
-  }, [activeCategory]);
+    return items.filter((i) => i.category === activeCategory);
+  }, [activeCategory, items]);
 
   const scopeLabel =
     activeCategory === "all" ? "Sekce programu" : (activeCategoryDef?.label ?? "");
@@ -93,7 +91,7 @@ export function ProudIndex({
             active={activeCategory === "all" && !isDetailMode}
             onClick={() => chooseCategory("all")}
           />
-          {proudCategories.map((cat) => {
+          {categories.map((cat) => {
             const catItems = items.filter((i) => i.category === cat.slug);
             return (
               <SidebarRow
@@ -134,6 +132,7 @@ export function ProudIndex({
 
             {activeCategory === "all" ? (
               <TopCategoriesHub
+                categories={categories}
                 items={items}
                 onSelectCategory={(cat) => setActiveCategory(cat)}
               />
@@ -162,15 +161,17 @@ export function ProudIndex({
 // list of policy areas (Náš program / Naši kandidáti / Doprava /
 // Životní prostředí / …) instead of a flat curated mix.
 function TopCategoriesHub({
+  categories,
   items,
   onSelectCategory,
 }: {
-  items: ProudItem[];
-  onSelectCategory: (cat: ProudCategory) => void;
+  categories: CategoryVM[];
+  items: ProudItemVM[];
+  onSelectCategory: (cat: string) => void;
 }) {
   return (
     <ul className="grid gap-4 sm:grid-cols-2">
-      {proudCategories.map((cat) => {
+      {categories.map((cat) => {
         const count = items.filter((i) => i.category === cat.slug).length;
         return (
           <li key={cat.slug}>
@@ -256,15 +257,15 @@ function buildBackHref(category: CategoryChoice): string {
 //    description. No date -- programme items are evergreen, not news.
 //  - Candidate rows (category "kandidati"): lead with the person's photo
 //    (circular avatar) -- candidates are a photo-led "special element".
-function ItemRow({ item }: { item: ProudItem }) {
-  const isCandidate = item.category === "kandidati";
+function ItemRow({ item }: { item: ProudItemVM }) {
+  const isCandidate = item.isCandidate;
   return (
     <a
       href={item.href}
       className="group flex items-start gap-3 px-3 py-4 outline-none transition-colors hover:bg-[var(--color-bg-elev)] focus-visible:bg-[var(--color-bg-elev)] focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 sm:gap-4"
     >
       {isCandidate ? (
-        <PersonThumb personId={item.personId} />
+        <PersonThumb photoUrl={item.personPhoto} />
       ) : (
         <ProudThumb heroImage={item.heroImage} />
       )}

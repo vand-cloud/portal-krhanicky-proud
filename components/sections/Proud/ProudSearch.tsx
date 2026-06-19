@@ -2,11 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { Folder, FileText, User } from "lucide-react";
-import {
-  type ProudCategoryDef,
-  type ProudItem,
-  proudCategoryLabels,
-} from "@/content/proud";
+import type { CategoryVM, ProudItemVM } from "@/lib/sanity/content-types";
 import { unaccent } from "@/content/entries";
 import { SearchBar } from "@/components/sections/Hybrid/SearchBar";
 
@@ -28,7 +24,7 @@ function buildCategoryHref(catSlug: string): string {
 }
 
 function findCategoryHits(
-  categories: ProudCategoryDef[],
+  categories: CategoryVM[],
   q: string,
 ): SearchHit[] {
   const hits: SearchHit[] = [];
@@ -47,10 +43,9 @@ function findCategoryHits(
   return hits;
 }
 
-// Item hits split into candidates (items with personId in "kandidati"
-// category) and posts. Candidate matches outrank post matches when the
-// query touches a person's name.
-function findItemHits(items: ProudItem[], q: string) {
+// Item hits split into candidates (isCandidate rows) and posts. Candidate
+// matches outrank post matches when the query touches a person's name.
+function findItemHits(items: ProudItemVM[], q: string) {
   const matched = items.filter((item) =>
     unaccent(`${item.title} ${item.description ?? ""}`).includes(q),
   );
@@ -59,15 +54,14 @@ function findItemHits(items: ProudItem[], q: string) {
   const posts: SearchHit[] = [];
 
   for (const item of matched) {
-    const meta = proudCategoryLabels[item.category];
     const hit: SearchHit = {
       id: item.id,
       href: item.href,
       title: item.title,
-      meta,
+      meta: item.categoryLabel,
       description: item.description,
     };
-    if (item.category === "kandidati") {
+    if (item.isCandidate) {
       candidates.push(hit);
     } else {
       posts.push(hit);
@@ -87,8 +81,8 @@ export function ProudSearch({
   items,
   placeholder,
 }: {
-  categories: ProudCategoryDef[];
-  items: ProudItem[];
+  categories: CategoryVM[];
+  items: ProudItemVM[];
   placeholder: string;
 }) {
   const [query, setQuery] = useState("");
