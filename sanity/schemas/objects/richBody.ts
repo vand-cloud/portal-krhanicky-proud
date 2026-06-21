@@ -17,6 +17,7 @@ export const richBody = defineType({
         { title: "Nadpis 2", value: "h2" },
         { title: "Nadpis 3", value: "h3" },
         { title: "Nadpis 4", value: "h4" },
+        { title: "Nadpis 5", value: "h5" },
         { title: "Citace", value: "blockquote" },
       ],
       lists: [

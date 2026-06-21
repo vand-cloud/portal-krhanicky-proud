@@ -53,6 +53,11 @@ const components: PortableTextComponents = {
         {children}
       </h4>
     ),
+    h5: ({ children }) => (
+      <h5 className="mt-5 mb-1 text-sm font-semibold tracking-wide text-[var(--color-text-accent)]">
+        {children}
+      </h5>
+    ),
     blockquote: ({ children }) => (
       <blockquote className="mt-6 border-l-2 border-[var(--color-accent)] pl-4 text-base italic leading-relaxed text-[var(--color-text-secondary)]">
         {children}
