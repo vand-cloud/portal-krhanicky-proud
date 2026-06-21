@@ -4,9 +4,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { ArrowRight, ArrowUpRight, ChevronLeft } from "lucide-react";
-import { blogPosts, sortBlogByDate } from "@/content/blog";
 import { BlogCard } from "../Blog/BlogCard";
-import { contentBlogToVM } from "@/lib/blog-card-adapter";
+import type { BlogPostVM } from "@/lib/sanity/content-types";
 import type {
   Category,
   Entry,
@@ -134,6 +133,7 @@ export function SectionView({
   initialTier,
   initialSelectedSlug,
   initialSelectedType,
+  blogPosts = [],
 }: {
   entries: Entry[];
   // Optional small mono kicker shown above the H1. Uses the .eyebrow
@@ -160,6 +160,10 @@ export function SectionView({
   // initialSelectedType, the view shows the detail panel pre-selected.
   initialSelectedSlug?: string;
   initialSelectedType?: EntryType;
+  // Newest blog posts from Sanity for the editorial band under the search
+  // module. Passed from the homepage server component (already sorted
+  // newest-first); BlogBand shows the top few.
+  blogPosts?: BlogPostVM[];
 }) {
   const tHome = useTranslations("homepage");
   const router = useRouter();
@@ -618,7 +622,7 @@ export function SectionView({
           listing scope (Vše, Akce, Místa, …) once the user scrolls past
           the module. Hidden only on detail pages, which stay focused on
           the single entry. */}
-      {!selectedEntry ? <BlogBand /> : null}
+      {!selectedEntry ? <BlogBand posts={blogPosts} /> : null}
     </div>
   );
 }
@@ -836,12 +840,10 @@ function AllScopeList({
 // "Vše" landing. The three newest blog posts, independent of the entry
 // filters (the blog is its own corpus). Spans the full content width so
 // the three cards breathe, unlike the column-bound events list above.
-function BlogBand() {
-  const posts = useMemo(
-    () => sortBlogByDate(blogPosts).slice(0, ALL_BLOG_LIMIT),
-    [],
-  );
-  if (posts.length === 0) return null;
+function BlogBand({ posts }: { posts: BlogPostVM[] }) {
+  // Posts arrive already sorted newest-first from Sanity; show the top few.
+  const shown = posts.slice(0, ALL_BLOG_LIMIT);
+  if (shown.length === 0) return null;
 
   return (
     <section
@@ -870,8 +872,8 @@ function BlogBand() {
       </div>
 
       <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {posts.map((post) => (
-          <BlogCard key={post.id} post={contentBlogToVM(post)} />
+        {shown.map((post) => (
+          <BlogCard key={post.id} post={post} />
         ))}
       </div>
 

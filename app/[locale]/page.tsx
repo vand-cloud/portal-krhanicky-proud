@@ -2,6 +2,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { entries, distanceTierOrder, type DistanceTier } from "@/content/entries";
 import { SectionView } from "@/components/sections/Hybrid/SectionView";
 import type { Scope } from "@/components/sections/Hybrid/util";
+import { getBlogData } from "@/lib/sanity/fetch";
 
 // Homepage IS the Krhanický průvodce. Visitors land directly on the
 // search hero so the primary action ("najdi mi něco") is the front
@@ -43,6 +44,10 @@ export default async function HomePage({
   setRequestLocale(locale);
   const tHome = await getTranslations({ locale, namespace: "homepage" });
 
+  // Newest blog posts from Sanity for the editorial band under the search
+  // module (the query already orders them newest-first).
+  const { posts: blogPosts } = await getBlogData();
+
   // Default landing is "all" -- a curated overview. Type-specific URLs
   // (?type=akce, mista, gastro, …) keep working for filtered listings.
   const initialScope: Scope = (type && SCOPE_BY_QUERY[type]) || "all";
@@ -77,6 +82,7 @@ export default async function HomePage({
       initialSubcategorySlug={sub}
       initialTags={initialTags}
       initialTier={initialTier}
+      blogPosts={blogPosts}
     />
   );
 }
