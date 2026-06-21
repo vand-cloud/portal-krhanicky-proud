@@ -77,8 +77,11 @@ const components: PortableTextComponents = {
     ),
   },
   listItem: {
-    bullet: ({ children }) => <li>{children}</li>,
-    number: ({ children }) => <li>{children}</li>,
+    // whitespace-pre-line keeps soft line breaks ("\n") authored inside a
+    // single list item — used by multi-paragraph resolutions (usnesení) so one
+    // numbered point can hold several lines without splitting the numbering.
+    bullet: ({ children }) => <li className="whitespace-pre-line">{children}</li>,
+    number: ({ children }) => <li className="whitespace-pre-line">{children}</li>,
   },
   marks: {
     strong: ({ children }) => (
