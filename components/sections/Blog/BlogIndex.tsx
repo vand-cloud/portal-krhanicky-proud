@@ -2,8 +2,11 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { FileText } from "lucide-react";
 import type { BlogPostVM, CategoryVM } from "@/lib/sanity/content-types";
 import { BlogCard } from "./BlogCard";
+import { SearchBar } from "@/components/sections/Hybrid/SearchBar";
+import { useFulltextSearch } from "@/components/sections/Hybrid/useFulltextSearch";
 
 // "all" is a sentinel for "no category filter" -- rendered as the first
 // item in the sidebar so the user always has a way back to the full list.
@@ -122,6 +125,16 @@ export function BlogIndex({
 
   const hasFilters = activeCategory !== "all" || activeTag !== null;
 
+  // Fulltext search across the whole blog (article bodies included). When the
+  // box has a query, results replace the filtered grid; clearing it returns to
+  // the category/tag browse view.
+  const [searchQuery, setSearchQuery] = useState("");
+  const { results: searchResults, loading: searchLoading } = useFulltextSearch(
+    "blog",
+    searchQuery,
+  );
+  const searching = searchQuery.trim().length >= 2;
+
   return (
     <div className="grid gap-10 lg:grid-cols-[18rem_1fr] lg:gap-12">
       {/* Sidebar: categories as a single-select vertical menu, tags below
@@ -198,27 +211,76 @@ export function BlogIndex({
         ) : null}
       </aside>
 
-      {/* Main: result count + grid of cards (1 col mobile, 2 cols desktop). */}
+      {/* Main: search box, then either fulltext results or the filtered grid. */}
       <div>
-        <p className="mb-5 text-xs text-[var(--color-text-tertiary)]">
-          {filtered.length === 0
-            ? "Pro zvolené filtry nejsou žádné články"
-            : `${filtered.length} ${pluralizeArticle(filtered.length)}`}
-        </p>
+        <div className="mb-5">
+          <SearchBar
+            query={searchQuery}
+            onChange={setSearchQuery}
+            placeholder="Hledat v článcích…"
+            size="large"
+            ariaLabel="Hledat v blogu"
+          />
+        </div>
 
-        {filtered.length === 0 ? (
-          <p className="rounded-lg border border-dashed border-[var(--color-border)] px-4 py-12 text-center text-sm text-[var(--color-text-secondary)]">
-            Zkuste odebrat některý z filtrů, nebo se podívejte na všechny
-            články.
-          </p>
+        {searching ? (
+          <>
+            <p className="mb-5 text-xs text-[var(--color-text-tertiary)]">
+              {searchLoading
+                ? "Hledám…"
+                : searchResults.length === 0
+                  ? `Pro „${searchQuery}“ jsme nic nenašli`
+                  : `${searchResults.length} ${pluralizeArticle(searchResults.length)}`}
+            </p>
+            {searchResults.length > 0 ? (
+              <ul className="divide-y divide-[var(--color-border)] overflow-hidden rounded-lg border border-[var(--color-border)]">
+                {searchResults.map((hit) => (
+                  <li key={hit.id}>
+                    <a
+                      href={hit.href}
+                      className="block px-4 py-3 outline-none hover:bg-[var(--color-bg-elev)] focus-visible:bg-[var(--color-bg-elev)] focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
+                    >
+                      <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-[var(--color-text-tertiary)]">
+                        <FileText size={12} aria-hidden />
+                        {hit.meta}
+                      </div>
+                      <div className="mt-0.5 text-sm font-medium leading-snug text-[var(--color-text)]">
+                        {hit.title}
+                      </div>
+                      {hit.snippet ? (
+                        <div className="mt-0.5 line-clamp-2 text-xs text-[var(--color-text-secondary)]">
+                          {hit.snippet}
+                        </div>
+                      ) : null}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+          </>
         ) : (
-          <ul className="grid gap-5 sm:grid-cols-2">
-            {filtered.map((post) => (
-              <li key={post.id}>
-                <BlogCard post={post} />
-              </li>
-            ))}
-          </ul>
+          <>
+            <p className="mb-5 text-xs text-[var(--color-text-tertiary)]">
+              {filtered.length === 0
+                ? "Pro zvolené filtry nejsou žádné články"
+                : `${filtered.length} ${pluralizeArticle(filtered.length)}`}
+            </p>
+
+            {filtered.length === 0 ? (
+              <p className="rounded-lg border border-dashed border-[var(--color-border)] px-4 py-12 text-center text-sm text-[var(--color-text-secondary)]">
+                Zkuste odebrat některý z filtrů, nebo se podívejte na všechny
+                články.
+              </p>
+            ) : (
+              <ul className="grid gap-5 sm:grid-cols-2">
+                {filtered.map((post) => (
+                  <li key={post.id}>
+                    <BlogCard post={post} />
+                  </li>
+                ))}
+              </ul>
+            )}
+          </>
         )}
       </div>
     </div>

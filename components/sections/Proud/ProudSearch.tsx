@@ -5,6 +5,7 @@ import { Folder, FileText, User } from "lucide-react";
 import type { CategoryVM, ProudItemVM } from "@/lib/sanity/content-types";
 import { unaccent } from "@/content/entries";
 import { SearchBar } from "@/components/sections/Hybrid/SearchBar";
+import { useFulltextSearch } from "@/components/sections/Hybrid/useFulltextSearch";
 
 const CATEGORY_LIMIT = 4;
 const PEOPLE_LIMIT = 4;
@@ -88,27 +89,30 @@ export function ProudSearch({
   const [query, setQuery] = useState("");
   const trimmed = query.trim();
 
+  // Categories + candidates stay instant (in-memory). Policy posts come from
+  // the server fulltext endpoint so the search reaches the full article text,
+  // not just the title + perex.
+  const { results: posts, loading } = useFulltextSearch("program", trimmed);
+
   const hits = useMemo(() => {
     if (!trimmed) {
       return {
         categories: [] as SearchHit[],
         candidates: [] as SearchHit[],
-        posts: [] as SearchHit[],
       };
     }
     const q = unaccent(trimmed);
     const cats = findCategoryHits(categories, q).slice(0, CATEGORY_LIMIT);
-    const { candidates, posts } = findItemHits(items, q);
+    const { candidates } = findItemHits(items, q);
     return {
       categories: cats,
       candidates: candidates.slice(0, PEOPLE_LIMIT),
-      posts: posts.slice(0, ITEM_LIMIT),
     };
   }, [categories, items, trimmed]);
 
   const showDropdown = trimmed.length > 0;
   const totalResults =
-    hits.categories.length + hits.candidates.length + hits.posts.length;
+    hits.categories.length + hits.candidates.length + posts.length;
 
   return (
     <div className="relative">
@@ -124,7 +128,9 @@ export function ProudSearch({
         <div className="mt-3 overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] shadow-sm">
           {totalResults === 0 ? (
             <p className="px-4 py-6 text-center text-sm text-[var(--color-text-secondary)]">
-              Pro „{query}“ jsme v sekci Proud nic nenašli. Zkuste jiný výraz.
+              {loading
+                ? "Hledám…"
+                : `Pro „${query}“ jsme v sekci Program nic nenašli. Zkuste jiný výraz.`}
             </p>
           ) : (
             <ul className="divide-y divide-[var(--color-border)]">
@@ -134,8 +140,12 @@ export function ProudSearch({
               {hits.candidates.map((hit) => (
                 <ResultRow key={hit.id} hit={hit} icon="user" />
               ))}
-              {hits.posts.map((hit) => (
-                <ResultRow key={hit.id} hit={hit} icon="file" />
+              {posts.slice(0, ITEM_LIMIT).map((hit) => (
+                <ResultRow
+                  key={hit.id}
+                  hit={{ ...hit, description: hit.snippet }}
+                  icon="file"
+                />
               ))}
             </ul>
           )}
@@ -167,7 +177,7 @@ function ResultRow({
           {hit.title}
         </div>
         {hit.description ? (
-          <div className="mt-0.5 line-clamp-1 text-xs text-[var(--color-text-secondary)]">
+          <div className="mt-0.5 line-clamp-2 text-xs text-[var(--color-text-secondary)]">
             {hit.description}
           </div>
         ) : null}

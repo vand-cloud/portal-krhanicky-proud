@@ -88,6 +88,17 @@ export interface UradItemVM {
   body?: RichBody;
 }
 
+// A single fulltext search result (scoped server search over title + lead +
+// the document body). `snippet` is an excerpt of the original text around the
+// match (or the lead when the match was only in title/lead).
+export interface SearchHit {
+  id: string;
+  title: string;
+  href: string;
+  meta: string;
+  snippet?: string;
+}
+
 export interface SiteSettingsVM {
   footerDisclosure?: RichBody;
   contactName?: string;

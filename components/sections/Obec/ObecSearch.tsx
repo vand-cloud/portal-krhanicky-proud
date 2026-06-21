@@ -8,6 +8,7 @@ import type {
 } from "@/lib/sanity/content-types";
 import { unaccent } from "@/content/entries";
 import { SearchBar } from "@/components/sections/Hybrid/SearchBar";
+import { useFulltextSearch } from "@/components/sections/Hybrid/useFulltextSearch";
 
 // Sections cap: keep the dropdown skimmable. The user said the search
 // should reach categories, people and documents -- three short groups
@@ -126,23 +127,27 @@ export function ObecSearch({
   const [query, setQuery] = useState("");
   const trimmed = query.trim();
 
+  // Categories + people stay instant (in-memory, not body-based). Documents
+  // (zápisy, usnesení, notices) come from the server fulltext endpoint so the
+  // search reaches names / parcel numbers / topics inside the transcripts.
+  const { results: docs, loading } = useFulltextSearch("urad", trimmed);
+
   const hits = useMemo(() => {
     if (!trimmed) {
-      return { categories: [] as SearchHit[], people: [] as SearchHit[], docs: [] as SearchHit[] };
+      return { categories: [] as SearchHit[], people: [] as SearchHit[] };
     }
     const q = unaccent(trimmed);
     const cats = findCategoryHits(categories, q).slice(0, CATEGORY_LIMIT);
-    const { people, docs } = findItemHits(categories, items, q);
+    const { people } = findItemHits(categories, items, q);
     return {
       categories: cats,
       people: people.slice(0, PEOPLE_LIMIT),
-      docs: docs.slice(0, ITEM_LIMIT),
     };
   }, [categories, items, trimmed]);
 
   const showDropdown = trimmed.length > 0;
   const totalResults =
-    hits.categories.length + hits.people.length + hits.docs.length;
+    hits.categories.length + hits.people.length + docs.length;
 
   return (
     <div className="relative">
@@ -158,7 +163,9 @@ export function ObecSearch({
         <div className="mt-3 overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] shadow-sm">
           {totalResults === 0 ? (
             <p className="px-4 py-6 text-center text-sm text-[var(--color-text-secondary)]">
-              Pro „{query}“ jsme v sekci Obec nic nenašli. Zkuste jiný výraz.
+              {loading
+                ? "Hledám…"
+                : `Pro „${query}“ jsme v sekci Úřad nic nenašli. Zkuste jiný výraz.`}
             </p>
           ) : (
             <ul className="divide-y divide-[var(--color-border)]">
@@ -168,8 +175,12 @@ export function ObecSearch({
               {hits.people.map((hit) => (
                 <ResultRow key={hit.id} hit={hit} icon="user" />
               ))}
-              {hits.docs.map((hit) => (
-                <ResultRow key={hit.id} hit={hit} icon="file" />
+              {docs.slice(0, ITEM_LIMIT).map((hit) => (
+                <ResultRow
+                  key={hit.id}
+                  hit={{ ...hit, description: hit.snippet }}
+                  icon="file"
+                />
               ))}
             </ul>
           )}
@@ -201,7 +212,7 @@ function ResultRow({
           {hit.title}
         </div>
         {hit.description ? (
-          <div className="mt-0.5 line-clamp-1 text-xs text-[var(--color-text-secondary)]">
+          <div className="mt-0.5 line-clamp-2 text-xs text-[var(--color-text-secondary)]">
             {hit.description}
           </div>
         ) : null}
