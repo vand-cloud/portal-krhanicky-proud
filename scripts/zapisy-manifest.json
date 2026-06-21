@@ -1,0 +1,35 @@
+[
+  { "cislo": "1", "rok": "2025", "isoDate": "2025-03-11", "dateLabel": "11. 3. 2025", "fullDateDot": "11.3.2025", "oid": "12091480" },
+  { "cislo": "2", "rok": "2025", "isoDate": "2025-04-16", "dateLabel": "16. 4. 2025", "fullDateDot": "16.4.2025", "oid": "12521950" },
+  { "cislo": "3", "rok": "2025", "isoDate": "2025-06-25", "dateLabel": "25. 6. 2025", "fullDateDot": "25.6.2025", "oid": "12534651" },
+  { "cislo": "4", "rok": "2025", "isoDate": "2025-08-26", "dateLabel": "26. 8. 2025", "fullDateDot": "26.8.2025", "oid": "12602392" },
+  { "cislo": "5", "rok": "2025", "isoDate": "2025-11-19", "dateLabel": "19. 11. 2025", "fullDateDot": "19.11.2025", "oid": "12920730" },
+  { "cislo": "6", "rok": "2025", "isoDate": "2025-12-12", "dateLabel": "12. 12. 2025", "fullDateDot": "12.12.2025", "oid": "13092137" },
+
+  { "cislo": "1", "rok": "2024", "isoDate": "2024-03-07", "dateLabel": "7. 3. 2024", "fullDateDot": "7.3.2024", "oid": "10896394" },
+  { "cislo": "2", "rok": "2024", "isoDate": "2024-06-06", "dateLabel": "6. 6. 2024", "fullDateDot": "6.6.2024", "oid": "11245580" },
+  { "cislo": "3", "rok": "2024", "isoDate": "2024-07-22", "dateLabel": "22. 7. 2024", "fullDateDot": "22.7.2024", "oid": "11607728" },
+  { "cislo": "4", "rok": "2024", "isoDate": "2024-09-24", "dateLabel": "24. 9. 2024", "fullDateDot": "24.9.2024", "oid": "11835884" },
+  { "cislo": "5", "rok": "2024", "isoDate": "2024-10-24", "dateLabel": "24. 10. 2024", "fullDateDot": "24.10.2024", "oid": "11607719" },
+  { "cislo": "6", "rok": "2024", "isoDate": "2024-12-13", "dateLabel": "13. 12. 2024", "fullDateDot": "13.12.2024", "oid": "11819766" },
+
+  { "cislo": "1", "rok": "2023", "isoDate": "2023-03-16", "dateLabel": "16. 3. 2023", "fullDateDot": "16.3.2023", "oid": "9846357" },
+  { "cislo": "2", "rok": "2023", "isoDate": "2023-06-15", "dateLabel": "15. 6. 2023", "fullDateDot": "15.6.2023", "oid": "10175521" },
+  { "cislo": "3", "rok": "2023", "isoDate": "2023-07-19", "dateLabel": "19. 7. 2023", "fullDateDot": "19.7.2023", "oid": "10243123" },
+  { "cislo": "4", "rok": "2023", "isoDate": "2023-10-19", "dateLabel": "19. 10. 2023", "fullDateDot": "19.10.2023", "oid": "10668393" },
+  { "cislo": "5", "rok": "2023", "isoDate": "2023-12-15", "dateLabel": "15. 12. 2023", "fullDateDot": "15.12.2023", "oid": "10668397" },
+
+  { "cislo": "1", "rok": "2022", "isoDate": "2022-02-21", "dateLabel": "21. 2. 2022", "fullDateDot": "21.2.2022", "oid": "8885483" },
+  { "cislo": "2", "rok": "2022", "isoDate": "2022-03-11", "dateLabel": "11. 3. 2022", "fullDateDot": "11.3.2022", "oid": "9240355" },
+  { "cislo": "3", "rok": "2022", "isoDate": "2022-05-02", "dateLabel": "2. 5. 2022", "fullDateDot": "2.5.2022", "oid": "9010232" },
+  { "cislo": "4", "rok": "2022", "isoDate": "2022-07-18", "dateLabel": "18. 7. 2022", "fullDateDot": "18.7.2022", "oid": "9210104" },
+  { "cislo": "5", "rok": "2022", "isoDate": "2022-10-19", "dateLabel": "19. 10. 2022", "fullDateDot": "19.10.2022", "oid": "9546788" },
+  { "cislo": "6", "rok": "2022", "isoDate": "2022-11-07", "dateLabel": "7. 11. 2022", "fullDateDot": "7.11.2022", "oid": "9546792" },
+  { "cislo": "7", "rok": "2022", "isoDate": "2022-12-22", "dateLabel": "22. 12. 2022", "fullDateDot": "22.12.2022", "oid": "9620200" },
+
+  { "cislo": "1", "rok": "2021", "isoDate": "2021-03-17", "dateLabel": "17. 3. 2021", "fullDateDot": "17.3.2021", "oid": "9240290" },
+  { "cislo": "2", "rok": "2021", "isoDate": "2021-06-14", "dateLabel": "14. 6. 2021", "fullDateDot": "14.6.2021", "oid": "9240317" },
+  { "cislo": "3", "rok": "2021", "isoDate": "2021-07-12", "dateLabel": "12. 7. 2021", "fullDateDot": "12.7.2021", "oid": "9240331" },
+  { "cislo": "4", "rok": "2021", "isoDate": "2021-09-13", "dateLabel": "13. 9. 2021", "fullDateDot": "13.9.2021", "oid": "9240341" },
+  { "cislo": "5", "rok": "2021", "isoDate": "2021-12-10", "dateLabel": "10. 12. 2021", "fullDateDot": "10.12.2021", "oid": "8874831" }
+]

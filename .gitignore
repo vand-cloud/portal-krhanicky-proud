@@ -53,3 +53,7 @@ test-results/
 .vercel/
 storybook-static/
 !.env.local.example
+
+# council-minutes import: downloaded source PDFs + temp
+scripts/zapisy-pdf/
+scripts/.zapis-import-*.pdf
