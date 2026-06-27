@@ -45,8 +45,13 @@ export default async function HomePage({
   const tHome = await getTranslations({ locale, namespace: "homepage" });
 
   // Newest blog posts from Sanity for the editorial band under the search
-  // module (the query already orders them newest-first).
-  const { posts: blogPosts } = await getBlogData();
+  // module (the query already orders them newest-first). The band is
+  // optional: if Sanity is unreachable (e.g. CI runs with a placeholder
+  // project id, or a transient outage), the homepage still renders the
+  // search hero -- BlogBand simply renders nothing for an empty list.
+  const blogPosts = await getBlogData()
+    .then((d) => d.posts)
+    .catch(() => []);
 
   // Default landing is "all" -- a curated overview. Type-specific URLs
   // (?type=akce, mista, gastro, …) keep working for filtered listings.

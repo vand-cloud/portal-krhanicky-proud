@@ -20,8 +20,17 @@ const formatDate = new Intl.DateTimeFormat("cs-CZ", {
 });
 
 export async function generateStaticParams() {
-  const slugs = await getAllUradSlugs();
-  return slugs.map((slug) => ({ slug }));
+  // Prerender every úřad slug when Sanity is reachable. If it is not (e.g. a
+  // CI build with a placeholder project id), return no params so the build
+  // succeeds and these routes render on demand instead of crashing the
+  // whole build. A production build with real credentials still prerenders
+  // the full set.
+  try {
+    const slugs = await getAllUradSlugs();
+    return slugs.map((slug) => ({ slug }));
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({

@@ -14,8 +14,17 @@ import { PersonDetail } from "@/components/sections/People/PersonDetail";
 import { PortableBody } from "@/components/sections/RichText/PortableBody";
 
 export async function generateStaticParams() {
-  const { items } = await getProgramData();
-  return items.map((i) => ({ slug: i.slug }));
+  // Prerender every programme item when Sanity is reachable. If it is not
+  // (e.g. a CI build with a placeholder project id), return no params so the
+  // build succeeds and these routes render on demand instead of crashing
+  // the whole build. A production build with real credentials still
+  // prerenders the full set.
+  try {
+    const { items } = await getProgramData();
+    return items.map((i) => ({ slug: i.slug }));
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({

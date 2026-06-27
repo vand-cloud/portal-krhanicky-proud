@@ -34,8 +34,50 @@ const KANDIDATI_CATEGORY: CategoryVM = {
     "Kdo jde v komunálních volbách 2026 za Krhanický Proud. Kandidátka v pořadí, jak ji uvidíte na hlasovacím lístku.",
 };
 
-const fetch = <T>(query: string, params?: Record<string, unknown>) =>
-  client.fetch<T>(query, params ?? {}, { next: { revalidate: 60 } });
+// True when the error means the Sanity backend is unreachable or misconfigured
+// rather than a real query problem: the project/dataset does not exist (404 --
+// e.g. a CI build pointed at the placeholder project id "dummy"), or the
+// network call failed outright. Genuine query errors (e.g. 400 from malformed
+// GROQ) still propagate so they are not silently hidden.
+const NETWORK_ERROR_CODES = new Set([
+  "ENOTFOUND",
+  "ECONNREFUSED",
+  "ECONNRESET",
+  "ETIMEDOUT",
+  "EAI_AGAIN",
+  "UND_ERR_CONNECT_TIMEOUT",
+]);
+
+function isBackendUnavailable(err: unknown): boolean {
+  if (!err || typeof err !== "object") return false;
+  // Sanity client HTTP errors carry an HTTP statusCode. 404 = project/dataset
+  // not found (the dummy-id case).
+  if ((err as { statusCode?: number }).statusCode === 404) return true;
+  // Transport-level failures from undici/node carry a string `code` (and the
+  // real cause is often nested under `cause` for a wrapped "fetch failed").
+  const code = (err as { code?: string }).code;
+  if (code && NETWORK_ERROR_CODES.has(code)) return true;
+  const causeCode = (err as { cause?: { code?: string } }).cause?.code;
+  if (causeCode && NETWORK_ERROR_CODES.has(causeCode)) return true;
+  return false;
+}
+
+// Every consumer below already coalesces a missing result (`?? []`, `| null`),
+// so degrading an unreachable backend to null keeps the whole site rendering
+// (with empty/optional content) instead of crashing the build or a request.
+const fetch = async <T>(
+  query: string,
+  params?: Record<string, unknown>,
+): Promise<T> => {
+  try {
+    return await client.fetch<T>(query, params ?? {}, {
+      next: { revalidate: 60 },
+    });
+  } catch (err) {
+    if (isBackendUnavailable(err)) return null as T;
+    throw err;
+  }
+};
 
 // ── Person ───────────────────────────────────────────────────────────────────
 type RawPerson = {

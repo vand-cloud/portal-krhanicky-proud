@@ -78,7 +78,12 @@ export default async function LocaleLayout({
 
   setRequestLocale(locale);
 
-  const settings = await getSiteSettings();
+  // Site settings (alert bar, footer disclosure, contact overrides) are
+  // optional chrome: ChromeWrapper falls back to siteConfig for every field
+  // when settings is null. If Sanity is unreachable (e.g. CI runs with a
+  // placeholder project id, or a transient outage), degrade to those static
+  // defaults instead of crashing every page in the layout.
+  const settings = await getSiteSettings().catch(() => null);
 
   return (
     <html

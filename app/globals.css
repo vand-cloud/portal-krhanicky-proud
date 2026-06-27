@@ -24,7 +24,11 @@
   --color-kp-navy: #00257b;       /* primary -- logo, headings, key UI    */
   --color-kp-navy-hover: #001f66; /* navy -8% L                           */
   --color-kp-navy-press: #001a52; /* navy -12% L                          */
-  --color-kp-blue: #0077c0;       /* secondary -- links, accents, focus   */
+  --color-kp-blue: #006db2;       /* secondary -- links, accents, focus.
+                                     Darkened from #0077c0 so accent text
+                                     clears WCAG 2.1 AA 4.5:1 on light
+                                     surfaces: 5.01:1 on the paper-cool page
+                                     bg, 5.48:1 on white. */
   --color-kp-blue-mid: #5ba0ce;   /* supporting -- quiet illustrative     */
   --color-kp-blue-sky: #a9cce3;   /* tertiary -- backgrounds, dividers    */
   --color-kp-blue-mist: #d4e5f2;  /* surface tint -- cards, hover bg      */
@@ -99,7 +103,10 @@
   --color-surface-warm: var(--color-kp-sand);
   --color-text: var(--color-kp-ink);
   --color-text-secondary: var(--color-kp-stone);
-  --color-text-tertiary: #8a8a8a;
+  /* Muted captions/labels. Darkened from #8a8a8a so it clears WCAG 2.1 AA
+     4.5:1 on every light surface it sits on (white, paper, paper-cool,
+     neutral-100): worst case 4.66:1 on paper-cool, 5.10:1 on white. */
+  --color-text-tertiary: #6e6e6e;
   --color-text-accent: var(--color-kp-navy);
   --color-text-on-brand: #ffffff;
   --color-border: var(--color-kp-border-warm);
