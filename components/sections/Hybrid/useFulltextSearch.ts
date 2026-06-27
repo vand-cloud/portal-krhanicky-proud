@@ -15,6 +15,10 @@ export function useFulltextSearch(scope: SearchScope, query: string) {
   const q = query.trim();
 
   useEffect(() => {
+    // Debounced search: synchronously clearing results/loading when the query
+    // is too short, and flagging loading before the debounced fetch, is the
+    // intended behaviour. These setState calls are deliberate.
+    /* eslint-disable react-hooks/set-state-in-effect */
     if (q.length < 2) {
       setResults([]);
       setLoading(false);
@@ -22,6 +26,7 @@ export function useFulltextSearch(scope: SearchScope, query: string) {
     }
     let active = true;
     setLoading(true);
+    /* eslint-enable react-hooks/set-state-in-effect */
     const timer = setTimeout(async () => {
       try {
         const res = await fetch(
