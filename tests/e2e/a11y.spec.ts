@@ -12,10 +12,19 @@ import AxeBuilder from "@axe-core/playwright";
 test("homepage has no critical or serious accessibility violations", async ({
   page,
 }) => {
+  // Test the settled render under reduced motion. The homepage uses scroll
+  // reveals (a parent opacity fade); without this, axe samples text mid-fade
+  // and reports false-positive contrast failures (a dark navy heading at
+  // opacity 0.3 over white computes as a washed-out light blue). Reduced motion
+  // makes Reveal paint its content at full opacity immediately, so axe measures
+  // the real, final colors, which is also the state a11y rules actually care
+  // about. This keeps the run deterministic instead of flaky on animation timing.
+  await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
 
   // Wait for the main landmark so we know the page actually rendered.
   await expect(page.locator("main")).toBeVisible();
+  await page.waitForLoadState("networkidle");
 
   const results = await new AxeBuilder({ page })
     .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
