@@ -8,6 +8,9 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
+    # Backstop: if any step wedges (e.g. a stalled browser download), fail in
+    # minutes instead of holding a runner until GitHub's 6h ceiling.
+    timeout-minutes: 25
 
     env:
       NEXT_PUBLIC_SANITY_PROJECT_ID: dummy
@@ -40,7 +43,21 @@ jobs:
         run: npm test
 
       - name: Install Playwright browsers
-        run: npx playwright install --with-deps chromium
+        # Playwright's installer has no internal timeout: it can download the
+        # first artifact to 100% and then stall indefinitely on the next CDN
+        # fetch, wedging the job until the job timeout fires. Wrap each attempt
+        # in a hard timeout and retry; already-downloaded artifacts are cached,
+        # so a retry only re-fetches whatever stalled.
+        run: |
+          for attempt in 1 2 3; do
+            echo "Playwright install attempt $attempt"
+            if timeout 240 npx playwright install --with-deps chromium; then
+              exit 0
+            fi
+            echo "::warning::Playwright install attempt $attempt stalled or timed out; retrying"
+          done
+          echo "::error::Playwright install failed after 3 attempts"
+          exit 1
 
       - name: E2E tests (Playwright + axe)
         run: npm run test:e2e
