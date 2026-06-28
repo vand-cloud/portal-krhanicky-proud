@@ -26,7 +26,12 @@ jobs:
         # npm-version-induced lockfile mismatches.
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          # Pinned to 24.15.0: Node 24.16.0 ships an extract-zip/yauzl
+          # regression that makes `playwright install` hang forever right after
+          # the browser download reaches 100% (microsoft/playwright#41000).
+          # Still Node 24.x, so it matches Vercel's build env. Can revert to a
+          # floating "24" once Playwright >=1.60 (which fixes the hang) is in.
+          node-version: 24.15.0
           cache: npm
 
       - name: Install dependencies
