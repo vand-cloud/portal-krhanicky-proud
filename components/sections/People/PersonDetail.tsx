@@ -74,9 +74,11 @@ export function PersonDetail({
       </div>
 
       {person.bio ? (
-        <p className="mt-8 text-base leading-relaxed text-[var(--color-text)]">
-          {person.bio}
-        </p>
+        <div className="mt-8 space-y-4 text-base leading-relaxed text-[var(--color-text)]">
+          {person.bio.split("\n").filter((p) => p.trim()).map((paragraph, i) => (
+            <p key={i}>{paragraph}</p>
+          ))}
+        </div>
       ) : null}
 
       {person.contactEmail || person.contactPhone || person.social ? (

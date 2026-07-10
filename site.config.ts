@@ -6,7 +6,7 @@ export const siteConfig = {
   phase: "designed" as Phase,
 
   brand: {
-    name: "Krhanický Proud",
+    name: "Krhanický PROUD",
     domain: "krhanicky-proud.cz",
     // Krhanice Navy + Proud Blue, from Claude Design system bundle.
     primaryColor: "#00257B",
