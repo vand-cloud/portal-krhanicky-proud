@@ -60,7 +60,7 @@ export function SiteHeader({
                     <li key={item.href}>
                       <a
                         href={item.href}
-                        className="block rounded-md px-3 py-2 text-[20px] font-medium text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-text)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
+                        className="block rounded-md px-3 py-2 text-[20px] font-bold text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-text)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
                       >
                         {item.label}
                       </a>
@@ -75,7 +75,7 @@ export function SiteHeader({
                     <a
                       href={item.href}
                       aria-haspopup="true"
-                      className="flex items-center gap-1 rounded-md px-3 py-2 text-[20px] font-medium text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-text)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
+                      className="flex items-center gap-1 rounded-md px-3 py-2 text-[20px] font-bold text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-text)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
                     >
                       {item.label}
                       <ChevronDown
@@ -108,7 +108,7 @@ export function SiteHeader({
                             key={child.href}
                             href={child.href}
                             role="menuitem"
-                            className="block rounded px-3 py-2 text-[20px] font-medium text-[var(--color-text-secondary)] outline-none transition-colors hover:bg-[var(--color-bg-elev)] hover:text-[var(--color-text)] focus-visible:bg-[var(--color-bg-elev)] focus-visible:text-[var(--color-text)]"
+                            className="block rounded px-3 py-2 text-[20px] font-bold text-[var(--color-text-secondary)] outline-none transition-colors hover:bg-[var(--color-bg-elev)] hover:text-[var(--color-text)] focus-visible:bg-[var(--color-bg-elev)] focus-visible:text-[var(--color-text)]"
                           >
                             {child.label}
                           </a>
@@ -148,7 +148,7 @@ export function SiteHeader({
                   <a
                     href={item.href}
                     onClick={() => setMobileOpen(false)}
-                    className="block py-3 text-base font-medium text-[var(--color-text)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
+                    className="block py-3 text-base font-bold text-[var(--color-text)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
                   >
                     {item.label}
                   </a>
@@ -159,7 +159,7 @@ export function SiteHeader({
                           <a
                             href={child.href}
                             onClick={() => setMobileOpen(false)}
-                            className="block py-3 pl-4 text-[20px] font-medium text-[var(--color-text-secondary)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
+                            className="block py-3 pl-4 text-[20px] font-bold text-[var(--color-text-secondary)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
                           >
                             {child.label}
                           </a>
