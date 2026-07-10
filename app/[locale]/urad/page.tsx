@@ -49,10 +49,11 @@ export default async function VillagePage({
         <h1 className="text-3xl font-bold leading-tight tracking-tight text-[var(--color-text-accent)] sm:text-4xl lg:text-5xl">
           {page?.title ?? "Obecní úřad Krhanice"}
         </h1>
-        <p className="mt-4 text-base leading-relaxed text-[var(--color-text-secondary)] sm:text-lg">
-          {page?.subtitle ??
-            "Úřední deska, zastupitelstvo, dokumenty a aktuality. Co potřebujete vědět z radnice na jednom místě."}
-        </p>
+        <div className="mt-4 space-y-3 text-base leading-relaxed text-[var(--color-text-secondary)] sm:text-lg">
+          {(page?.subtitle ?? "Úřední deska, zastupitelstvo, dokumenty a aktuality. Co potřebujete vědět z radnice na jednom místě.").split("\n").filter((ln) => ln.trim()).map((ln, i) => (
+            <p key={i}>{ln}</p>
+          ))}
+        </div>
         <div className="mt-7">
           <ObecSearch
             categories={categories}
