@@ -43,6 +43,7 @@ export interface SocialLinks {
   instagram?: string;
   linkedin?: string;
   youtube?: string;
+  web?: string;
 }
 
 export interface Entry {
