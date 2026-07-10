@@ -24,10 +24,11 @@ export default async function BlogPage({
         <h1 className="text-3xl font-bold leading-tight tracking-tight text-[var(--color-text-accent)] sm:text-4xl lg:text-5xl">
           {page?.title ?? "Obecní příspěvky"}
         </h1>
-        <p className="mt-4 text-base leading-relaxed text-[var(--color-text-secondary)] sm:text-lg">
-          {page?.intro ??
-            "Delší texty: rozhovory s místními, vysvětlení k radničním rozhodnutím a tipy na výlety po Posázaví."}
-        </p>
+        <div className="mt-4 space-y-3 text-base leading-relaxed text-[var(--color-text-secondary)] sm:text-lg">
+          {(page?.intro ?? "Delší texty: rozhovory s místními, vysvětlení k radničním rozhodnutím a tipy na výlety po Posázaví.").split("\n").filter((ln) => ln.trim()).map((ln, i) => (
+            <p key={i}>{ln}</p>
+          ))}
+        </div>
       </header>
 
       <div className="mt-12">
