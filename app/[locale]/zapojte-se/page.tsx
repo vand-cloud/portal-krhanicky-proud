@@ -33,10 +33,11 @@ export default async function GetInvolvedPage({
         <h1 className="text-3xl font-bold leading-tight tracking-tight text-[var(--color-text-accent)] sm:text-4xl lg:text-5xl">
           {page?.title ?? "Zapojte se"}
         </h1>
-        <p className="mt-4 text-base leading-relaxed text-[var(--color-text-secondary)]">
-          {page?.subtitle ??
-            "Tento portál stojí na sousedské spolupráci. Akce, místa a tipy přicházejí často přímo od vás."}
-        </p>
+        <div className="mt-4 space-y-3 text-base leading-relaxed text-[var(--color-text-secondary)]">
+          {(page?.subtitle ?? "Tento portál stojí na sousedské spolupráci. Akce, místa a tipy přicházejí často přímo od vás.").split("\n").filter((ln) => ln.trim()).map((ln, i) => (
+            <p key={i}>{ln}</p>
+          ))}
+        </div>
       </header>
 
       {/* Ways to contribute. Two columns on tablet, four on desktop so each
