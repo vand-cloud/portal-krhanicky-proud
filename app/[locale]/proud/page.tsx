@@ -32,10 +32,11 @@ export default async function ProudPage({
         <h1 className="text-3xl font-bold leading-tight tracking-tight text-[var(--color-text-accent)] sm:text-4xl lg:text-5xl">
           {page?.title ?? "Krhanický Proud"}
         </h1>
-        <p className="mt-4 text-base leading-relaxed text-[var(--color-text-secondary)] sm:text-lg">
-          {page?.subtitle ??
-            "Jsme občané, kteří v Krhanicích žijí. Provozujeme tento portál celoročně jako informační rozcestník pro sousedy a návštěvníky obce. V období komunálních voleb vám představujeme i naši kandidátku."}
-        </p>
+        <div className="mt-4 space-y-3 text-base leading-relaxed text-[var(--color-text-secondary)] sm:text-lg">
+          {(page?.subtitle ?? "Jsme občané, kteří v Krhanicích žijí. Provozujeme tento portál celoročně jako informační rozcestník pro sousedy a návštěvníky obce. V období komunálních voleb vám představujeme i naši kandidátku.").split("\n").filter((ln) => ln.trim()).map((ln, i) => (
+            <p key={i}>{ln}</p>
+          ))}
+        </div>
       </header>
 
       <ProudHero
