@@ -48,6 +48,10 @@ export function ObecIndex({
   const isDetailMode = Boolean(initialSelectedSlug && detailNode);
 
   function selectCategory(cat: CategoryChoice) {
+    if (isDetailMode) {
+      window.location.href = buildBackHref(cat, null);
+      return;
+    }
     setActiveCategory(cat);
     setActiveSubcategory(null);
   }
@@ -155,7 +159,13 @@ export function ObecIndex({
                           label={sub.label}
                           count={subItems.length}
                           active={activeSubcategory === sub.slug}
-                          onClick={() => setActiveSubcategory(sub.slug)}
+                          onClick={() => {
+                            if (isDetailMode) {
+                              window.location.href = buildBackHref(cat.slug, sub.slug);
+                              return;
+                            }
+                            setActiveSubcategory(sub.slug);
+                          }}
                         />
                       );
                     })}
