@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.brand.name}`,
   },
   description:
-    "Krhanický Proud — místní portál pro občany Krhanic. Akce, místa, služby a aktuality v okolí.",
+    "Krhanický PROUD — místní portál pro občany Krhanic. Akce, místa, služby a aktuality v okolí.",
 };
 
 export function generateStaticParams() {
