@@ -97,10 +97,11 @@ export default async function NasProgramDetailPage({
         <h1 className="text-3xl font-bold leading-tight tracking-tight text-[var(--color-text-accent)] sm:text-4xl lg:text-5xl">
           {page?.title ?? "Náš program"}
         </h1>
-        <p className="mt-4 text-base leading-relaxed text-[var(--color-text-secondary)] sm:text-lg">
-          {page?.subtitle ??
-            "Co konkrétně chceme v Krhanicích řešit. Témata řadíme tematicky, za každým návrhem stojí někdo z týmu nebo kandidátky."}
-        </p>
+        <div className="mt-4 space-y-3 text-base leading-relaxed text-[var(--color-text-secondary)] sm:text-lg">
+          {(page?.subtitle ?? "Co konkrétně chceme v Krhanicích řešit. Témata řadíme tematicky, za každým návrhem stojí někdo z týmu nebo kandidátky.").split("\n").filter((ln) => ln.trim()).map((ln, i) => (
+            <p key={i}>{ln}</p>
+          ))}
+        </div>
         <div className="mt-7">
           <ProudSearch
             categories={categories}
@@ -141,9 +142,11 @@ function GenericProudPost({ item }: { item: ProudItemVM }) {
       {/* Lead/perex above the cover, like the blog detail excerpt: larger
           type that sets up the piece before the reader hits the image. */}
       {item.description ? (
-        <p className="mt-4 text-lg text-[var(--color-text-secondary)]">
-          {item.description}
-        </p>
+        <div className="mt-4 space-y-3 text-lg text-[var(--color-text-secondary)]">
+          {item.description.split("\n").filter((ln) => ln.trim()).map((ln, i) => (
+            <p key={i}>{ln}</p>
+          ))}
+        </div>
       ) : null}
 
       {/* Cover image below the lead, like the blog detail: shown at its
