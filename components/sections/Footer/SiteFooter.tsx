@@ -45,19 +45,19 @@ export function SiteFooter({
   return (
     <footer
       role="contentinfo"
-      className="border-t border-[var(--color-border)] bg-[var(--color-bg-elev)] py-10 text-sm text-[var(--color-text-secondary)]"
+      className="border-t border-[var(--color-border)] bg-[var(--color-bg-elev)] py-12 text-[16px] text-[var(--color-text-secondary)]"
     >
-      <div className="mx-auto max-w-7xl space-y-6 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl space-y-8 px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div className="max-w-2xl">
-            <p className="text-base font-semibold text-[var(--color-text)]">
+            <p className="text-[18px] font-semibold text-[var(--color-text)]">
               {brandName}
             </p>
             {disclosure ? (
-              <p className="mt-2 text-sm leading-relaxed">{disclosure}</p>
+              <p className="mt-2 text-[16px] leading-relaxed">{disclosure}</p>
             ) : null}
             {contact ? (
-              <p className="mt-2 text-sm leading-relaxed">{contact}</p>
+              <p className="mt-2 text-[16px] leading-relaxed">{contact}</p>
             ) : null}
           </div>
           <div className="flex shrink-0 flex-col items-start gap-4 sm:items-end">
@@ -106,7 +106,7 @@ export function SiteFooter({
             </nav>
           </div>
         </div>
-        <p className="border-t border-[var(--color-border)] pt-4 text-xs text-[var(--color-text-tertiary)]">
+        <p className="border-t border-[var(--color-border)] pt-6 text-sm text-[var(--color-text-tertiary)]">
           {copyright}
         </p>
       </div>
