@@ -1,6 +1,8 @@
+import { Facebook, Instagram } from "lucide-react";
 import { CookieSettingsButton } from "@/components/consent/CookieSettingsButton";
 
 type LegalLink = { label: string; href: string };
+type Social = { facebook?: string; instagram?: string };
 
 export function SiteFooter({
   brandName,
@@ -9,23 +11,21 @@ export function SiteFooter({
   legalLinks = [],
   copyright,
   cookieSettingsLabel = "Nastavení cookies",
+  social,
 }: {
   brandName: string;
-  // ReactNode (not just string) so the disclosure can embed inline links
-  // (e.g. a link to the programme section).
   disclosure?: React.ReactNode;
-  // Optional contact line under the disclosure (name + active tel/mailto
-  // links). Built by the host from siteConfig.contact.
   contact?: React.ReactNode;
   legalLinks?: LegalLink[];
   copyright: string;
   cookieSettingsLabel?: string;
+  social?: Social;
 }) {
-  // Shared style: legal links and the cookie settings re-open trigger
-  // need identical typography so the action sits inline with the links
-  // and reads as part of the same row.
   const legalItemClass =
     "cursor-pointer bg-transparent p-0 text-xs text-[var(--color-text-tertiary)] outline-none hover:text-[var(--color-text)] focus-visible:underline";
+
+  const iconClass =
+    "text-[var(--color-text-tertiary)] transition-colors hover:text-[var(--color-text)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 rounded";
 
   return (
     <footer
@@ -45,23 +45,51 @@ export function SiteFooter({
               <p className="mt-2 text-sm leading-relaxed">{contact}</p>
             ) : null}
           </div>
-          <nav aria-label="Právní odkazy" className="shrink-0">
-            <ul className="flex flex-wrap gap-x-4 gap-y-2">
-              {legalLinks.map((link) => (
-                <li key={link.href}>
-                  <a href={link.href} className={legalItemClass}>
-                    {link.label}
+          <div className="flex shrink-0 flex-col items-start gap-4 sm:items-end">
+            {social && (social.facebook || social.instagram) ? (
+              <div className="flex gap-3">
+                {social.facebook ? (
+                  <a
+                    href={social.facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Facebook"
+                    className={iconClass}
+                  >
+                    <Facebook size={20} aria-hidden />
                   </a>
+                ) : null}
+                {social.instagram ? (
+                  <a
+                    href={social.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                    className={iconClass}
+                  >
+                    <Instagram size={20} aria-hidden />
+                  </a>
+                ) : null}
+              </div>
+            ) : null}
+            <nav aria-label="Právní odkazy">
+              <ul className="flex flex-wrap gap-x-4 gap-y-2">
+                {legalLinks.map((link) => (
+                  <li key={link.href}>
+                    <a href={link.href} className={legalItemClass}>
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+                <li>
+                  <CookieSettingsButton
+                    className={legalItemClass}
+                    label={cookieSettingsLabel}
+                  />
                 </li>
-              ))}
-              <li>
-                <CookieSettingsButton
-                  className={legalItemClass}
-                  label={cookieSettingsLabel}
-                />
-              </li>
-            </ul>
-          </nav>
+              </ul>
+            </nav>
+          </div>
         </div>
         <p className="border-t border-[var(--color-border)] pt-4 text-xs text-[var(--color-text-tertiary)]">
           {copyright}
