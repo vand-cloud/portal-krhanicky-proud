@@ -46,10 +46,11 @@ export default async function NasProgramPage({
         <h1 className="text-3xl font-bold leading-tight tracking-tight text-[var(--color-text-accent)] sm:text-4xl lg:text-5xl">
           {page?.title ?? "Náš program"}
         </h1>
-        <p className="mt-4 text-base leading-relaxed text-[var(--color-text-secondary)] sm:text-lg">
-          {page?.subtitle ??
-            "Co konkrétně chceme v Krhanicích řešit. Témata řadíme tematicky, za každým návrhem stojí někdo z týmu nebo kandidátky."}
-        </p>
+        <div className="mt-4 space-y-3 text-base leading-relaxed text-[var(--color-text-secondary)] sm:text-lg">
+          {(page?.subtitle ?? "Co konkrétně chceme v Krhanicích řešit. Témata řadíme tematicky, za každým návrhem stojí někdo z týmu nebo kandidátky.").split("\n").filter((ln) => ln.trim()).map((ln, i) => (
+            <p key={i}>{ln}</p>
+          ))}
+        </div>
         <div className="mt-7">
           <ProudSearch
             categories={categories}
