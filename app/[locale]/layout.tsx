@@ -217,6 +217,7 @@ function ChromeWrapper({
           year: new Date().getFullYear(),
           brand: siteConfig.brand.name,
         })}
+        social={settings?.social}
       />
     </>
   );
