@@ -8,7 +8,7 @@ import { getBlogData } from "@/lib/sanity/fetch";
 // search hero so the primary action ("najdi mi něco") is the front
 // door, not a curated overview. The previous curated rozcestník now
 // lives at /rozcestnik (hidden from nav, pending deploy decision).
-export const metadata = { title: "Krhanický průvodce" };
+export const metadata = { title: "Krhanický PROUD" };
 
 // URL ?type=... → internal Scope. New taxonomy: each type IS its own slug.
 // "vse" remains as a friendly alias for the catch-all view.
