@@ -21,6 +21,7 @@ export interface PersonVM {
   id: string;
   slug: string;
   name: string;
+  shortName?: string;
   role?: string;
   bio?: string;
   affiliations: string[];
