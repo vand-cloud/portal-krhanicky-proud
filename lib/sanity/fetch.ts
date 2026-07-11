@@ -217,12 +217,14 @@ export async function getProudPostBySlug(
 
 // ── Blog ─────────────────────────────────────────────────────────────────────
 type RawBlogPost = Omit<BlogPostVM, "href" | "readingTime" | "related"> & {
+  authorShortName?: string | null;
   related?: RawBlogPost[];
 };
 
 function blogToVM(p: RawBlogPost): BlogPostVM {
   return {
     ...p,
+    author: p.authorShortName ?? p.author,
     categories: p.categories ?? [],
     categoryLabels: p.categoryLabels ?? [],
     tags: p.tags ?? [],
