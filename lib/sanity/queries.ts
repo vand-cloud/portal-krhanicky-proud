@@ -31,7 +31,8 @@ const BODY = groq`body[]{
 // Blog list / related card fields (raw body kept only for reading-time).
 const BLOG_CARD = groq`
   "id": _id, title, "slug": slug.current, excerpt, publishedAt,
-  "author": author->coalesce(shortName, name),
+  "author": author->name,
+  "authorShortName": author->shortName,
   "categories": categories[]->slug.current,
   "categoryLabels": categories[]->{ "slug": slug.current, "label": title },
   tags,
@@ -110,7 +111,8 @@ export const blogSlugsQuery = groq`*[_type == "blogPost"]{ "slug": slug.current 
 export const blogPostBySlugQuery = groq`
   *[_type == "blogPost" && slug.current == $slug][0]{
     "id": _id, title, "slug": slug.current, excerpt, publishedAt,
-    "author": author->coalesce(shortName, name),
+    "author": author->name,
+    "authorShortName": author->shortName,
     "categories": categories[]->slug.current,
     "categoryLabels": categories[]->{ "slug": slug.current, "label": title },
     tags,
