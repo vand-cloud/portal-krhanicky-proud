@@ -2,7 +2,7 @@ import { groq } from "next-sanity";
 
 // ── Reusable projections ─────────────────────────────────────────────────────
 const PERSON_FULL = groq`
-  "id": _id, name, "slug": slug.current, role, bio, affiliations, visibility,
+  "id": _id, name, shortName, "slug": slug.current, role, bio, affiliations, visibility,
   "photo": photo.asset->url,
   "contactEmail": contact.email,
   "contactPhone": contact.phone,
@@ -87,7 +87,7 @@ export const proudPostsQuery = groq`
     "id": _id, title, "slug": slug.current, description,
     "category": category->slug.current, "categoryLabel": category->name,
     "heroImage": coverImage.asset->url,
-    "author": author->{ name, role }
+    "author": author->{ name, shortName, role }
   }
 `;
 export const proudPostBySlugQuery = groq`
@@ -95,7 +95,7 @@ export const proudPostBySlugQuery = groq`
     "id": _id, title, "slug": slug.current, description,
     "category": category->slug.current, "categoryLabel": category->name,
     "heroImage": coverImage.asset->url,
-    "author": author->{ name, role },
+    "author": author->{ name, shortName, role },
     ${BODY}
   }
 `;
