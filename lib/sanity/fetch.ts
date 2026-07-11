@@ -83,6 +83,7 @@ const fetch = async <T>(
 type RawPerson = {
   id: string;
   name: string;
+  shortName?: string | null;
   slug: string;
   role?: string;
   bio?: string;
@@ -102,6 +103,7 @@ function mapPerson(p: RawPerson): PersonVM {
   return {
     id: p.id,
     name: p.name,
+    shortName: p.shortName ?? undefined,
     slug: p.slug,
     role: p.role,
     bio: p.bio,
@@ -149,7 +151,7 @@ type RawProudPost = {
   category?: string;
   categoryLabel?: string;
   heroImage?: string;
-  author?: { name: string; role?: string } | null;
+  author?: { name: string; shortName?: string | null; role?: string } | null;
   body?: ProudItemVM["body"];
 };
 
@@ -164,7 +166,7 @@ function proudPostToVM(p: RawProudPost): ProudItemVM {
     href: `/proud/nas-program/${p.slug}`,
     isCandidate: false,
     heroImage: p.heroImage,
-    author: p.author ?? null,
+    author: p.author ? { name: p.author.shortName ?? p.author.name, role: p.author.role } : null,
     body: p.body,
   };
 }
@@ -293,7 +295,7 @@ function uradPostToVM(p: RawUradPost): UradItemVM {
 function councillorToUradVM(person: PersonVM): UradItemVM {
   return {
     id: person.id,
-    title: person.name,
+    title: person.shortName ?? person.name,
     slug: `zastupitel-${person.slug}`,
     description: person.role,
     category: "zastupitelstvo",
