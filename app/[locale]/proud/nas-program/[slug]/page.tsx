@@ -174,7 +174,6 @@ function GenericProudPost({ item }: { item: ProudItemVM }) {
         <p className="mt-6 text-sm text-[var(--color-text-tertiary)]">
           Za návrhem stojí:{" "}
           <span className="text-[var(--color-text)]">{author.name}</span>
-          {author.role ? <span> ({author.role})</span> : null}
         </p>
       ) : null}
       <PortableBody value={item.body} />
