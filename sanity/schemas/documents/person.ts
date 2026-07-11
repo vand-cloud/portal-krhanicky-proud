@@ -17,6 +17,12 @@ export const person = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "shortName",
+      title: "Jméno bez titulu",
+      type: "string",
+      description: "Jen jméno bez akademického titulu – používá se u autorství článků na blogu.",
+    }),
+    defineField({
       name: "slug",
       title: "Slug",
       type: "slug",
