@@ -845,6 +845,11 @@ function BlogBand({ posts }: { posts: BlogPostVM[] }) {
   const shown = posts.slice(0, ALL_BLOG_LIMIT);
   if (shown.length === 0) return null;
 
+  // Unique tags across ALL posts (not just the 3 shown), sorted alphabetically.
+  const allTags = Array.from(new Set(posts.flatMap((p) => p.tags ?? []))).sort(
+    (a, b) => a.localeCompare(b, "cs"),
+  );
+
   return (
     <section
       aria-labelledby="vse-blog"
@@ -870,6 +875,21 @@ function BlogBand({ posts }: { posts: BlogPostVM[] }) {
           <ArrowRight size={16} aria-hidden />
         </a>
       </div>
+
+      {/* Tag chips: all unique tags from all blog posts, link to filtered blog */}
+      {allTags.length > 0 && (
+        <div className="mt-4 flex flex-wrap gap-2">
+          {allTags.map((tag) => (
+            <a
+              key={tag}
+              href={`/blog?stitek=${encodeURIComponent(tag)}`}
+              className="inline-flex items-center rounded-full border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-1 text-xs font-medium text-[var(--color-text-secondary)] transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
+            >
+              {tag}
+            </a>
+          ))}
+        </div>
+      )}
 
       <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {shown.map((post) => (
