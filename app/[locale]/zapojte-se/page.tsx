@@ -2,6 +2,7 @@ import { setRequestLocale } from "next-intl/server";
 import { Mail } from "lucide-react";
 import { getZapojteSePage, getSiteSettings } from "@/lib/sanity/fetch";
 import { Icon } from "@/components/sections/RichText/IconRender";
+import { ContactForm } from "@/components/sections/ContactBlock/ContactForm";
 
 export const metadata = { title: "Zapojte se" };
 
@@ -61,9 +62,9 @@ export default async function GetInvolvedPage({
         ))}
       </ul>
 
-      {/* Contact panel: title on the left, mailto CTA on the right. */}
+      {/* Contact panel: header row (title + mailto), form below. */}
       <section className="mt-16 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-elev)] p-6 sm:p-8">
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div className="max-w-2xl">
             <h2 className="text-xl font-semibold text-[var(--color-text-accent)] sm:text-2xl">
               {contactTitle}
@@ -74,12 +75,13 @@ export default async function GetInvolvedPage({
           </div>
           <a
             href={`mailto:${contactEmail}`}
-            className="inline-flex shrink-0 items-center justify-center gap-2 rounded-md bg-[var(--color-brand)] px-5 py-2.5 text-sm font-semibold text-[var(--color-text-on-brand)] transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
+            className="inline-flex shrink-0 items-center justify-center gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-bg)] px-5 py-2.5 text-sm font-semibold text-[var(--color-text)] transition-colors hover:bg-[var(--color-bg-elev)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
           >
             <Mail size={16} aria-hidden />
             {contactButtonLabel}
           </a>
         </div>
+        <ContactForm />
       </section>
     </div>
   );
