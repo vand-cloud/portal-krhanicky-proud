@@ -147,6 +147,11 @@ export const uradPostBySlugQuery = groq`
   }
 `;
 
+// ── People (all public) ──────────────────────────────────────────────────────
+export const allPublicPeopleQuery = groq`
+  *[_type == "person" && visibility == "public"]{ "slug": slug.current }
+`;
+
 // ── Legal ────────────────────────────────────────────────────────────────────
 export const legalPageQuery = groq`
   *[_type == "legalPage" && slug.current == $slug][0]{
