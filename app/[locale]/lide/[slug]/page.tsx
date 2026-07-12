@@ -1,19 +1,17 @@
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { ChevronLeft } from "lucide-react";
-import { findPersonBySlug, people } from "@/content/people";
-import { entries } from "@/content/entries";
-import { blogPosts } from "@/content/blog";
-import {
-  PersonDetail,
-  resolvePersonRefs,
-} from "@/components/sections/People/PersonDetail";
+import { getAllPublicPersonSlugs, getPersonBySlug } from "@/lib/sanity/fetch";
+import { type Person } from "@/content/people";
+import { PersonDetail } from "@/components/sections/People/PersonDetail";
 
 export async function generateStaticParams() {
-  // Only build pages for public profiles. Internal profiles have no page.
-  return people
-    .filter((p) => p.visibility === "public")
-    .map((p) => ({ slug: p.slug }));
+  try {
+    const slugs = await getAllPublicPersonSlugs();
+    return slugs.map((slug) => ({ slug }));
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({
@@ -22,7 +20,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const person = findPersonBySlug(slug);
+  const person = await getPersonBySlug(slug);
   if (!person || person.visibility !== "public") {
     return { title: "Profil nenalezen" };
   }
@@ -40,38 +38,35 @@ export default async function PersonDetailPage({
   const { locale, slug } = await params;
   setRequestLocale(locale);
 
-  const person = findPersonBySlug(slug);
-  // Internal profiles 404 on direct URL. Detail pages exist only for
-  // people who opted in (visibility = public).
-  if (!person || person.visibility !== "public") notFound();
+  const raw = await getPersonBySlug(slug);
+  if (!raw || raw.visibility !== "public") notFound();
 
-  const { businesses, articles } = resolvePersonRefs(
-    person,
-    entries,
-    blogPosts,
-  );
+  const person: Person = {
+    id: raw.id,
+    slug: raw.slug,
+    name: raw.name,
+    role: raw.role,
+    bio: raw.bio,
+    affiliations: raw.affiliations as Person["affiliations"],
+    visibility: raw.visibility,
+    contactEmail: raw.contactEmail,
+    contactPhone: raw.contactPhone,
+    social: raw.social as Person["social"],
+    photo: raw.photo,
+  };
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-      {/* This page is the standalone, context-less detail. People reached
-          from /urad are routed through /urad/[slug] (sidebar kept). The
-          link back here is intentionally generic -- /proud is the most
-          common origin for direct links. */}
       <a
-        href="/proud"
+        href="javascript:history.back()"
         className="inline-flex items-center gap-1 text-xs text-[var(--color-text-tertiary)] outline-none transition-colors hover:text-[var(--color-text)] focus-visible:rounded focus-visible:outline-2 focus-visible:outline-[var(--color-accent)] focus-visible:outline-offset-2"
       >
         <ChevronLeft size={12} aria-hidden />
-        Zpět na Krhanický Proud
+        Zpět
       </a>
-
-      <article className="mt-6">
-        <PersonDetail
-          person={person}
-          businesses={businesses}
-          articles={articles}
-        />
-      </article>
+      <div className="mt-8">
+        <PersonDetail person={person} businesses={[]} articles={[]} />
+      </div>
     </div>
   );
 }
