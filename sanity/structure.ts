@@ -1,8 +1,6 @@
 import type { StructureResolver, StructureBuilder } from "sanity/structure";
 import { orderableDocumentListDeskItem } from "@sanity/orderable-document-list";
 
-// Singleton document types: edited as a single document, never listed and
-// never offered in the "create new" menu.
 export const SINGLETON_TYPES = [
   "siteSettings",
   "programPage",
@@ -56,7 +54,16 @@ export const structure: StructureResolver = async (S, context) => {
           S.list()
             .title("Program")
             .items([
-              orderableDocumentListDeskItem({ type: "proudCategory", title: "Kategorie", S, context }),
+              S.listItem()
+                .title("Kategorie")
+                .id("program-kategorie")
+                .child(
+                  S.documentList()
+                    .id("program-kategorie-list")
+                    .title("Programové kategorie")
+                    .filter('_type == "proudCategory"')
+                    .defaultOrdering([{ field: "orderRank", direction: "asc" }]),
+                ),
               orderableDocumentListDeskItem({ type: "proudPost", title: "Příspěvky", S, context }),
               ...proudCats.map((cat) =>
                 S.listItem()
@@ -80,13 +87,22 @@ export const structure: StructureResolver = async (S, context) => {
           S.list()
             .title("Blog")
             .items([
-              orderableDocumentListDeskItem({ type: "blogCategory", title: "Kategorie", S, context }),
               S.listItem()
-                .title("Příspěvky")
-                .id("blog-posts-all")
+                .title("Kategorie")
+                .id("blog-kategorie")
                 .child(
                   S.documentList()
-                    .id("blog-list-all")
+                    .id("blog-kategorie-list")
+                    .title("Blog kategorie")
+                    .filter('_type == "blogCategory"')
+                    .defaultOrdering([{ field: "orderRank", direction: "asc" }]),
+                ),
+              S.listItem()
+                .title("Příspěvky")
+                .id("blog-prispevky")
+                .child(
+                  S.documentList()
+                    .id("blog-prispevky-list")
                     .title("Příspěvky")
                     .filter('_type == "blogPost"')
                     .defaultOrdering([{ field: "publishedAt", direction: "desc" }]),
@@ -113,13 +129,22 @@ export const structure: StructureResolver = async (S, context) => {
           S.list()
             .title("Úřad")
             .items([
-              orderableDocumentListDeskItem({ type: "uradCategory", title: "Kategorie", S, context }),
               S.listItem()
-                .title("Příspěvky")
-                .id("urad-posts-all")
+                .title("Kategorie")
+                .id("urad-kategorie")
                 .child(
                   S.documentList()
-                    .id("urad-list-all")
+                    .id("urad-kategorie-list")
+                    .title("Úřední kategorie")
+                    .filter('_type == "uradCategory"')
+                    .defaultOrdering([{ field: "orderRank", direction: "asc" }]),
+                ),
+              S.listItem()
+                .title("Příspěvky")
+                .id("urad-prispevky")
+                .child(
+                  S.documentList()
+                    .id("urad-prispevky-list")
                     .title("Příspěvky")
                     .filter('_type == "uradPost"')
                     .defaultOrdering([{ field: "date", direction: "desc" }]),
