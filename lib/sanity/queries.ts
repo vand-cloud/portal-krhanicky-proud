@@ -33,6 +33,8 @@ const BLOG_CARD = groq`
   "id": _id, title, "slug": slug.current, excerpt, publishedAt,
   "author": author->name,
   "authorShortName": author->shortName,
+  "authorSlug": author->slug.current,
+  "authorVisibility": author->visibility,
   "categories": categories[]->slug.current,
   "categoryLabels": categories[]->{ "slug": slug.current, "label": title },
   tags,
@@ -87,7 +89,7 @@ export const proudPostsQuery = groq`
     "id": _id, title, "slug": slug.current, description,
     "category": category->slug.current, "categoryLabel": category->name,
     "heroImage": coverImage.asset->url,
-    "author": author->{ name, shortName, role }
+    "author": author->{ name, shortName, role, "slug": slug.current, visibility }
   }
 `;
 export const proudPostBySlugQuery = groq`
@@ -95,7 +97,7 @@ export const proudPostBySlugQuery = groq`
     "id": _id, title, "slug": slug.current, description,
     "category": category->slug.current, "categoryLabel": category->name,
     "heroImage": coverImage.asset->url,
-    "author": author->{ name, shortName, role },
+    "author": author->{ name, shortName, role, "slug": slug.current, visibility },
     ${BODY}
   }
 `;
@@ -113,6 +115,8 @@ export const blogPostBySlugQuery = groq`
     "id": _id, title, "slug": slug.current, excerpt, publishedAt,
     "author": author->name,
     "authorShortName": author->shortName,
+    "authorSlug": author->slug.current,
+    "authorVisibility": author->visibility,
     "categories": categories[]->slug.current,
     "categoryLabels": categories[]->{ "slug": slug.current, "label": title },
     tags,
