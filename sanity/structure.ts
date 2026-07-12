@@ -86,7 +86,39 @@ export const structure: StructureResolver = (S, context) =>
                 S,
                 context,
               }),
-              S.documentTypeListItem("uradPost").title("Příspěvky"),
+              S.listItem()
+                .title("Příspěvky")
+                .child(async () => {
+                  const client = context.getClient({ apiVersion: "2024-01-01" });
+                  const cats = await client.fetch<{ _id: string; title: string }[]>(
+                    `*[_type == "uradCategory"] | order(orderRank) { _id, title }`,
+                  );
+                  return S.list()
+                    .title("Příspěvky")
+                    .items([
+                      S.listItem()
+                        .title("Vše")
+                        .id("urad-all")
+                        .child(
+                          S.documentTypeList("uradPost")
+                            .title("Všechny příspěvky")
+                            .defaultOrdering([{ field: "date", direction: "desc" }]),
+                        ),
+                      S.divider(),
+                      ...cats.map((cat) =>
+                        S.listItem()
+                          .title(cat.title)
+                          .id(cat._id)
+                          .child(
+                            S.documentList()
+                              .title(cat.title)
+                              .filter('_type == "uradPost" && category._ref == $catId')
+                              .params({ catId: cat._id })
+                              .defaultOrdering([{ field: "date", direction: "desc" }]),
+                          ),
+                      ),
+                    ]);
+                }),
             ]),
         ),
       S.divider(),
