@@ -52,7 +52,7 @@ export interface ProudItemVM {
   isCandidate: boolean;
   personPhoto?: string;
   heroImage?: string;
-  author?: { name: string; role?: string } | null;
+  author?: { name: string; role?: string; slug?: string; visibility?: "public" | "internal" } | null;
   body?: RichBody;
 }
 
@@ -64,6 +64,8 @@ export interface BlogPostVM {
   publishedAt: string;
   readingTime: string;
   author?: string;
+  authorSlug?: string;
+  authorVisibility?: "public" | "internal";
   categories: string[];
   categoryLabels: { slug: string; label: string }[];
   tags: string[];
