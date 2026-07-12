@@ -128,7 +128,19 @@ export default async function BlogDetailPage({
               {formatDate.format(new Date(post.publishedAt))}
             </time>
             {" · "}
-            <span>Autor: {post.author ?? "Krhanický Proud"}</span>
+            <span>
+              Autor:{" "}
+              {post.authorSlug && post.authorVisibility === "public" ? (
+                <a
+                  href={`/lide/${post.authorSlug}`}
+                  className="text-[var(--color-text)] underline underline-offset-2 hover:text-[var(--color-accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
+                >
+                  {post.author ?? "Krhanický Proud"}
+                </a>
+              ) : (
+                post.author ?? "Krhanický Proud"
+              )}
+            </span>
           </p>
           {post.tags.length > 0 ? (
             <div className="flex flex-wrap items-center gap-1.5">
