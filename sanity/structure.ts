@@ -21,8 +21,6 @@ function singleton(S: StructureBuilder, type: string, title: string) {
 
 type Cat = { _id: string; title: string };
 
-// Fetch all categories upfront so the structure is built synchronously —
-// orderableDocumentListDeskItem requires a synchronous call context.
 export const structure: StructureResolver = async (S, context) => {
   const client = context.getClient({ apiVersion: "2024-01-01" });
   const [proudCats, blogCats, uradCats] = await Promise.all([
@@ -38,6 +36,7 @@ export const structure: StructureResolver = async (S, context) => {
       S.divider(),
       S.listItem()
         .title("Stránky")
+        .id("section-stranky")
         .child(
           S.list()
             .title("Stránky")
@@ -52,6 +51,7 @@ export const structure: StructureResolver = async (S, context) => {
       S.divider(),
       S.listItem()
         .title("Program")
+        .id("section-program")
         .child(
           S.list()
             .title("Program")
@@ -75,6 +75,7 @@ export const structure: StructureResolver = async (S, context) => {
         ),
       S.listItem()
         .title("Blog")
+        .id("section-blog")
         .child(
           S.list()
             .title("Blog")
@@ -107,6 +108,7 @@ export const structure: StructureResolver = async (S, context) => {
         ),
       S.listItem()
         .title("Úřad")
+        .id("section-urad")
         .child(
           S.list()
             .title("Úřad")
