@@ -151,7 +151,7 @@ type RawProudPost = {
   category?: string;
   categoryLabel?: string;
   heroImage?: string;
-  author?: { name: string; shortName?: string | null; role?: string } | null;
+  author?: { name: string; shortName?: string | null; role?: string; slug?: string | null; visibility?: string | null } | null;
   body?: ProudItemVM["body"];
 };
 
@@ -166,7 +166,7 @@ function proudPostToVM(p: RawProudPost): ProudItemVM {
     href: `/proud/nas-program/${p.slug}`,
     isCandidate: false,
     heroImage: p.heroImage,
-    author: p.author ? { name: p.author.shortName ?? p.author.name, role: p.author.role } : null,
+    author: p.author ? { name: p.author.shortName ?? p.author.name, role: p.author.role, slug: p.author.slug ?? undefined, visibility: (p.author.visibility as "public" | "internal" | undefined) } : null,
     body: p.body,
   };
 }
@@ -218,8 +218,10 @@ export async function getProudPostBySlug(
 }
 
 // ── Blog ─────────────────────────────────────────────────────────────────────
-type RawBlogPost = Omit<BlogPostVM, "href" | "readingTime" | "related"> & {
+type RawBlogPost = Omit<BlogPostVM, "href" | "readingTime" | "related" | "authorSlug" | "authorVisibility"> & {
   authorShortName?: string | null;
+  authorSlug?: string | null;
+  authorVisibility?: string | null;
   related?: RawBlogPost[];
 };
 
@@ -227,6 +229,8 @@ function blogToVM(p: RawBlogPost): BlogPostVM {
   return {
     ...p,
     author: p.authorShortName ?? p.author,
+    authorSlug: p.authorSlug ?? undefined,
+    authorVisibility: (p.authorVisibility as "public" | "internal" | undefined) ?? undefined,
     categories: p.categories ?? [],
     categoryLabels: p.categoryLabels ?? [],
     tags: p.tags ?? [],
