@@ -295,7 +295,7 @@ function uradPostToVM(p: RawUradPost): UradItemVM {
 function councillorToUradVM(person: PersonVM): UradItemVM {
   return {
     id: person.id,
-    title: person.shortName ?? person.name,
+    title: person.name,
     slug: `zastupitel-${person.slug}`,
     description: person.role,
     category: "zastupitelstvo",
