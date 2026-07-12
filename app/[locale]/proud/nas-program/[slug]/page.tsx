@@ -173,7 +173,16 @@ function GenericProudPost({ item }: { item: ProudItemVM }) {
       {author ? (
         <p className="mt-6 text-sm text-[var(--color-text-tertiary)]">
           Za návrhem stojí:{" "}
-          <span className="text-[var(--color-text)]">{author.name}</span>
+          {author.slug && author.visibility === "public" ? (
+            <a
+              href={`/lide/${author.slug}`}
+              className="text-[var(--color-text)] underline underline-offset-2 hover:text-[var(--color-accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
+            >
+              {author.name}
+            </a>
+          ) : (
+            <span className="text-[var(--color-text)]">{author.name}</span>
+          )}
         </p>
       ) : null}
       <PortableBody value={item.body} />
