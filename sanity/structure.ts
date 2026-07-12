@@ -26,7 +26,7 @@ type Cat = { _id: string; title: string };
 export const structure: StructureResolver = async (S, context) => {
   const client = context.getClient({ apiVersion: "2024-01-01" });
   const [proudCats, blogCats, uradCats] = await Promise.all([
-    client.fetch<Cat[]>(`*[_type == "proudCategory"] | order(orderRank) { _id, title }`),
+    client.fetch<Cat[]>(`*[_type == "proudCategory"] | order(orderRank) { _id, "title": name }`),
     client.fetch<Cat[]>(`*[_type == "blogCategory"] | order(orderRank) { _id, title }`),
     client.fetch<Cat[]>(`*[_type == "uradCategory"] | order(orderRank) { _id, title }`),
   ]);
