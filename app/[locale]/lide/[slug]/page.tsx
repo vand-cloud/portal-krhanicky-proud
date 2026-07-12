@@ -58,7 +58,7 @@ export default async function PersonDetailPage({
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
       <a
-        href="javascript:history.back()"
+        href="/"
         className="inline-flex items-center gap-1 text-xs text-[var(--color-text-tertiary)] outline-none transition-colors hover:text-[var(--color-text)] focus-visible:rounded focus-visible:outline-2 focus-visible:outline-[var(--color-accent)] focus-visible:outline-offset-2"
       >
         <ChevronLeft size={12} aria-hidden />
