@@ -101,10 +101,8 @@ export const structure: StructureResolver = async (S, context) => {
                 .title("Příspěvky")
                 .id("blog-prispevky")
                 .child(
-                  S.documentList()
-                    .id("blog-prispevky-list")
+                  S.documentTypeList("blogPost")
                     .title("Příspěvky")
-                    .filter('_type == "blogPost"')
                     .defaultOrdering([{ field: "publishedAt", direction: "desc" }]),
                 ),
               ...blogCats.map((cat) =>
@@ -143,10 +141,8 @@ export const structure: StructureResolver = async (S, context) => {
                 .title("Příspěvky")
                 .id("urad-prispevky")
                 .child(
-                  S.documentList()
-                    .id("urad-prispevky-list")
+                  S.documentTypeList("uradPost")
                     .title("Příspěvky")
-                    .filter('_type == "uradPost"')
                     .defaultOrdering([{ field: "date", direction: "desc" }]),
                 ),
               ...uradCats.map((cat) =>
