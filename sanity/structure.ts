@@ -41,8 +41,12 @@ export const structure: StructureResolver = (S, context) =>
       S.divider(),
       S.listItem()
         .title("Program")
-        .child(
-          S.list()
+        .child(async () => {
+          const client = context.getClient({ apiVersion: "2024-01-01" });
+          const cats = await client.fetch<{ _id: string; title: string }[]>(
+            `*[_type == "proudCategory"] | order(orderRank) { _id, title }`,
+          );
+          return S.list()
             .title("Program")
             .items([
               orderableDocumentListDeskItem({
@@ -57,12 +61,28 @@ export const structure: StructureResolver = (S, context) =>
                 S,
                 context,
               }),
-            ]),
-        ),
+              ...cats.map((cat) =>
+                S.listItem()
+                  .title(`  › ${cat.title}`)
+                  .id(cat._id)
+                  .child(
+                    S.documentList()
+                      .title(cat.title)
+                      .filter('_type == "proudPost" && category._ref == $catId')
+                      .params({ catId: cat._id })
+                      .defaultOrdering([{ field: "orderRank", direction: "asc" }]),
+                  ),
+              ),
+            ]);
+        }),
       S.listItem()
         .title("Blog")
-        .child(
-          S.list()
+        .child(async () => {
+          const client = context.getClient({ apiVersion: "2024-01-01" });
+          const cats = await client.fetch<{ _id: string; title: string }[]>(
+            `*[_type == "blogCategory"] | order(orderRank) { _id, title }`,
+          );
+          return S.list()
             .title("Blog")
             .items([
               orderableDocumentListDeskItem({
@@ -71,9 +91,28 @@ export const structure: StructureResolver = (S, context) =>
                 S,
                 context,
               }),
-              S.documentTypeListItem("blogPost").title("Příspěvky"),
-            ]),
-        ),
+              S.listItem()
+                .title("Příspěvky")
+                .id("blog-posts-all")
+                .child(
+                  S.documentTypeList("blogPost")
+                    .title("Příspěvky")
+                    .defaultOrdering([{ field: "publishedAt", direction: "desc" }]),
+                ),
+              ...cats.map((cat) =>
+                S.listItem()
+                  .title(`  › ${cat.title}`)
+                  .id(cat._id)
+                  .child(
+                    S.documentList()
+                      .title(cat.title)
+                      .filter('_type == "blogPost" && $catId in categories[]._ref')
+                      .params({ catId: cat._id })
+                      .defaultOrdering([{ field: "publishedAt", direction: "desc" }]),
+                  ),
+              ),
+            ]);
+        }),
       S.listItem()
         .title("Úřad")
         .child(async () => {
@@ -100,7 +139,7 @@ export const structure: StructureResolver = (S, context) =>
                 ),
               ...cats.map((cat) =>
                 S.listItem()
-                  .title(`  › ${cat.title}`)
+                  .title(`  › ${cat.title}`)
                   .id(cat._id)
                   .child(
                     S.documentList()
