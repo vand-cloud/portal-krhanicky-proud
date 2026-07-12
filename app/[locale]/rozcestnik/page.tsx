@@ -17,16 +17,17 @@
 
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import {
-  entries,
   filterByType,
   news,
   sortByDistance,
   sortByStart,
+  type Entry,
 } from "@/content/entries";
 import { blogPosts, sortBlogByDate } from "@/content/blog";
 import { HomeSearch } from "@/components/sections/Home/HomeSearch";
 import { BlogCard } from "@/components/sections/Blog/BlogCard";
 import { contentBlogToVM } from "@/lib/blog-card-adapter";
+import { getCatalogEntries } from "@/lib/sanity/catalog";
 
 export const metadata = { title: "Rozcestník" };
 
@@ -84,6 +85,7 @@ export default async function RozcestnikPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const tHome = await getTranslations({ locale, namespace: "homepage" });
+  const entries = await getCatalogEntries();
 
   // Top 5 upcoming events (no 60-day window -- on the rozcestník we want
   // farther horizon so all 5 slots stay filled even in slow months).
@@ -208,7 +210,7 @@ function ColumnHeader({
   );
 }
 
-function ColumnEvents({ events, now }: { events: typeof entries; now: Date }) {
+function ColumnEvents({ events, now }: { events: Entry[]; now: Date }) {
   if (events.length === 0) return null;
   return (
     <div>
@@ -245,7 +247,7 @@ function ColumnEvents({ events, now }: { events: typeof entries; now: Date }) {
   );
 }
 
-function ColumnServices({ services }: { services: typeof entries }) {
+function ColumnServices({ services }: { services: Entry[] }) {
   if (services.length === 0) return null;
   return (
     <div>

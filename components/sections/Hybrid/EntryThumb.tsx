@@ -48,7 +48,7 @@ export function EntryThumb({
         {/* eslint-disable-next-line @next/next/no-img-element -- Phase 2 wireframe; next/image comes in Phase 4 with Sanity assets. */}
         <img
           src={entry.heroImage}
-          alt={entry.title}
+          alt={entry.heroAlt ?? entry.title}
           className="absolute inset-0 h-full w-full object-cover"
         />
       </div>

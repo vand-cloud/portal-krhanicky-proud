@@ -1,8 +1,9 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { entries, distanceTierOrder, type DistanceTier } from "@/content/entries";
+import { distanceTierOrder, type DistanceTier } from "@/content/entries";
 import { SectionView } from "@/components/sections/Hybrid/SectionView";
 import type { Scope } from "@/components/sections/Hybrid/util";
 import { getBlogData } from "@/lib/sanity/fetch";
+import { getCatalogEntries } from "@/lib/sanity/catalog";
 
 // Homepage IS the Krhanický průvodce. Visitors land directly on the
 // search hero so the primary action ("najdi mi něco") is the front
@@ -43,6 +44,7 @@ export default async function HomePage({
   const { type, cat, sub, tags, dist } = await searchParams;
   setRequestLocale(locale);
   const tHome = await getTranslations({ locale, namespace: "homepage" });
+  const entries = await getCatalogEntries();
 
   // Newest blog posts from Sanity for the editorial band under the search
   // module (the query already orders them newest-first). The band is

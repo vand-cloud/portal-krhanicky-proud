@@ -19,6 +19,15 @@ function singleton(S: StructureBuilder, type: string, title: string) {
 
 type Cat = { _id: string; title: string };
 
+const CATALOG_TYPES = [
+  { type: "akce", title: "Akce" },
+  { type: "mista", title: "Místa" },
+  { type: "gastro", title: "Gastro" },
+  { type: "obchody", title: "Obchody" },
+  { type: "sluzby", title: "Služby" },
+  { type: "spolky", title: "Spolky" },
+];
+
 export const structure: StructureResolver = async (S, context) => {
   const client = context.getClient({ apiVersion: "2024-01-01" });
   const [proudCats, blogCats, uradCats] = await Promise.all([
@@ -158,6 +167,59 @@ export const structure: StructureResolver = async (S, context) => {
                       .defaultOrdering([{ field: "date", direction: "desc" }]),
                   ),
               ),
+            ]),
+        ),
+      S.listItem()
+        .title("Katalog")
+        .id("section-katalog")
+        .child(
+          S.list()
+            .title("Katalog")
+            .items([
+              ...CATALOG_TYPES.map(({ type, title }) =>
+                S.listItem()
+                  .title(title)
+                  .id(`katalog-${type}`)
+                  .child(
+                    S.documentList()
+                      .id(`katalog-${type}-list`)
+                      .title(title)
+                      .filter('_type == "catalogEntry" && entryType == $type')
+                      .params({ type })
+                      .initialValueTemplates([S.initialValueTemplateItem(`catalogEntry-${type}`)]),
+                  ),
+              ),
+              S.divider(),
+              S.listItem()
+                .title("Ke schválení")
+                .id("katalog-pending")
+                .child(
+                  S.documentList()
+                    .id("katalog-pending-list")
+                    .title("Ke schválení")
+                    .filter('_type == "catalogEntry" && status == "pending"'),
+                ),
+              S.divider(),
+              S.listItem()
+                .title("Kategorie")
+                .id("katalog-kategorie")
+                .child(
+                  S.documentList()
+                    .id("katalog-kategorie-list")
+                    .title("Kategorie katalogu")
+                    .filter('_type == "catalogCategory"')
+                    .defaultOrdering([{ field: "orderRank", direction: "asc" }]),
+                ),
+              S.listItem()
+                .title("Štítky")
+                .id("katalog-stitky")
+                .child(
+                  S.documentList()
+                    .id("katalog-stitky-list")
+                    .title("Štítky katalogu")
+                    .filter('_type == "catalogTag"')
+                    .defaultOrdering([{ field: "orderRank", direction: "asc" }]),
+                ),
             ]),
         ),
       S.divider(),

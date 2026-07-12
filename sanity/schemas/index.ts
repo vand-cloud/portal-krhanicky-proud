@@ -18,6 +18,7 @@ import {
 } from "./documents/pages";
 import { proudCategory, blogCategory, uradCategory } from "./documents/categories";
 import { proudPost, blogPost, uradPost } from "./documents/posts";
+import { catalogCategory, catalogTag, catalogEntry } from "./documents/catalog";
 import { legalPage } from "./legalPage";
 
 export const schemaTypes: SchemaTypeDefinition[] = [
@@ -42,6 +43,10 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   proudPost,
   blogPost,
   uradPost,
+  // catalog (mista/akce/gastro/obchody/sluzby/spolky, one unified entry type)
+  catalogCategory,
+  catalogTag,
+  catalogEntry,
   // shared
   person,
   // legal
