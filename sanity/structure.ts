@@ -19,8 +19,19 @@ function singleton(S: StructureBuilder, type: string, title: string) {
     .child(S.document().schemaType(type).documentId(type).title(title));
 }
 
-export const structure: StructureResolver = (S, context) =>
-  S.list()
+type Cat = { _id: string; title: string };
+
+// Fetch all categories upfront so the structure is built synchronously —
+// orderableDocumentListDeskItem requires a synchronous call context.
+export const structure: StructureResolver = async (S, context) => {
+  const client = context.getClient({ apiVersion: "2024-01-01" });
+  const [proudCats, blogCats, uradCats] = await Promise.all([
+    client.fetch<Cat[]>(`*[_type == "proudCategory"] | order(orderRank) { _id, title }`),
+    client.fetch<Cat[]>(`*[_type == "blogCategory"] | order(orderRank) { _id, title }`),
+    client.fetch<Cat[]>(`*[_type == "uradCategory"] | order(orderRank) { _id, title }`),
+  ]);
+
+  return S.list()
     .title("Obsah")
     .items([
       singleton(S, "siteSettings", "Nastavení webu"),
@@ -41,118 +52,94 @@ export const structure: StructureResolver = (S, context) =>
       S.divider(),
       S.listItem()
         .title("Program")
-        .child(async () => {
-          const client = context.getClient({ apiVersion: "2024-01-01" });
-          const cats = await client.fetch<{ _id: string; title: string }[]>(
-            `*[_type == "proudCategory"] | order(orderRank) { _id, title }`,
-          );
-          return S.list()
+        .child(
+          S.list()
             .title("Program")
             .items([
-              orderableDocumentListDeskItem({
-                type: "proudCategory",
-                title: "Kategorie",
-                S,
-                context,
-              }),
-              orderableDocumentListDeskItem({
-                type: "proudPost",
-                title: "Příspěvky",
-                S,
-                context,
-              }),
-              ...cats.map((cat) =>
+              orderableDocumentListDeskItem({ type: "proudCategory", title: "Kategorie", S, context }),
+              orderableDocumentListDeskItem({ type: "proudPost", title: "Příspěvky", S, context }),
+              ...proudCats.map((cat) =>
                 S.listItem()
                   .title(`  › ${cat.title}`)
-                  .id(cat._id)
+                  .id(`proud-cat-${cat._id}`)
                   .child(
                     S.documentList()
+                      .id(`proud-list-${cat._id}`)
                       .title(cat.title)
                       .filter('_type == "proudPost" && category._ref == $catId')
                       .params({ catId: cat._id })
                       .defaultOrdering([{ field: "orderRank", direction: "asc" }]),
                   ),
               ),
-            ]);
-        }),
+            ]),
+        ),
       S.listItem()
         .title("Blog")
-        .child(async () => {
-          const client = context.getClient({ apiVersion: "2024-01-01" });
-          const cats = await client.fetch<{ _id: string; title: string }[]>(
-            `*[_type == "blogCategory"] | order(orderRank) { _id, title }`,
-          );
-          return S.list()
+        .child(
+          S.list()
             .title("Blog")
             .items([
-              orderableDocumentListDeskItem({
-                type: "blogCategory",
-                title: "Kategorie",
-                S,
-                context,
-              }),
+              orderableDocumentListDeskItem({ type: "blogCategory", title: "Kategorie", S, context }),
               S.listItem()
                 .title("Příspěvky")
                 .id("blog-posts-all")
                 .child(
-                  S.documentTypeList("blogPost")
+                  S.documentList()
+                    .id("blog-list-all")
                     .title("Příspěvky")
+                    .filter('_type == "blogPost"')
                     .defaultOrdering([{ field: "publishedAt", direction: "desc" }]),
                 ),
-              ...cats.map((cat) =>
+              ...blogCats.map((cat) =>
                 S.listItem()
                   .title(`  › ${cat.title}`)
-                  .id(cat._id)
+                  .id(`blog-cat-${cat._id}`)
                   .child(
                     S.documentList()
+                      .id(`blog-list-${cat._id}`)
                       .title(cat.title)
                       .filter('_type == "blogPost" && $catId in categories[]._ref')
                       .params({ catId: cat._id })
                       .defaultOrdering([{ field: "publishedAt", direction: "desc" }]),
                   ),
               ),
-            ]);
-        }),
+            ]),
+        ),
       S.listItem()
         .title("Úřad")
-        .child(async () => {
-          const client = context.getClient({ apiVersion: "2024-01-01" });
-          const cats = await client.fetch<{ _id: string; title: string }[]>(
-            `*[_type == "uradCategory"] | order(orderRank) { _id, title }`,
-          );
-          return S.list()
+        .child(
+          S.list()
             .title("Úřad")
             .items([
-              orderableDocumentListDeskItem({
-                type: "uradCategory",
-                title: "Kategorie",
-                S,
-                context,
-              }),
+              orderableDocumentListDeskItem({ type: "uradCategory", title: "Kategorie", S, context }),
               S.listItem()
                 .title("Příspěvky")
                 .id("urad-posts-all")
                 .child(
-                  S.documentTypeList("uradPost")
+                  S.documentList()
+                    .id("urad-list-all")
                     .title("Příspěvky")
+                    .filter('_type == "uradPost"')
                     .defaultOrdering([{ field: "date", direction: "desc" }]),
                 ),
-              ...cats.map((cat) =>
+              ...uradCats.map((cat) =>
                 S.listItem()
                   .title(`  › ${cat.title}`)
-                  .id(cat._id)
+                  .id(`urad-cat-${cat._id}`)
                   .child(
                     S.documentList()
+                      .id(`urad-list-${cat._id}`)
                       .title(cat.title)
                       .filter('_type == "uradPost" && category._ref == $catId')
                       .params({ catId: cat._id })
                       .defaultOrdering([{ field: "date", direction: "desc" }]),
                   ),
               ),
-            ]);
-        }),
+            ]),
+        ),
       S.divider(),
       S.documentTypeListItem("person").title("Lidé"),
       S.divider(),
       S.documentTypeListItem("legalPage").title("Servisní stránky"),
     ]);
+};
