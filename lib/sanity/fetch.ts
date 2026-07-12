@@ -360,6 +360,11 @@ export async function getLegalPage(slug: string): Promise<LegalPageVM | null> {
   return fetch<LegalPageVM | null>(Q.legalPageQuery, { slug });
 }
 
+export async function getAllPublicPersonSlugs(): Promise<string[]> {
+  const people = await fetch<{ slug: string }[]>(Q.allPublicPeopleQuery);
+  return (people ?? []).map((p) => p.slug);
+}
+
 export async function getAllLegalSlugs(): Promise<string[]> {
   const pages = await fetch<{ slug: string }[]>(Q.allLegalPagesQuery);
   return (pages ?? []).map((p) => p.slug);
