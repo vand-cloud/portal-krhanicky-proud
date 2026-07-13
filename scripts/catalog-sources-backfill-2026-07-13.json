@@ -1,0 +1,492 @@
+[
+  {
+    "id": "catalogEntry-sv-anfilov",
+    "sourceUrl": "https://anfilov.cz/",
+    "sourceLabel": "anfilov.cz"
+  },
+  {
+    "id": "catalogEntry-sv-aktivni-krhanice",
+    "sourceUrl": "https://www.aktivnikrhanice.cz/",
+    "sourceLabel": "aktivnikrhanice.cz"
+  },
+  {
+    "id": "catalogEntry-evt-einstein-jilove-2026",
+    "sourceUrl": "http://tourist.posazavi.com/cz/Event/Event.aspx?Id=43728",
+    "sourceLabel": "Posázaví (turistický portál)"
+  },
+  {
+    "id": "catalogEntry-rm-elektrosluzba-kozel",
+    "sourceUrl": "http://www.ak-elektro.cz",
+    "sourceLabel": "ak-elektro.cz"
+  },
+  {
+    "id": "catalogEntry-pl-andrago-winery",
+    "sourceUrl": "https://mapy.cz/turisticka?x=14.431&y=49.814&z=17&source=base&q=Andrago%20Winery",
+    "sourceLabel": "mapy.cz"
+  },
+  {
+    "id": "catalogEntry-pl-bar-masna-tynec",
+    "sourceUrl": "https://www.instagram.com/barmasnatynec/",
+    "sourceLabel": "Instagram"
+  },
+  {
+    "id": "catalogEntry-evt-beneficni-street-food-festival-porici-2026-09-19",
+    "sourceUrl": "https://vikendo.cz/events/beneficni-street-food-festival-porici-nad-sazavou",
+    "sourceLabel": "Víkendo"
+  },
+  {
+    "id": "catalogEntry-pl-bisport-tynec",
+    "sourceUrl": "https://www.kudyznudy.cz/aktivity/bisport-jednicka-mezi-pujcovnami-sportovniho-vyb",
+    "sourceLabel": "Kudy z nudy"
+  },
+  {
+    "id": "catalogEntry-pl-brooklyn",
+    "sourceUrl": "https://mapy.cz/turisticka?x=14.588088&y=49.835804&z=17&source=base&q=Brooklyn",
+    "sourceLabel": "mapy.cz"
+  },
+  {
+    "id": "catalogEntry-pl-coop",
+    "sourceUrl": "https://mapy.cz/turisticka?x=14.553797&y=49.846722&z=17&source=base&q=COOP%20Chr%C3%A1st%20nad%20S%C3%A1zavou",
+    "sourceLabel": "mapy.cz"
+  },
+  {
+    "id": "catalogEntry-pl-detske-hriste-podhorky",
+    "sourceUrl": "https://mapy.cz/turisticka?x=14.593&y=49.825&z=17&source=base&q=D%C4%9Btsk%C3%A9%20h%C5%99i%C5%A1t%C4%9B%20Podhorky",
+    "sourceLabel": "mapy.cz"
+  },
+  {
+    "id": "catalogEntry-pl-detske-hriste-tynec",
+    "sourceUrl": "https://mapy.cz/turisticka?x=14.596&y=49.834&z=17&source=base&q=D%C4%9Btsk%C3%A9%20h%C5%99i%C5%A1t%C4%9B%20T%C3%BDnec",
+    "sourceLabel": "mapy.cz"
+  },
+  {
+    "id": "catalogEntry-sv-faho-knedliky",
+    "sourceUrl": "https://www.faho.cz/",
+    "sourceLabel": "faho.cz"
+  },
+  {
+    "id": "catalogEntry-evt-ferova-snidane-tynec-2026",
+    "sourceUrl": "http://tourist.posazavi.com/cz/Event/Event.aspx?Id=44172",
+    "sourceLabel": "Posázaví (turistický portál)"
+  },
+  {
+    "id": "catalogEntry-evt-historicky-serm-pani-z-kolina-jemniste",
+    "sourceUrl": "https://tourist.posazavi.com/cz/Event/Event.aspx?Id=44956",
+    "sourceLabel": "Posázaví (turistický portál)"
+  },
+  {
+    "id": "catalogEntry-rm-itservis-petlach",
+    "sourceUrl": "https://www.itposazavi.cz",
+    "sourceLabel": "itposazavi.cz"
+  },
+  {
+    "id": "catalogEntry-sv-jarno-pekarna",
+    "sourceUrl": "https://www.jarno.cz/",
+    "sourceLabel": "jarno.cz"
+  },
+  {
+    "id": "catalogEntry-sv-karhany",
+    "sourceUrl": "https://www.karhany.cz/",
+    "sourceLabel": "karhany.cz"
+  },
+  {
+    "id": "catalogEntry-evt-kavarnicka-seniori-2026",
+    "sourceUrl": "https://www.obeckrhanice.cz/pozvanky-na-akce",
+    "sourceLabel": "Obec Krhanice"
+  },
+  {
+    "id": "catalogEntry-pl-kemp-sazava",
+    "sourceUrl": "https://www.kempsazava.cz/",
+    "sourceLabel": "kempsazava.cz"
+  },
+  {
+    "id": "catalogEntry-rm-keramika-jordanova",
+    "sourceUrl": "https://www.fler.cz",
+    "sourceLabel": "fler.cz"
+  },
+  {
+    "id": "catalogEntry-pl-knihovna-tynec",
+    "sourceUrl": "https://mapy.cz/turisticka?x=14.5949&y=49.8369&z=17&source=base&q=Knihovna%20T%C3%BDnec%20nad%20S%C3%A1zavou",
+    "sourceLabel": "mapy.cz"
+  },
+  {
+    "id": "catalogEntry-evt-konopiste-waffen-ss-2026",
+    "sourceUrl": "https://www.zamek-konopiste.cz/cs/akce/132638-konopiste-velitelstvi-waffen-ss",
+    "sourceLabel": "Zámek Konopiště"
+  },
+  {
+    "id": "catalogEntry-pl-kopec-dabel",
+    "sourceUrl": "https://www.navylet.cz/cs/cil/kopec-dabel-geometricky-stred-cech",
+    "sourceLabel": "Na výlet"
+  },
+  {
+    "id": "catalogEntry-pl-kostel-porici",
+    "sourceUrl": "https://www.kudyznudy.cz/aktivity/kostel-sv-petra-a-pavla-v-porici-nad-sazavou",
+    "sourceLabel": "Kudy z nudy"
+  },
+  {
+    "id": "catalogEntry-evt-kreativni-obrazy-tynec-2026",
+    "sourceUrl": "https://www.mestotynec.cz/kalendar-akci/kalendar-akci/220482-kreativni-obrazy/",
+    "sourceLabel": "Město Týnec nad Sázavou"
+  },
+  {
+    "id": "catalogEntry-evt-krhanice-open-air-2026",
+    "sourceUrl": "https://www.obeckrhanice.cz/pozvanky-na-akce",
+    "sourceLabel": "Obec Krhanice"
+  },
+  {
+    "id": "catalogEntry-pl-kc-tynec",
+    "sourceUrl": "https://www.mestotynec.cz/kulturni-centrum-tynec",
+    "sourceLabel": "Město Týnec nad Sázavou"
+  },
+  {
+    "id": "catalogEntry-evt-kaceni-maje-2026",
+    "sourceUrl": "https://www.obeckrhanice.cz/pozvanky-na-akce",
+    "sourceLabel": "Obec Krhanice"
+  },
+  {
+    "id": "catalogEntry-pl-lekarna-alba",
+    "sourceUrl": "https://mapy.cz/turisticka?x=14.569865&y=49.831233&z=17&source=base&q=L%C3%A9k%C3%A1rna%20Alba",
+    "sourceLabel": "mapy.cz"
+  },
+  {
+    "id": "catalogEntry-pl-lekarna-poliklinika-tynec",
+    "sourceUrl": "https://mapy.cz/turisticka?x=14.588425&y=49.837525&z=17&source=base&q=L%C3%A9k%C3%A1rna%2C%20M%C4%9Bstsk%C3%A1%20poliklinika%20T%C3%BDnec",
+    "sourceLabel": "mapy.cz"
+  },
+  {
+    "id": "catalogEntry-sv-ms-krhanice",
+    "sourceUrl": "http://www.mskrhanice.cz/",
+    "sourceLabel": "mskrhanice.cz"
+  },
+  {
+    "id": "catalogEntry-pl-mlyn-brejlov",
+    "sourceUrl": "https://www.mlynbrejlov.cz/",
+    "sourceLabel": "mlynbrejlov.cz"
+  },
+  {
+    "id": "catalogEntry-evt-muzejni-noc-tynec-2026",
+    "sourceUrl": "https://www.kudyznudy.cz/akce/muzejni-noc-hvezdy-na-hrade",
+    "sourceLabel": "Kudy z nudy"
+  },
+  {
+    "id": "catalogEntry-rm-mydlarna-leontynka",
+    "sourceUrl": "https://www.mydlarnaleontynka.cz",
+    "sourceLabel": "mydlarnaleontynka.cz"
+  },
+  {
+    "id": "catalogEntry-pl-naucna-stezka-jilovske-zlate-doly",
+    "sourceUrl": "https://www.navylet.cz/cs/cil/naucna-stezka-jilovske-zlate-doly",
+    "sourceLabel": "Na výlet"
+  },
+  {
+    "id": "catalogEntry-pl-naucna-stezka-svatojanske-proudy",
+    "sourceUrl": "https://www.navylet.cz/cs/cil/naucna-stezka-svatojanske-proudy",
+    "sourceLabel": "Na výlet"
+  },
+  {
+    "id": "catalogEntry-sv-nase-krhanice",
+    "sourceUrl": "https://www.nasekrhanice.cz/",
+    "sourceLabel": "nasekrhanice.cz"
+  },
+  {
+    "id": "catalogEntry-evt-nejvetsi-zahady-tajemstvi-sveta-lesany",
+    "sourceUrl": "https://tynec.posazavi.com/cz/Event/Event.aspx?Id=44768",
+    "sourceLabel": "Posázaví (turistický portál)"
+  },
+  {
+    "id": "catalogEntry-sv-knihovna-krhanice",
+    "sourceUrl": "https://www.obeckrhanice.cz/obecni-knihovna",
+    "sourceLabel": "Obec Krhanice"
+  },
+  {
+    "id": "catalogEntry-evt-ora-et-labora-jilove-2026",
+    "sourceUrl": "http://tourist.posazavi.com/cz/Event/Event.aspx?Id=44144",
+    "sourceLabel": "Posázaví (turistický portál)"
+  },
+  {
+    "id": "catalogEntry-evt-ozivly-stredovek-beneficni-festival-zlenice",
+    "sourceUrl": "https://tourist.posazavi.com/cz/Event/Event.aspx?Id=43907",
+    "sourceLabel": "Posázaví (turistický portál)"
+  },
+  {
+    "id": "catalogEntry-pl-panska-skala",
+    "sourceUrl": "https://mapy.cz/turisticka?x=14.443&y=49.87&z=17&source=base&q=Pansk%C3%A1%20sk%C3%A1la",
+    "sourceLabel": "mapy.cz"
+  },
+  {
+    "id": "catalogEntry-evt-pohadky-na-hrade-jak-zlatnik-ke-stesti-prisel",
+    "sourceUrl": "http://www.hradtynec.cz/",
+    "sourceLabel": "hradtynec.cz"
+  },
+  {
+    "id": "catalogEntry-pl-pomnik-padlych-tynec",
+    "sourceUrl": "https://mapy.cz/turisticka?x=14.588&y=49.836&z=17&source=base&q=Pomn%C3%ADk%20padl%C3%BDm%20ve%20sv%C4%9Btov%C3%BDch%20v%C3%A1lk%C3%A1ch",
+    "sourceLabel": "mapy.cz"
+  },
+  {
+    "id": "catalogEntry-pl-posazavska-hospoda-stodola",
+    "sourceUrl": "https://posazavskastodola-cz.webnode.cz/menu/",
+    "sourceLabel": "posazavskastodola-cz.webnode.cz"
+  },
+  {
+    "id": "catalogEntry-pl-posazavska-stezka",
+    "sourceUrl": "https://www.kudyznudy.cz/aktivity/posazavska-stezka-ceska-trempska-klasika",
+    "sourceLabel": "Kudy z nudy"
+  },
+  {
+    "id": "catalogEntry-pl-posazavsky-motoracek",
+    "sourceUrl": "https://www.kudyznudy.cz/aktivity/posazavsky-motoracek-pravidelny-vikendovy-vlak",
+    "sourceLabel": "Kudy z nudy"
+  },
+  {
+    "id": "catalogEntry-evt-paleni-carodejnic-2026",
+    "sourceUrl": "https://www.obeckrhanice.cz/pozvanky-na-akce",
+    "sourceLabel": "Obec Krhanice"
+  },
+  {
+    "id": "catalogEntry-evt-pribeh-vejiru-tynec-2026",
+    "sourceUrl": "https://www.mestotynec.cz/kalendar-akci/kalendar-akci/220478-pribeh-vejiru/",
+    "sourceLabel": "Město Týnec nad Sázavou"
+  },
+  {
+    "id": "catalogEntry-sv-quad-moto-shop",
+    "sourceUrl": "https://www.quad-motoshop.cz/",
+    "sourceLabel": "quad-motoshop.cz"
+  },
+  {
+    "id": "catalogEntry-pl-muzeum-jilove",
+    "sourceUrl": "http://muzeumjilove.cz/",
+    "sourceLabel": "muzeumjilove.cz"
+  },
+  {
+    "id": "catalogEntry-rm-pekarstvi-novotni",
+    "sourceUrl": "https://www.jarno.cz/",
+    "sourceLabel": "jarno.cz"
+  },
+  {
+    "id": "catalogEntry-pl-rozhledna-nesteticka-hora",
+    "sourceUrl": "https://www.navylet.cz/cs/cil/rozhledna-nesteticka-hora-neveklov",
+    "sourceLabel": "Na výlet"
+  },
+  {
+    "id": "catalogEntry-pl-rozhledna-pepr",
+    "sourceUrl": "https://www.navylet.cz/cs/cil/rozhledna-pepr-jilove-u-prahy",
+    "sourceLabel": "Na výlet"
+  },
+  {
+    "id": "catalogEntry-pl-hasicska-zbrojnice-krhanice",
+    "sourceUrl": "https://hasici.obeckrhanice.cz/",
+    "sourceLabel": "hasici.obeckrhanice.cz"
+  },
+  {
+    "id": "catalogEntry-evt-sber-textilu-tynec-2026",
+    "sourceUrl": "http://tourist.posazavi.com/cz/Event/Event.aspx?Id=44273",
+    "sourceLabel": "Posázaví (turistický portál)"
+  },
+  {
+    "id": "catalogEntry-pl-smetanova-vyhlidka",
+    "sourceUrl": "https://www.navylet.cz/cs/cil/smetanova-vyhlidka",
+    "sourceLabel": "Na výlet"
+  },
+  {
+    "id": "catalogEntry-pl-sokolovna-zboreny-kostelec",
+    "sourceUrl": "https://mapy.cz/turisticka?x=14.592406&y=49.850936&z=17&source=base&q=Sokolovna%20Zbo%C5%99en%C3%BD%20Kostelec",
+    "sourceLabel": "mapy.cz"
+  },
+  {
+    "id": "catalogEntry-rm-masaze-micova",
+    "sourceUrl": "https://masazekrhanice.cz/",
+    "sourceLabel": "masazekrhanice.cz"
+  },
+  {
+    "id": "catalogEntry-evt-stripky-tynecka-2026",
+    "sourceUrl": "https://www.mestotynec.cz/kalendar-akci/kalendar-akci/220481-stripky-z-historie-tynecka/",
+    "sourceLabel": "Město Týnec nad Sázavou"
+  },
+  {
+    "id": "catalogEntry-evt-svet-ocima-tvurcu-teptina",
+    "sourceUrl": "https://tynec.posazavi.com/cz/Event/Event.aspx?Id=44459",
+    "sourceLabel": "Posázaví (turistický portál)"
+  },
+  {
+    "id": "catalogEntry-evt-swap-kvetin-tynec-2026",
+    "sourceUrl": "https://www.mestotynec.cz/kalendar-akci/kalendar-akci/220485-swap-kvetin-v-knihovne/",
+    "sourceLabel": "Město Týnec nad Sázavou"
+  },
+  {
+    "id": "catalogEntry-evt-sazavenkov-carodejnice-2026",
+    "sourceUrl": "https://www.mestotynec.cz/kalendar-akci/kalendar-akci/220480-sazavenkov-v-risi-carodejnic/",
+    "sourceLabel": "Město Týnec nad Sázavou"
+  },
+  {
+    "id": "catalogEntry-sv-tj-sokol",
+    "sourceUrl": "https://www.facebook.com/sokolkrhanice/",
+    "sourceLabel": "Facebook"
+  },
+  {
+    "id": "catalogEntry-pl-tk-tynec-nad-sazavou",
+    "sourceUrl": "https://mapy.cz/turisticka?x=14.594&y=49.832&z=17&source=base&q=Tenisov%C3%BD%20klub%20T%C3%BDnec%20nad%20S%C3%A1zavou",
+    "sourceLabel": "mapy.cz"
+  },
+  {
+    "id": "catalogEntry-evt-trziste-zajeci-2026",
+    "sourceUrl": "https://www.mestobystrice.cz/volny-cas/kalendar-akci/",
+    "sourceLabel": "mestobystrice.cz"
+  },
+  {
+    "id": "catalogEntry-evt-tvoreni-dne-matek-2026",
+    "sourceUrl": "https://www.mestotynec.cz/kalendar-akci/kalendar-akci/220448-tvoreni-ke-dni-matek/",
+    "sourceLabel": "Město Týnec nad Sázavou"
+  },
+  {
+    "id": "catalogEntry-pl-tvrz-prosecnice",
+    "sourceUrl": "https://mapy.cz/turisticka?x=14.589&y=49.794&z=17&source=base&q=Tvrz%20Prose%C4%8Dnice",
+    "sourceLabel": "mapy.cz"
+  },
+  {
+    "id": "catalogEntry-evt-tynecka-kamenina-2026",
+    "sourceUrl": "https://www.mestotynec.cz/kalendar-akci/kalendar-akci/220479-tynecka-kamenina/",
+    "sourceLabel": "Město Týnec nad Sázavou"
+  },
+  {
+    "id": "catalogEntry-evt-tynecka-neckyada-2026",
+    "sourceUrl": "https://www.kudyznudy.cz/akce/tynecka-neckyada-1",
+    "sourceLabel": "Kudy z nudy"
+  },
+  {
+    "id": "catalogEntry-pl-tynecky-hrad",
+    "sourceUrl": "https://www.mestotynec.cz/hrad-a-muzeum",
+    "sourceLabel": "Město Týnec nad Sázavou"
+  },
+  {
+    "id": "catalogEntry-pl-u-adenauera-na-zastavce",
+    "sourceUrl": "https://mapy.cz/turisticka?x=14.516958&y=49.866315&z=17&source=base&q=U%20Adenauera%2C%20Na%20Zast%C3%A1vce",
+    "sourceLabel": "mapy.cz"
+  },
+  {
+    "id": "catalogEntry-pl-u-holubu",
+    "sourceUrl": "https://mapy.cz/turisticka?x=14.594895&y=49.849433&z=17&source=base&q=U%20Holub%C5%AF",
+    "sourceLabel": "mapy.cz"
+  },
+  {
+    "id": "catalogEntry-pl-u-tonicky",
+    "sourceUrl": "https://mapy.cz/turisticka?x=14.554293&y=49.846665&z=17&source=base&q=U%20Toni%C4%8Dky",
+    "sourceLabel": "mapy.cz"
+  },
+  {
+    "id": "catalogEntry-rm-velei21",
+    "sourceUrl": "https://www.velei21.cz",
+    "sourceLabel": "velei21.cz"
+  },
+  {
+    "id": "catalogEntry-rm-veterinakrskova",
+    "sourceUrl": "https://veterinakrhanice.cz",
+    "sourceLabel": "veterinakrhanice.cz"
+  },
+  {
+    "id": "catalogEntry-evt-konopiste-ruzova-zahrada-2026",
+    "sourceUrl": "https://www.zamek-konopiste.cz/cs/akce/11123-vecerni-prohlidka-exotika-v-ruzove-zahrade",
+    "sourceLabel": "Zámek Konopiště"
+  },
+  {
+    "id": "catalogEntry-evt-vinny-kost-festival-chuti-benesov-2026-10-03",
+    "sourceUrl": "https://vikendo.cz/events/vinny-kost-festival-chuti-v-benesove",
+    "sourceLabel": "Víkendo"
+  },
+  {
+    "id": "catalogEntry-sv-vinovintage",
+    "sourceUrl": "https://vinovintage.cz/",
+    "sourceLabel": "vinovintage.cz"
+  },
+  {
+    "id": "catalogEntry-pl-vojenske-muzeum-lesany",
+    "sourceUrl": "https://www.vhu.cz/muzea/lesany/",
+    "sourceLabel": "vhu.cz"
+  },
+  {
+    "id": "catalogEntry-pl-vyhlidka-maj",
+    "sourceUrl": "https://www.navylet.cz/cs/cil/vyhlidka-maj",
+    "sourceLabel": "Na výlet"
+  },
+  {
+    "id": "catalogEntry-pl-vyhlidka-trestibok",
+    "sourceUrl": "https://www.navylet.cz/cs/cil/vyhlidka-trestibok",
+    "sourceLabel": "Na výlet"
+  },
+  {
+    "id": "catalogEntry-pl-viceucelnove-sportoviste-tynec",
+    "sourceUrl": "https://mapy.cz/turisticka?x=14.598&y=49.826&z=17&source=base&q=V%C3%ADce%C3%BA%C4%8Delov%C3%A9%20sportovi%C5%A1t%C4%9B%20T%C3%BDnec",
+    "sourceLabel": "mapy.cz"
+  },
+  {
+    "id": "catalogEntry-evt-vystava-obrazu-magdy-hanove-pysely",
+    "sourceUrl": "https://tourist.posazavi.com/cz/Event/Event.aspx?Id=44665",
+    "sourceLabel": "Posázaví (turistický portál)"
+  },
+  {
+    "id": "catalogEntry-pl-workout-hriste-bozkov",
+    "sourceUrl": "https://mapy.cz/turisticka?x=14.596&y=49.815&z=17&source=base&q=Workoutov%C3%A9%20a%20d%C4%9Btsk%C3%A9%20h%C5%99i%C5%A1t%C4%9B%20Bo%C5%BEkov",
+    "sourceLabel": "mapy.cz"
+  },
+  {
+    "id": "catalogEntry-sv-zdravotnicke-stredisko-tynec",
+    "sourceUrl": "https://mapy.cz/turisticka?x=14.565733&y=49.829585&z=17&source=base&q=Zdravotnick%C3%A9%20st%C5%99edisko%20T%C3%BDnec",
+    "sourceLabel": "mapy.cz"
+  },
+  {
+    "id": "catalogEntry-sv-zubni-ordinace-tynec",
+    "sourceUrl": "https://mapy.cz/turisticka?x=14.588139&y=49.836389&z=17&source=base&q=Zubn%C3%AD%20ordinace%20T%C3%BDnec",
+    "sourceLabel": "mapy.cz"
+  },
+  {
+    "id": "catalogEntry-evt-zajezd-divadlo-2026",
+    "sourceUrl": "https://www.obeckrhanice.cz/pozvanky-na-akce",
+    "sourceLabel": "Obec Krhanice"
+  },
+  {
+    "id": "catalogEntry-sv-zs-krhanice",
+    "sourceUrl": "https://www.zskrhanice.cz/",
+    "sourceLabel": "zskrhanice.cz"
+  },
+  {
+    "id": "catalogEntry-sv-zs-tynec-nad-sazavou",
+    "sourceUrl": "https://www.zstynec.cz/",
+    "sourceLabel": "mapy.cz"
+  },
+  {
+    "id": "catalogEntry-pl-konopiste",
+    "sourceUrl": "https://www.zamek-konopiste.cz/",
+    "sourceLabel": "Zámek Konopiště"
+  },
+  {
+    "id": "catalogEntry-pl-zlenice",
+    "sourceUrl": "https://www.kudyznudy.cz/aktivity/zricenina-hradu-zlenice-hrad-znamy-z-obrazku-jos",
+    "sourceLabel": "Kudy z nudy"
+  },
+  {
+    "id": "catalogEntry-evt-cervnove-diskoteky-2026",
+    "sourceUrl": "https://www.obeckrhanice.cz/pozvanky-na-akce",
+    "sourceLabel": "Obec Krhanice"
+  },
+  {
+    "id": "catalogEntry-evt-cesky-pohar-vodaku-2026",
+    "sourceUrl": "https://www.kudyznudy.cz/akce/sazava-cesky-pohar-vodaku",
+    "sourceLabel": "Kudy z nudy"
+  },
+  {
+    "id": "catalogEntry-pl-stola-sv-antonina-paduanskeho",
+    "sourceUrl": "https://www.navylet.cz/cs/cil/stola-sv-antonina-paduanskeho-jilove-u-prahy",
+    "sourceLabel": "Na výlet"
+  },
+  {
+    "id": "catalogEntry-pl-stola-v-halirich",
+    "sourceUrl": "https://www.navylet.cz/cs/cil/stola-v-halirich-jilove-u-prahy",
+    "sourceLabel": "Na výlet"
+  },
+  {
+    "id": "catalogEntry-pl-zampasska-vyhlidka",
+    "sourceUrl": "https://mapy.cz/turisticka?x=14.43&y=49.84&z=17&source=base&q=%C5%BDampa%C5%A1sk%C3%A1%20vyhl%C3%ADdka",
+    "sourceLabel": "mapy.cz"
+  }
+]

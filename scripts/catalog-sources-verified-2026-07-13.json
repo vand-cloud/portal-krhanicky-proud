@@ -1,0 +1,490 @@
+[
+  {
+    "id": "catalogEntry-sv-aafoto",
+    "title": "AAFOTO",
+    "sourceUrl": "https://www.firmy.cz/Remesla-a-sluzby/Fotograficke-sluzby/kraj-stredocesky/benesov/3564-tynec-nad-sazavou",
+    "sourceLabel": "Firmy.cz",
+    "confidence": "high",
+    "note": "Firmy.cz seznam fotografických služeb Týnecka uvádí fotografa AAFOTO na adrese Krhanice 197 (sedí obec i č.p.). Doména aafoto.cz je jen prázdná WP šablona, proto zdroj = katalog."
+  },
+  {
+    "id": "catalogEntry-sv-alzabox-krhanice",
+    "title": "AlzaBox Krhanice",
+    "sourceUrl": "https://www.firmy.cz/detail/13745020-alzabox-krhanice.html",
+    "sourceLabel": "Firmy.cz",
+    "confidence": "high",
+    "note": "Firmy.cz detail AlzaBox Krhanice na Krhanice 149 u ZŠ, 24/7 výdejní box; sedí adresa i souřadnice."
+  },
+  {
+    "id": "catalogEntry-sv-autolakovna-standa",
+    "title": "Autolakovna Standa",
+    "sourceUrl": "https://www.firmy.cz/detail/12931879-autolakovna-standa-krhanice.html",
+    "sourceLabel": "Firmy.cz",
+    "confidence": "high",
+    "note": "Firmy.cz detail Autolakovna Standa, Krhanice 269, autolakýrnické a drobné karosářské práce (od 1992). Sedí adresa i obor."
+  },
+  {
+    "id": "catalogEntry-sv-denny-rose",
+    "title": "DENNY ROSE",
+    "sourceUrl": "https://www.dennyrose.cz/",
+    "sourceLabel": "Vlastní web (Denny Rose CZ / Dero s.r.o.)",
+    "confidence": "medium",
+    "note": "Značka DENNY ROSE je v ČR zastupovaná firmou Dero s.r.o. (obchodiste.cz), jejíž sídlo je na Krhanice 84. Vlastní CZ web existuje; přesná prodejna v Krhanicích není nezávisle doložená mimo firemní registr."
+  },
+  {
+    "id": "catalogEntry-sv-fstage",
+    "title": "Fstage",
+    "sourceUrl": "https://www.firmy.cz/detail/13715985-fstage-krhanice.html",
+    "sourceLabel": "Firmy.cz",
+    "confidence": "high",
+    "note": "Firmy.cz detail Fstage Krhanice + vlastní web fstage.cz; pronájem pódií, ozvučení a osvětlení. Sedí obec i obor."
+  },
+  {
+    "id": "catalogEntry-sv-instalace-anten",
+    "title": "Instalace a servis antén",
+    "sourceUrl": "https://www.firmy.cz/detail/12874614-instalace-a-servis-anten-krhanice.html",
+    "sourceLabel": "Firmy.cz",
+    "confidence": "high",
+    "note": "Firmy.cz detail Instalace a servis antén Krhanice, partner Skylink, montáž pozemních i satelitních antén. Sedí obec i obor (č.p. v katalogu 185 vs 259 na firmy.cz — drobný rozdíl, jinak shoda)."
+  },
+  {
+    "id": "catalogEntry-sv-koloros-production",
+    "title": "KOLOROS Production",
+    "sourceUrl": "https://www.firmy.cz/detail/13943511-koloros-production-krhanice.html",
+    "sourceLabel": "Firmy.cz",
+    "confidence": "high",
+    "note": "Firmy.cz detail KOLOROS Production, Krhanice 235 + vlastní web koloros.cz; pronájem světel, zvuku a mobilních pódií. Sedí adresa i obor."
+  },
+  {
+    "id": "catalogEntry-sv-ordinace-prakticky-lekar",
+    "title": "MUDr. Tomáš Macháček, praktický lékař",
+    "sourceUrl": "https://www.firmy.cz/detail/387601-prakticky-lekar-mudr-tomas-machacek-krhanice.html",
+    "sourceLabel": "Firmy.cz",
+    "confidence": "high",
+    "note": "Firmy.cz + ZnamyLekar.cz + registrlekaru.cz shodně: praktický lékař MUDr. Tomáš Macháček, Krhanice 70, IČ 46424318. Sedí adresa, souřadnice i obor."
+  },
+  {
+    "id": "catalogEntry-sv-pin-292",
+    "title": "PIN 292, s.r.o.",
+    "sourceUrl": "https://www.firmy.cz/detail/646338-pin-292-krhanice.html",
+    "sourceLabel": "Firmy.cz",
+    "confidence": "high",
+    "note": "Firmy.cz detail PIN 292, s.r.o., sídlo Krhanice 236, energetika / fotovoltaika a solární systémy. Sedí adresa i obor."
+  },
+  {
+    "id": "catalogEntry-sv-porcelan-mulier",
+    "title": "Porcelánová výroba Mulier, s.r.o.",
+    "sourceUrl": "https://www.mulier.cz/",
+    "sourceLabel": "Vlastní web (+ Firmy.cz, Deník)",
+    "confidence": "high",
+    "note": "Vlastní web mulier.cz, Firmy.cz detail (Krhanice 71) i reportáže Deník.cz potvrzují ruční výrobu porcelánových vypínačů/zásuvek značky Mulier v Krhanicích."
+  },
+  {
+    "id": "catalogEntry-sv-tmcar-autoservis",
+    "title": "TMCAR autoservis",
+    "sourceUrl": "https://www.podnikatel.cz/rejstrik/tmcar-autoservis-s-r-o-24167053/",
+    "sourceLabel": "Obchodní rejstřík (podnikatel.cz)",
+    "confidence": "medium",
+    "note": "TMCAR autoservis s.r.o. (IČO 24167053) je v obchodním rejstříku navázaný na adresu Krhanice 233; provozovna firmy.cz je vedená v Praze-Hostivaři. Existence firmy potvrzena, provozní vazba na Krhanice jen přes registr."
+  },
+  {
+    "id": "catalogEntry-sv-zahradni-studio-strnadova",
+    "title": "Zahradní studio Strnadová",
+    "sourceUrl": "https://www.strnadova.studio/",
+    "sourceLabel": "Vlastní web (+ Facebook)",
+    "confidence": "high",
+    "note": "Vlastní web strnadova.studio + FB stránka Strnadová studio Krhanice; Hana Strnadová, zahradní architektura, adresa Krhanice 291. Sedí adresa i obor."
+  },
+  {
+    "id": "catalogEntry-sv-taekwon-do",
+    "title": "Škola TAEKWON-DO I.T.F. GE-BAEK HOSIN SOOL",
+    "sourceUrl": "https://www.tkd.cz/krhanice",
+    "sourceLabel": "Vlastní web (klub tkd.cz)",
+    "confidence": "high",
+    "note": "Škola Ge-Baek Hosin Sool má vlastní stránku pobočky Krhanice (ZŠ) na tkd.cz/krhanice; sedí místo tréninku (tělocvična ZŠ) i název spolku."
+  },
+  {
+    "id": "catalogEntry-sv-abakron",
+    "title": "ABAKRON, s.r.o.",
+    "sourceUrl": "https://www.abakron.cz/",
+    "sourceLabel": "Vlastní web",
+    "confidence": "high",
+    "note": "Vlastní web žulového kamenolomu ABAKRON v Prosečnici (bývalý lom Dolní Požáry), odpovídá adrese i činnosti."
+  },
+  {
+    "id": "catalogEntry-evt-anenska-zabava-2026",
+    "title": "Anenská zábava",
+    "sourceUrl": "https://www.facebook.com/sokolkrhanice/",
+    "sourceLabel": "Facebook (TJ Sokol Krhanice)",
+    "confidence": "high",
+    "note": "Anenská zábava je reálná tradiční akce TJ Sokol Krhanice, naplánovaná na 26. 7. 2026; detail o předprodeji 'U Hraběte' je demo dodatek, samotná akce existuje."
+  },
+  {
+    "id": "catalogEntry-rm-bfj-stav",
+    "title": "BFJ stav",
+    "sourceUrl": "https://www.firmy.cz/detail/467153-bfj-stav-krhanice.html",
+    "sourceLabel": "Firmy.cz",
+    "confidence": "high",
+    "note": "Firmy.cz i obchodní rejstřík (IČO 26686406) potvrzují stavební firmu BFJ stav, s.r.o. na adrese Krhanice 255."
+  },
+  {
+    "id": "catalogEntry-evt-detsky-den-2026",
+    "title": "Dětský den",
+    "sourceUrl": "https://www.krhanice.cz/akce",
+    "sourceLabel": "Obec Krhanice",
+    "confidence": "medium",
+    "note": "Dětský den v Krhanicích tradičně pořádá Sokol/škola a obec ho vede v kalendáři akcí, ale nenašel jsem samostatnou stránku k tomuto konkrétnímu ročníku; popis je generický."
+  },
+  {
+    "id": "catalogEntry-evt-hasicsky-ples-2026",
+    "title": "Hasičský ples pod hvězdami",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "confidence": "none",
+    "note": "SDH Krhanice (zal. 1895) existuje, ale žádný zdroj nepotvrzuje letní venkovní 'ples pod hvězdami'; popis nese znaky demo (předprodej v neexistující hospodě U Hraběte)."
+  },
+  {
+    "id": "catalogEntry-sv-instalaterstvi-hudcek",
+    "title": "Instalatérství Jaroslav Hudček",
+    "sourceUrl": "http://instalaterstvijh.webmium.com/",
+    "sourceLabel": "Vlastní web",
+    "confidence": "high",
+    "note": "Vlastní web + Firmy.cz potvrzují instalatérství Jaroslava Hudčka, Krhanice 59 (IČO 48926434)."
+  },
+  {
+    "id": "catalogEntry-sv-kadernictvi-petra-prosecnice",
+    "title": "Kadeřnictví by Petra",
+    "sourceUrl": "https://www.firmy.cz/detail/13933860-kadernictvi-by-petra-krhanice-prosecnice.html",
+    "sourceLabel": "Firmy.cz",
+    "confidence": "high",
+    "note": "Firmy.cz záznam přesně pro 'Kadeřnictví by Petra' v Krhanicích, části Prosečnice."
+  },
+  {
+    "id": "catalogEntry-sv-mv-truhlarstvi",
+    "title": "MV Truhlářství",
+    "sourceUrl": "http://www.mvtruhlarstvi.cz/",
+    "sourceLabel": "Vlastní web",
+    "confidence": "high",
+    "note": "Vlastní web zakázkového truhlářství + Firmy.cz záznam pro Krhanice."
+  },
+  {
+    "id": "catalogEntry-pl-panska-vyhlidka",
+    "title": "Panská vyhlídka",
+    "sourceUrl": "https://cs.wikipedia.org/wiki/Panská_vyhlídka_(hrad)",
+    "sourceLabel": "Wikipedie",
+    "confidence": "high",
+    "note": "Wikipedie má samostatný článek 'Panská vyhlídka (hrad)'; skalní vyhlídka nad Sázavou v katastru Krhanic (na Wikimedia Commons kategorie vázaná na Krhanice), sedí i tipy na výlet e-chalupy.cz."
+  },
+  {
+    "id": "catalogEntry-pl-restaurace-na-zastavce",
+    "title": "Restaurace Na zastávce",
+    "sourceUrl": "https://www.nadrazky.eu/hospoda.php?hospodaID=100008",
+    "sourceLabel": "Nádražky.eu / idatabaze.cz",
+    "confidence": "high",
+    "note": "Restaurace Na Zastávce, Prosečnice 19 (Krhanice) potvrzena na Nádražky.eu i idatabaze.cz; hodnocení ~4,8/84 recenzí odpovídá popisu."
+  },
+  {
+    "id": "catalogEntry-pl-tank-pro-deti",
+    "title": "Tank pro děti",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "confidence": "none",
+    "note": "Ikonický 'Růžový tank' i dětské tankové hřiště patří k Vojenskému technickému muzeu Lešany, ne do vsi Krhanice; pro dětské hřiště s tankem přímo v Krhanicích na uvedených souřadnicích jsem nenašel žádný zdroj."
+  },
+  {
+    "id": "catalogEntry-pl-zboreny-kostelec",
+    "title": "Zbořený Kostelec",
+    "sourceUrl": "https://cs.wikipedia.org/wiki/Zbo%C5%99en%C3%BD_Kostelec_(hrad)",
+    "sourceLabel": "Wikipedie",
+    "confidence": "high",
+    "note": "Zřícenina hradu Zbořený Kostelec u Týnce nad Sázavou, kulturní památka; doloženo Wikipedií, kudyznudy.cz i hrady.cz."
+  },
+  {
+    "id": "catalogEntry-sv-ad-mlejnek",
+    "title": "AD Mlejnek, autodoprava",
+    "sourceUrl": "https://regiony.kurzy.cz/posta/25747/krhanice-autodoprava-mlejnek/",
+    "sourceLabel": "Kurzy.cz / Česká pošta (balíkovna)",
+    "confidence": "medium",
+    "note": "Autodoprava Mlejnek na adrese Krhanice 215 potvrzena jako výdejní/balíkovna bod pojmenovaný po firmě; firmy.cz Autodoprava Mlejnek je jiná (Jihlava)."
+  },
+  {
+    "id": "catalogEntry-sv-auto-moto-tyno",
+    "title": "Auto-moto-tyno",
+    "sourceUrl": "https://www.firmy.cz/Auto-moto/Auto-moto-sluzby/Autoservisy/kraj-stredocesky/benesov/3509-krhanice",
+    "sourceLabel": "Firmy.cz (autoservisy Krhanice)",
+    "confidence": "medium",
+    "note": "Autoservis/pneuservis v Krhanicích dohledán v katalogu Firmy.cz pro Krhanice; přímý detail se nepodařilo izolovat, ale činnost i lokalita sedí."
+  },
+  {
+    "id": "catalogEntry-sv-crazy-boys",
+    "title": "Crazy Boys",
+    "sourceUrl": "https://www.firmy.cz/detail/266882-crazy-boys-krhanice.html",
+    "sourceLabel": "Firmy.cz",
+    "confidence": "high",
+    "note": "Vlastní katalogový záznam Crazy Boys (Krhanice) na Firmy.cz, hudební skupina, odpovídá obci."
+  },
+  {
+    "id": "catalogEntry-sv-energozon",
+    "title": "ENERGOZON",
+    "sourceUrl": "https://www.firmy.cz/Dum-byt-a-zahrada/Prodejci-vybaveni-domu/Prodejci-tepelne-techniky/Prodejci-alternativnich-tepelnych-zdroju/Prodej-a-montaz-tepelnych-cerpadel/kraj-stredocesky/benesov",
+    "sourceLabel": "Firmy.cz (tepelná čerpadla Benešov)",
+    "confidence": "medium",
+    "note": "ENERGOZON, Krhanice 74, tepelná čerpadla a fotovoltaika opakovaně dohledán ve Firmy.cz katalogu Benešovska; přímý detail nedohledán."
+  },
+  {
+    "id": "catalogEntry-pl-hospoda-na-hristi",
+    "title": "Hospoda Na hřišti",
+    "sourceUrl": "https://www.firmy.cz/detail/13139455-hospoda-na-hristi-krhanice-krhanice.html",
+    "sourceLabel": "Firmy.cz",
+    "confidence": "high",
+    "note": "Hospoda Na hřišti u sokolského hřiště v Krhanicích má vlastní záznam na Firmy.cz i oficiální Facebook stránku."
+  },
+  {
+    "id": "catalogEntry-sv-jerman",
+    "title": "JERMAN, s.r.o.",
+    "sourceUrl": "https://www.jerman-sro.cz/",
+    "sourceLabel": "Vlastní web",
+    "confidence": "high",
+    "note": "Firma JERMAN, s.r.o. z Krhanic má vlastní web (kamenictví + údržba zeleně/sekání trávy), potvrzeno i Firmy.cz a obchodním rejstříkem (IČO 28431740)."
+  },
+  {
+    "id": "catalogEntry-sv-kamen-zbraslav",
+    "title": "Kamenolom Krhanice, KÁMEN Zbraslav",
+    "sourceUrl": "https://www.kamenzbraslav.cz/lom-krhanice",
+    "sourceLabel": "Vlastní web (KÁMEN Zbraslav)",
+    "confidence": "high",
+    "note": "Oficiální stránka lomu Krhanice na webu provozovatele KÁMEN Zbraslav, a.s.; lom u Prosečnice, potvrzeno i Firmy.cz."
+  },
+  {
+    "id": "catalogEntry-sv-mikolasova-zubni-lab",
+    "title": "Marie Mikolášová, zubní laboratoř",
+    "sourceUrl": "https://www.firmy.cz/detail/365431-marie-mikolasova-krhanice.html",
+    "sourceLabel": "Firmy.cz",
+    "confidence": "high",
+    "note": "Zubní laboratoř Marie Mikolášová, Krhanice 188, potvrzena záznamem na Firmy.cz i ZlatéStránky/Živéfirmy."
+  },
+  {
+    "id": "catalogEntry-sv-pedi-moni",
+    "title": "Pedi-moni",
+    "sourceUrl": "https://www.pedi-moni.cz/",
+    "sourceLabel": "Vlastní web",
+    "confidence": "high",
+    "note": "Suchá pedikúra Pedi-moni má vlastní web, uvádí provozovnu v Prosečnici + výjezdy po Praze a středních Čechách."
+  },
+  {
+    "id": "catalogEntry-rm-smisene-zbozi",
+    "title": "Smíšené zboží Krhanice",
+    "sourceUrl": "https://www.firmy.cz/detail/13468430-smisene-zbozi-krhanice-krhanice.html",
+    "sourceLabel": "Firmy.cz",
+    "confidence": "high",
+    "note": "Obchod Smíšené zboží Krhanice (IČO 03404641) má vlastní záznam na Firmy.cz včetně adresy a otevírací doby."
+  },
+  {
+    "id": "catalogEntry-sv-smolik-vahy",
+    "title": "Vladimír Smolík, servis vah",
+    "sourceUrl": "https://www.firmy.cz/detail/2666365-vladimir-smolik-krhanice.html",
+    "sourceLabel": "Firmy.cz",
+    "confidence": "high",
+    "note": "Vladimír Smolík, Krhanice ev.č. 70, prodej a servis vah, potvrzeno záznamem na Firmy.cz."
+  },
+  {
+    "id": "catalogEntry-rm-zednictvi-jaros",
+    "title": "Zednictví Karel Jaroš",
+    "sourceUrl": "https://www.obeckrhanice.cz/zivnostnici-a-remeslnici-v-obci",
+    "sourceLabel": "Obec Krhanice",
+    "confidence": "high",
+    "note": "Karel Jaroš, Krhanice č.p. 270, uveden v seznamu živnostníků a řemeslníků na oficiálních stránkách obce; potvrzeno i obchodním rejstříkem."
+  },
+  {
+    "id": "catalogEntry-sv-antelek",
+    "title": "ANTELEK",
+    "sourceUrl": "https://www.antelek.cz/",
+    "sourceLabel": "Vlastní web",
+    "confidence": "high",
+    "note": "Vlastní web antelek.cz — antény, kabeláže, zabezpečení a kamerové systémy, sídlo Krhanice; sedí i firmy.cz."
+  },
+  {
+    "id": "catalogEntry-sv-autodilna-bazant",
+    "title": "Autodílna Bažant",
+    "sourceUrl": "https://rejstrik.penize.cz/jan-bazant",
+    "sourceLabel": "Obchodní rejstřík (Peníze.cz/ARES)",
+    "confidence": "medium",
+    "note": "Jan Bažant je veden v rejstříku s adresou v Krhanicích (257 42); dílna nemá vlastní web, konkrétní autoservisní činnost samostatně nedoložena."
+  },
+  {
+    "id": "catalogEntry-pl-cyklostezka-do-krnan",
+    "title": "Cyklostezka do Krňan",
+    "sourceUrl": "https://www.kudyznudy.cz/kam-pojedete/stredocesky-kraj/posazavi/krnany",
+    "sourceLabel": "Kudy z nudy",
+    "confidence": "medium",
+    "note": "Posázavská cyklo/stezka spojující okolí Krhanic s Krňany je doložena (kudyznudy, navylet.cz); jako samostatně pojmenovaná trasa ale není přesně vymezená."
+  },
+  {
+    "id": "catalogEntry-sv-elektroprace-bozik",
+    "title": "Elektropráce Jan Božík",
+    "sourceUrl": "https://www.firmy.cz/Elektro-mobily-a-pocitace/Elektroservisy/kraj-stredocesky/benesov/3509-krhanice",
+    "sourceLabel": "Firmy.cz",
+    "confidence": "medium",
+    "note": "Firmy.cz eviduje elektroservis v Krhanicích s popisem přesně odpovídajícím vstupu (silnoproud/slaboproud od 2010, Krhanice 37, datové sítě, TV, Wi-Fi)."
+  },
+  {
+    "id": "catalogEntry-sv-brabec-yourwin",
+    "title": "Ing. Luděk Brabec, YOUR WIN",
+    "sourceUrl": "https://rejstrik.penize.cz/ludek-brabec",
+    "sourceLabel": "Obchodní rejstřík (Peníze.cz/ARES)",
+    "confidence": "medium",
+    "note": "Luděk Brabec je veden v rejstříku s vazbou na Krhanice; značka YOUR WIN ani dotační poradenství se na webu samostatně nepotvrdily, existence osoby v obci ano."
+  },
+  {
+    "id": "catalogEntry-sv-jan-balacek-hodiny",
+    "title": "Jan Baláček, opravy věžních hodin",
+    "sourceUrl": "https://www.firmy.cz/detail/666799-jan-balacek-krhanice.html",
+    "sourceLabel": "Firmy.cz",
+    "confidence": "high",
+    "note": "Firmy.cz má samostatný detail Jan Baláček, Krhanice — opravy a repase věžních hodin (Krhanice 36)."
+  },
+  {
+    "id": "catalogEntry-pl-kostel-simon-juda-tynec",
+    "title": "Kostel sv. Šimona a Judy",
+    "sourceUrl": "https://cs.wikipedia.org/wiki/Kostel_svat%C3%A9ho_%C5%A0imona_a_Judy_(T%C3%BDnec_nad_S%C3%A1zavou)",
+    "sourceLabel": "Wikipedie",
+    "confidence": "high",
+    "note": "Wikipedie: farní kostel sv. Šimona a Judy v centru Týnce nad Sázavou vedle hradu, kulturní památka od 1974."
+  },
+  {
+    "id": "catalogEntry-rm-pilatova-kadernictvi",
+    "title": "Milena Pilátová, kadeřnictví",
+    "sourceUrl": "https://www.idatabaze.cz/firma/91490-pilatova-milena/",
+    "sourceLabel": "Katalog firem (idatabaze.cz)",
+    "confidence": "high",
+    "note": "Doloženo v idatabaze.cz i zivefirmy.cz a firmy.cz — kadeřnictví Milena Pilátová, Krhanice 122, od 1998."
+  },
+  {
+    "id": "catalogEntry-pl-penzion-club-demon",
+    "title": "Penzion Club Démon",
+    "sourceUrl": "https://www.firmy.cz/detail/13212256-penzion-club-demon-krhanice-prosecnice.html",
+    "sourceLabel": "Firmy.cz",
+    "confidence": "high",
+    "note": "Firmy.cz detail + vlastní web (penzion-demon) + Facebook; Prosečnice, kapacita 38 lůžek, kurt, bezbariérový přístup — sedí se vstupem."
+  },
+  {
+    "id": "catalogEntry-sv-valaskova-ucetnictvi",
+    "title": "Soňa Valášková, účetnictví",
+    "sourceUrl": "https://www.firmy.cz/detail/12947728-sona-valaskova-krhanice.html",
+    "sourceLabel": "Firmy.cz",
+    "confidence": "high",
+    "note": "Firmy.cz detail Soňa Valášková, Krhanice (IČO 71602577) — účetnictví, daňová evidence, mzdy, daně."
+  },
+  {
+    "id": "catalogEntry-pl-vlci-rokle",
+    "title": "Vlčí rokle",
+    "sourceUrl": "https://cs.wikipedia.org/wiki/Vl%C4%8D%C3%AD_rokle",
+    "sourceLabel": "Wikipedie",
+    "confidence": "high",
+    "note": "Wikipedie: přírodní památka Vlčí rokle na katastru obce Krhanice, acidofilní bučina a balvanitý rozpad — přesně odpovídá popisu."
+  },
+  {
+    "id": "catalogEntry-pl-sazava-tynec",
+    "title": "Řeka Sázava, úsek Týnec",
+    "sourceUrl": "https://www.vodackanavigace.cz/sazava",
+    "sourceLabel": "Vodácká navigace / kilometráž",
+    "confidence": "high",
+    "note": "Úsek Sázavy u Týnce nad Sázavou (stezka pod hradem, klasika Týnec–Pikovice) je doložen ve vodáckých průvodcích i na visittynec.cz."
+  },
+  {
+    "id": "catalogEntry-rm-alltech",
+    "title": "AllTech, s.r.o.",
+    "sourceUrl": "https://www.alltechsro.cz/",
+    "sourceLabel": "Vlastní web",
+    "confidence": "high",
+    "note": "Vlastní web firmy; potvrzeno i na Firmy.cz a v obchodním rejstříku (IČO 27103498, Krhanice 38), obor vodo-topo-plyn sedí."
+  },
+  {
+    "id": "catalogEntry-sv-autodilna-cerny",
+    "title": "Autodílna Černý",
+    "sourceUrl": "https://www.firmy.cz/detail/13259163-autodilna-cerny-krhanice-prosecnice.html",
+    "sourceLabel": "Firmy.cz",
+    "confidence": "high",
+    "note": "Záznam na Firmy.cz přímo pro Krhanice-Prosečnice, autoservis a opravy vozidel, sedí lokalita i obor."
+  },
+  {
+    "id": "catalogEntry-sv-fun-carving-club",
+    "title": "Czech Fun Carving Club",
+    "sourceUrl": "https://www.fun-carving.cz/",
+    "sourceLabel": "Vlastní web",
+    "confidence": "high",
+    "note": "Vlastní web klubu (fun/race carving); sídlo Krhanice 37 potvrzeno i v katalogu Kompass a na Facebooku."
+  },
+  {
+    "id": "catalogEntry-sv-foto-dostalkova",
+    "title": "Fotoateliér Magdaléna Dostálková",
+    "sourceUrl": "https://www.idatabaze.cz/katalog/sluzby/fotoateliery/benesov/",
+    "sourceLabel": "idatabaze.cz",
+    "confidence": "medium",
+    "note": "Katalogový záznam potvrzuje adresu Krhanice 46, OSVČ od 2012, portrétní focení a fotoknihy; pravděpodobná FB stránka fotoateliermadeleine."
+  },
+  {
+    "id": "catalogEntry-sv-zita-nielsen",
+    "title": "Ing. Zita Nielsen, grafika a DTP",
+    "sourceUrl": "https://www.idatabaze.cz/firma/90678-nielsen-zita-ing/",
+    "sourceLabel": "idatabaze.cz",
+    "confidence": "high",
+    "note": "Katalogový záznam sedí adresou Krhanice 181 i oborem (grafika, DTP, předtisková příprava), IČ 68720131."
+  },
+  {
+    "id": "catalogEntry-rm-tesar-visvarda",
+    "title": "Jan Višvarda, tesař",
+    "sourceUrl": "https://www.nejremeslnici.cz/profil/48737-visvarda-strechy",
+    "sourceLabel": "NejŘemeslníci.cz",
+    "confidence": "high",
+    "note": "Profil Střechy Krhanice (Jan Višvarda) s recenzemi; tesařství/klempířství/pokrývačství, IČO 65258070, Krhanice."
+  },
+  {
+    "id": "catalogEntry-evt-letni-kino-2026",
+    "title": "Letní kino",
+    "sourceUrl": "https://www.aktivnikrhanice.cz/letni-kino",
+    "sourceLabel": "Spolek Aktivní Krhanice",
+    "confidence": "medium",
+    "note": "Letní kino je reálná opakovaná akce v Krhanicích (pořádá Spolek Aktivní Krhanice / Karhany); konkrétní ročník 2026 a detaily jsou ale šablonové."
+  },
+  {
+    "id": "catalogEntry-sv-okna-blahut",
+    "title": "Okna a dveře Roman Blahút",
+    "sourceUrl": "https://www.firmy.cz/detail/13620131-okna-dvere-roman-blahut-krhanice.html",
+    "sourceLabel": "Firmy.cz",
+    "confidence": "high",
+    "note": "Záznam na Firmy.cz pro Krhanice, prodej a montáž oken a dveří; sedí lokalita i obor."
+  },
+  {
+    "id": "catalogEntry-pl-pohostinstvi-drevak",
+    "title": "Pohostinství Dřevák",
+    "sourceUrl": "https://www.firmy.cz/detail/13009671-pohostinstvi-drevak-krhanice-prosecnice.html",
+    "sourceLabel": "Firmy.cz",
+    "confidence": "high",
+    "note": "Záznam na Firmy.cz přímo pro Krhanice-Prosečnice, pohostinství u zastávky; sedí lokalita i typ."
+  },
+  {
+    "id": "catalogEntry-sv-koci-reality",
+    "title": "Specialista na Posázaví, Lucie Kočí",
+    "sourceUrl": "https://www.sreality.cz/adresar/specialista-na-posazavi-lucie-koci-krhanice-prosecnice/70955",
+    "sourceLabel": "Sreality.cz",
+    "confidence": "high",
+    "note": "Profil makléřky na Sreality (Krhanice-Prosečnice 240), realitní služby pro Posázaví; IČO 87071193, agentura od 1991."
+  },
+  {
+    "id": "catalogEntry-sv-zpev-hlavnickova",
+    "title": "Výuka zpěvu, Leona Hlavničková",
+    "sourceUrl": "https://www.hlavnickova.cz/vyuka_zp%C4%9Bvu.html",
+    "sourceLabel": "Vlastní web",
+    "confidence": "high",
+    "note": "Vlastní web (Zpívání srdcem) — individuální výuka zpěvu; propojení s Mýdlárnou Leontýnka na adrese Krhanice 238 potvrzeno."
+  },
+  {
+    "id": "catalogEntry-sv-sarlota-resort",
+    "title": "Šarlota Resort & Care",
+    "sourceUrl": "https://www.sarlotaresort.cz/",
+    "sourceLabel": "Vlastní web",
+    "confidence": "high",
+    "note": "Vlastní web; Prosečnice 10, 257 42 Krhanice, domov pro seniory / rezidenční péče, sedí adresa i obor."
+  }
+]

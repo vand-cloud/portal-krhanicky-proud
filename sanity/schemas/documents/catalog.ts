@@ -187,6 +187,24 @@ export const catalogEntry = defineType({
       type: "boolean",
     }),
     defineField({ name: "website", title: "Web", type: "url" }),
+    // Provenance: a public link that verifies this entry is a real
+    // place/event/business (own site, catalogue listing, obec/tourist
+    // page, Facebook, mapy.cz...). Shown to visitors as a "Zdroj" link so
+    // the catalogue is auditable. Entries with no verifiable source are
+    // archived rather than shown.
+    defineField({
+      name: "sourceUrl",
+      title: "Zdroj (ověřovací odkaz)",
+      type: "url",
+      description:
+        "Veřejný odkaz, který dokládá, že vstup je reálný (vlastní web, katalog, stránka obce, Facebook, mapy.cz...). Zobrazí se návštěvníkům jako „Zdroj“.",
+    }),
+    defineField({
+      name: "sourceLabel",
+      title: "Popisek zdroje",
+      type: "string",
+      description: "Krátký název zdroje, např. Firmy.cz, Vlastní web, Obec Krhanice, mapy.cz.",
+    }),
     defineField({
       name: "social",
       title: "Sociální sítě",

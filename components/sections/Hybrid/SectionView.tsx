@@ -43,7 +43,7 @@ import { EntryThumb } from "./EntryThumb";
 import { ScopePills } from "./ScopePills";
 import { DistanceTierPills } from "./DistanceTierPills";
 import { SortControl, type SortMode } from "./SortControl";
-import { SOCIAL_ITEMS, formatWebUrl } from "./SocialIcons";
+import { SOCIAL_ITEMS, formatWebUrl, isSameUrl } from "./SocialIcons";
 import {
   type Scope,
   categoryFilterHref,
@@ -978,7 +978,24 @@ function buildMetaRows(entry: Entry): MetaRow[] {
   const emailHref = entry.contactEmail
     ? `mailto:${entry.contactEmail}`
     : undefined;
-  const webValue = entry.website ? formatWebUrl(entry.website) : null;
+  // Suppress the Web row when it points to the same place as the source row
+  // below -- otherwise a business whose own site is also its source shows the
+  // same link twice.
+  const webValue =
+    entry.website && !isSameUrl(entry.website, entry.sourceUrl)
+      ? formatWebUrl(entry.website)
+      : null;
+  // Provenance link. Value is the short label (or the bare domain), the
+  // href is the actual source. Lets a visitor verify the entry is real.
+  const sourceValue = entry.sourceUrl
+    ? entry.sourceLabel || formatWebUrl(entry.sourceUrl)
+    : null;
+  const sourceRow: MetaRow = {
+    label: "Zdroj",
+    value: sourceValue,
+    href: entry.sourceUrl,
+    external: true,
+  };
 
   const t = entry.type;
 
@@ -992,6 +1009,7 @@ function buildMetaRows(entry: Entry): MetaRow[] {
       { label: "Web", value: webValue, href: entry.website, external: true },
       { label: "E-mail", value: entry.contactEmail, href: emailHref },
       { label: "Telefon", value: entry.contactPhone, href: phoneHref },
+      sourceRow,
     ];
   }
 
@@ -1004,6 +1022,7 @@ function buildMetaRows(entry: Entry): MetaRow[] {
       { label: "Web", value: webValue, href: entry.website, external: true },
       { label: "Adresa", value: entry.address },
       { label: "Pořadatel", value: entry.organizer },
+      sourceRow,
     ];
   }
 
@@ -1017,6 +1036,7 @@ function buildMetaRows(entry: Entry): MetaRow[] {
     { label: "Pořadatel", value: entry.organizer },
     { label: "E-mail", value: entry.contactEmail, href: emailHref },
     { label: "Telefon", value: entry.contactPhone, href: phoneHref },
+    sourceRow,
   ];
 }
 

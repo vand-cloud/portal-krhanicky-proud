@@ -3,7 +3,7 @@ import type { Entry, EntryType } from "@/content/entries";
 import { getCategoryLabel, typeLabels } from "@/content/entries";
 import { categoryFilterHref, pruvodceHref } from "./util";
 import { EntryThumb } from "./EntryThumb";
-import { SOCIAL_ITEMS, formatWebUrl } from "./SocialIcons";
+import { SOCIAL_ITEMS, formatWebUrl, isSameUrl } from "./SocialIcons";
 
 const formatDateTime = new Intl.DateTimeFormat("cs-CZ", {
   day: "numeric",
@@ -160,17 +160,23 @@ function BottomMetaRow({
   displayType: EntryType;
 }) {
   if (displayType === "akce") {
-    if (!entry.organizer) return null;
+    if (!entry.organizer && !entry.sourceUrl) return null;
     return (
-      <p className="mt-1.5 text-xs text-[var(--color-text-tertiary)]">
-        Pořadatel: {entry.organizer}
+      <p className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-[var(--color-text-tertiary)]">
+        {entry.organizer ? <span>Pořadatel: {entry.organizer}</span> : null}
+        <SourceLink entry={entry} />
       </p>
     );
   }
 
-  // mista: address is already shown in the subtitle, no extra meta row.
+  // mista: address is already shown in the subtitle; only add a source link.
   if (displayType === "mista") {
-    return null;
+    if (!entry.sourceUrl) return null;
+    return (
+      <p className="mt-1.5 text-xs text-[var(--color-text-tertiary)]">
+        <SourceLink entry={entry} />
+      </p>
+    );
   }
 
   // gastro / obchody / sluzby / spolky: rapid-contact strip. Each contact
@@ -178,6 +184,28 @@ function BottomMetaRow({
   // win over the title overlay; the surrounding tertiary-color separators
   // and dots do not, so clicking the gaps still falls through to the detail.
   return <ServiceContactRow entry={entry} />;
+}
+
+// Provenance link shown in list items across every type. Same quiet
+// tertiary-text style as the other meta links (Web:, Tel:) so it reads as
+// metadata, not a call to action. Renders nothing when the entry carries
+// no verified source.
+const META_LINK_CLASS =
+  "relative z-10 inline-flex items-center outline-none transition-colors hover:text-[var(--color-text)] hover:underline focus-visible:rounded focus-visible:outline-2 focus-visible:outline-[var(--color-accent)] focus-visible:outline-offset-2";
+
+function SourceLink({ entry }: { entry: Entry }) {
+  if (!entry.sourceUrl) return null;
+  const label = entry.sourceLabel || formatWebUrl(entry.sourceUrl);
+  return (
+    <a
+      href={entry.sourceUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={META_LINK_CLASS}
+    >
+      Zdroj: {label}
+    </a>
+  );
 }
 
 function ServiceContactRow({ entry }: { entry: Entry }) {
@@ -189,19 +217,23 @@ function ServiceContactRow({ entry }: { entry: Entry }) {
   const socialItems = social
     ? SOCIAL_ITEMS.filter((item) => social[item.key])
     : [];
+  // Hide the Web link when it is the same URL as the source link below.
+  const showWeb = Boolean(
+    entry.website && !isSameUrl(entry.website, entry.sourceUrl),
+  );
 
   // If nothing to show, render nothing -- avoid a stray empty row.
   if (
     !phoneHref &&
     !emailHref &&
-    !entry.website &&
+    !showWeb &&
+    !entry.sourceUrl &&
     socialItems.length === 0
   ) {
     return null;
   }
 
-  const linkClass =
-    "relative z-10 inline-flex items-center outline-none transition-colors hover:text-[var(--color-text)] hover:underline focus-visible:rounded focus-visible:outline-2 focus-visible:outline-[var(--color-accent)] focus-visible:outline-offset-2";
+  const linkClass = META_LINK_CLASS;
 
   return (
     <p className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-[var(--color-text-tertiary)]">
@@ -215,7 +247,7 @@ function ServiceContactRow({ entry }: { entry: Entry }) {
           E-mail: {entry.contactEmail}
         </a>
       ) : null}
-      {entry.website ? (
+      {showWeb && entry.website ? (
         <a
           href={entry.website}
           target="_blank"
@@ -225,6 +257,7 @@ function ServiceContactRow({ entry }: { entry: Entry }) {
           Web: {formatWebUrl(entry.website)}
         </a>
       ) : null}
+      <SourceLink entry={entry} />
       {socialItems.length > 0 && social ? (
         <span className="inline-flex items-center gap-2">
           {socialItems.map(({ key, Icon, label }) => (

@@ -76,6 +76,8 @@ const catalogEntriesQuery = groq`
     "tags": tags[]->slug.current,
     status,
     trustLevel,
+    sourceUrl,
+    sourceLabel,
     "heroImage": heroImage.asset->url,
     "heroAlt": heroImage.alt,
     organizer,
@@ -112,6 +114,8 @@ type RawCatalogEntry = {
   tags: string[] | null;
   status: EntryStatus;
   trustLevel: TrustLevel;
+  sourceUrl: string | null;
+  sourceLabel: string | null;
   heroImage: string | null;
   heroAlt: string | null;
   organizer: string | null;
@@ -174,6 +178,8 @@ function mapCatalogEntry(raw: RawCatalogEntry): Entry {
     tags: raw.tags ?? undefined,
     status: raw.status,
     trustLevel: raw.trustLevel,
+    sourceUrl: raw.sourceUrl ?? undefined,
+    sourceLabel: raw.sourceLabel ?? undefined,
     heroImage: raw.heroImage ?? undefined,
     heroAlt: raw.heroAlt ?? undefined,
     organizer: raw.organizer ?? undefined,

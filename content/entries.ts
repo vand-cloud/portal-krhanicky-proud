@@ -81,6 +81,10 @@ export interface Entry {
   trustLevel: TrustLevel;
   heroImage?: string;
   heroAlt?: string;
+  // Provenance link proving the entry is real, plus a short human label
+  // (e.g. "Firmy.cz", "Vlastní web", "mapy.cz"). Rendered as a "Zdroj" link.
+  sourceUrl?: string;
+  sourceLabel?: string;
   organizer?: string;
   contactEmail?: string;
   contactPhone?: string;

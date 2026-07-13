@@ -83,3 +83,18 @@ export const SOCIAL_ITEMS: Array<{
 export function formatWebUrl(url: string): string {
   return url.replace(/^https?:\/\//, "").replace(/\/$/, "");
 }
+
+// Loose URL equality (ignores protocol, leading www, trailing slash, case).
+// Used to avoid showing the same link twice as both "Web" and "Zdroj" when
+// an entry's own website is also its verification source.
+export function isSameUrl(a?: string, b?: string): boolean {
+  if (!a || !b) return false;
+  const norm = (u: string) =>
+    u
+      .trim()
+      .replace(/^https?:\/\//i, "")
+      .replace(/^www\./i, "")
+      .replace(/\/+$/, "")
+      .toLowerCase();
+  return norm(a) === norm(b);
+}
