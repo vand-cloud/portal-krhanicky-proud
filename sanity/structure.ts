@@ -173,26 +173,8 @@ export const structure: StructureResolver = async (S, context) => {
                     .filter('_type == "catalogEntry" && status == "pending"'),
                 ),
               S.divider(),
-              S.listItem()
-                .title("Kategorie")
-                .id("katalog-kategorie")
-                .child(
-                  S.documentList()
-                    .id("katalog-kategorie-list")
-                    .title("Kategorie katalogu")
-                    .filter('_type == "catalogCategory"')
-                    .defaultOrdering([{ field: "orderRank", direction: "asc" }]),
-                ),
-              S.listItem()
-                .title("Štítky")
-                .id("katalog-stitky")
-                .child(
-                  S.documentList()
-                    .id("katalog-stitky-list")
-                    .title("Štítky katalogu")
-                    .filter('_type == "catalogTag"')
-                    .defaultOrdering([{ field: "orderRank", direction: "asc" }]),
-                ),
+              orderableDocumentListDeskItem({ type: "catalogCategory", title: "Kategorie", S, context }),
+              orderableDocumentListDeskItem({ type: "catalogTag", title: "Štítky", S, context }),
             ]),
         ),
       S.divider(),
