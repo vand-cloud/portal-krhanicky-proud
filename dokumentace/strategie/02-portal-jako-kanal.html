@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<title>Portál jako kampaňový kanál – Krhanický Proud 2026</title>
+<style>
+  @page { size: A4; margin: 18mm 18mm; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Source Serif Pro", "Charter", "Georgia", serif;
+    font-size: 10.5pt;
+    line-height: 1.55;
+    color: #1a1a1a;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, .sans { font-family: "Inter", -apple-system, "Helvetica Neue", sans-serif; }
+  header { margin-bottom: 18pt; }
+  h1 {
+    font-size: 20pt;
+    font-weight: 700;
+    margin: 0 0 4pt 0;
+    color: #1d3557;
+    letter-spacing: -0.01em;
+  }
+  .lead {
+    font-size: 9pt;
+    color: #6b6b6b;
+    font-family: "Inter", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 12pt;
+  }
+  hr.divider { border: none; border-top: 1pt solid #1d3557; margin: 0; }
+  h2 {
+    font-size: 12pt;
+    font-weight: 700;
+    color: #1d3557;
+    margin: 22pt 0 6pt 0;
+    border-bottom: 0.5pt solid #ddd;
+    padding-bottom: 3pt;
+  }
+  h3 {
+    font-size: 10pt;
+    font-weight: 700;
+    color: #1d3557;
+    margin: 12pt 0 4pt 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  p { margin: 0 0 8pt 0; }
+  ul, ol { margin: 0 0 10pt 0; padding-left: 18pt; }
+  li { margin-bottom: 4pt; }
+  table { width: 100%; border-collapse: collapse; margin: 6pt 0 12pt 0; font-size: 9.5pt; }
+  th { background: #f3f4f6; text-align: left; padding: 5pt 7pt; font-family: "Inter", sans-serif; font-weight: 700; color: #1d3557; border-bottom: 1pt solid #1d3557; font-size: 9pt; }
+  td { padding: 5pt 7pt; border-bottom: 0.3pt solid #e5e5e5; vertical-align: top; }
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8pt;
+    margin: 10pt 0 12pt 0;
+  }
+  .why-box {
+    border: 0.5pt solid #ddd;
+    padding: 8pt;
+    background: #fafafa;
+  }
+  .why-box .num {
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    font-size: 11pt;
+    color: #1d3557;
+    display: block;
+    margin-bottom: 3pt;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .why-box p { font-size: 9pt; margin: 0; line-height: 1.4; }
+  .rules {
+    list-style: none;
+    padding: 0;
+    counter-reset: rule;
+  }
+  .rules > li {
+    counter-increment: rule;
+    padding: 10pt 12pt 10pt 36pt;
+    position: relative;
+    margin-bottom: 8pt;
+    background: #f3f4f6;
+    border-left: 2pt solid #1d3557;
+  }
+  .rules > li::before {
+    content: counter(rule);
+    position: absolute;
+    left: 10pt;
+    top: 10pt;
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    color: white;
+    background: #1d3557;
+    width: 18pt;
+    height: 18pt;
+    line-height: 18pt;
+    text-align: center;
+    font-size: 10pt;
+    border-radius: 50%;
+  }
+  .rules .rule-title {
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    font-size: 10.5pt;
+    color: #1d3557;
+    display: block;
+    margin-bottom: 4pt;
+  }
+  .rules .rule-body { font-size: 9.5pt; margin: 0; }
+  .donts {
+    background: #fde8e8;
+    border-left: 3pt solid #c1432f;
+    padding: 8pt 10pt;
+    margin: 10pt 0;
+  }
+  .donts h3 { color: #c1432f; margin-top: 0; }
+  .donts ul { padding-left: 16pt; margin-bottom: 0; }
+  .heuristic {
+    background: #1d3557;
+    color: white;
+    padding: 10pt 12pt;
+    margin: 12pt 0;
+    font-family: "Inter", sans-serif;
+    font-size: 9pt;
+  }
+  .heuristic strong { display: block; margin-bottom: 4pt; font-size: 9.5pt; letter-spacing: 0.04em; text-transform: uppercase; }
+  .optin-example {
+    border: 0.5pt solid #1d3557;
+    background: #f9fafb;
+    padding: 10pt 12pt;
+    margin: 8pt 0 12pt 0;
+    font-family: "Inter", sans-serif;
+    font-size: 9pt;
+  }
+  .optin-example .opt {
+    display: block;
+    margin-bottom: 5pt;
+  }
+  .optin-example .checkbox {
+    display: inline-block;
+    width: 11pt;
+    height: 11pt;
+    border: 1pt solid #1d3557;
+    margin-right: 6pt;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 9pt;
+    font-size: 9pt;
+    color: #1d3557;
+    background: white;
+  }
+  .optin-example .checkbox.checked { background: #1d3557; color: white; }
+  .optin-example .note {
+    font-size: 8pt;
+    color: #555;
+    margin-top: 6pt;
+    font-style: italic;
+  }
+  footer {
+    margin-top: 24pt;
+    padding-top: 8pt;
+    border-top: 0.5pt solid #ddd;
+    font-family: "Inter", sans-serif;
+    font-size: 8pt;
+    color: #888;
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Portál jako kampaňový kanál</h1>
+  <div class="lead">Krhanický Proud 2026 · 4 pravidla provozu, GDPR, strukturální obrana</div>
+  <hr class="divider">
+</header>
+
+<h2>Proč portál vůbec provozovat</h2>
+<div class="why-grid">
+  <div class="why-box">
+    <span class="num">1 · Service</span>
+    <p>Rozcestník na akce, výlety, koupaliště a služby je legitimní občanský nástroj s reálnou hodnotou pro komunitu. Návštěvnost je organická, lidé chodí dobrovolně a vrací se.</p>
+  </div>
+  <div class="why-box">
+    <span class="num">2 · Kanál</span>
+    <p>Každá návštěva portálu přinese organické setkání s kampaňovou vrstvou UI (badge v hlavičce, sekce "Doporučujeme", footer). 3 dotyky během jedné návštěvy, nikdo si nestěžuje.</p>
+  </div>
+  <div class="why-box">
+    <span class="num">3 · Asset</span>
+    <p>Databáze opt-in odběratelů newsletteru (s legitimním souhlasem) zůstane Krhanickému Proudu i po volbách 2026. Dlouhodobý komunikační kanál pro cyklus 2030.</p>
+  </div>
+</div>
+
+<h2>Proč ne samostatný spolek</h2>
+<p>
+  Původní úvaha o oddělení portálu pod registrovaný spolek (z.s.) měla řešit tři věci: GDPR, percepci a daňovou uznatelnost darů. Po důkladnější diskusi: <strong>v obci 1 200 lidí, kde každý ví, kdo portál provozuje, by formální spolek působil spíš jako "co si na nás hrajete"</strong>, než jako věrohodné oddělení. GDPR lze čistě vyřešit dvojitým opt-inem přímo pod značkou Krhanického Proudu. Daňová uznatelnost darů není pro plánovaný fundraising kritická. Strukturální obrana proti narativu "trojský kůň" se dělá <strong>transparencí a 4 pravidly níže</strong>, ne institucionálním nadbytkem.
+</p>
+
+<h2>4 pravidla provozu, která musí všechna platit</h2>
+<ol class="rules">
+  <li>
+    <span class="rule-title">Homepage zůstává rozcestník · job to be done</span>
+    <p class="rule-body">Vyhledávač akcí, výletů a služeb je primární obsah homepage. Lidé tam chodí kvůli tomuto, proto vůbec přijdou. Pokud místo rozcestníku najdou bannery kampaně, vrátí se na obeckrhanice.cz nebo Google a portál ti odumře. Kampaňová vrstva = nenápadné, ale stále viditelné UI: badge "Kandidujeme do voleb 2026" v hlavičce s linkem na program, jedna sekce pod foldem "Doporučujeme tento týden", footer s odkazem na audit a kandidátku.</p>
+  </li>
+  <li>
+    <span class="rule-title">Vizuální dělba service vs kampaň</span>
+    <p class="rule-body">Service obsah (kalendář akcí, mapa služeb) a kampaňový obsah (program, mítink) musí být vizuálně jasně oddělené sekce, nikdy propletené. V kalendáři akcí v obci se mezi "fotbalový zápas neděle" nesmí mihnout "mítink Krhanického Proudu úterý" jako rovnocenná položka. Pro kampaň samostatná sekce nebo banner s viditelným označením "kampaňové sdělení".</p>
+  </li>
+  <li>
+    <span class="rule-title">GDPR dvojitý opt-in · framing "Občanský watchdog"</span>
+    <p class="rule-body">Politické názory jsou special category dle čl. 9 GDPR. Bundled consent (skryté kampaňové podmínky v Terms of Service) je porušení čl. 7 odst. 4 a politicky devastující past. Místo toho: oddělený opt-in s upřímným, ale neutrálnějším framingem.</p>
+    <div class="optin-example">
+      <span class="opt"><span class="checkbox checked">✓</span> Newsletter "Krhanice tento týden" (akce v obci, výlety, služby)</span>
+      <span class="opt"><span class="checkbox"></span> Občanský watchdog: dění v zastupitelstvu, rozpočet, projekty, dotace (připravuje Krhanický Proud)</span>
+      <span class="note">Druhý opt-in je defaultně NEzaškrtnutý (povinně dle SDEU Planet49 2019). Framing "watchdog" + obsah "veřejné záležitosti" má konverzi 30–50 % místo 20 % u "kampaňového sdělení".</span>
+    </div>
+  </li>
+  <li>
+    <span class="rule-title">Závazek 4+ roky po volbách + open submission akcí</span>
+    <p class="rule-body">Veřejná deklarace v patičce a v sekci "O portálu": "Tento portál provozujeme nejméně do roku 2030, bez ohledu na výsledek voleb 2026." Pokud portál zmizí 1. listopadu 2026, retrospektivně se to čte jako manipulace a vrátí se to v cyklu 2030. Současně: open submission akcí (kdokoliv může poslat akci k zveřejnění) je strukturální obrana neutrality. Argument "portál je otevřený, sami obec i spolky tam mohou přidávat akce" odráží námitky o stranické infrastruktuře.</p>
+  </li>
+</ol>
+
+<h2>Transparentní sekce "Doporučujeme tento týden"</h2>
+<p>
+  Místo skrytého boostování vlastních akcí v "objektivním" listingu (= dark pattern, který se v malé obci provalí a zničí morální nárok kampaně) zavedete <strong>explicitně označenou kurátorskou sekci</strong>: lidská redakční volba, otevřeně přiznaná. Pravidlo obsazení:
+</p>
+<ul>
+  <li><strong>60 až 70 % obsahu jsou věci, které s vámi nemají nic společného</strong>: fotbalový zápas Krhanic, hasičský bál, mše v kostele, divadelní spolek, sousedské setkání obce.</li>
+  <li><strong>30 až 40 % obsahu může být kampaňové</strong> (mítink, otevřená debata, prezentace auditu), vždy s jasným označením "připravuje Krhanický Proud".</li>
+  <li>Když je tam kampaňová akce, je to redakční volba s transparentním kontextem, ne manipulace. Konverze srovnatelná s rigged listingem, riziko nulové, morální pozice neporušená.</li>
+</ul>
+
+<h2>Mechanika opt-in: email vs SMS</h2>
+<table>
+  <tr>
+    <th style="width: 18%;">Kanál</th>
+    <th style="width: 22%;">Náklad</th>
+    <th style="width: 30%;">Cílová skupina</th>
+    <th>Doporučení</th>
+  </tr>
+  <tr>
+    <td><strong>Email</strong></td>
+    <td>0 Kč (Resend nebo Mailerlite, free tier do 1 000 příjemců)</td>
+    <td>30 až 50 let, část 50+</td>
+    <td>Default volba ve formuláři. Snazší legal, nižší náklady, snadné odhlášení.</td>
+  </tr>
+  <tr>
+    <td><strong>SMS</strong></td>
+    <td>~0,80 až 1,50 Kč/zpráva (Twilio, SMS brány)</td>
+    <td>50+, zejména senioři</td>
+    <td>Volitelný opt-in. Vyžaduje stejný GDPR consent jako email. Pro 60+ funguje, ale dražší a omezenější obsah.</td>
+  </tr>
+  <tr>
+    <td><strong>FB obecní skupina</strong></td>
+    <td>0 Kč</td>
+    <td>20 až 65 let</td>
+    <td>Organický kanál, žádný consent, žádný opt-in. Klíčový pro mobilizaci.</td>
+  </tr>
+  <tr>
+    <td><strong>Tištěný leták</strong></td>
+    <td>~0,70 až 1,50 Kč/ks (A6)</td>
+    <td>65+ jádro Papouškova voličstva</td>
+    <td>Žádný consent pro neadresnou roznášku do schránek. Pro 60+ je to <strong>nenahraditelný kanál</strong>, email/SMS to nezastoupí.</td>
+  </tr>
+</table>
+
+<div class="donts">
+  <h3>Co na portálu konkrétně nedělat</h3>
+  <ul>
+    <li><strong>Pop-upy</strong> typu "Pozor, chcete vidět něco více o našem programu?". Univerzálně nenáviděné (NN/g research), v politickém kontextu okamžitě čteny jako manipulace. V malé obci větu "víš že na tom jejich portále ti vyskakují reklamy?" zaslechneš v hospodě do 2 týdnů.</li>
+    <li><strong>Skryté boostování vlastních akcí v listingu</strong> ("featured nenápadně, do kódu nám nikdo nepoleze"). Lidé nepotřebují vidět kód, aby pattern poznali. Stačí 2 týdny pozorování. A View Source v Chromu umí všichni IT lidé z Prahy, co v obci víkendují.</li>
+    <li><strong>Bundled consent</strong> (souhlas s obecnými podmínkami, ve kterých je skrytý souhlas s kampaňovou komunikací). Porušení čl. 7 odst. 4 GDPR. Jediná stížnost u ÚOOÚ spustí kontrolu a politicky devastující PR.</li>
+    <li><strong>Předzaškrtnuté boxy</strong> pro jakýkoliv souhlas. Rozsudek SDEU Planet49 (2019), defaultní souhlas není platný souhlas.</li>
+    <li><strong>"To nikdo nepozná"</strong> jako rozhodovací logika. V obci 1 200 lidí je sociální transparence nesrovnatelně vyšší než si lidé z velkých měst dokáží představit.</li>
+  </ul>
+</div>
+
+<div class="heuristic">
+  <strong>Screenshot test · jediná kontrolní otázka pro každý prvek na portálu</strong>
+  Pokud zítra někdo udělá screenshot a pošle na lokální FB skupinu jako "podívejte, jak nás chtějí oklamat", dokážu to obhájit tak, abych si zachoval kredibilitu? Pokud odpověď zní "to nikdo nepozná", neudělej to. To není GDPR pravidlo, to je politická hygiena.
+</div>
+
+<footer>
+  <span>Portál jako kampaňový kanál · Krhanický Proud 2026</span>
+  <span>Verze 1.0 · květen 2026</span>
+</footer>
+
+</body>
+</html>
