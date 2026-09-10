@@ -1,0 +1,397 @@
+[
+  {
+    "_id": "catalogTag-bezbarierove",
+    "applicableForms": [
+      "mista",
+      "gastro",
+      "obchody",
+      "sluzby"
+    ],
+    "group": "accessibility",
+    "name": "Bezbariérové",
+    "slug": "bezbarierove"
+  },
+  {
+    "_id": "catalogTag-bezlepkove",
+    "applicableForms": [
+      "gastro"
+    ],
+    "group": "gastro",
+    "name": "Bezlepkové",
+    "slug": "bezlepkove"
+  },
+  {
+    "_id": "catalogTag-bio-eko",
+    "applicableForms": [
+      "gastro",
+      "obchody",
+      "akce"
+    ],
+    "group": "theme",
+    "name": "Bio / eko",
+    "slug": "bio-eko"
+  },
+  {
+    "_id": "catalogTag-brunch",
+    "applicableForms": [
+      "gastro"
+    ],
+    "group": "gastro",
+    "name": "Brunch",
+    "slug": "brunch"
+  },
+  {
+    "_id": "catalogTag-celorocni",
+    "applicableForms": [
+      "akce",
+      "mista"
+    ],
+    "group": "place-weather",
+    "name": "Celoroční",
+    "slug": "celorocni"
+  },
+  {
+    "_id": "catalogTag-darkovy-poukaz",
+    "applicableForms": [
+      "gastro",
+      "sluzby"
+    ],
+    "group": "price-entry",
+    "name": "Dárkový poukaz",
+    "slug": "darkovy-poukaz"
+  },
+  {
+    "_id": "catalogTag-donaska",
+    "applicableForms": [
+      "gastro"
+    ],
+    "group": "gastro",
+    "name": "Donáška",
+    "slug": "donaska"
+  },
+  {
+    "_id": "catalogTag-historie",
+    "applicableForms": [
+      "akce",
+      "mista"
+    ],
+    "group": "theme",
+    "name": "Historie",
+    "slug": "historie"
+  },
+  {
+    "_id": "catalogTag-hudba",
+    "applicableForms": [
+      "akce",
+      "mista",
+      "spolky"
+    ],
+    "group": "theme",
+    "name": "Hudba",
+    "slug": "hudba"
+  },
+  {
+    "_id": "catalogTag-literatura",
+    "applicableForms": [
+      "akce",
+      "mista"
+    ],
+    "group": "theme",
+    "name": "Literatura",
+    "slug": "literatura"
+  },
+  {
+    "_id": "catalogTag-lokalni-vyroba",
+    "applicableForms": [
+      "obchody"
+    ],
+    "group": "theme",
+    "name": "Lokální výroba",
+    "slug": "lokalni-vyroba"
+  },
+  {
+    "_id": "catalogTag-mimo-obec",
+    "applicableForms": [
+      "mista"
+    ],
+    "group": "place-weather",
+    "name": "Mimo obec",
+    "slug": "mimo-obec"
+  },
+  {
+    "_id": "catalogTag-naucne",
+    "applicableForms": [
+      "akce",
+      "mista"
+    ],
+    "group": "theme",
+    "name": "Naučné",
+    "slug": "naucne"
+  },
+  {
+    "_id": "catalogTag-parkovani",
+    "applicableForms": [
+      "mista",
+      "gastro",
+      "obchody",
+      "sluzby"
+    ],
+    "group": "accessibility",
+    "name": "Parkování",
+    "slug": "parkovani"
+  },
+  {
+    "_id": "catalogTag-pejskari-vitani",
+    "applicableForms": [
+      "mista",
+      "gastro"
+    ],
+    "group": "accessibility",
+    "name": "Pejskaři vítáni",
+    "slug": "pejskari-vitani"
+  },
+  {
+    "_id": "catalogTag-placene",
+    "applicableForms": [
+      "akce"
+    ],
+    "group": "price-entry",
+    "name": "Placené",
+    "slug": "placene"
+  },
+  {
+    "_id": "catalogTag-pod-strechou",
+    "applicableForms": [
+      "akce",
+      "mista"
+    ],
+    "group": "place-weather",
+    "name": "Pod střechou",
+    "slug": "pod-strechou"
+  },
+  {
+    "_id": "catalogTag-poledni-menu-tag",
+    "applicableForms": [
+      "gastro"
+    ],
+    "group": "gastro",
+    "name": "Polední menu",
+    "slug": "poledni-menu-tag"
+  },
+  {
+    "_id": "catalogTag-priroda",
+    "applicableForms": [
+      "akce",
+      "mista"
+    ],
+    "group": "theme",
+    "name": "Příroda",
+    "slug": "priroda"
+  },
+  {
+    "_id": "catalogTag-pro-deti",
+    "applicableForms": [
+      "akce",
+      "mista",
+      "gastro",
+      "obchody",
+      "sluzby",
+      "spolky"
+    ],
+    "group": "audience",
+    "name": "Pro děti",
+    "slug": "pro-deti"
+  },
+  {
+    "_id": "catalogTag-pro-pary",
+    "applicableForms": [
+      "akce",
+      "mista",
+      "gastro"
+    ],
+    "group": "audience",
+    "name": "Pro páry",
+    "slug": "pro-pary"
+  },
+  {
+    "_id": "catalogTag-pro-rodiny",
+    "applicableForms": [
+      "akce",
+      "mista",
+      "gastro"
+    ],
+    "group": "audience",
+    "name": "Pro rodiny",
+    "slug": "pro-rodiny"
+  },
+  {
+    "_id": "catalogTag-pro-seniory",
+    "applicableForms": [
+      "akce",
+      "mista",
+      "sluzby"
+    ],
+    "group": "audience",
+    "name": "Pro seniory",
+    "slug": "pro-seniory"
+  },
+  {
+    "_id": "catalogTag-pro-skupiny",
+    "applicableForms": [
+      "akce",
+      "mista",
+      "gastro"
+    ],
+    "group": "audience",
+    "name": "Pro skupiny",
+    "slug": "pro-skupiny"
+  },
+  {
+    "_id": "catalogTag-regionalni-produkt",
+    "applicableForms": [
+      "gastro",
+      "obchody",
+      "akce"
+    ],
+    "group": "theme",
+    "name": "Regionální produkt",
+    "slug": "regionalni-produkt"
+  },
+  {
+    "_id": "catalogTag-remeslo",
+    "applicableForms": [
+      "akce",
+      "obchody",
+      "spolky",
+      "sluzby"
+    ],
+    "group": "theme",
+    "name": "Řemeslo",
+    "slug": "remeslo"
+  },
+  {
+    "_id": "catalogTag-rezervace-nutna",
+    "applicableForms": [
+      "akce",
+      "gastro",
+      "sluzby"
+    ],
+    "group": "price-entry",
+    "name": "Rezervace nutná",
+    "slug": "rezervace-nutna"
+  },
+  {
+    "_id": "catalogTag-sezonni",
+    "applicableForms": [
+      "akce",
+      "mista",
+      "gastro"
+    ],
+    "group": "place-weather",
+    "name": "Sezónní",
+    "slug": "sezonni"
+  },
+  {
+    "_id": "catalogTag-snidane",
+    "applicableForms": [
+      "gastro"
+    ],
+    "group": "gastro",
+    "name": "Snídaně",
+    "slug": "snidane"
+  },
+  {
+    "_id": "catalogTag-tradice",
+    "applicableForms": [
+      "akce",
+      "mista",
+      "spolky",
+      "obchody"
+    ],
+    "group": "theme",
+    "name": "Tradice",
+    "slug": "tradice"
+  },
+  {
+    "_id": "catalogTag-v-centru",
+    "applicableForms": [
+      "mista",
+      "gastro",
+      "obchody",
+      "sluzby"
+    ],
+    "group": "place-weather",
+    "name": "V centru",
+    "slug": "v-centru"
+  },
+  {
+    "_id": "catalogTag-veda-technika",
+    "applicableForms": [
+      "akce",
+      "mista"
+    ],
+    "group": "theme",
+    "name": "Věda a technika",
+    "slug": "veda-technika"
+  },
+  {
+    "_id": "catalogTag-veganske",
+    "applicableForms": [
+      "gastro"
+    ],
+    "group": "gastro",
+    "name": "Veganské",
+    "slug": "veganske"
+  },
+  {
+    "_id": "catalogTag-vegetarianske",
+    "applicableForms": [
+      "gastro"
+    ],
+    "group": "gastro",
+    "name": "Vegetariánské",
+    "slug": "vegetarianske"
+  },
+  {
+    "_id": "catalogTag-venku",
+    "applicableForms": [
+      "akce",
+      "mista"
+    ],
+    "group": "place-weather",
+    "name": "Venku",
+    "slug": "venku"
+  },
+  {
+    "_id": "catalogTag-vstup-zdarma",
+    "applicableForms": [
+      "akce",
+      "mista"
+    ],
+    "group": "price-entry",
+    "name": "Vstup zdarma",
+    "slug": "vstup-zdarma"
+  },
+  {
+    "_id": "catalogTag-vytvarne",
+    "applicableForms": [
+      "akce",
+      "mista",
+      "obchody",
+      "spolky"
+    ],
+    "group": "theme",
+    "name": "Výtvarné",
+    "slug": "vytvarne"
+  },
+  {
+    "_id": "catalogTag-wifi-zdarma",
+    "applicableForms": [
+      "gastro",
+      "mista"
+    ],
+    "group": "accessibility",
+    "name": "WiFi zdarma",
+    "slug": "wifi-zdarma"
+  }
+]

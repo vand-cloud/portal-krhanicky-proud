@@ -1,0 +1,1054 @@
+[
+  {
+    "_id": "catalogCategory-akce-deti-rodina",
+    "name": "Děti a rodina",
+    "slug": "deti-rodina",
+    "subcategories": [
+      {
+        "slug": "detske-dny",
+        "title": "Dětské dny"
+      },
+      {
+        "slug": "tabory",
+        "title": "Tábory"
+      },
+      {
+        "slug": "dilny-pro-deti",
+        "title": "Dílny pro děti"
+      },
+      {
+        "slug": "detska-divadla",
+        "title": "Dětská divadla"
+      },
+      {
+        "slug": "soutezi",
+        "title": "Soutěže"
+      }
+    ],
+    "type": "akce"
+  },
+  {
+    "_id": "catalogCategory-akce-kultura",
+    "name": "Kultura",
+    "slug": "kultura",
+    "subcategories": [
+      {
+        "slug": "vystavy",
+        "title": "Výstavy"
+      },
+      {
+        "slug": "koncerty",
+        "title": "Koncerty"
+      },
+      {
+        "slug": "divadlo",
+        "title": "Divadlo"
+      },
+      {
+        "slug": "kino",
+        "title": "Kino"
+      },
+      {
+        "slug": "prednasky",
+        "title": "Přednášky"
+      },
+      {
+        "slug": "prohlidky",
+        "title": "Prohlídky"
+      },
+      {
+        "slug": "besedy-cteni",
+        "title": "Besedy a čtení"
+      },
+      {
+        "slug": "festivaly",
+        "title": "Festivaly"
+      }
+    ],
+    "type": "akce"
+  },
+  {
+    "_id": "catalogCategory-akce-priroda",
+    "name": "Příroda",
+    "slug": "priroda",
+    "subcategories": [
+      {
+        "slug": "vylety",
+        "title": "Výlety"
+      },
+      {
+        "slug": "brigady",
+        "title": "Brigády"
+      },
+      {
+        "slug": "sbery",
+        "title": "Sběry"
+      },
+      {
+        "slug": "sazeni",
+        "title": "Sázení"
+      },
+      {
+        "slug": "pozorovani",
+        "title": "Pozorování"
+      }
+    ],
+    "type": "akce"
+  },
+  {
+    "_id": "catalogCategory-akce-sport",
+    "name": "Sport",
+    "slug": "sport",
+    "subcategories": [
+      {
+        "slug": "zavody",
+        "title": "Závody"
+      },
+      {
+        "slug": "turnaje",
+        "title": "Turnaje"
+      },
+      {
+        "slug": "treninky",
+        "title": "Tréninky"
+      },
+      {
+        "slug": "cviceni",
+        "title": "Cvičení"
+      },
+      {
+        "slug": "pochody-behy",
+        "title": "Pochody a běhy"
+      }
+    ],
+    "type": "akce"
+  },
+  {
+    "_id": "catalogCategory-akce-vzdelavani",
+    "name": "Vzdělávání",
+    "slug": "vzdelavani",
+    "subcategories": [
+      {
+        "slug": "kurzy",
+        "title": "Kurzy"
+      },
+      {
+        "slug": "workshopy",
+        "title": "Workshopy"
+      },
+      {
+        "slug": "seminare",
+        "title": "Semináře"
+      },
+      {
+        "slug": "tvurci-dilny",
+        "title": "Tvůrčí dílny"
+      },
+      {
+        "slug": "exkurze",
+        "title": "Exkurze"
+      }
+    ],
+    "type": "akce"
+  },
+  {
+    "_id": "catalogCategory-akce-zabava",
+    "name": "Zábava",
+    "slug": "zabava",
+    "subcategories": [
+      {
+        "slug": "plesy",
+        "title": "Plesy"
+      },
+      {
+        "slug": "oslavy",
+        "title": "Oslavy"
+      },
+      {
+        "slug": "jarmarky",
+        "title": "Jarmarky"
+      },
+      {
+        "slug": "posviceni",
+        "title": "Posvícení"
+      },
+      {
+        "slug": "tanecni-zabavy",
+        "title": "Taneční zábavy"
+      }
+    ],
+    "type": "akce"
+  },
+  {
+    "_id": "catalogCategory-gastro-catering-doruceni",
+    "name": "Catering a doručování",
+    "slug": "catering-doruceni",
+    "subcategories": [
+      {
+        "slug": "catering-akce",
+        "title": "Catering na akce"
+      },
+      {
+        "slug": "donaskova-sluzba",
+        "title": "Donášková služba"
+      },
+      {
+        "slug": "poledni-menu",
+        "title": "Polední menu"
+      }
+    ],
+    "type": "gastro"
+  },
+  {
+    "_id": "catalogCategory-gastro-hospody-bary",
+    "name": "Hospody a bary",
+    "slug": "hospody-bary",
+    "subcategories": [
+      {
+        "slug": "pivnice",
+        "title": "Pivnice"
+      },
+      {
+        "slug": "bary",
+        "title": "Bary"
+      },
+      {
+        "slug": "vinoteky",
+        "title": "Vinotéky"
+      },
+      {
+        "slug": "pivovary-minipivovary",
+        "title": "Pivovary a minipivovary"
+      }
+    ],
+    "type": "gastro"
+  },
+  {
+    "_id": "catalogCategory-gastro-kavarny-cukrarny",
+    "name": "Kavárny a cukrárny",
+    "slug": "kavarny-cukrarny",
+    "subcategories": [
+      {
+        "slug": "kavarny",
+        "title": "Kavárny"
+      },
+      {
+        "slug": "cukrarny",
+        "title": "Cukrárny"
+      },
+      {
+        "slug": "cajovny",
+        "title": "Čajovny"
+      },
+      {
+        "slug": "zmrzlinarny",
+        "title": "Zmrzlinárny"
+      }
+    ],
+    "type": "gastro"
+  },
+  {
+    "_id": "catalogCategory-gastro-restaurace",
+    "name": "Restaurace",
+    "slug": "restaurace",
+    "subcategories": [
+      {
+        "slug": "ceska-kuchyne",
+        "title": "Česká kuchyně"
+      },
+      {
+        "slug": "italska",
+        "title": "Italská"
+      },
+      {
+        "slug": "asijska",
+        "title": "Asijská"
+      },
+      {
+        "slug": "mezinarodni",
+        "title": "Mezinárodní"
+      },
+      {
+        "slug": "vegetarianska-vegan",
+        "title": "Vegetariánská a vegan"
+      },
+      {
+        "slug": "pizzerie",
+        "title": "Pizzerie"
+      }
+    ],
+    "type": "gastro"
+  },
+  {
+    "_id": "catalogCategory-gastro-rychle-obcerstveni",
+    "name": "Rychlé občerstvení",
+    "slug": "rychle-obcerstveni",
+    "subcategories": [
+      {
+        "slug": "bistra",
+        "title": "Bistra"
+      },
+      {
+        "slug": "stanky",
+        "title": "Stánky"
+      },
+      {
+        "slug": "foodtrucky",
+        "title": "Foodtrucky"
+      },
+      {
+        "slug": "s-sebou",
+        "title": "S sebou"
+      }
+    ],
+    "type": "gastro"
+  },
+  {
+    "_id": "catalogCategory-mista-kultura",
+    "name": "Kultura",
+    "slug": "kultura",
+    "subcategories": [
+      {
+        "slug": "muzea",
+        "title": "Muzea"
+      },
+      {
+        "slug": "galerie",
+        "title": "Galerie"
+      },
+      {
+        "slug": "knihovny",
+        "title": "Knihovny"
+      },
+      {
+        "slug": "kulturni-domy",
+        "title": "Kulturní domy"
+      },
+      {
+        "slug": "divadla-kina",
+        "title": "Divadla a kina"
+      }
+    ],
+    "type": "mista"
+  },
+  {
+    "_id": "catalogCategory-mista-pamatky",
+    "name": "Památky",
+    "slug": "pamatky",
+    "subcategories": [
+      {
+        "slug": "sakralni-stavby",
+        "title": "Sakrální stavby"
+      },
+      {
+        "slug": "pomniky-sochy",
+        "title": "Pomníky a sochy"
+      },
+      {
+        "slug": "hrady-zamky",
+        "title": "Hrady a zámky"
+      },
+      {
+        "slug": "historicke-budovy",
+        "title": "Historické budovy"
+      },
+      {
+        "slug": "archeologicke",
+        "title": "Archeologické"
+      }
+    ],
+    "type": "mista"
+  },
+  {
+    "_id": "catalogCategory-mista-prakticka-mista",
+    "name": "Praktická místa",
+    "slug": "prakticka-mista",
+    "subcategories": [
+      {
+        "slug": "urady",
+        "title": "Úřady"
+      },
+      {
+        "slug": "posta",
+        "title": "Pošta"
+      },
+      {
+        "slug": "nadrazi-zastavky",
+        "title": "Nádraží a zastávky"
+      },
+      {
+        "slug": "parkoviste",
+        "title": "Parkoviště"
+      },
+      {
+        "slug": "hrbitov",
+        "title": "Hřbitov"
+      },
+      {
+        "slug": "sberny-dvur",
+        "title": "Sběrný dvůr"
+      }
+    ],
+    "type": "mista"
+  },
+  {
+    "_id": "catalogCategory-mista-priroda-krajina",
+    "name": "Příroda a krajina",
+    "slug": "priroda-krajina",
+    "subcategories": [
+      {
+        "slug": "lesy-stezky",
+        "title": "Lesy a stezky"
+      },
+      {
+        "slug": "rybniky-vodni-plochy",
+        "title": "Rybníky a vodní plochy"
+      },
+      {
+        "slug": "vyhlidky",
+        "title": "Vyhlídky"
+      },
+      {
+        "slug": "naucne-stezky",
+        "title": "Naučné stezky"
+      },
+      {
+        "slug": "parky-zahrady",
+        "title": "Parky a zahrady"
+      }
+    ],
+    "type": "mista"
+  },
+  {
+    "_id": "catalogCategory-mista-rekreace",
+    "name": "Rekreace",
+    "slug": "rekreace",
+    "subcategories": [
+      {
+        "slug": "koupaliste",
+        "title": "Koupaliště"
+      },
+      {
+        "slug": "detska-hriste",
+        "title": "Dětská hřiště"
+      },
+      {
+        "slug": "piknikova-mista",
+        "title": "Pikniková místa"
+      },
+      {
+        "slug": "ohniste",
+        "title": "Ohniště"
+      },
+      {
+        "slug": "workout",
+        "title": "Workout"
+      }
+    ],
+    "type": "mista"
+  },
+  {
+    "_id": "catalogCategory-mista-sport",
+    "name": "Sport",
+    "slug": "sport",
+    "subcategories": [
+      {
+        "slug": "hriste",
+        "title": "Hřiště"
+      },
+      {
+        "slug": "sportoviste",
+        "title": "Sportoviště"
+      },
+      {
+        "slug": "posilovny",
+        "title": "Posilovny"
+      },
+      {
+        "slug": "telocvicny",
+        "title": "Tělocvičny"
+      },
+      {
+        "slug": "cyklotrasy",
+        "title": "Cyklotrasy"
+      },
+      {
+        "slug": "sjezdovky",
+        "title": "Sjezdovky"
+      }
+    ],
+    "type": "mista"
+  },
+  {
+    "_id": "catalogCategory-obchody-hobby-volny-cas",
+    "name": "Hobby a volný čas",
+    "slug": "hobby-volny-cas",
+    "subcategories": [
+      {
+        "slug": "sportovni-potreby",
+        "title": "Sportovní potřeby"
+      },
+      {
+        "slug": "hracky",
+        "title": "Hračky"
+      },
+      {
+        "slug": "knihy",
+        "title": "Knihy"
+      },
+      {
+        "slug": "papirnictvi",
+        "title": "Papírnictví"
+      },
+      {
+        "slug": "darky",
+        "title": "Dárky"
+      },
+      {
+        "slug": "hudebni-nastroje",
+        "title": "Hudební nástroje"
+      }
+    ],
+    "type": "obchody"
+  },
+  {
+    "_id": "catalogCategory-obchody-moda",
+    "name": "Móda",
+    "slug": "moda",
+    "subcategories": [
+      {
+        "slug": "odevy",
+        "title": "Oděvy"
+      },
+      {
+        "slug": "obuv",
+        "title": "Obuv"
+      },
+      {
+        "slug": "doplnky-sperky",
+        "title": "Doplňky a šperky"
+      }
+    ],
+    "type": "obchody"
+  },
+  {
+    "_id": "catalogCategory-obchody-pekarstvi-cukrarstvi",
+    "name": "Pekařství a cukrářství",
+    "slug": "pekarstvi-cukrarstvi",
+    "subcategories": [
+      {
+        "slug": "pekarny",
+        "title": "Pekárny"
+      },
+      {
+        "slug": "cukrarny-prodejna",
+        "title": "Cukrárny"
+      }
+    ],
+    "type": "obchody"
+  },
+  {
+    "_id": "catalogCategory-obchody-potraviny-napoje",
+    "name": "Potraviny a nápoje",
+    "slug": "potraviny-napoje",
+    "subcategories": [
+      {
+        "slug": "samoobsluhy",
+        "title": "Samoobsluhy"
+      },
+      {
+        "slug": "reznictvi",
+        "title": "Řeznictví"
+      },
+      {
+        "slug": "syrarny",
+        "title": "Sýrárny"
+      },
+      {
+        "slug": "vinoteky",
+        "title": "Vinotéky"
+      },
+      {
+        "slug": "regionalni-produkty",
+        "title": "Regionální produkty"
+      },
+      {
+        "slug": "bio",
+        "title": "Bio"
+      }
+    ],
+    "type": "obchody"
+  },
+  {
+    "_id": "catalogCategory-obchody-pro-domov",
+    "name": "Pro domov",
+    "slug": "pro-domov",
+    "subcategories": [
+      {
+        "slug": "nabytek",
+        "title": "Nábytek"
+      },
+      {
+        "slug": "dekorace",
+        "title": "Dekorace"
+      },
+      {
+        "slug": "drogerie",
+        "title": "Drogerie"
+      },
+      {
+        "slug": "kvetinarstvi",
+        "title": "Květinářství"
+      },
+      {
+        "slug": "naradi",
+        "title": "Nářadí"
+      },
+      {
+        "slug": "stavebniny",
+        "title": "Stavebniny"
+      },
+      {
+        "slug": "zahradnictvi",
+        "title": "Zahradnictví"
+      }
+    ],
+    "type": "obchody"
+  },
+  {
+    "_id": "catalogCategory-obchody-specializovane",
+    "name": "Specializované",
+    "slug": "specializovane",
+    "subcategories": [
+      {
+        "slug": "lekarna",
+        "title": "Lékárna"
+      },
+      {
+        "slug": "optika",
+        "title": "Optika"
+      },
+      {
+        "slug": "keramika-remeslo",
+        "title": "Keramika a řemeslo"
+      },
+      {
+        "slug": "galanterie",
+        "title": "Galanterie"
+      },
+      {
+        "slug": "starozitnosti",
+        "title": "Starožitnosti"
+      },
+      {
+        "slug": "farmarske-trhy",
+        "title": "Farmářské trhy"
+      }
+    ],
+    "type": "obchody"
+  },
+  {
+    "_id": "catalogCategory-sluzby-auto-doprava",
+    "name": "Auto a doprava",
+    "slug": "auto-doprava",
+    "subcategories": [
+      {
+        "slug": "autoservis",
+        "title": "Autoservis"
+      },
+      {
+        "slug": "pneuservis",
+        "title": "Pneuservis"
+      },
+      {
+        "slug": "stk",
+        "title": "STK"
+      },
+      {
+        "slug": "taxi",
+        "title": "Taxi"
+      },
+      {
+        "slug": "autoskola",
+        "title": "Autoškola"
+      },
+      {
+        "slug": "pujcovna-aut",
+        "title": "Půjčovna aut"
+      },
+      {
+        "slug": "odtah",
+        "title": "Odtah"
+      }
+    ],
+    "type": "sluzby"
+  },
+  {
+    "_id": "catalogCategory-sluzby-bydleni-stavba",
+    "name": "Bydlení a stavba",
+    "slug": "bydleni-stavba",
+    "subcategories": [
+      {
+        "slug": "instalater",
+        "title": "Instalatér"
+      },
+      {
+        "slug": "elektrikar",
+        "title": "Elektrikář"
+      },
+      {
+        "slug": "zednik",
+        "title": "Zedník"
+      },
+      {
+        "slug": "malir",
+        "title": "Malíř"
+      },
+      {
+        "slug": "klempir",
+        "title": "Klempíř"
+      },
+      {
+        "slug": "kominik",
+        "title": "Kominík"
+      },
+      {
+        "slug": "plynar",
+        "title": "Plynař"
+      },
+      {
+        "slug": "stavebni-firmy",
+        "title": "Stavební firmy"
+      },
+      {
+        "slug": "podlahari",
+        "title": "Podlaháři"
+      },
+      {
+        "slug": "sklenari",
+        "title": "Sklenáři"
+      }
+    ],
+    "type": "sluzby"
+  },
+  {
+    "_id": "catalogCategory-sluzby-krasa-pece",
+    "name": "Krása a péče",
+    "slug": "krasa-pece",
+    "subcategories": [
+      {
+        "slug": "kadernictvi",
+        "title": "Kadeřnictví"
+      },
+      {
+        "slug": "kosmetika",
+        "title": "Kosmetika"
+      },
+      {
+        "slug": "manikura",
+        "title": "Manikúra"
+      },
+      {
+        "slug": "pedikura",
+        "title": "Pedikúra"
+      },
+      {
+        "slug": "masaze",
+        "title": "Masáže"
+      },
+      {
+        "slug": "solarium",
+        "title": "Solárium"
+      },
+      {
+        "slug": "tetovani",
+        "title": "Tetování"
+      }
+    ],
+    "type": "sluzby"
+  },
+  {
+    "_id": "catalogCategory-sluzby-pro-domacnost-ostatni",
+    "name": "Pro domácnost a ostatní",
+    "slug": "pro-domacnost-ostatni",
+    "subcategories": [
+      {
+        "slug": "uklid",
+        "title": "Úklid"
+      },
+      {
+        "slug": "pradelna",
+        "title": "Prádelna"
+      },
+      {
+        "slug": "hodinar",
+        "title": "Hodinář"
+      },
+      {
+        "slug": "foto",
+        "title": "Foto"
+      },
+      {
+        "slug": "it-web",
+        "title": "IT a web"
+      },
+      {
+        "slug": "svatebni-agentura",
+        "title": "Svatební agentura"
+      },
+      {
+        "slug": "pohrebni-sluzba",
+        "title": "Pohřební služba"
+      }
+    ],
+    "type": "sluzby"
+  },
+  {
+    "_id": "catalogCategory-sluzby-profesni-financni",
+    "name": "Profesní a finanční",
+    "slug": "profesni-financni",
+    "subcategories": [
+      {
+        "slug": "advokat",
+        "title": "Advokát"
+      },
+      {
+        "slug": "notar",
+        "title": "Notář"
+      },
+      {
+        "slug": "ucetni",
+        "title": "Účetní"
+      },
+      {
+        "slug": "realitka",
+        "title": "Realitka"
+      },
+      {
+        "slug": "pojistovna",
+        "title": "Pojišťovna"
+      },
+      {
+        "slug": "banka",
+        "title": "Banka"
+      },
+      {
+        "slug": "danovy-poradce",
+        "title": "Daňový poradce"
+      }
+    ],
+    "type": "sluzby"
+  },
+  {
+    "_id": "catalogCategory-sluzby-vzdelavani",
+    "name": "Vzdělávání",
+    "slug": "vzdelavani",
+    "subcategories": [
+      {
+        "slug": "materska-skola",
+        "title": "Mateřská škola"
+      },
+      {
+        "slug": "zakladni-skola",
+        "title": "Základní škola"
+      },
+      {
+        "slug": "hudebni-skola",
+        "title": "Hudební škola"
+      },
+      {
+        "slug": "jazykovka",
+        "title": "Jazykovka"
+      },
+      {
+        "slug": "doucovani",
+        "title": "Doučování"
+      },
+      {
+        "slug": "kurzy",
+        "title": "Kurzy"
+      }
+    ],
+    "type": "sluzby"
+  },
+  {
+    "_id": "catalogCategory-sluzby-zdravi",
+    "name": "Zdraví",
+    "slug": "zdravi",
+    "subcategories": [
+      {
+        "slug": "prakticky-lekar",
+        "title": "Praktický lékař"
+      },
+      {
+        "slug": "zubar",
+        "title": "Zubař"
+      },
+      {
+        "slug": "pediatr",
+        "title": "Pediatr"
+      },
+      {
+        "slug": "gynekolog",
+        "title": "Gynekolog"
+      },
+      {
+        "slug": "fyzioterapie",
+        "title": "Fyzioterapie"
+      },
+      {
+        "slug": "veterinar",
+        "title": "Veterinář"
+      },
+      {
+        "slug": "psycholog",
+        "title": "Psycholog"
+      }
+    ],
+    "type": "sluzby"
+  },
+  {
+    "_id": "catalogCategory-spolky-kultura-umeni",
+    "name": "Kultura a umění",
+    "slug": "kultura-umeni",
+    "subcategories": [
+      {
+        "slug": "pevecky",
+        "title": "Pěvecký"
+      },
+      {
+        "slug": "divadelni",
+        "title": "Divadelní"
+      },
+      {
+        "slug": "tanecni",
+        "title": "Taneční"
+      },
+      {
+        "slug": "hudebni",
+        "title": "Hudební"
+      },
+      {
+        "slug": "fotograficky",
+        "title": "Fotografický"
+      },
+      {
+        "slug": "vytvarny",
+        "title": "Výtvarný"
+      }
+    ],
+    "type": "spolky"
+  },
+  {
+    "_id": "catalogCategory-spolky-mladez",
+    "name": "Mládež",
+    "slug": "mladez",
+    "subcategories": [
+      {
+        "slug": "skauti-junak",
+        "title": "Skauti / Junák"
+      },
+      {
+        "slug": "pionyr",
+        "title": "Pionýr"
+      },
+      {
+        "slug": "detske-oddily",
+        "title": "Dětské oddíly"
+      },
+      {
+        "slug": "ymca",
+        "title": "YMCA"
+      }
+    ],
+    "type": "spolky"
+  },
+  {
+    "_id": "catalogCategory-spolky-sport",
+    "name": "Sport",
+    "slug": "sport",
+    "subcategories": [
+      {
+        "slug": "fotbal",
+        "title": "Fotbal"
+      },
+      {
+        "slug": "hokej",
+        "title": "Hokej"
+      },
+      {
+        "slug": "tenis",
+        "title": "Tenis"
+      },
+      {
+        "slug": "sokol",
+        "title": "Sokol"
+      },
+      {
+        "slug": "sachy",
+        "title": "Šachy"
+      },
+      {
+        "slug": "bojove-sporty",
+        "title": "Bojové sporty"
+      },
+      {
+        "slug": "ostatni-sport",
+        "title": "Ostatní"
+      }
+    ],
+    "type": "spolky"
+  },
+  {
+    "_id": "catalogCategory-spolky-tradice-komunita",
+    "name": "Tradice a komunita",
+    "slug": "tradice-komunita",
+    "subcategories": [
+      {
+        "slug": "hasicsky-sbor",
+        "title": "Hasičský sbor"
+      },
+      {
+        "slug": "myslivecky",
+        "title": "Myslivecký"
+      },
+      {
+        "slug": "sousedsky",
+        "title": "Sousedský"
+      },
+      {
+        "slug": "vlastenecky",
+        "title": "Vlastenecký"
+      }
+    ],
+    "type": "spolky"
+  },
+  {
+    "_id": "catalogCategory-spolky-zajmove",
+    "name": "Zájmové",
+    "slug": "zajmove",
+    "subcategories": [
+      {
+        "slug": "zahradkari",
+        "title": "Zahrádkáři"
+      },
+      {
+        "slug": "chovatele",
+        "title": "Chovatelé"
+      },
+      {
+        "slug": "modelari",
+        "title": "Modeláři"
+      },
+      {
+        "slug": "klub-senioru",
+        "title": "Klub seniorů"
+      },
+      {
+        "slug": "vcelari",
+        "title": "Včelaři"
+      }
+    ],
+    "type": "spolky"
+  }
+]
