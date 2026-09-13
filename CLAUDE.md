@@ -113,6 +113,10 @@ Default v této složce kvůli mezerám v cestě `0 CLAUDE CODE/`, kde Turbopack
 
 Build (`next build`) zůstává Turbopack, Vercel má vlastní pipeline. Webpack je jen pro lokální dev.
 
+Pozor: pravidlo rootu monorepa od Next 16.2.6 říká nechat default Turbopack (webpack trpí HMR rebuild loopy)
+a novější klientské weby `--webpack` nemají. Tady `package.json` flag pořád má; při příštím upgradu Next ho
+odeber a ověř, že `next dev` z cesty s mezerou funguje.
+
 ### Cloudflare DNS pro Vercel projekty = DNS-only mode (šedý mráček)
 Nikdy Proxied (oranžový), interferuje s Vercel SSL validací, cache managementem a edge networkem. Při auditu DNS recordů u domény `krhanicky-proud.cz` flagni jakýkoliv oranžový mráček mířící na Vercel.
 
