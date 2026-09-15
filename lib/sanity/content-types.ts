@@ -110,7 +110,7 @@ export interface SiteSettingsVM {
   addressStreet?: string;
   addressCity?: string;
   ico?: string;
-  social?: { facebook?: string; instagram?: string };
+  social?: { facebook?: string; instagram?: string; youtube?: string };
   seo?: { defaultDescription?: string; ogImage?: string };
   alertBar?: {
     enabled?: boolean;
