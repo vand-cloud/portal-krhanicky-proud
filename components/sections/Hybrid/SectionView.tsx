@@ -738,8 +738,9 @@ function TagChipRow({
 // Maximum curated events surfaced on the "Vše" landing before the user is
 // invited to open the full Akce timeline.
 const ALL_EVENTS_LIMIT = 5;
-// Newest blog posts shown in the editorial band under the events.
-const ALL_BLOG_LIMIT = 3;
+// Newest blog posts shown in the editorial band under the events, capped
+// at two rows of four on the lg 4-col grid.
+const ALL_BLOG_LIMIT = 8;
 
 // "Vše" listing inside the search+map module's right column: the
 // operator's "Doporučujeme" picks (featured: true), soonest term first,
@@ -837,9 +838,9 @@ function AllScopeList({
 }
 
 // Full-width editorial band sitting BELOW the search+map module on the
-// "Vše" landing. The three newest blog posts, independent of the entry
-// filters (the blog is its own corpus). Spans the full content width so
-// the three cards breathe, unlike the column-bound events list above.
+// "Vše" landing. The newest blog posts, independent of the entry filters
+// (the blog is its own corpus). Spans the full content width, laid out
+// 4-up so a second row only appears once there are more than 4 posts.
 function BlogBand({ posts }: { posts: BlogPostVM[] }) {
   // Posts arrive already sorted newest-first from Sanity; show the top few.
   const shown = posts.slice(0, ALL_BLOG_LIMIT);
@@ -891,7 +892,7 @@ function BlogBand({ posts }: { posts: BlogPostVM[] }) {
         </div>
       )}
 
-      <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {shown.map((post) => (
           <BlogCard key={post.id} post={post} />
         ))}
