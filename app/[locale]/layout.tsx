@@ -206,6 +206,7 @@ function ChromeWrapper({
         brandName={siteConfig.brand.name}
         brandHref="/"
         navItems={navItems}
+        social={settings?.social}
       />
       <main className="flex-1">{children}</main>
       <SiteFooter

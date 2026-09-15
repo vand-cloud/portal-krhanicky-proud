@@ -2,6 +2,11 @@
 
 import { useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
+import {
+  FacebookIcon,
+  InstagramIcon,
+  YoutubeIcon,
+} from "@/components/sections/Hybrid/SocialIcons";
 /* eslint-disable-next-line @next/next/no-img-element -- inline <img> for SVG
    logo so the file is not bundled by next/image. SVG is tiny (<5kb) and
    styling stays simpler at this scale. */
@@ -20,16 +25,34 @@ export type NavItem = {
 // SiteHeader renders ONLY the sticky brand + nav row. The optional banner
 // above (campaign / alert) is now its own `TopBar` component composed in
 // the layout, keeping concerns separate.
+type HeaderSocial = { facebook?: string; instagram?: string; youtube?: string };
+
 export function SiteHeader({
   brandName,
   brandHref,
   navItems,
+  social,
 }: {
   brandName: string;
   brandHref: string;
   navItems: NavItem[];
+  social?: HeaderSocial;
 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const socialItems = social
+    ? [
+        social.facebook
+          ? { href: social.facebook, label: "Facebook", Icon: FacebookIcon }
+          : null,
+        social.instagram
+          ? { href: social.instagram, label: "Instagram", Icon: InstagramIcon }
+          : null,
+        social.youtube
+          ? { href: social.youtube, label: "YouTube", Icon: YoutubeIcon }
+          : null,
+      ].filter((item): item is NonNullable<typeof item> => item !== null)
+    : [];
 
   return (
     <header
@@ -37,18 +60,36 @@ export function SiteHeader({
       className="sticky top-0 z-30 border-b border-[var(--color-border)] bg-[var(--color-bg-elev)]/85 backdrop-blur"
     >
         <div className="mx-auto flex h-[6rem] max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-          <a
-            href={brandHref}
-            aria-label={brandName}
-            className="inline-flex items-center outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 rounded"
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element -- inline SVG, not bundling via next/image. */}
-            <img
-              src="/brand/logo-left.svg"
-              alt={brandName}
-              className="h-[60px] w-auto"
-            />
-          </a>
+          <div className="flex items-center gap-4">
+            <a
+              href={brandHref}
+              aria-label={brandName}
+              className="inline-flex items-center outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 rounded"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element -- inline SVG, not bundling via next/image. */}
+              <img
+                src="/brand/logo-left.svg"
+                alt={brandName}
+                className="h-[60px] w-auto"
+              />
+            </a>
+            {socialItems.length > 0 ? (
+              <div className="hidden items-center gap-3 border-l border-[var(--color-border)] pl-4 sm:flex">
+                {socialItems.map(({ href, label, Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="text-[var(--color-text-tertiary)] transition-colors hover:text-[var(--color-text)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 rounded"
+                  >
+                    <Icon size={18} />
+                  </a>
+                ))}
+              </div>
+            ) : null}
+          </div>
 
           <nav aria-label="Hlavní navigace" className="hidden md:block">
             <ul className="flex items-center gap-1">
