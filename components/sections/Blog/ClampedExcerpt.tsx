@@ -20,14 +20,14 @@ export function ClampedExcerpt({ text }: { text: string }) {
       // leftover column space even without the line-clamp box mode, and
       // this avoids measuring a box whose height the clamp already fixed.
       el.style.display = "block";
-      el.style.webkitLineClamp = "unset";
+      el.style.removeProperty("-webkit-line-clamp");
       const lineHeight = parseFloat(getComputedStyle(el).lineHeight);
       const available = el.getBoundingClientRect().height;
       const lines =
         lineHeight > 0 ? Math.max(1, Math.floor(available / lineHeight)) : 3;
       el.style.display = "-webkit-box";
-      el.style.webkitBoxOrient = "vertical";
-      el.style.webkitLineClamp = String(lines);
+      el.style.setProperty("-webkit-box-orient", "vertical");
+      el.style.setProperty("-webkit-line-clamp", String(lines));
     };
 
     recalc();
