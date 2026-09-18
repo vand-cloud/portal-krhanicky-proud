@@ -14,7 +14,8 @@
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "sync-from-ds": "node scripts/sync-from-ds.mjs",
-    "sync-from-ds:init": "node scripts/init-components-manifest.mjs"
+    "sync-from-ds:init": "node scripts/init-components-manifest.mjs",
+    "verify": "npm run typecheck && npm test"
   },
   "dependencies": {
     "@next/third-parties": "^16.2.4",
