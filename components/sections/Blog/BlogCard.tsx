@@ -1,5 +1,6 @@
 import { Image as ImageIcon } from "lucide-react";
 import type { BlogPostVM } from "@/lib/sanity/content-types";
+import { ClampedExcerpt } from "./ClampedExcerpt";
 
 const formatDate = new Intl.DateTimeFormat("cs-CZ", {
   day: "numeric",
@@ -70,9 +71,7 @@ export function BlogCard({ post }: { post: BlogPostVM }) {
           </a>
         </h3>
 
-        <p className="mt-2 line-clamp-3 flex-1 text-sm text-[var(--color-text-secondary)]">
-          {post.excerpt}
-        </p>
+        <ClampedExcerpt text={post.excerpt} />
 
         <p className="mt-4 text-xs text-[var(--color-text-tertiary)]">
           <time dateTime={post.publishedAt}>

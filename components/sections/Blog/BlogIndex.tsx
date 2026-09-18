@@ -272,7 +272,7 @@ export function BlogIndex({
                 články.
               </p>
             ) : (
-              <ul className="grid gap-5 sm:grid-cols-2">
+              <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {filtered.map((post) => (
                   <li key={post.id}>
                     <BlogCard post={post} />
