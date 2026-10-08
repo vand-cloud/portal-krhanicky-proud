@@ -1,0 +1,43 @@
+{
+  "@sanity/cli": {
+    "reason": "sanity CLI toolchain (via next-sanity), build-time only; fix needs major upgrade",
+    "until": "2026-12-31"
+  },
+  "@sanity/codegen": {
+    "reason": "sanity CLI toolchain (via next-sanity), build-time only; fix needs major upgrade",
+    "until": "2026-12-31"
+  },
+  "@sanity/runtime-cli": {
+    "reason": "sanity CLI toolchain (via next-sanity), build-time only; fix needs major upgrade",
+    "until": "2026-12-31"
+  },
+  "adm-zip": {
+    "reason": "sanity CLI toolchain (via next-sanity), build-time only; fix needs major upgrade",
+    "until": "2026-12-31"
+  },
+  "braces": {
+    "reason": "sanity CLI toolchain (via next-sanity), build-time only; fix needs major upgrade",
+    "until": "2026-12-31"
+  },
+  "chokidar": {
+    "reason": "sanity CLI toolchain (via next-sanity), build-time only; fix needs major upgrade",
+    "until": "2026-12-31"
+  },
+  "fast-glob": {
+    "reason": "sanity CLI toolchain (via next-sanity), build-time only; fix needs major upgrade",
+    "until": "2026-12-31"
+  },
+  "globby": {
+    "reason": "sanity CLI toolchain (via next-sanity), build-time only; fix needs major upgrade",
+    "until": "2026-12-31"
+  },
+  "js-yaml": {
+    "reason": "sanity CLI toolchain (via next-sanity), build-time only; fix needs major upgrade",
+    "until": "2026-12-31"
+  },
+  "micromatch": {
+    "reason": "sanity CLI toolchain (via next-sanity), build-time only; fix needs major upgrade",
+    "until": "2026-12-31"
+  },
+  "_comment": "High advisories inside the sanity CLI toolchain (build-time only, never served to visitors). Fix = sanity/next-sanity major upgrade. The gate blocks again after the date."
+}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import maplibregl from "maplibre-gl";
+import * as maplibregl from "maplibre-gl"; // maplibre-gl 6 is ESM-only without a default export
 import "maplibre-gl/dist/maplibre-gl.css";
 import type { Entry, EntryType } from "@/content/entries";
 import { KRHANICE_CENTER, typeLabels } from "@/content/entries";
