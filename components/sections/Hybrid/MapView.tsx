@@ -129,6 +129,10 @@ export function MapView({
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
 
+    /* maplibre-gl 6 loads its worker from a separate file resolved from the library URL, which the bundler does not serve; point it at the emitted asset. */
+
+    maplibregl.setWorkerUrl(new URL("maplibre-gl/dist/maplibre-gl-worker.mjs", import.meta.url).toString());
+
     const map = new maplibregl.Map({
       container: containerRef.current,
       style: VECTOR_STYLE_URL,
