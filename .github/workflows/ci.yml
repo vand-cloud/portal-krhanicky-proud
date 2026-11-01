@@ -7,7 +7,15 @@ on:
 
 jobs:
   ci:
-    runs-on: ubuntu-latest
+    # Pinned, not ubuntu-latest: GitHub moves that label to a new Ubuntu over
+    # a month or two, and Playwright refuses to install a browser on a host it
+    # does not know yet ("does not support chromium on ubuntu26.04-x64", first
+    # seen 2026-10-27). Move up only once the installed Playwright has a
+    # Chromium build for the new host, i.e. once
+    #   PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntuNN.NN-x64 \
+    #     npx playwright install --dry-run chromium
+    # prints a download URL.
+    runs-on: ubuntu-24.04
     # Backstop: if any step wedges (e.g. a stalled browser download), fail in
     # minutes instead of holding a runner until GitHub's 6h ceiling.
     timeout-minutes: 25
